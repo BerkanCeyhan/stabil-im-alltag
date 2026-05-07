@@ -136,6 +136,22 @@
       max-height: 460px;
     }
 
+    /* 4:3 crop — zeigt unteren Bildbereich (Gurt sichtbar) */
+    .img-crop-43 {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border-radius: 10px;
+      margin: 28px 0;
+    }
+    .img-crop-43 img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: bottom;
+      display: block;
+    }
+
     /* ── BODY TEXT ── */
     .article-body p { margin-bottom: 20px; }
 
@@ -469,7 +485,7 @@
 <!-- ═══ HEADER ═══ -->
 <header class="site-header">
   <div class="header-inner">
-    <a href="/"><img src="../../../logo_transparent.png" alt="Stabil im Alltag" style="height:40px;width:auto;display:block;"></a>
+    <a href="/"><img src="../../../assets/logo_transparent.png" alt="Stabil im Alltag" style="height:56px;width:auto;display:block;"></a>
     <div class="header-anzeige">Advertorial</div>
   </div>
 </header>
@@ -650,12 +666,10 @@
 
       <p>Das Beste daran: Man kann diese zwanzig Minuten auf der Couch verbringen. Beim Fernsehen. Beim Lesen. Beim Telefonieren. Der Gurt arbeitet, während ich Zeit für andere Dinge habe. Hört sich zu gut an, um wahr zu sein? Das dachte ich zunächst auch.</p>
 
-      <!-- IMAGE 4 - belt -->
-      <img
-        src="https://images.pexels.com/photos/5327461/pexels-photo-5327461.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-        alt="Trainingsunterstützung für den unteren Rücken"
-        class="article-img"
-      >
+      <!-- Wellenpuls LWS – erstes Produktbild, 4:3-Crop auf unteren Bildbereich -->
+      <div class="img-crop-43">
+        <img src="../../../assets/Anwendung-wellenpuls.jpg" alt="Wellenpuls LWS Gurt – Anwendung">
+      </div>
 
       <h2>Die ersten Wochen: Was ich nicht erwartet hatte</h2>
 
@@ -855,12 +869,9 @@
       <div class="product-name">Wellenpuls LWS</div>
       <div class="product-tagline">Das Trainingsgerät für die Tiefenmuskulatur – entwickelt aus sportwissenschaftlicher Forschung</div>
 
-      <img
-        src="https://images.pexels.com/photos/5794038/pexels-photo-5794038.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-        alt="Rückentraining mit dem Wellenpuls LWS"
-        class="article-img"
-        style="margin-top:0;"
-      >
+      <div class="img-crop-43" style="margin-top:0;">
+        <img src="../../../assets/Anwendung-wellenpuls.jpg" alt="Wellenpuls LWS – Anwendung">
+      </div>
 
       <div class="rating-row">
         <span class="rating-stars">★★★★★</span>
@@ -937,7 +948,7 @@
 
 <!-- ═══ FOOTER ═══ -->
 <footer class="site-footer">
-  <a href="/"><img src="../../../logo_transparent.png" alt="Stabil im Alltag" style="height:44px;width:auto;display:block;margin:0 auto 10px;"></a>
+  <a href="/"><img src="../../../assets/logo_transparent.png" alt="Stabil im Alltag" style="height:48px;width:auto;display:block;margin:0 auto 10px;"></a>
   <div>© 2026, Stabil im Alltag</div>
   <div class="footer-links">
     <a href="/impressum/">Impressum</a>
