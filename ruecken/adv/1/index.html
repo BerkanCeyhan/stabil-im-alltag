@@ -6,6 +6,20 @@
   <title>Warum du alles richtig machst und trotzdem nicht besser wirst – Stabil im Alltag</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window,document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','576311248662294');
+  fbq('track','PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=576311248662294&ev=PageView&noscript=1"/></noscript>
+  <!-- End Meta Pixel Code -->
   <style>
     :root {
       --primary:  #1A5C8A;
@@ -958,5 +972,48 @@
   </div>
 </footer>
 
+<!-- Lead Tracking -->
+<script>
+(function(){
+  function getCookie(n){var m=document.cookie.match(new RegExp('(?:^|; )'+n.replace(/([.$?*|{}()[\]\\/+^])/g,'\\$1')+'=([^;]*)'));return m?decodeURIComponent(m[1]):null;}
+  function getParam(n){try{return new URL(window.location.href).searchParams.get(n);}catch(e){return null;}}
+  function setCookie(n,v,age){var p=[n+'='+encodeURIComponent(v),'path=/','max-age='+(age||7776000),'samesite=lax'];if(location.protocol==='https:')p.push('secure');document.cookie=p.join('; ');}
+  function ensureFbc(){var e=getCookie('_fbc');if(e)return e;var id=getParam('fbclid');if(!id)return null;var fbc='fb.1.'+Date.now()+'.'+id;setCookie('_fbc',fbc,7776000);return fbc;}
+
+  function sendLead(btn){
+    var eventId='lead-'+Math.random().toString(36).substring(2,12);
+    if(typeof fbq==='function'){fbq('track','Lead',{},{eventID:eventId});}
+    var payload={
+      trigger:true,
+      event_name:'Lead',
+      event_id:eventId,
+      event_time:Math.floor(Date.now()/1000),
+      action_source:'website',
+      event_source_url:window.location.href,
+      referrer:document.referrer||null,
+      client_user_agent:navigator.userAgent,
+      fbp:getCookie('_fbp'),
+      fbc:ensureFbc(),
+      fbclid:getParam('fbclid')
+    };
+    var sent=false;
+    function doNav(){if(!sent){sent=true;window.location.href=btn.href;}}
+    setTimeout(doNav,500);
+    fetch('https://hook.eu2.make.com/e8zrhj4ndaftv617irpx2185nzqbhfix',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload),
+      keepalive:true
+    }).then(doNav).catch(doNav);
+  }
+
+  document.querySelectorAll('.track-lead').forEach(function(btn){
+    btn.addEventListener('click',function(e){
+      e.preventDefault();
+      sendLead(btn);
+    });
+  });
+})();
+</script>
 </body>
 </html>
