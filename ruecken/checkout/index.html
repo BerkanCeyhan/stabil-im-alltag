@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sicherer Checkout – Wellenpuls LWS</title>
-<!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -17,7 +16,6 @@ fbq('track','PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=576311248662294&ev=PageView&noscript=1"/></noscript>
-<!-- End Meta Pixel Code -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Libre+Franklin:wght@400;500;600;700;800;900&display=swap" onload="this.rel='stylesheet'">
@@ -40,6 +38,7 @@ src="https://www.facebook.com/tr?id=576311248662294&ev=PageView&noscript=1"/></n
   --star:oklch(75% 0.16 75);
   --green:oklch(52% 0.14 155);
   --red:oklch(42% 0.14 25);
+  --red-light:oklch(97% 0.01 25);
 }
 html{font-size:16px}
 body{font-family:'Libre Franklin',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
@@ -48,94 +47,255 @@ a{color:inherit;text-decoration:none}
 
 /* HEADER */
 .header{background:var(--primary);color:#fff;padding:14px 20px;text-align:center}
-.header-inner{max-width:560px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:10px}
+.header-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:10px}
 .header-lock{font-size:16px}
 .header-title{font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 .header-ssl{font-size:11px;font-weight:600;opacity:.7;margin-left:4px}
 
-/* MAIN LAYOUT */
-.page{max-width:520px;margin:0 auto;padding:20px 16px 60px}
+/* PAGE */
+.page{max-width:960px;margin:0 auto;padding:20px 16px 60px}
 
 /* TIMER */
-.timer-bar{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:12px 16px;text-align:center;margin-bottom:16px;font-size:13px;color:var(--text-muted);font-weight:600}
+.timer-bar{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:12px 16px;text-align:center;margin-bottom:20px;font-size:13px;color:var(--text-muted);font-weight:600}
 .timer-bar strong{color:var(--text);font-weight:800}
-.timer-digits{display:inline-flex;gap:4px;align-items:center;margin-left:6px;font-size:18px;font-weight:900;color:var(--red);font-family:'Libre Franklin',sans-serif;letter-spacing:.02em}
+.timer-digits{display:inline-flex;gap:4px;align-items:center;margin-left:6px;font-size:18px;font-weight:900;color:var(--red);letter-spacing:.02em}
 .timer-sep{opacity:.5}
 
-/* PRODUCT CARD */
-.product-card{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:16px}
-.product-img{background:var(--primary-light);padding:28px 16px;text-align:center}
-.product-img img{width:100%;max-width:380px;margin:0 auto;filter:drop-shadow(0 8px 20px oklch(38% 0.1 240 / 0.2))}
-.product-body{padding:20px}
-.product-name{font-family:'Lora',serif;font-size:20px;font-weight:700;color:var(--text);margin-bottom:6px}
-.product-sub{font-size:14px;color:var(--text-muted);margin-bottom:16px}
+/* GRID */
+.checkout-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  grid-template-areas:"summary""form";
+  gap:0;
+}
+@media(min-width:720px){
+  .checkout-grid{
+    grid-template-columns:1fr 360px;
+    grid-template-areas:"form summary";
+    gap:28px;
+    align-items:start;
+  }
+}
+.form-col{grid-area:form}
+.summary-col{grid-area:summary}
+@media(min-width:720px){
+  .summary-col{position:sticky;top:20px}
+}
 
-/* OFFER ITEMS */
-.offer-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border)}
-.offer-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);gap:12px}
-.offer-row:last-child{border-bottom:none}
-.offer-row-name{font-size:14px;color:var(--text-body);display:flex;align-items:center;gap:8px}
-.offer-row-name .ck{color:var(--teal);font-weight:800;font-size:15px}
-.offer-row-price{font-size:13px;font-weight:700;text-align:right;flex-shrink:0}
-.offer-row-price .gratis{color:var(--teal);font-weight:800;display:block;font-size:12px}
-.offer-row-price .original{color:var(--text-muted);text-decoration:line-through;font-size:11px;font-weight:500}
+/* MOBILE SUMMARY TOGGLE */
+.ms-toggle{
+  display:flex;align-items:center;gap:10px;
+  background:var(--primary-light);
+  border:1px solid var(--border);
+  border-radius:10px;padding:14px 16px;
+  cursor:pointer;margin-bottom:14px;
+  font-size:14px;font-weight:700;
+}
+.ms-toggle .ms-amount{font-size:17px;font-weight:900;color:var(--primary);margin-left:auto}
+.ms-arrow{flex-shrink:0;transition:transform .2s ease-out}
+.ms-arrow.open{transform:rotate(180deg)}
+.ms-drawer{display:none;margin-bottom:14px}
+.ms-drawer.open{display:block}
+@media(min-width:720px){
+  .ms-toggle{display:none}
+  .ms-drawer{display:none!important}
+}
 
-/* TOTAL ROW */
-.total-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:16px}
-.total-row{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--text-muted);margin-bottom:8px}
-.total-row:last-child{margin-bottom:0}
-.total-final{display:flex;justify-content:space-between;align-items:center;font-size:19px;font-weight:900;color:var(--text);padding-top:12px;border-top:1px solid var(--border);margin-top:12px}
-.total-final .savings{font-size:12px;font-weight:600;color:var(--teal);display:block;margin-top:2px}
+/* FORM CARDS */
+.form-card{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:10px}
+.form-section{padding:20px}
+.section-head{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.step-badge{
+  width:24px;height:24px;border-radius:50%;
+  background:var(--teal);color:#fff;
+  font-size:12px;font-weight:900;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.section-title{font-size:15px;font-weight:800;color:var(--text)}
 
-/* CTA */
-.cta-block{margin-bottom:16px}
-.btn-cta{display:block;width:100%;background:var(--teal);color:#fff;font-family:'Libre Franklin',sans-serif;font-size:18px;font-weight:900;padding:22px 24px;border-radius:8px;text-align:center;text-decoration:none;border:none;cursor:pointer;box-shadow:0 4px 20px oklch(48% 0.1 165 / 0.4);letter-spacing:.01em;transition:background .18s,transform .1s,box-shadow .18s;line-height:1.3}
-.btn-cta:hover{background:var(--teal-dark);transform:translateY(-1px);box-shadow:0 6px 24px oklch(48% 0.1 165 / 0.5)}
-.btn-cta small{display:block;font-size:12px;font-weight:600;opacity:.85;margin-top:3px;letter-spacing:.04em}
+/* INPUTS */
+.irow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.irow.pc{grid-template-columns:110px 1fr}
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+.fg:last-child{margin-bottom:0}
+.fg label{font-size:13px;font-weight:700;color:var(--text-body)}
+.optional{font-weight:500;color:var(--text-muted);font-size:12px}
+
+input[type=text],
+input[type=email],
+input[type=tel],
+select{
+  width:100%;height:48px;padding:0 14px;
+  border:1.5px solid var(--border);border-radius:8px;
+  font-family:'Libre Franklin',sans-serif;font-size:15px;color:var(--text);
+  background:var(--white);outline:none;
+  appearance:none;-webkit-appearance:none;
+  transition:border-color .15s,box-shadow .15s;
+}
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=tel]:focus,
+select:focus{
+  border-color:var(--teal);
+  box-shadow:0 0 0 3px oklch(48% 0.1 165 / 0.12);
+}
+input.err{border-color:var(--red);background:var(--red-light)}
+input.err:focus{box-shadow:0 0 0 3px oklch(42% 0.14 25 / 0.1)}
+select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;
+}
+.ferr{
+  font-size:12px;font-weight:600;color:var(--red);
+  max-height:0;overflow:hidden;opacity:0;
+  transition:max-height .2s ease-out,opacity .2s;
+}
+.ferr.show{max-height:50px;opacity:1}
+
+/* PAYMENT METHOD CARDS */
+.pm-list{display:flex;flex-direction:column;gap:8px}
+.pm-opt{cursor:pointer;display:block}
+.pm-opt input[type=radio]{position:absolute;opacity:0;width:0;height:0;pointer-events:none}
+.pm-inner{
+  display:flex;align-items:center;gap:12px;
+  padding:13px 15px;border:1.5px solid var(--border);border-radius:8px;
+  background:var(--white);transition:border-color .15s,background .15s;
+}
+.pm-opt input:checked + .pm-inner{
+  border-color:var(--teal);background:var(--teal-light);
+}
+.pm-opt:hover .pm-inner{border-color:oklch(62% 0.06 165)}
+.pm-logo{
+  width:38px;height:38px;border-radius:7px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:900;
+}
+.pm-logo-cc{background:var(--primary-light);color:var(--primary);font-size:20px}
+.pm-logo-pp{background:#003087;color:#fff;font-size:11px;letter-spacing:-.5px}
+.pm-logo-kl{background:#FFB3C7;color:#17120E;font-size:15px}
+.pm-logo-sf{background:oklch(36% 0.12 265);color:#fff;font-size:18px}
+.pm-info{flex:1;min-width:0}
+.pm-name{font-size:14px;font-weight:700;color:var(--text)}
+.pm-sub{font-size:12px;color:var(--text-muted)}
+.pm-dot{
+  width:18px;height:18px;border-radius:50%;border:2px solid var(--border);
+  flex-shrink:0;transition:border-color .15s,background .15s;
+  position:relative;display:flex;align-items:center;justify-content:center;
+}
+.pm-opt input:checked + .pm-inner .pm-dot{border-color:var(--teal);background:var(--teal)}
+.pm-dot::after{
+  content:'';width:6px;height:6px;border-radius:50%;background:#fff;
+  opacity:0;transition:opacity .15s;
+}
+.pm-opt input:checked + .pm-inner .pm-dot::after{opacity:1}
+
+/* SUBMIT SECTION */
+.submit-sec{padding:20px}
+.agb-wrap{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:13px;color:var(--text-body);line-height:1.55;
+  cursor:pointer;margin-bottom:16px;
+}
+.agb-wrap input[type=checkbox]{
+  width:18px;height:18px;flex-shrink:0;margin-top:2px;
+  accent-color:var(--teal);cursor:pointer;
+}
+.agb-wrap a{color:var(--primary);font-weight:600;text-decoration:underline}
+
+.err-banner{
+  display:flex;align-items:flex-start;gap:10px;
+  background:var(--red-light);border:1px solid oklch(42% 0.14 25 / 0.25);
+  border-radius:8px;padding:12px 14px;
+  font-size:13px;color:var(--red);font-weight:600;
+  margin-bottom:14px;
+}
+.err-banner[hidden]{display:none}
+
+.btn-cta{
+  display:block;width:100%;background:var(--teal);color:#fff;
+  font-family:'Libre Franklin',sans-serif;font-size:17px;font-weight:900;
+  padding:20px 24px;border-radius:8px;text-align:center;
+  border:none;cursor:pointer;line-height:1.3;
+  box-shadow:0 4px 20px oklch(48% 0.1 165 / 0.4);
+  transition:background .18s,transform .1s,box-shadow .18s;
+}
+.btn-cta:hover:not(:disabled){background:var(--teal-dark);transform:translateY(-1px);box-shadow:0 6px 24px oklch(48% 0.1 165 / 0.5)}
+.btn-cta:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-cta small{display:block;font-size:12px;font-weight:600;opacity:.85;margin-top:4px;letter-spacing:.04em}
+.spin-row{display:flex;align-items:center;justify-content:center;gap:10px}
+.spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+
 .trust-row{display:flex;justify-content:center;flex-wrap:wrap;gap:4px 14px;margin-top:12px}
 .trust-row span{font-size:11px;font-weight:600;color:var(--text-muted)}
 
-/* GUARANTEE */
-.guarantee-strip{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:16px;display:flex;gap:14px;align-items:flex-start}
-.guarantee-icon{font-size:32px;flex-shrink:0;line-height:1}
-.guarantee-title{font-weight:800;font-size:15px;color:var(--text);margin-bottom:3px}
-.guarantee-text{font-size:13px;color:var(--text-muted);line-height:1.6}
+/* SUMMARY CARD */
+.sum-card{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.sum-img{background:var(--primary-light);padding:20px 16px;text-align:center}
+.sum-img img{width:100%;max-width:280px;margin:0 auto;filter:drop-shadow(0 6px 16px oklch(38% 0.1 240 / 0.18))}
+.sum-body{padding:16px}
+.sum-name{font-family:'Lora',serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:3px}
+.sum-sub{font-size:13px;color:var(--text-muted);margin-bottom:14px}
 
-/* PAYMENT METHODS */
-.payment-methods{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px 16px 12px;margin-bottom:16px;text-align:center}
-.payment-methods-label{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px}
-.payment-icons{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px}
-.payment-icon{height:28px;background:var(--bg);border:1px solid var(--border);border-radius:5px;padding:4px 10px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--text-body);letter-spacing:.02em}
+.offer-list{border-top:1px solid var(--border)}
+.offer-row{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border);gap:8px}
+.offer-row:last-child{border-bottom:none}
+.or-name{font-size:13px;color:var(--text-body);display:flex;align-items:flex-start;gap:6px;flex:1}
+.ck{color:var(--teal);font-weight:800;font-size:13px;flex-shrink:0}
+.or-price{font-size:12px;font-weight:700;text-align:right;flex-shrink:0}
+.gratis{color:var(--teal);font-weight:800;font-size:11px;display:block}
+.original{color:var(--text-muted);text-decoration:line-through;font-size:10px;font-weight:500;display:block}
 
-/* TESTIMONIALS */
+.sum-total{padding-top:10px;border-top:1px solid var(--border);margin-top:4px}
+.tr{display:flex;justify-content:space-between;font-size:13px;color:var(--text-muted);margin-bottom:5px}
+.tr.sav{color:var(--teal);font-weight:700}
+.tf{display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid var(--border);margin-top:6px}
+.tf-label{font-size:15px;font-weight:800}
+.tf-amount{font-size:20px;font-weight:900;color:var(--text)}
+.tf-badge{font-size:11px;font-weight:700;color:var(--teal);background:var(--teal-light);padding:2px 8px;border-radius:20px;display:block;margin-top:3px;text-align:right}
+
+.sum-pay{padding:12px 16px;border-top:1px solid var(--border);text-align:center}
+.sum-pay img{max-width:260px;width:100%;margin:0 auto;height:auto}
+.sum-guar{padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:10px;align-items:flex-start}
+.guar-icon{font-size:22px;flex-shrink:0;line-height:1.2}
+.guar-title{font-weight:800;font-size:13px;color:var(--text);margin-bottom:2px}
+.guar-text{font-size:12px;color:var(--text-muted);line-height:1.5}
+
+/* BELOW GRID */
+.trust-below{max-width:680px;margin:32px auto 0}
 .section-label{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;text-align:center}
-.testi-list{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.testi-list{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
 .testi-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px}
 .testi-stars{color:var(--star);font-size:13px;letter-spacing:1px;margin-bottom:8px}
 .testi-text{font-family:'Lora',serif;font-size:15px;font-style:italic;color:var(--text);line-height:1.65;margin-bottom:8px}
 .testi-name{font-size:12px;font-weight:700;color:var(--text-muted);display:flex;align-items:center;gap:6px}
 .testi-verified{background:var(--teal-light);color:var(--teal);font-size:10px;font-weight:800;padding:2px 7px;border-radius:20px}
-
-/* FOUNDER NOTE */
-.founder-note{background:var(--primary-light);border-radius:10px;padding:16px;margin-bottom:16px;display:flex;gap:14px;align-items:flex-start}
+.founder-note{background:var(--primary-light);border-radius:10px;padding:16px;margin-bottom:20px;display:flex;gap:14px;align-items:flex-start}
 .founder-note-photo{width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:top;flex-shrink:0}
 .founder-note-name{font-weight:800;font-size:14px;color:var(--text);margin-bottom:2px}
 .founder-note-role{font-size:11px;color:var(--teal);font-weight:600;margin-bottom:6px}
 .founder-note-text{font-size:13px;color:var(--text-body);line-height:1.65}
-
-/* LEGAL */
 .legal{font-size:11px;color:var(--text-muted);text-align:center;line-height:1.7;margin-bottom:16px}
 .legal a{color:var(--primary);font-weight:600}
-
-/* FOOTER */
 .footer{text-align:center;padding:20px 0;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted)}
 .footer a{color:var(--text-muted);margin:0 8px}
 .footer a:hover{color:var(--text)}
+
+@media(max-width:479px){
+  .irow{grid-template-columns:1fr}
+  .irow.pc{grid-template-columns:100px 1fr}
+}
+
+/* ABWEICHENDE LIEFERADRESSE */
+.ship-toggle-wrap{margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+.ship-toggle-label{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;color:var(--text-body);cursor:pointer}
+.ship-toggle-label input[type=checkbox]{width:18px;height:18px;accent-color:var(--teal);cursor:pointer;flex-shrink:0}
+#ship-card{display:none}
+#ship-card.open{display:block}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="header">
   <div class="header-inner">
     <span class="header-lock">🔒</span>
@@ -146,7 +306,6 @@ a{color:inherit;text-decoration:none}
 
 <div class="page">
 
-  <!-- TIMER -->
   <div class="timer-bar">
     <strong>Dein Warenkorb ist reserviert für:</strong>
     <span class="timer-digits">
@@ -154,156 +313,501 @@ a{color:inherit;text-decoration:none}
     </span>
   </div>
 
-  <!-- PRODUCT CARD -->
-  <div class="product-card">
-    <div class="product-img">
-      <img src="../../assets/bundle_image.png" alt="Wellenpuls LWS – das komplette Paket">
-    </div>
-    <div class="product-body">
-      <div class="product-name">Wellenpuls LWS</div>
-      <div class="product-sub">Inkl. Reiseetui · Lieferung in 2 Werktagen</div>
+  <div class="checkout-grid">
 
-      <div class="offer-list">
-        <div class="offer-row">
-          <div class="offer-row-name"><span class="ck">✓</span> Wellenpuls LWS + Reiseetui</div>
-          <div class="offer-row-price">489,00 €</div>
-        </div>
-        <div class="offer-row">
-          <div class="offer-row-name"><span class="ck">✓</span> 1:1 Beratung mit Christian</div>
-          <div class="offer-row-price">
-            <span class="gratis">Gratis</span>
-            <span class="original">120,00 €</span>
-          </div>
-        </div>
-        <div class="offer-row">
-          <div class="offer-row-name"><span class="ck">✓</span> Videokurs (3 × 20 Min.)</div>
-          <div class="offer-row-price">
-            <span class="gratis">Gratis</span>
-            <span class="original">79,00 €</span>
-          </div>
-        </div>
-        <div class="offer-row">
-          <div class="offer-row-name"><span class="ck">✓</span> E-Book + Checkliste</div>
-          <div class="offer-row-price">
-            <span class="gratis">Gratis</span>
-            <span class="original">34,90 €</span>
-          </div>
-        </div>
-        <div class="offer-row">
-          <div class="offer-row-name"><span class="ck">✓</span> Kostenloser Versand</div>
-          <div class="offer-row-price">
-            <span class="gratis">Gratis</span>
-            <span class="original">9,90 €</span>
+    <!-- FORM COLUMN -->
+    <div class="form-col">
+
+      <!-- Mobile summary toggle -->
+      <div class="ms-toggle" id="ms-toggle" role="button" tabindex="0" aria-expanded="false" aria-controls="ms-drawer">
+        <span id="ms-label">Bestellübersicht anzeigen</span>
+        <span class="ms-amount">489,00 €</span>
+        <svg class="ms-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 6l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <div class="ms-drawer" id="ms-drawer">
+        <div class="sum-card">
+          <div class="sum-img"><img src="../../assets/bundle_image.png" alt="Wellenpuls LWS – das komplette Paket"></div>
+          <div class="sum-body">
+            <div class="sum-name">Wellenpuls LWS</div>
+            <div class="sum-sub">Inkl. Reiseetui · Lieferung in 2 Werktagen</div>
+            <div class="offer-list">
+              <div class="offer-row"><div class="or-name"><span class="ck">✓</span> Wellenpuls LWS + Reiseetui</div><div class="or-price">489,00 €</div></div>
+              <div class="offer-row"><div class="or-name"><span class="ck">✓</span> 1:1 Beratung mit Christian</div><div class="or-price"><span class="gratis">Gratis</span><span class="original">120,00 €</span></div></div>
+              <div class="offer-row"><div class="or-name"><span class="ck">✓</span> Videokurs (3 × 20 Min.)</div><div class="or-price"><span class="gratis">Gratis</span><span class="original">79,00 €</span></div></div>
+              <div class="offer-row"><div class="or-name"><span class="ck">✓</span> E-Book + Checkliste</div><div class="or-price"><span class="gratis">Gratis</span><span class="original">34,90 €</span></div></div>
+              <div class="offer-row"><div class="or-name"><span class="ck">✓</span> Kostenloser Versand</div><div class="or-price"><span class="gratis">Gratis</span><span class="original">9,90 €</span></div></div>
+            </div>
+            <div class="sum-total">
+              <div class="tr"><span>Gesamtwert</span><span style="text-decoration:line-through">732,80 €</span></div>
+              <div class="tr sav"><span>Ersparnis</span><span>− 243,80 €</span></div>
+              <div class="tf">
+                <span class="tf-label">Gesamtbetrag</span>
+                <div style="text-align:right"><span class="tf-amount">489,00 €</span><span class="tf-badge">33 % gespart</span></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- TOTAL -->
-  <div class="total-card">
-    <div class="total-row">
-      <span>Gesamtwert des Pakets</span>
-      <span style="text-decoration:line-through;color:var(--text-muted)">732,80 €</span>
-    </div>
-    <div class="total-row">
-      <span style="color:var(--teal);font-weight:700">Deine Ersparnis</span>
-      <span style="color:var(--teal);font-weight:700">− 243,80 €</span>
-    </div>
-    <div class="total-final">
-      <span>Gesamtbetrag</span>
-      <div style="text-align:right">
-        489,00 €
-        <span class="savings">33 % gespart · Einmalige Zahlung</span>
+      <!-- FORM -->
+      <form id="checkout-form" novalidate>
+
+        <!-- 1. Kontaktdaten -->
+        <div class="form-card">
+          <div class="form-section">
+            <div class="section-head">
+              <span class="step-badge">1</span>
+              <span class="section-title">Kontaktdaten</span>
+            </div>
+            <div class="irow">
+              <div class="fg">
+                <label for="first_name">Vorname</label>
+                <input type="text" id="first_name" name="first_name" autocomplete="given-name" placeholder="Maria">
+                <div class="ferr" id="err-first_name" role="alert"></div>
+              </div>
+              <div class="fg">
+                <label for="last_name">Nachname</label>
+                <input type="text" id="last_name" name="last_name" autocomplete="family-name" placeholder="Müller">
+                <div class="ferr" id="err-last_name" role="alert"></div>
+              </div>
+            </div>
+            <div class="fg">
+              <label for="email">E-Mail-Adresse</label>
+              <input type="email" id="email" name="email" autocomplete="email" placeholder="maria@beispiel.de">
+              <div class="ferr" id="err-email" role="alert"></div>
+            </div>
+            <div class="fg">
+              <label for="phone">Telefon <span class="optional">(optional)</span></label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+49 123 456 789">
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Lieferadresse -->
+        <div class="form-card">
+          <div class="form-section">
+            <div class="section-head">
+              <span class="step-badge">2</span>
+              <span class="section-title">Rechnungsadresse</span>
+            </div>
+            <div class="fg">
+              <label for="address">Straße und Hausnummer</label>
+              <input type="text" id="address" name="address" autocomplete="street-address" placeholder="Musterstraße 42">
+              <div class="ferr" id="err-address" role="alert"></div>
+            </div>
+            <div class="irow pc">
+              <div class="fg">
+                <label for="postcode">PLZ</label>
+                <input type="text" id="postcode" name="postcode" autocomplete="postal-code" inputmode="numeric" maxlength="5" placeholder="12345">
+                <div class="ferr" id="err-postcode" role="alert"></div>
+              </div>
+              <div class="fg">
+                <label for="city">Ort</label>
+                <input type="text" id="city" name="city" autocomplete="address-level2" placeholder="Berlin">
+                <div class="ferr" id="err-city" role="alert"></div>
+              </div>
+            </div>
+            <div class="fg">
+              <label for="country">Land</label>
+              <select id="country" name="country" autocomplete="country">
+                <option value="DE" selected>Deutschland</option>
+                <option value="AT">Österreich</option>
+                <option value="CH">Schweiz</option>
+              </select>
+            </div>
+            <div class="ship-toggle-wrap">
+              <label class="ship-toggle-label">
+                <input type="checkbox" id="ship-toggle">
+                Abweichende Lieferadresse angeben
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Separate Lieferadresse (optional) -->
+        <div class="form-card" id="ship-card">
+          <div class="form-section">
+            <div class="section-head">
+              <span class="step-badge" style="background:var(--primary)">→</span>
+              <span class="section-title">Lieferadresse</span>
+            </div>
+            <div class="fg">
+              <label for="ship_address">Straße und Hausnummer</label>
+              <input type="text" id="ship_address" name="ship_address" autocomplete="shipping street-address" placeholder="Musterstraße 42">
+              <div class="ferr" id="err-ship_address" role="alert"></div>
+            </div>
+            <div class="irow pc">
+              <div class="fg">
+                <label for="ship_postcode">PLZ</label>
+                <input type="text" id="ship_postcode" name="ship_postcode" autocomplete="shipping postal-code" inputmode="numeric" maxlength="5" placeholder="12345">
+                <div class="ferr" id="err-ship_postcode" role="alert"></div>
+              </div>
+              <div class="fg">
+                <label for="ship_city">Ort</label>
+                <input type="text" id="ship_city" name="ship_city" autocomplete="shipping address-level2" placeholder="Berlin">
+                <div class="ferr" id="err-ship_city" role="alert"></div>
+              </div>
+            </div>
+            <div class="fg">
+              <label for="ship_country">Land</label>
+              <select id="ship_country" name="ship_country" autocomplete="shipping country">
+                <option value="DE" selected>Deutschland</option>
+                <option value="AT">Österreich</option>
+                <option value="CH">Schweiz</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Zahlungsmethode -->
+        <div class="form-card">
+          <div class="form-section">
+            <div class="section-head">
+              <span class="step-badge">3</span>
+              <span class="section-title">Zahlungsmethode</span>
+            </div>
+            <div class="pm-list" role="radiogroup" aria-label="Zahlungsmethode wählen">
+
+              <label class="pm-opt">
+                <input type="radio" name="payment_method" value="creditcard" checked>
+                <div class="pm-inner">
+                  <div class="pm-logo pm-logo-cc">💳</div>
+                  <div class="pm-info">
+                    <div class="pm-name">Kreditkarte</div>
+                    <div class="pm-sub">Visa · Mastercard · American Express</div>
+                  </div>
+                  <div class="pm-dot"></div>
+                </div>
+              </label>
+
+              <label class="pm-opt">
+                <input type="radio" name="payment_method" value="paypal">
+                <div class="pm-inner">
+                  <div class="pm-logo pm-logo-pp">PP</div>
+                  <div class="pm-info">
+                    <div class="pm-name">PayPal</div>
+                    <div class="pm-sub">Schnell und sicher mit deinem PayPal-Konto</div>
+                  </div>
+                  <div class="pm-dot"></div>
+                </div>
+              </label>
+
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="form-card">
+          <div class="submit-sec">
+
+            <div class="err-banner" id="err-banner" hidden role="alert">
+              <span>⚠️</span>
+              <span id="err-banner-text">Ein Fehler ist aufgetreten. Bitte versuche es erneut.</span>
+            </div>
+
+            <label class="agb-wrap">
+              <input type="checkbox" id="agb" name="agb">
+              <span>Ich akzeptiere die <a href="#">AGB</a> und die <a href="/datenschutz/">Datenschutzerklärung</a>. Mit dem Kauf bestätige ich, die Widerrufsbelehrung gelesen zu haben.</span>
+            </label>
+
+            <button type="submit" id="submit-btn" class="btn-cta" disabled>
+              <span id="btn-label">Jetzt sicher bezahlen · 489,00 €</span>
+              <span id="btn-loading" hidden>
+                <span class="spin-row">
+                  <span class="spinner"></span>
+                  Zahlung wird vorbereitet...
+                </span>
+              </span>
+              <small>🔒 SSL-verschlüsselt · Sicher &amp; geschützt</small>
+            </button>
+
+            <div class="trust-row">
+              <span>🛡 30 Tage Geld-zurück</span>
+              <span>📦 Kostenloser Versand</span>
+              <span>🚚 2 Werktage Lieferzeit</span>
+            </div>
+
+          </div>
+        </div>
+
+      </form>
+    </div><!-- /form-col -->
+
+    <!-- SUMMARY COLUMN (desktop only) -->
+    <div class="summary-col" aria-hidden="true">
+      <div class="sum-card">
+        <div class="sum-img"><img src="../../assets/bundle_image.png" alt="" loading="eager"></div>
+        <div class="sum-body">
+          <div class="sum-name">Wellenpuls LWS</div>
+          <div class="sum-sub">Inkl. Reiseetui · Lieferung in 2 Werktagen</div>
+          <div class="offer-list">
+            <div class="offer-row"><div class="or-name"><span class="ck">✓</span> Wellenpuls LWS + Reiseetui</div><div class="or-price">489,00 €</div></div>
+            <div class="offer-row"><div class="or-name"><span class="ck">✓</span> 1:1 Beratung mit Christian</div><div class="or-price"><span class="gratis">Gratis</span><span class="original">120,00 €</span></div></div>
+            <div class="offer-row"><div class="or-name"><span class="ck">✓</span> Videokurs (3 × 20 Min.)</div><div class="or-price"><span class="gratis">Gratis</span><span class="original">79,00 €</span></div></div>
+            <div class="offer-row"><div class="or-name"><span class="ck">✓</span> E-Book + Checkliste</div><div class="or-price"><span class="gratis">Gratis</span><span class="original">34,90 €</span></div></div>
+            <div class="offer-row"><div class="or-name"><span class="ck">✓</span> Kostenloser Versand</div><div class="or-price"><span class="gratis">Gratis</span><span class="original">9,90 €</span></div></div>
+          </div>
+          <div class="sum-total">
+            <div class="tr"><span>Gesamtwert des Pakets</span><span style="text-decoration:line-through">732,80 €</span></div>
+            <div class="tr sav"><span>Deine Ersparnis</span><span>− 243,80 €</span></div>
+            <div class="tf">
+              <span class="tf-label">Gesamtbetrag</span>
+              <div style="text-align:right">
+                <span class="tf-amount">489,00 €</span>
+                <span class="tf-badge">33 % gespart · Einmalige Zahlung</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sum-pay">
+          <img src="../../assets/Zahlungsanbieter.png" alt="Kreditkarte, PayPal" loading="lazy">
+        </div>
+        <div class="sum-guar">
+          <span class="guar-icon">🛡</span>
+          <div>
+            <div class="guar-title">30 Tage Geld-zurück-Garantie</div>
+            <div class="guar-text">Kein Risiko. Wenn du nach 30 Tagen keinen Unterschied spürst, wird das Gerät unkompliziert zurückgenommen.</div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /summary-col -->
+
+  </div><!-- /checkout-grid -->
+
+  <!-- TRUST BELOW -->
+  <div class="trust-below">
+
+    <div class="section-label">Das sagen unsere Kunden</div>
+    <div class="testi-list">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">„Seit ich den Gurt benutze, fühlt sich mein Rücken so viel besser an."</div>
+        <div class="testi-name">Karin H. <span class="testi-verified">Verifiziert</span></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">„Zum ersten Mal habe ich das Gefühl, etwas gefunden zu haben, was mir wirklich hilft."</div>
+        <div class="testi-name">Sebastian D. <span class="testi-verified">Verifiziert</span></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">„Der Rücken meines Vaters fühlt sich um Welten entspannter an. Er hat schon vieles ausprobiert und schwört drauf."</div>
+        <div class="testi-name">Leon H. <span class="testi-verified">Verifiziert</span></div>
       </div>
     </div>
-  </div>
 
-  <!-- CTA -->
-  <div class="cta-block">
-    <a href="https://wellenpuls.de/checkout-link/?products=3271:1" class="btn-cta">
-      Jetzt kaufen — 489,00 €
-      <small>🔒 Sicherer Checkout · SSL-verschlüsselt</small>
-    </a>
-    <div class="trust-row">
-      <span>🛡 30 Tage Geld-zurück</span>
-      <span>📦 Kostenloser Versand</span>
-      <span>🚚 2 Werktage</span>
+    <div class="founder-note">
+      <img class="founder-note-photo" src="../../assets/Portrait_Gruender_Christian_Senfleben.jpg" alt="Christian Senfleben" loading="lazy">
+      <div>
+        <div class="founder-note-name">Christian Senfleben</div>
+        <div class="founder-note-role">Gründer · M.Sc. DSHS Köln</div>
+        <div class="founder-note-text">„Ich stehe persönlich hinter jeder Bestellung. Bei Fragen erreichst du mich direkt per E-Mail."</div>
+      </div>
     </div>
-  </div>
 
-  <!-- PAYMENT METHODS -->
-  <div class="payment-methods">
-    <div class="payment-methods-label">Akzeptierte Zahlungsmethoden</div>
-    <img src="../../assets/Zahlungsanbieter.png" alt="Kreditkarte, PayPal, Klarna, Apple Pay, Google Pay" style="width:100%;max-width:340px;display:block;margin:0 auto;height:auto">
-  </div>
-
-  <!-- GUARANTEE -->
-  <div class="guarantee-strip">
-    <div class="guarantee-icon">🛡</div>
-    <div>
-      <div class="guarantee-title">30 Tage Geld-zurück-Garantie</div>
-      <div class="guarantee-text">Kein Risiko. Wenn du nach 30 Tagen keinen Unterschied spürst, wird das Gerät unkompliziert zurückgenommen. Eine E-Mail an Christian reicht.</div>
+    <div class="legal">
+      Mit dem Kauf akzeptierst du die <a href="#">AGB</a> und <a href="/datenschutz/">Datenschutzerklärung</a>.<br>
+      Der Wellenpuls LWS ist ein Trainingsgerät, kein Medizinprodukt. Individuelle Ergebnisse können variieren.
     </div>
-  </div>
 
-  <!-- TESTIMONIALS -->
-  <div class="section-label">Das sagen unsere Kunden</div>
-  <div class="testi-list">
-    <div class="testi-card">
-      <div class="testi-stars">★★★★★</div>
-      <div class="testi-text">„Seit ich den Gurt benutze, fühlt sich mein Rücken so viel besser an."</div>
-      <div class="testi-name">Karin H. <span class="testi-verified">Verifiziert</span></div>
+    <div class="footer">
+      <a href="/impressum/">Impressum</a>
+      <a href="/datenschutz/">Datenschutz</a>
     </div>
-    <div class="testi-card">
-      <div class="testi-stars">★★★★★</div>
-      <div class="testi-text">„Zum ersten Mal habe ich das Gefühl, etwas gefunden zu haben, was mir wirklich hilft."</div>
-      <div class="testi-name">Sebastian D. <span class="testi-verified">Verifiziert</span></div>
-    </div>
-    <div class="testi-card">
-      <div class="testi-stars">★★★★★</div>
-      <div class="testi-text">„Der Rücken meines Vaters fühlt sich um Welten entspannter an. Er hat schon vieles ausprobiert und schwört drauf."</div>
-      <div class="testi-name">Leon H. <span class="testi-verified">Verifiziert</span></div>
-    </div>
+
   </div>
 
-  <!-- FOUNDER NOTE -->
-  <div class="founder-note">
-    <img class="founder-note-photo" src="../../assets/Portrait_Gruender_Christian_Senfleben.jpg" alt="Christian Senfleben">
-    <div>
-      <div class="founder-note-name">Christian Senfleben</div>
-      <div class="founder-note-role">Gründer · M.Sc. DSHS Köln</div>
-      <div class="founder-note-text">„Ich stehe persönlich hinter jeder Bestellung. Bei Fragen erreichst du mich direkt per E-Mail."</div>
-    </div>
-  </div>
-
-  <!-- LEGAL -->
-  <div class="legal">
-    Mit dem Kauf akzeptierst du die <a href="#">AGB</a> und <a href="/datenschutz/">Datenschutzerklärung</a>.<br>
-    Der Wellenpuls LWS ist ein Trainingsgerät, kein Medizinprodukt. Individuelle Ergebnisse können variieren.
-  </div>
-
-  <!-- FOOTER -->
-  <div class="footer">
-    <a href="/impressum/">Impressum</a>
-    <a href="/datenschutz/">Datenschutz</a>
-  </div>
-
-</div>
+</div><!-- /page -->
 
 <script>
-// Countdown: 14:59
+// ── KONFIGURATION ────────────────────────────────────────────
+const MAKE_WEBHOOK_URL = 'https://hook.eu2.make.com/wk4v2q911h2j1nx89voqd25lq80ymuln';
+// ────────────────────────────────────────────────────────────
+
+// Countdown
 (function(){
   var total = 14*60+59;
   function tick(){
-    if(total<=0){total=0}
-    var m=Math.floor(total/60), s=total%60;
-    document.getElementById('cd-m').textContent=String(m).padStart(2,'0');
-    document.getElementById('cd-s').textContent=String(s).padStart(2,'0');
-    if(total>0){total--;setTimeout(tick,1000);}
+    var m = Math.floor(total/60), s = total%60;
+    document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+    if(total > 0){ total--; setTimeout(tick, 1000); }
   }
   tick();
 })();
+
+// Mobile summary toggle
+(function(){
+  var toggle = document.getElementById('ms-toggle');
+  var drawer = document.getElementById('ms-drawer');
+  var arrow  = toggle.querySelector('.ms-arrow');
+  var label  = document.getElementById('ms-label');
+
+  function activate(){
+    var open = drawer.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+    arrow.classList.toggle('open', open);
+    label.textContent = open ? 'Bestellübersicht ausblenden' : 'Bestellübersicht anzeigen';
+  }
+  toggle.addEventListener('click', activate);
+  toggle.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); activate(); }
+  });
+})();
+
+// AGB → enable button
+document.getElementById('agb').addEventListener('change', function(){
+  document.getElementById('submit-btn').disabled = !this.checked;
+});
+
+// Shipping address toggle
+document.getElementById('ship-toggle').addEventListener('change', function(){
+  var card = document.getElementById('ship-card');
+  card.classList.toggle('open', this.checked);
+});
+
+// Validation rules
+var baseRules = {
+  first_name: function(v){ return v.trim().length >= 2 ? null : 'Bitte gib deinen Vornamen ein.'; },
+  last_name:  function(v){ return v.trim().length >= 2 ? null : 'Bitte gib deinen Nachnamen ein.'; },
+  email:      function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? null : 'Bitte gib eine gültige E-Mail-Adresse ein.'; },
+  address:    function(v){ return v.trim().length >= 5 ? null : 'Bitte gib Straße und Hausnummer ein.'; },
+  postcode:   function(v){ return /^\d{4,5}$/.test(v.trim()) ? null : 'Bitte gib eine gültige Postleitzahl ein.'; },
+  city:       function(v){ return v.trim().length >= 2 ? null : 'Bitte gib deinen Ort ein.'; },
+};
+var shipRules = {
+  ship_address:  function(v){ return v.trim().length >= 5 ? null : 'Bitte gib Straße und Hausnummer ein.'; },
+  ship_postcode: function(v){ return /^\d{4,5}$/.test(v.trim()) ? null : 'Bitte gib eine gültige Postleitzahl ein.'; },
+  ship_city:     function(v){ return v.trim().length >= 2 ? null : 'Bitte gib deinen Ort ein.'; },
+};
+function getRules(){
+  var r = Object.assign({}, baseRules);
+  if(document.getElementById('ship-toggle').checked) Object.assign(r, shipRules);
+  return r;
+}
+var rules = { get: getRules };
+
+function setFieldError(id, msg){
+  var input = document.getElementById(id);
+  var errEl = document.getElementById('err-' + id);
+  if(!input || !errEl) return;
+  if(msg){
+    input.classList.add('err');
+    errEl.textContent = msg;
+    errEl.classList.add('show');
+  } else {
+    input.classList.remove('err');
+    errEl.textContent = '';
+    errEl.classList.remove('show');
+  }
+}
+
+function validateField(id){
+  var fn = getRules()[id];
+  if(!fn) return true;
+  var val = document.getElementById(id).value;
+  var err = fn(val);
+  setFieldError(id, err);
+  return !err;
+}
+
+// Blur + live-clear on each field
+var allFieldIds = Object.keys(baseRules).concat(Object.keys(shipRules));
+allFieldIds.forEach(function(id){
+  var el = document.getElementById(id);
+  if(!el) return;
+  el.addEventListener('blur', function(){ validateField(id); });
+  el.addEventListener('input', function(){
+    if(this.classList.contains('err')) validateField(id);
+  });
+});
+
+function validateAll(){
+  return Object.keys(getRules()).map(validateField).every(Boolean);
+}
+
+function setLoading(on){
+  var btn     = document.getElementById('submit-btn');
+  var lbl     = document.getElementById('btn-label');
+  var spinner = document.getElementById('btn-loading');
+  btn.disabled  = on;
+  lbl.hidden    = on;
+  spinner.hidden = !on;
+}
+
+function showBannerError(msg){
+  var b = document.getElementById('err-banner');
+  document.getElementById('err-banner-text').textContent = msg;
+  b.hidden = false;
+  b.scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+function hideBannerError(){
+  document.getElementById('err-banner').hidden = true;
+}
+
+// Submit
+document.getElementById('checkout-form').addEventListener('submit', async function(e){
+  e.preventDefault();
+  hideBannerError();
+
+  if(!validateAll()){
+    var first = document.querySelector('input.err');
+    if(first) first.scrollIntoView({ behavior:'smooth', block:'center' });
+    return;
+  }
+
+  setLoading(true);
+
+  var shipOpen = document.getElementById('ship-toggle').checked;
+  var payload = {
+    first_name:          document.getElementById('first_name').value.trim(),
+    last_name:           document.getElementById('last_name').value.trim(),
+    email:               document.getElementById('email').value.trim(),
+    phone:               document.getElementById('phone').value.trim(),
+    address_1:           document.getElementById('address').value.trim(),
+    postcode:            document.getElementById('postcode').value.trim(),
+    city:                document.getElementById('city').value.trim(),
+    country:             document.getElementById('country').value,
+    shipping_address_1:  shipOpen ? document.getElementById('ship_address').value.trim()  : document.getElementById('address').value.trim(),
+    shipping_postcode:   shipOpen ? document.getElementById('ship_postcode').value.trim() : document.getElementById('postcode').value.trim(),
+    shipping_city:       shipOpen ? document.getElementById('ship_city').value.trim()     : document.getElementById('city').value.trim(),
+    shipping_country:    shipOpen ? document.getElementById('ship_country').value         : document.getElementById('country').value,
+    payment_method:      document.querySelector('input[name="payment_method"]:checked').value,
+    product_id:          4220,
+    quantity:            1,
+    amount:              '489.00',
+    currency:            'EUR'
+  };
+
+  try {
+    var res = await fetch(MAKE_WEBHOOK_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(payload)
+    });
+
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+
+    var data = await res.json();
+
+    if(data && data.payment_url){
+      if(typeof fbq !== 'undefined'){
+        fbq('track', 'InitiateCheckout', { value: 489.00, currency: 'EUR' });
+      }
+      window.location.href = data.payment_url;
+    } else {
+      throw new Error('Keine Zahlungs-URL erhalten');
+    }
+  } catch(err){
+    setLoading(false);
+    showBannerError('Die Zahlung konnte nicht gestartet werden. Bitte versuche es erneut oder schreib uns an hallo@wellenpuls.de.');
+  }
+});
 </script>
 </body>
 </html>
