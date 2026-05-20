@@ -171,7 +171,7 @@ select{
   font-size:13px;font-weight:900;
 }
 .pm-logo-cc{background:var(--primary-light);color:var(--primary);font-size:20px}
-.pm-logo-pp{background:#003087;color:#fff;font-size:11px;letter-spacing:-.5px}
+.pm-logo-pp{background:#fff;border:1px solid var(--border);width:auto;padding:0 10px;min-width:38px}
 .pm-logo-kl{background:#FFB3C7;color:#17120E;font-size:15px}
 .pm-logo-sf{background:oklch(36% 0.12 265);color:#fff;font-size:18px}
 .pm-info{flex:1;min-width:0}
@@ -486,7 +486,11 @@ select{
               <label class="pm-opt">
                 <input type="radio" name="payment_method" value="paypal">
                 <div class="pm-inner">
-                  <div class="pm-logo pm-logo-pp">PP</div>
+                  <div class="pm-logo pm-logo-pp">
+                    <svg viewBox="0 0 68 18" width="68" height="18" xmlns="http://www.w3.org/2000/svg" aria-label="PayPal">
+                      <text font-family="Arial Black,Arial,sans-serif" font-weight="900" font-size="17" y="15"><tspan fill="#003087">Pay</tspan><tspan fill="#009cde">Pal</tspan></text>
+                    </svg>
+                  </div>
                   <div class="pm-info">
                     <div class="pm-name">PayPal</div>
                     <div class="pm-sub">Schnell und sicher mit deinem PayPal-Konto</div>
