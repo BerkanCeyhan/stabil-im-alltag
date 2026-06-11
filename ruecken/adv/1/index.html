@@ -6,20 +6,8 @@
   <title>Warum du alles richtig machst und trotzdem nicht besser wirst – Stabil im Alltag</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
-  <!-- Meta Pixel Code -->
-  <script>
-  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window,document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init','576311248662294');
-  fbq('track','PageView');
-  </script>
-  <noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=576311248662294&ev=PageView&noscript=1"/></noscript>
-  <!-- End Meta Pixel Code -->
+  <link rel="icon" type="image/png" href="../../../assets/logo_transparent.png">
+  <link rel="apple-touch-icon" href="../../../assets/logo_transparent.png">
   <style>
     :root {
       --primary:  #1A5C8A;
@@ -520,9 +508,6 @@
     </p>
 
     <div class="author-row">
-      <div class="author-avatar">
-        <img src="https://images.pexels.com/photos/8871851/pexels-photo-8871851.jpeg?auto=compress&cs=tinysrgb&h=100&w=100" alt="Sabine Hoffmann">
-      </div>
       <div>
         <div class="author-name">Sabine Hoffmann</div>
         <div class="author-role">Gesundheitsredakteurin</div>
@@ -936,9 +921,6 @@
 
     <!-- ═══ AUTHOR BIO ═══ -->
     <div class="author-bio">
-      <div class="author-bio-avatar">
-        <img src="https://images.pexels.com/photos/8871851/pexels-photo-8871851.jpeg?auto=compress&cs=tinysrgb&h=144&w=144" alt="Sabine Hoffmann">
-      </div>
       <div>
         <div class="author-bio-name">Sabine Hoffmann</div>
         <div class="author-bio-role">Gesundheitsredakteurin · Stabil im Alltag</div>
@@ -956,7 +938,7 @@
 
     <!-- ═══ DISCLAIMER ═══ -->
     <div class="disclaimer">
-      <strong>Hinweis:</strong> Bei diesem Artikel handelt es sich um ein Advertorial, das Affiliate-Links enthalten kann. Bei einem Kauf über diese Links kann der Betreiber eine Provision erhalten, ohne Mehrkosten für den Käufer. Die beschriebenen Erfahrungen sind einer fiktiven Figur zugeschrieben, die den typischen Erfahrungen unserer Zielgruppe entspricht. Vor der Veröffentlichung wird dieser Text mit dem Erlebnisbericht eines echten Kunden aktualisiert. Der Wellenpuls LWS ist ein Trainingsgerät und kein Medizinprodukt. Er ersetzt keine ärztliche Beratung. Individuelle Ergebnisse können variieren.
+      <strong>Hinweis:</strong> Bei diesem Artikel handelt es sich um ein Advertorial, das Affiliate-Links enthalten kann. Bei einem Kauf über diese Links kann der Betreiber eine Provision erhalten, ohne Mehrkosten für den Käufer. Der Erfahrungsbericht beruht auf echten Kundenerfahrungen und wird pseudonymisiert veröffentlicht, um die Privatsphäre der betreffenden Person zu schützen. Der Wellenpuls LWS ist ein Trainingsgerät und kein Medizinprodukt. Er ersetzt keine ärztliche Beratung. Individuelle Ergebnisse können variieren.
     </div>
 
   </article>
@@ -969,51 +951,10 @@
   <div class="footer-links">
     <a href="/impressum/">Impressum</a>
     <a href="/datenschutz/">Datenschutz</a>
+    <a href="#" onclick="SIA_openConsent();return false;">Cookie-Einstellungen</a>
   </div>
 </footer>
 
-<!-- Lead Tracking -->
-<script>
-(function(){
-  function getCookie(n){var m=document.cookie.match(new RegExp('(?:^|; )'+n.replace(/([.$?*|{}()[\]\\/+^])/g,'\\$1')+'=([^;]*)'));return m?decodeURIComponent(m[1]):null;}
-  function getParam(n){try{return new URL(window.location.href).searchParams.get(n);}catch(e){return null;}}
-  function setCookie(n,v,age){var p=[n+'='+encodeURIComponent(v),'path=/','max-age='+(age||7776000),'samesite=lax'];if(location.protocol==='https:')p.push('secure');document.cookie=p.join('; ');}
-  function ensureFbc(){var e=getCookie('_fbc');if(e)return e;var id=getParam('fbclid');if(!id)return null;var fbc='fb.1.'+Date.now()+'.'+id;setCookie('_fbc',fbc,7776000);return fbc;}
-
-  function sendLead(btn){
-    var eventId='lead-'+Math.random().toString(36).substring(2,12);
-    if(typeof fbq==='function'){fbq('track','Lead',{},{eventID:eventId});}
-    var payload={
-      trigger:true,
-      event_name:'Lead',
-      event_id:eventId,
-      event_time:Math.floor(Date.now()/1000),
-      action_source:'website',
-      event_source_url:window.location.href,
-      referrer:document.referrer||null,
-      client_user_agent:navigator.userAgent,
-      fbp:getCookie('_fbp'),
-      fbc:ensureFbc(),
-      fbclid:getParam('fbclid')
-    };
-    var sent=false;
-    function doNav(){if(!sent){sent=true;window.location.href=btn.href;}}
-    setTimeout(doNav,500);
-    fetch('https://hook.eu2.make.com/e8zrhj4ndaftv617irpx2185nzqbhfix',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(payload),
-      keepalive:true
-    }).then(doNav).catch(doNav);
-  }
-
-  document.querySelectorAll('.track-lead').forEach(function(btn){
-    btn.addEventListener('click',function(e){
-      e.preventDefault();
-      sendLead(btn);
-    });
-  });
-})();
-</script>
+<script src="../../../assets/consent.js" defer></script>
 </body>
 </html>
