@@ -44,12 +44,29 @@
       n.queue = []; t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t, s);
     }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+    fetchClientIp();
     fbq('init', PIXEL_ID);
     fbq('track', 'PageView');
     // Optionales Purchase-Event (z. B. Danke-Seite): nur mit Einwilligung, da Pixel sonst nicht geladen ist.
     if (window.SIA_PURCHASE && typeof window.SIA_PURCHASE === 'object') {
       fbq('track', 'Purchase', window.SIA_PURCHASE);
     }
+  }
+
+  /* ---------- Client-IP (für Meta Match Quality) ---------- */
+  // Make/Webhook stellt die Besucher-IP nicht zuverlässig bereit. Daher holen wir die
+  // öffentliche IP direkt im Browser (nur nach Einwilligung) und senden sie im Payload mit.
+  var clientIp = null;
+  var ipFetched = false;
+  function fetchClientIp() {
+    if (ipFetched) return;
+    ipFetched = true;
+    try {
+      fetch('https://api.ipify.org?format=json')
+        .then(function (r) { return r.json(); })
+        .then(function (d) { if (d && d.ip) clientIp = d.ip; })
+        .catch(function () {});
+    } catch (e) {}
   }
 
   /* ---------- Lead-Tracking (Browser-Pixel + Server-CAPI via Make) ---------- */
@@ -90,6 +107,7 @@
       fbp: getCookie('_fbp'),
       fbc: ensureFbc(),
       fbclid: getParam('fbclid'),
+      client_ip_address: clientIp,
       custom_data: customData || {}
     };
 
