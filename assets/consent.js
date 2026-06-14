@@ -4,7 +4,8 @@
    Wer auf dem Advertorial zustimmt, sieht das Banner auf LP/Checkout/Danke nicht erneut. */
 (function () {
   var PIXEL_ID = '576311248662294';
-  var WEBHOOK  = 'https://hook.eu2.make.com/e8zrhj4ndaftv617irpx2185nzqbhfix';
+  // Meta Conversions-API via Make (Server-Side). Empfängt Browser-Events und spielt sie serverseitig an Meta.
+  var CAPI_WEBHOOK = 'https://hook.eu2.make.com/7omhyj9vgfm9az1i1el3i9ihvfh5hjym';
   var COOKIE   = 'sia_consent';
   var MAXAGE   = 15552000; // 180 Tage
 
@@ -63,21 +64,23 @@
     var c = readConsent();
     return !!(c && c.marketing);
   }
-  function sendLead(btn) {
-    var href = btn.href;
+  // Feuert ein Standard-Event über Pixel (Browser) UND Conversions-API (Server, via Make).
+  // Beide nutzen dieselbe eventID -> Meta dedupliziert. btn ist optional (für Klick-Weiterleitung).
+  function sendEvent(eventName, btn, customData) {
+    var href = btn && btn.href;
 
     if (!marketingAllowed()) {
       // Ohne Marketing-Einwilligung kein Pixel/CAPI – nur weiterleiten.
-      window.location.href = href;
+      if (href) window.location.href = href;
       return;
     }
 
-    var eventId = 'lead-' + Math.random().toString(36).substring(2, 12);
-    if (typeof fbq === 'function') fbq('track', 'Lead', {}, { eventID: eventId });
+    var eventId = eventName.toLowerCase() + '-' + Math.random().toString(36).substring(2, 12);
+    if (typeof fbq === 'function') fbq('track', eventName, customData || {}, { eventID: eventId });
 
     var payload = {
       trigger: true,
-      event_name: 'Lead',
+      event_name: eventName,
       event_id: eventId,
       event_time: Math.floor(Date.now() / 1000),
       action_source: 'website',
@@ -86,13 +89,14 @@
       client_user_agent: navigator.userAgent,
       fbp: getCookie('_fbp'),
       fbc: ensureFbc(),
-      fbclid: getParam('fbclid')
+      fbclid: getParam('fbclid'),
+      custom_data: customData || {}
     };
 
     var navigated = false;
-    function go() { if (!navigated) { navigated = true; window.location.href = href; } }
-    setTimeout(go, 500);
-    fetch(WEBHOOK, {
+    function go() { if (href && !navigated) { navigated = true; window.location.href = href; } }
+    if (href) setTimeout(go, 500);
+    fetch(CAPI_WEBHOOK, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
@@ -100,11 +104,18 @@
     }).then(go).catch(go);
   }
 
-  function bindLeadButtons() {
+  function bindEventButtons() {
+    // Advertorial: Klick auf CTA -> Lead
     document.querySelectorAll('.track-lead').forEach(function (btn) {
       if (btn.__siaBound) return;
       btn.__siaBound = true;
-      btn.addEventListener('click', function (e) { e.preventDefault(); sendLead(btn); });
+      btn.addEventListener('click', function (e) { e.preventDefault(); sendEvent('Lead', btn); });
+    });
+    // Landing Page: Klick auf Kauf-/Bestell-Button (Richtung Checkout) -> AddToCart
+    document.querySelectorAll('.track-atc').forEach(function (btn) {
+      if (btn.__siaBound) return;
+      btn.__siaBound = true;
+      btn.addEventListener('click', function (e) { e.preventDefault(); sendEvent('AddToCart', btn, { value: 489.00, currency: 'EUR' }); });
     });
   }
 
@@ -189,7 +200,7 @@
   function grantAll() {
     saveConsent({ essential: true, marketing: true });
     loadPixel();
-    bindLeadButtons();
+    bindEventButtons();
     hideBanner();
   }
   function essentialOnly() {
@@ -200,7 +211,7 @@
     var mkt = document.getElementById('sia-mkt');
     var marketing = !!(mkt && mkt.checked);
     saveConsent({ essential: true, marketing: marketing });
-    if (marketing) { loadPixel(); bindLeadButtons(); }
+    if (marketing) { loadPixel(); bindEventButtons(); }
     hideBanner();
   }
 
@@ -209,7 +220,7 @@
 
   /* ---------- Init ---------- */
   function init() {
-    bindLeadButtons(); // Buttons binden; sendLead prüft Consent selbst.
+    bindEventButtons(); // Buttons binden; sendEvent prüft Consent selbst.
     var consent = readConsent();
     if (consent) {
       if (consent.marketing) loadPixel();
