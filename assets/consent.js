@@ -235,6 +235,8 @@
 
   // Banner nachträglich erneut öffnen (Footer-Link "Cookie-Einstellungen").
   window.SIA_openConsent = showBanner;
+  // Dynamisch eingefügte Event-Buttons (z. B. Quiz-Ergebnis) nachträglich binden.
+  window.SIA_bindEvents = bindEventButtons;
 
   /* ---------- Init ---------- */
   function init() {

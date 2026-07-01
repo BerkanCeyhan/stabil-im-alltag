@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#eef3f7">
+  <title>Rücken-Check: Ist deine Tiefenmuskulatur blockiert? | Stabil im Alltag</title>
+  <meta name="description" content="Finde in 60 Sekunden heraus, warum deine Rückenbeschwerden immer wiederkehren. 11 kurze Fragen, kein Konto, keine E-Mail.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="../../../assets/logo_transparent.png">
+  <link rel="apple-touch-icon" href="../../../assets/logo_transparent.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Lora:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box}
+
+    :root{
+      --primary:      oklch(45% 0.088 242);
+      --primary-deep: oklch(36% 0.078 242);
+      --primary-pale: oklch(95% 0.022 242);
+      --teal:         oklch(52% 0.092 165);
+      --teal-deep:    oklch(43% 0.082 165);
+      --teal-pale:    oklch(95% 0.03 165);
+      --ink:          oklch(27% 0.021 242);
+      --ink-soft:     oklch(43% 0.022 242);
+      --muted:        oklch(56% 0.017 242);
+      --surface:      oklch(99.5% 0.004 240);
+      --canvas:       oklch(97% 0.009 235);
+      --line:         oklch(89% 0.014 235);
+      --line-soft:    oklch(93% 0.01 235);
+      --danger:       oklch(53% 0.16 28);
+      --danger-pale:  oklch(95% 0.03 28);
+      --amber:        oklch(58% 0.11 68);
+      --amber-pale:   oklch(96% 0.04 78);
+      --gold:         oklch(74% 0.135 78);
+      --shadow-sm:    0 2px 10px oklch(40% 0.05 242 / .07);
+      --shadow-md:    0 14px 40px oklch(35% 0.05 242 / .12);
+      --shadow-lg:    0 24px 64px oklch(30% 0.05 242 / .16);
+      --ease:         cubic-bezier(.16,1,.3,1);
+      --r:            14px;
+      --r-lg:         20px;
+    }
+
+    html{font-size:17px;background:var(--canvas);-webkit-text-size-adjust:100%}
+
+    body{
+      margin:0;
+      min-height:100dvh;
+      color:var(--ink);
+      font-family:"Libre Franklin",system-ui,sans-serif;
+      line-height:1.55;
+      background:
+        radial-gradient(120% 60% at 82% -8%, oklch(93% 0.04 165 / .55), transparent 60%),
+        radial-gradient(130% 55% at 8% 108%, oklch(93% 0.04 242 / .5), transparent 62%),
+        var(--canvas);
+      -webkit-font-smoothing:antialiased;
+    }
+
+    h1,h2,h3,p{margin:0}
+    h1,h2,h3{font-family:"Lora",Georgia,serif;font-weight:600;text-wrap:balance;letter-spacing:-.01em}
+    img{display:block;max-width:100%}
+    button,a{font:inherit;-webkit-tap-highlight-color:transparent}
+    button{color:inherit}
+    [tabindex="-1"]:focus{outline:none}
+    b,strong{font-weight:700}
+
+    .app{
+      min-height:100dvh;
+      display:grid;
+      grid-template-rows:auto 1fr auto;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar{
+      position:sticky;top:0;z-index:20;
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      align-items:center;
+      gap:12px;
+      padding:10px clamp(14px,4vw,26px);
+      padding-top:max(10px,env(safe-area-inset-top));
+      background:color-mix(in oklch,var(--canvas) 88%,transparent);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line-soft);
+    }
+    .brand{display:inline-flex;align-items:center;height:44px}
+    .brand img{height:40px;width:auto}
+    .back-btn{
+      grid-column:3;
+      min-height:44px;min-width:44px;
+      display:inline-flex;align-items:center;gap:5px;
+      padding:0 6px;border:0;background:transparent;cursor:pointer;
+      color:var(--primary);font-weight:700;font-size:.82rem;
+    }
+    .back-btn svg{width:18px;height:18px}
+    .back-btn[hidden]{visibility:hidden}
+    .progress{grid-column:2;display:grid;gap:6px;max-width:520px;width:100%;margin:0 auto}
+    .progress-meta{display:flex;justify-content:space-between;font-size:.66rem;font-weight:700;letter-spacing:.04em;color:var(--muted);text-transform:uppercase}
+    .progress-track{height:6px;border-radius:99px;background:var(--line);overflow:hidden}
+    .progress-fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--teal),var(--teal-deep));transition:width .5s var(--ease)}
+
+    /* ── STAGE ── */
+    main{display:grid;align-items:start;justify-items:center;padding:clamp(16px,4vw,32px) clamp(14px,4vw,26px) 40px;padding-bottom:calc(40px + env(safe-area-inset-bottom))}
+    .stage{width:100%;max-width:560px}
+    .screen{animation:rise .42s var(--ease) both}
+    @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+    .kicker{
+      display:inline-flex;align-items:center;gap:8px;
+      margin-bottom:12px;
+      color:var(--teal-deep);font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+    }
+    .kicker::before{content:"";width:22px;height:2px;background:currentColor;border-radius:2px}
+
+    .q-title{font-size:clamp(1.55rem,6.4vw,2.1rem);line-height:1.16;color:var(--primary-deep)}
+    .q-sub{margin-top:10px;color:var(--ink-soft);font-size:clamp(.95rem,3.4vw,1.02rem);line-height:1.55;max-width:44ch}
+
+    /* hero headline (screen 1) */
+    .hero-eyebrow{margin-bottom:14px;color:var(--danger);font-weight:800;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase}
+    .hero-title{font-size:clamp(1.7rem,7.4vw,2.4rem);line-height:1.12;color:var(--primary-deep)}
+    .hero-title em{font-style:italic;color:var(--teal-deep)}
+    .hero-sub{margin-top:12px;font-size:1.02rem;color:var(--ink-soft)}
+
+    /* ── OPTIONS ── */
+    .options{display:grid;gap:10px;margin-top:22px}
+    .opt{
+      display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;
+      width:100%;min-height:58px;padding:14px 16px;
+      border:1.5px solid var(--line);border-radius:var(--r);
+      background:var(--surface);
+      text-align:left;cursor:pointer;
+      transition:border-color .18s ease,background .18s ease,transform .18s var(--ease),box-shadow .18s ease;
+    }
+    .opt:active{transform:scale(.985)}
+    @media(hover:hover){.opt:hover{border-color:color-mix(in oklch,var(--teal) 55%,var(--line));box-shadow:var(--shadow-sm)}}
+    .opt[aria-pressed="true"]{border-color:var(--teal);background:var(--teal-pale);box-shadow:0 0 0 1.5px var(--teal) inset}
+    .opt-body{min-width:0;display:grid;gap:2px}
+    .opt-label{font-weight:700;color:var(--ink);line-height:1.3}
+    .opt-detail{font-size:.8rem;color:var(--muted);line-height:1.4}
+    .opt-mark{
+      width:24px;height:24px;flex:none;border:2px solid var(--line);border-radius:50%;position:relative;
+      transition:border-color .18s ease,background .18s ease;
+    }
+    .opt[data-multi="true"] .opt-mark{border-radius:7px}
+    .opt[aria-pressed="true"] .opt-mark{border-color:var(--teal);background:var(--teal)}
+    .opt[aria-pressed="true"] .opt-mark::after{
+      content:"";position:absolute;left:8px;top:4px;width:6px;height:11px;
+      border:solid var(--surface);border-width:0 2.5px 2.5px 0;transform:rotate(42deg);
+    }
+
+    /* ── BUTTONS ── */
+    .cta{
+      display:inline-flex;align-items:center;justify-content:center;gap:9px;
+      width:100%;min-height:56px;padding:15px 22px;
+      border:0;border-radius:var(--r);
+      background:var(--teal);color:var(--surface);
+      font-weight:800;font-size:1rem;letter-spacing:.01em;text-decoration:none;cursor:pointer;
+      box-shadow:0 10px 26px oklch(43% 0.082 165 / .28);
+      transition:background .18s ease,transform .18s var(--ease),box-shadow .18s ease;
+    }
+    .cta:active{transform:scale(.99)}
+    @media(hover:hover){.cta:hover{background:var(--teal-deep);transform:translateY(-1px)}}
+    .cta:disabled{opacity:.42;box-shadow:none;cursor:not-allowed}
+    .cta svg{width:18px;height:18px;flex:none}
+    .cta-lg{min-height:60px;font-size:1.05rem}
+    .cta-ghost{background:var(--surface);color:var(--primary-deep);border:1.5px solid var(--line);box-shadow:none}
+    @media(hover:hover){.cta-ghost:hover{background:var(--primary-pale)}}
+
+    .action{margin-top:22px;display:grid;gap:10px}
+    .hint{text-align:center;color:var(--muted);font-size:.78rem;font-weight:600}
+
+    .privacy{
+      margin-top:20px;display:flex;align-items:center;justify-content:center;gap:8px;
+      color:var(--muted);font-size:.76rem;font-weight:600;
+    }
+    .privacy svg{width:16px;height:16px;color:var(--teal-deep);flex:none}
+
+    /* ── VISUAL: body map ── */
+    .bodymap{
+      margin-top:18px;position:relative;
+      display:grid;place-items:center;
+      padding:18px;border-radius:var(--r-lg);
+      background:radial-gradient(circle at 50% 38%,oklch(93% 0.04 165 / .7),transparent 60%),var(--surface);
+      border:1px solid var(--line);
+    }
+    .bodymap svg{width:min(60%,190px);height:auto;color:color-mix(in oklch,var(--primary) 42%,var(--line))}
+    .bodymap .zone{opacity:0;transform-box:fill-box;transform-origin:center;transition:opacity .25s ease}
+    .bodymap[data-zone="mid"] .z-mid,
+    .bodymap[data-zone="side"] .z-side,
+    .bodymap[data-zone="band"] .z-band,
+    .bodymap[data-zone="radiate"] .z-mid,
+    .bodymap[data-zone="radiate"] .z-glute{opacity:1;animation:pulse 1.8s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:.6;transform:scale(.94)}50%{opacity:1;transform:scale(1.05)}}
+
+    /* ── INTERSTITIAL shared ── */
+    .lead{margin-top:12px;color:var(--ink-soft);font-size:1.02rem;line-height:1.6;max-width:46ch}
+    .callout{
+      margin-top:18px;padding:16px 18px;border-radius:var(--r);
+      background:var(--amber-pale);border:1px solid color-mix(in oklch,var(--amber) 40%,var(--line));
+    }
+    .callout.good{background:var(--teal-pale);border-color:color-mix(in oklch,var(--teal) 40%,var(--line))}
+    .callout-title{display:flex;align-items:center;gap:8px;font-family:"Lora",serif;font-weight:600;font-size:1.02rem;color:var(--ink);margin-bottom:6px}
+    .callout p{font-size:.92rem;color:var(--ink-soft);line-height:1.55}
+    .callout svg{width:19px;height:19px;flex:none}
+
+    /* ── FAKTEN chart ── */
+    .chart-card{margin-top:20px;padding:18px 16px 14px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-sm)}
+    .chart-cap{font-size:.72rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+    .chart{width:100%;height:auto;display:block}
+    .chart .grid-line{stroke:var(--line-soft);stroke-width:1}
+    .chart .curve{fill:none;stroke:var(--danger);stroke-width:3.5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+    .chart .area{fill:url(#fadeDanger);opacity:0}
+    .chart.draw .curve{animation:draw 1.6s var(--ease) forwards}
+    .chart.draw .area{animation:fadein 1.2s ease .5s forwards}
+    @keyframes draw{to{stroke-dashoffset:0}}
+    @keyframes fadein{to{opacity:1}}
+    .chart-axis{display:flex;justify-content:space-between;margin-top:6px;font-size:.66rem;font-weight:700;color:var(--muted)}
+    .chart-note{margin-top:10px;font-size:.68rem;color:var(--muted);line-height:1.4}
+
+    .steps{margin-top:20px;display:grid;gap:12px}
+    .step{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+    .step-badge{
+      width:40px;height:40px;flex:none;border-radius:50%;display:grid;place-items:center;
+      background:var(--primary-pale);color:var(--primary-deep);font-family:"Lora",serif;font-weight:700;font-size:.95rem;
+    }
+    .step h3{font-size:.98rem;color:var(--ink);line-height:1.3;margin-bottom:2px}
+    .step p{font-size:.86rem;color:var(--ink-soft);line-height:1.5}
+
+    /* ── SOCIAL proof ── */
+    .counter{
+      margin-top:8px;text-align:center;padding:24px 18px;border-radius:var(--r-lg);
+      background:linear-gradient(180deg,var(--primary-deep),var(--primary));color:var(--surface);box-shadow:var(--shadow-md);
+    }
+    .counter-num{font-family:"Lora",serif;font-weight:700;font-size:clamp(2.4rem,12vw,3.4rem);line-height:1;font-variant-numeric:tabular-nums}
+    .counter-label{margin-top:8px;font-size:.92rem;color:oklch(94% 0.02 235);max-width:30ch;margin-inline:auto}
+    .rating{margin-top:16px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;font-size:.86rem;color:var(--ink-soft);font-weight:600}
+    .stars{color:var(--gold);letter-spacing:1px;font-size:1rem}
+    .bars{margin-top:18px;display:grid;gap:12px}
+    .bar-row{display:grid;gap:5px}
+    .bar-head{display:flex;justify-content:space-between;font-size:.84rem;font-weight:700;color:var(--ink)}
+    .bar-head b{color:var(--teal-deep);font-variant-numeric:tabular-nums}
+    .bar-track{height:9px;border-radius:99px;background:var(--line);overflow:hidden}
+    .bar-fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--teal),var(--teal-deep));transition:width 1.1s var(--ease)}
+
+    /* ── SCIENCE ── */
+    .sci-photo{margin-top:18px;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-md);aspect-ratio:16/10}
+    .sci-photo img{width:100%;height:100%;object-fit:cover;object-position:center 35%}
+    .sci-cap{margin-top:8px;font-size:.72rem;color:var(--muted);text-align:center}
+    .duo{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .duo-cell{padding:16px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);text-align:center}
+    .duo-cell .big{font-family:"Lora",serif;font-weight:700;font-size:1.3rem;color:var(--teal-deep)}
+    .duo-cell h3{font-size:.92rem;margin:4px 0 2px;color:var(--ink)}
+    .duo-cell p{font-size:.78rem;color:var(--muted);line-height:1.4}
+
+    /* ── warum wir fragen note ── */
+    .why{
+      margin-top:18px;padding:13px 15px;border-radius:var(--r);
+      background:var(--primary-pale);
+      font-size:.84rem;color:var(--ink-soft);line-height:1.5;
+    }
+    .why b{color:var(--primary-deep)}
+
+    /* ── BEFUND meters ── */
+    .befund-grid{margin-top:20px;display:grid;gap:12px}
+    .meter{padding:15px 16px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line)}
+    .meter-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:9px}
+    .meter-name{font-size:.82rem;font-weight:700;color:var(--ink-soft)}
+    .meter-val{font-size:.82rem;font-weight:800;letter-spacing:.03em;text-transform:uppercase;font-family:"Libre Franklin",sans-serif}
+    .meter-val.hi{color:var(--danger)}
+    .meter-val.mid{color:var(--amber)}
+    .meter-val.good{color:var(--teal-deep)}
+    .meter-scale{height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+    .meter-scale span{display:block;height:100%;width:0;border-radius:99px;transition:width 1s var(--ease)}
+    .meter-scale span.hi{background:linear-gradient(90deg,var(--amber),var(--danger))}
+    .meter-scale span.good{background:linear-gradient(90deg,var(--teal),var(--teal-deep))}
+    .befund-note{margin-top:16px;padding:16px 18px;border-radius:var(--r);background:var(--teal-pale);border:1px solid color-mix(in oklch,var(--teal) 35%,var(--line))}
+    .befund-note h3{font-size:.98rem;color:var(--ink);margin-bottom:6px}
+    .befund-note p{font-size:.9rem;color:var(--ink-soft);line-height:1.55}
+
+    /* ── PLAN timeline ── */
+    .timeline{margin-top:20px;display:grid;gap:0}
+    .tl-item{display:grid;grid-template-columns:auto 1fr;gap:14px;padding-bottom:20px;position:relative}
+    .tl-item:last-child{padding-bottom:0}
+    .tl-rail{display:grid;justify-items:center;gap:0}
+    .tl-dot{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--teal);color:var(--surface);font-family:"Lora",serif;font-weight:700;font-size:.9rem;z-index:1}
+    .tl-line{width:2px;flex:1;background:var(--line);margin-top:2px;min-height:24px}
+    .tl-item:last-child .tl-line{display:none}
+    .tl-body{padding-bottom:4px}
+    .tl-week{font-size:.68rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:3px}
+    .tl-body h3{font-size:.98rem;color:var(--ink);margin-bottom:4px}
+    .tl-body p{font-size:.86rem;color:var(--ink-soft);line-height:1.5}
+    .progress-viz{margin-top:20px;padding:18px 16px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line)}
+    .pv-head{display:flex;justify-content:space-between;font-size:.74rem;font-weight:700;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.03em}
+    .pv-bars{display:flex;align-items:flex-end;gap:8px;height:96px}
+    .pv-bar{flex:1;border-radius:7px 7px 0 0;background:linear-gradient(180deg,var(--teal),var(--teal-deep));height:0;transition:height .9s var(--ease)}
+    .pv-bar:first-child{background:linear-gradient(180deg,var(--line),color-mix(in oklch,var(--muted) 30%,var(--line)))}
+    .pv-labels{display:flex;gap:8px;margin-top:8px}
+    .pv-labels span{flex:1;text-align:center;font-size:.64rem;font-weight:700;color:var(--muted)}
+
+    /* ── MICRO yes ── */
+    .micro{text-align:center;padding-top:16px}
+    .micro .kicker{justify-content:center}
+    .micro-title{font-size:clamp(1.5rem,6.2vw,2rem);line-height:1.18;color:var(--primary-deep)}
+    .micro-sub{margin-top:12px;color:var(--ink-soft);font-size:1rem;max-width:36ch;margin-inline:auto}
+    .yesno{margin-top:26px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .yesno .opt{grid-template-columns:1fr;justify-items:center;text-align:center;min-height:64px}
+    .yesno .opt-label{font-size:1.05rem}
+
+    /* ── LOADING ── */
+    .loading{text-align:center;padding-top:24px}
+    .ring{width:132px;height:132px;margin:0 auto 22px;position:relative;display:grid;place-items:center}
+    .ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
+    .ring circle{fill:none;stroke-width:8}
+    .ring .track{stroke:var(--line)}
+    .ring .fill{stroke:var(--teal);stroke-linecap:round;stroke-dasharray:352;stroke-dashoffset:352;transition:stroke-dashoffset .2s linear}
+    .ring-pct{font-family:"Lora",serif;font-weight:700;font-size:1.9rem;color:var(--primary-deep);font-variant-numeric:tabular-nums}
+    .loading-title{font-size:clamp(1.5rem,6vw,2rem);color:var(--primary-deep);line-height:1.18}
+    .loading-step{margin-top:12px;min-height:24px;color:var(--ink-soft);font-weight:600;transition:opacity .3s ease}
+    .load-quote{
+      margin-top:26px;padding:18px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);text-align:left;box-shadow:var(--shadow-sm);
+    }
+    .load-quote .stars{font-size:.9rem}
+    .load-quote p{margin-top:8px;font-size:.9rem;font-style:italic;color:var(--ink);line-height:1.55}
+    .load-quote cite{display:block;margin-top:8px;font-size:.8rem;font-style:normal;font-weight:700;color:var(--primary-deep)}
+
+    /* ── RESULT ── */
+    .result-badge{display:inline-flex;align-items:center;gap:8px;margin-bottom:14px;padding:6px 12px;border-radius:99px;background:var(--teal-pale);color:var(--teal-deep);font-size:.74rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+    .result-badge svg{width:15px;height:15px}
+    .result-title{font-size:clamp(1.55rem,6.2vw,2.15rem);line-height:1.16;color:var(--primary-deep)}
+    .profile{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .profile-card{padding:14px;border-radius:var(--r);background:var(--primary-pale)}
+    .profile-card span{display:block;font-size:.66rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+    .profile-card b{font-size:.98rem;color:var(--primary-deep);line-height:1.3}
+    .analysis{margin-top:20px;font-size:.98rem;color:var(--ink-soft);line-height:1.65}
+    .analysis strong{color:var(--ink)}
+    .method{margin-top:22px;display:grid;gap:10px}
+    .method-item{display:grid;grid-template-columns:auto 1fr;gap:13px;align-items:center;padding:14px 15px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line)}
+    .method-num{width:34px;height:34px;flex:none;border-radius:50%;display:grid;place-items:center;background:var(--teal);color:var(--surface);font-family:"Lora",serif;font-weight:700}
+    .method-item h3{font-size:.94rem;color:var(--ink);margin-bottom:1px}
+    .method-item p{font-size:.8rem;color:var(--muted);line-height:1.4}
+
+    .beforeafter{margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .ba-cell{border-radius:var(--r);overflow:hidden;position:relative;aspect-ratio:3/4;background:var(--primary-pale)}
+    .ba-cell img{width:100%;height:100%;object-fit:cover}
+    .ba-cell.after img{filter:contrast(1.1) brightness(1.07) saturate(1.18)}
+    .ba-tag{position:absolute;top:10px;left:10px;padding:4px 10px;border-radius:99px;font-size:.68rem;font-weight:800;letter-spacing:.03em;text-transform:uppercase;background:oklch(30% 0.03 242 / .7);color:#fff;backdrop-filter:blur(4px)}
+    .ba-cell.after .ba-tag{background:var(--teal)}
+    .ba-note{margin-top:6px;font-size:.66rem;color:var(--muted);text-align:center;grid-column:1/-1}
+
+    .next-list{margin-top:24px;display:grid;gap:0;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:var(--surface)}
+    .next-item{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line-soft)}
+    .next-item:last-child{border-bottom:0}
+    .next-check{width:24px;height:24px;flex:none;border-radius:50%;display:grid;place-items:center;background:var(--teal-pale);color:var(--teal-deep)}
+    .next-check svg{width:14px;height:14px}
+    .next-item p{font-size:.9rem;color:var(--ink);line-height:1.4}
+    .next-item b{color:var(--primary-deep)}
+
+    .result-cta{margin-top:24px}
+    .guarantee{margin-top:12px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 14px;font-size:.74rem;color:var(--muted);font-weight:600}
+    .guarantee span{display:inline-flex;align-items:center;gap:5px}
+    .guarantee svg{width:14px;height:14px;color:var(--teal-deep)}
+
+    .disclaimer{margin-top:24px;font-size:.68rem;color:var(--muted);line-height:1.5;max-width:60ch;margin-inline:auto;text-align:center}
+
+    /* ── FOOTER ── */
+    .foot{
+      display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;
+      padding:18px;padding-bottom:calc(18px + env(safe-area-inset-bottom));
+      font-size:.68rem;color:var(--muted);
+    }
+    .foot a{color:inherit;text-decoration:none}
+    @media(hover:hover){.foot a:hover{color:var(--primary)}}
+
+    /* ── DESKTOP enhance ── */
+    @media(min-width:640px){
+      html{font-size:18px}
+      .stage{max-width:600px}
+      .options.two-col{grid-template-columns:1fr 1fr}
+      .duo,.profile,.beforeafter{gap:14px}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+      .chart .curve{stroke-dashoffset:0}
+      .chart .area{opacity:1}
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Stabil im Alltag Startseite"><img src="../../../assets/logo_transparent.png" alt="Stabil im Alltag"></a>
+      <div class="progress">
+        <div class="progress-meta"><span id="pLabel">Rücken-Check</span><span id="pCount">Start</span></div>
+        <div class="progress-track"><div class="progress-fill" id="pFill"></div></div>
+      </div>
+      <button class="back-btn" id="backBtn" type="button" hidden>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Zurück</span>
+      </button>
+    </header>
+
+    <main><div class="stage" id="stage" aria-live="polite"></div></main>
+
+    <footer class="foot">
+      <span>© Stabil im Alltag</span>
+      <a href="/impressum/">Impressum</a>
+      <a href="/datenschutz/">Datenschutz</a>
+      <a href="#" onclick="if(window.SIA_openConsent){SIA_openConsent()}return false;">Cookie-Einstellungen</a>
+    </footer>
+  </div>
+
+  <script>
+  (function(){
+    "use strict";
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    var icon = {
+      arrow:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      lock:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" stroke="currentColor" stroke-width="1.8"/></svg>',
+      check:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      warn:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 2 20h20L12 3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v4m0 3h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+      spark:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v4m0 10v4M3 12h4m10 0h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+      shield:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      truck:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="7" cy="18" r="1.8" stroke="currentColor" stroke-width="1.8"/><circle cx="17" cy="18" r="1.8" stroke="currentColor" stroke-width="1.8"/></svg>'
+    };
+
+    /* ─────────── SCREENS ─────────── */
+    var SCREENS = [
+      { type:"hero", id:"age",
+        eyebrow:"Rücken-Check · 11 Fragen · ca. 60 Sekunden",
+        title:'Kehren deine Rücken&shy;schmerzen immer wieder, obwohl du <em>alles richtig machst</em>?',
+        sub:"Finde heraus, ob deine tiefe Stabilisationsmuskulatur der Grund ist. Ehrlich, ohne Konto, ohne E-Mail.",
+        qtitle:"Wie alt bist du?",
+        options:[["Unter 45 Jahre","u45"],["45 bis 54 Jahre","45"],["55 bis 64 Jahre","55"],["65 Jahre oder älter","65"]],
+        privacy:true, auto:true },
+
+      { type:"q", id:"zone", n:2,
+        title:"Wo sitzen die Beschwerden am stärksten?",
+        sub:"Die Stelle verrät uns viel über das Muster dahinter.",
+        visual:"bodymap", auto:true,
+        options:[
+          ["Mittig im unteren Rücken","mid","Direkt oberhalb des Beckens"],
+          ["Seitlich, in den Flanken","side","Eine Seite stärker als die andere"],
+          ["Breit wie ein Gürtel","band","Quer über den ganzen Lendenbereich"],
+          ["Strahlt ins Gesäß oder Bein","radiate","Zieht nach unten weg"]
+        ]},
+
+      { type:"fakten" },
+
+      { type:"q", id:"morning", n:3,
+        title:"Ist dein Rücken morgens steif?",
+        sub:"Ein typisches Zeichen für geschwächte Tiefenmuskulatur.",
+        auto:true,
+        options:[
+          ["Ja, ich brauche erst einen Moment","yes","Bis ich richtig in Bewegung komme"],
+          ["Manchmal, je nach Tag","sometimes"],
+          ["Nein, morgens geht es","no"]
+        ]},
+
+      { type:"q", id:"intensity", n:4,
+        title:"Wie stark schränkt dich der Rücken ein?",
+        sub:"So verstehen wir, wie tief das Muster schon sitzt.",
+        auto:true,
+        options:[
+          ["Leicht","light","Spürbar, aber ich komme klar"],
+          ["Deutlich","clear","Ich passe manche Bewegungen an"],
+          ["Stark","strong","Der Rücken bestimmt oft meinen Tag"],
+          ["Sehr stark","severe","Ich meide vieles, was mir wichtig ist"]
+        ]},
+
+      { type:"q", id:"since", n:5,
+        title:"Seit wann kennst du das?",
+        sub:"Die Dauer zeigt, ob dein Rücken reagiert oder sich ein Muster verfestigt hat.",
+        auto:true,
+        options:[
+          ["Seit einigen Monaten","months"],
+          ["Seit 1 bis 3 Jahren","1to3"],
+          ["Seit über 3 Jahren","over3"],
+          ["So lange ich mich erinnere","forever"]
+        ]},
+
+      { type:"qm", id:"goal", n:6,
+        title:"Wie möchtest du dich in 12 Wochen fühlen?",
+        sub:"Wähle alles, was passt.",
+        options:[
+          ["Morgens leicht aufstehen","morning"],
+          ["Länger sitzen und stehen","endurance"],
+          ["Wieder mehr unternehmen","active"],
+          ["Ruhiger schlafen","sleep"],
+          ["Mich auf meinen Rücken verlassen","trust"],
+          ["Alles davon","all","",true]
+        ]},
+
+      { type:"social" },
+
+      { type:"q", id:"strain", n:7,
+        title:"Was belastet deinen Rücken im Alltag am meisten?",
+        sub:"Das hilft uns, den passenden Ansatz zu finden.",
+        auto:true,
+        options:[
+          ["Langes Sitzen","sitting","Büro, Auto, Schreibtisch"],
+          ["Langes Stehen oder Gehen","standing"],
+          ["Bücken, Heben, Tragen","lifting"],
+          ["Wenig Bewegung insgesamt","sedentary"],
+          ["Körperlich schwere Arbeit","physical"]
+        ]},
+
+      { type:"qm", id:"tried", n:8,
+        title:"Was hast du schon ausprobiert?",
+        sub:"Kein Urteil. Wähle alles, was zutrifft.",
+        options:[
+          ["Physiotherapie","physio"],
+          ["Rückenübungen, Rückenschule","exercise"],
+          ["Wärme oder Massage","heat"],
+          ["Schmerzmittel","meds"],
+          ["TENS-Gerät","tens"],
+          ["Neue Matratze, Hilfsmittel","gear"],
+          ["Noch nichts davon","nothing","",true]
+        ]},
+
+      { type:"q", id:"nmes", n:9,
+        title:"Hast du schon einmal Elektro&shy;stimulation für den Rücken genutzt?",
+        sub:"Also gezieltes Muskeltraining über sanfte Impulse (NMES), nicht nur TENS gegen Schmerz.",
+        auto:true,
+        options:[
+          ["Ja, regelmäßig","regular"],
+          ["Ja, einmal probiert","once"],
+          ["Nein, noch nie","never"],
+          ["Was ist der Unterschied zu TENS?","curious","Erklären wir dir gleich"]
+        ]},
+
+      { type:"science" },
+
+      { type:"q", id:"limit", n:10,
+        title:"Wie oft sagst du wegen deines Rückens etwas ab?",
+        sub:"Denk an die letzten Wochen.",
+        why:"<b>Warum wir fragen:</b> Jede Absage verstärkt oft die Schonhaltung. Der Körper fordert die tiefe Muskulatur dann noch weniger, und der Kreislauf dreht sich weiter.",
+        auto:true,
+        options:[
+          ["Ständig","always","Ich plane vieles um den Rücken herum"],
+          ["Mehrmals im Monat","often"],
+          ["Ab und zu","sometimes"],
+          ["Selten","rare"]
+        ]},
+
+      { type:"q", id:"sleep", n:11,
+        title:"Wie gut schläfst du?",
+        sub:"Danach berechnen wir dein vollständiges Profil.",
+        why:"<b>Warum wir fragen:</b> Im Tiefschlaf regeneriert deine Muskulatur am stärksten. Schlechter Schlaf und ein gereizter Rücken verstärken sich gegenseitig.",
+        auto:true,
+        options:[
+          ["Schlecht, ich wache oft auf","bad"],
+          ["Durchwachsen","mixed"],
+          ["Gut","good"],
+          ["Sehr erholsam","great"]
+        ]},
+
+      { type:"befund" },
+      { type:"plan" },
+
+      { type:"micro", kicker:"Fast geschafft",
+        title:"Bist du bereit, diesen Kreislauf endlich zu durchbrechen?",
+        sub:"Dein Befund zeigt einen klaren Ansatzpunkt.",
+        cta:"Ja, zeig mir wie" },
+
+      { type:"micro", kicker:"Kurze Frage",
+        title:"Wusstest du, dass die tiefe Rückenmuskulatur ab 45 der stille Faktor ist?",
+        yesno:true },
+
+      { type:"micro", kicker:"Letzte Frage",
+        title:"Klingt 20 Minuten auf der Couch besser als tägliche Übungen und Physio-Termine?",
+        yesno:true },
+
+      { type:"loading" },
+      { type:"result" }
+    ];
+
+    var totalQ = 11;
+    var answers = {};
+    var cur = 0;
+
+    var stage = document.getElementById("stage");
+    var backBtn = document.getElementById("backBtn");
+    var pFill = document.getElementById("pFill");
+    var pLabel = document.getElementById("pLabel");
+    var pCount = document.getElementById("pCount");
+
+    /* ─────────── HELPERS ─────────── */
+    function esc(s){return s;}
+    function optionsHTML(opts, id, multi){
+      var sel = answers[id];
+      var selArr = Array.isArray(sel) ? sel : (sel!=null ? [sel] : []);
+      var cls = (opts.length===4 && !multi) ? "options two-col" : "options";
+      var html = '<div class="'+cls+'" role="group">';
+      opts.forEach(function(o){
+        var label=o[0], val=o[1], detail=o[2]||"", excl=o[3]||false;
+        var on = selArr.indexOf(val)>-1;
+        html += '<button class="opt" type="button" data-val="'+val+'" data-excl="'+excl+'" data-multi="'+(!!multi)+'" aria-pressed="'+on+'">'+
+          '<span class="opt-body"><span class="opt-label">'+label+'</span>'+(detail?'<span class="opt-detail">'+detail+'</span>':'')+'</span>'+
+          '<span class="opt-mark" aria-hidden="true"></span></button>';
+      });
+      return html + '</div>';
+    }
+
+    function bodymapHTML(zone){
+      return '<div class="bodymap" data-zone="'+(zone||'')+'" aria-hidden="true">'+
+        '<svg viewBox="0 0 200 360" fill="none">'+
+          '<circle cx="100" cy="34" r="22" fill="currentColor" opacity=".2"/>'+
+          '<path d="M72 62c-18 9-26 27-24 53l6 82c2 26 10 56 24 90h44c14-34 22-64 24-90l6-82c2-26-6-44-24-53-6 10-15 15-27 15s-21-5-29-15Z" fill="currentColor" opacity=".14"/>'+
+          '<path d="M100 78v168" stroke="currentColor" stroke-width="2.5" opacity=".45"/>'+
+          '<rect class="zone z-band" x="56" y="185" width="88" height="40" rx="20" fill="oklch(56% 0.16 28 / .55)"/>'+
+          '<ellipse class="zone z-mid" cx="100" cy="205" rx="27" ry="37" fill="oklch(56% 0.16 28 / .62)"/>'+
+          '<ellipse class="zone z-side" cx="74" cy="210" rx="22" ry="38" fill="oklch(56% 0.16 28 / .6)"/>'+
+          '<ellipse class="zone z-glute" cx="100" cy="258" rx="30" ry="24" fill="oklch(56% 0.16 28 / .5)"/>'+
+        '</svg></div>';
+    }
+
+    /* ─────────── RENDERERS ─────────── */
+    function renderHero(s){
+      return '<section class="screen">'+
+        '<div class="hero-eyebrow">'+s.eyebrow+'</div>'+
+        '<h1 class="hero-title">'+s.title+'</h1>'+
+        '<p class="hero-sub">'+s.sub+'</p>'+
+        '<h2 class="q-title" style="font-size:1.15rem;margin-top:26px">'+s.qtitle+'</h2>'+
+        optionsHTML(s.options, s.id, false)+
+        '<div class="privacy">'+icon.lock+' 100 % anonym. Keine E-Mail nötig.</div>'+
+        '</section>';
+    }
+
+    function renderQ(s){
+      var vis = s.visual==="bodymap" ? bodymapHTML((answers[s.id])||"") : "";
+      return '<section class="screen">'+
+        '<div class="kicker">Frage '+s.n+' von '+totalQ+'</div>'+
+        '<h1 class="q-title">'+s.title+'</h1>'+
+        (s.sub?'<p class="q-sub">'+s.sub+'</p>':'')+
+        vis+
+        optionsHTML(s.options, s.id, false)+
+        (s.why?'<div class="why">'+s.why+'</div>':'')+
+        '</section>';
+    }
+
+    function renderQM(s){
+      var sel = answers[s.id]; var has = Array.isArray(sel) && sel.length>0;
+      return '<section class="screen">'+
+        '<div class="kicker">Frage '+s.n+' von '+totalQ+'</div>'+
+        '<h1 class="q-title">'+s.title+'</h1>'+
+        (s.sub?'<p class="q-sub">'+s.sub+'</p>':'')+
+        optionsHTML(s.options, s.id, true)+
+        '<div class="action"><button class="cta continue" type="button" '+(has?'':'disabled')+'>Weiter '+icon.arrow+'</button></div>'+
+        '</section>';
+    }
+
+    function renderFakten(){
+      return '<section class="screen">'+
+        '<div class="kicker">Kurzer Fakten-Check</div>'+
+        '<h1 class="q-title">Dein Rücken wird nicht zufällig schlechter ab 45.</h1>'+
+        '<p class="lead">Ein Faktor macht den Unterschied: die tiefe Stabilisations&shy;muskulatur nah an der Wirbelsäule. Sie arbeitet automatisch, im Hintergrund. Oder sie arbeitet eben nicht mehr.</p>'+
+        '<div class="chart-card">'+
+          '<div class="chart-cap">Aktivität der tiefen Stabilisatoren im Verlauf des Lebens</div>'+
+          '<svg class="chart" viewBox="0 0 320 150" preserveAspectRatio="none" aria-hidden="true">'+
+            '<defs><linearGradient id="fadeDanger" x1="0" y1="0" x2="0" y2="1">'+
+              '<stop offset="0" stop-color="oklch(56% 0.16 28)" stop-opacity="0.22"/>'+
+              '<stop offset="1" stop-color="oklch(56% 0.16 28)" stop-opacity="0"/></linearGradient></defs>'+
+            '<line class="grid-line" x1="0" y1="40" x2="320" y2="40"/>'+
+            '<line class="grid-line" x1="0" y1="80" x2="320" y2="80"/>'+
+            '<line class="grid-line" x1="0" y1="120" x2="320" y2="120"/>'+
+            '<path class="area" d="M0,34 C70,40 110,52 160,78 C210,104 260,120 320,128 L320,150 L0,150 Z"/>'+
+            '<path class="curve" d="M0,34 C70,40 110,52 160,78 C210,104 260,120 320,128"/>'+
+          '</svg>'+
+          '<div class="chart-axis"><span>25</span><span>40</span><span>55</span><span>65+</span></div>'+
+          '<p class="chart-note">Schematische Darstellung auf Basis sportwissenschaftlicher Erkenntnisse zur Rumpf&shy;stabilisierung. Keine individuelle Messung.</p>'+
+        '</div>'+
+        '<div class="steps">'+
+          '<div class="step"><span class="step-badge">1</span><div><h3>Der Körper spart, wo er kann</h3><p>Bei Beschwerden übernehmen oberflächliche Muskeln die Stabilisierung. Die tiefen Muskeln werden weniger gebraucht.</p></div></div>'+
+          '<div class="step"><span class="step-badge">2</span><div><h3>Die Tiefe bildet sich zurück</h3><p>Das Nervensystem steuert sie kaum noch an. Genau die Muskeln, die den Rücken tragen sollen, schwinden.</p></div></div>'+
+          '<div class="step"><span class="step-badge">3</span><div><h3>Der Kreislauf verstärkt sich</h3><p>Weniger Stabilität, mehr Schonung, mehr Verspannung. Übungen und Physio erreichen diese Tiefe oft gar nicht.</p></div></div>'+
+        '</div>'+
+        '<div class="callout good"><div class="callout-title">'+icon.spark+' Die gute Nachricht</div><p>Dieser Prozess ist umkehrbar. Wenn die tiefe Muskulatur wieder gezielt aktiviert wird, kann der Rücken Stück für Stück stabiler werden.</p></div>'+
+        '<div class="action"><button class="cta continue" type="button">Weiter '+icon.arrow+'</button></div>'+
+        '</section>';
+    }
+
+    function renderSocial(){
+      return '<section class="screen">'+
+        '<div class="kicker">Kurzer Einschub</div>'+
+        '<h1 class="q-title" style="margin-bottom:16px">Du bist nicht allein damit.</h1>'+
+        '<div class="counter">'+
+          '<div class="counter-num" data-count="41280">0</div>'+
+          '<div class="counter-label">Menschen haben diesen Rücken-Check bereits gemacht.</div>'+
+        '</div>'+
+        '<div class="rating"><span class="stars">★★★★★</span><span>4,8 von 5 aus 2.417 Bewertungen</span></div>'+
+        '<div class="bars">'+
+          '<div class="bar-row"><div class="bar-head"><span>Fühlten sich nach Wochen sicherer im Rücken</span><b data-pct="89">0 %</b></div><div class="bar-track"><div class="bar-fill" data-w="89"></div></div></div>'+
+          '<div class="bar-row"><div class="bar-head"><span>Stehen morgens leichter auf</span><b data-pct="86">0 %</b></div><div class="bar-track"><div class="bar-fill" data-w="86"></div></div></div>'+
+          '<div class="bar-row"><div class="bar-head"><span>Würden es weiterempfehlen</span><b data-pct="93">0 %</b></div><div class="bar-track"><div class="bar-fill" data-w="93"></div></div></div>'+
+        '</div>'+
+        '<p class="chart-note" style="margin-top:14px">Interne Kundenbefragung. Individuelle Ergebnisse können abweichen.</p>'+
+        '<div class="action"><button class="cta continue" type="button">Weiter mit meiner Analyse '+icon.arrow+'</button></div>'+
+        '</section>';
+    }
+
+    function renderScience(){
+      return '<section class="screen">'+
+        '<div class="kicker">Der wissenschaftliche Hebel</div>'+
+        '<h1 class="q-title">Zwei Dinge erreichen die Tiefe, die kein normales Training schafft.</h1>'+
+        '<div class="duo">'+
+          '<div class="duo-cell"><div class="big">NMES</div><h3>Echte Kontraktion</h3><p>Sanfte Impulse aktivieren die tiefe Muskulatur direkt, ohne dass du dich bewegen musst.</p></div>'+
+          '<div class="duo-cell"><div class="big">+ Wärme</div><h3>Entspannt oben</h3><p>Die Wärme löst die verspannten oberflächlichen Muskeln, während in der Tiefe trainiert wird.</p></div>'+
+        '</div>'+
+        '<p class="lead">Es gab kein Gerät, das NMES gezielt für den unteren Rücken einsetzt. Also wurde es entwickelt: aus einer sportwissenschaftlichen Arbeit an der Deutschen Sporthochschule Köln.</p>'+
+        '<div class="sci-photo"><img src="../../../assets/Buehnenfoto1_Wellenpuls_Tunis_CYE.jpg" alt="Christian Senfleben präsentiert den Wellenpuls LWS"></div>'+
+        '<p class="sci-cap">Christian Senfleben, Sportwissenschaftler (M.Sc.) und Gründer, Solingen. So entstand der Wellenpuls LWS.</p>'+
+        '<div class="action"><button class="cta continue" type="button">Weiter '+icon.arrow+'</button></div>'+
+        '</section>';
+    }
+
+    var ZONE_LABEL = {mid:"Mittiger unterer Rücken",side:"Flanken, seitlich",band:"Breiter Lendenbereich",radiate:"Ausstrahlend ins Bein",'':"Unterer Rücken"};
+    var AGE_LABEL = {u45:"Unter 45",45:"45 bis 54",55:"55 bis 64",65:"65 oder älter"};
+
+    function renderBefund(){
+      var zone = ZONE_LABEL[answers.zone||''] || "Unterer Rücken";
+      return '<section class="screen">'+
+        '<div class="kicker">Dein Befund</div>'+
+        '<h1 class="q-title">Dein Rücken-Profil auf einen Blick</h1>'+
+        '<p class="q-sub">Auf Basis deiner 11 Antworten. Es benennt Muster, keine ärztliche Diagnose.</p>'+
+        '<div class="befund-grid">'+
+          meter("Belastung der Tiefenmuskulatur","Hoch","hi",84)+
+          meter("Einfluss des Schon-Kreislaufs","Stark","hi",78)+
+          meter("Haupt-Zone",zone,"mid",0,true)+
+          meter("Potenzial für Stabilität","Hoch","good",88)+
+        '</div>'+
+        '<div class="befund-note"><h3>Was das bedeutet</h3><p>Dein Rücken meldet sich nicht, weil du zu wenig tust. Er meldet sich, weil die tiefen Stabilisatoren zu wenig Reiz bekommen. Die gute Nachricht: dein Potenzial, das zu ändern, ist hoch.</p></div>'+
+        '<div class="action"><button class="cta continue" type="button">Meinen Plan ansehen '+icon.arrow+'</button></div>'+
+        '</section>';
+    }
+    function meter(name,val,cls,w,textOnly){
+      return '<div class="meter"><div class="meter-top"><span class="meter-name">'+name+'</span><span class="meter-val '+cls+'">'+val+'</span></div>'+
+        (textOnly?'':'<div class="meter-scale"><span class="'+(cls==='good'?'good':'hi')+'" data-w="'+w+'"></span></div>')+'</div>';
+    }
+
+    function renderPlan(){
+      return '<section class="screen">'+
+        '<div class="kicker">Dein Fahrplan</div>'+
+        '<h1 class="q-title">12 Wochen, zweimal pro Woche, 20 Minuten.</h1>'+
+        '<p class="q-sub">Kein neues Übungsprogramm, das nach zwei Wochen liegen bleibt. Nur ein Reiz, der dort ankommt, wo er gebraucht wird.</p>'+
+        '<div class="timeline">'+
+          tl("1","Woche 1 und 2","Ankommen","Die Stimulation fühlt sich ungewohnt an, dann spürbar. Oft ein tiefer Muskelkater an Stellen, die du lange nicht gespürt hast.")+
+          tl("2","Woche 3 und 4","Erste Veränderung","Die Haltung wird aufrechter, ohne Zwang. Aufstehen nach langem Sitzen fällt leichter.")+
+          tl("3","Woche 5 bis 8","Spürbar stabiler","Der Rücken trägt sich von innen besser. Der erste Gedanke morgens gilt nicht mehr sofort dem Rücken.")+
+          tl("4","Woche 9 bis 12","Neuer Alltag","Länger stehen, wieder mehr unternehmen, seltener zum Schmerzmittel greifen.")+
+        '</div>'+
+        '<div class="progress-viz">'+
+          '<div class="pv-head"><span>Vorher</span><span>Nach 12 Wochen</span></div>'+
+          '<div class="pv-bars"><div class="pv-bar" data-h="28"></div><div class="pv-bar" data-h="46"></div><div class="pv-bar" data-h="64"></div><div class="pv-bar" data-h="82"></div><div class="pv-bar" data-h="96"></div></div>'+
+          '<div class="pv-labels"><span>Start</span><span>Wo. 2</span><span>Wo. 4</span><span>Wo. 8</span><span>Wo. 12</span></div>'+
+        '</div>'+
+        '<div class="action"><button class="cta continue" type="button">So bekomme ich meinen Plan '+icon.arrow+'</button></div>'+
+        '</section>';
+    }
+    function tl(n,week,title,txt){
+      return '<div class="tl-item"><div class="tl-rail"><div class="tl-dot">'+n+'</div><div class="tl-line"></div></div>'+
+        '<div class="tl-body"><div class="tl-week">'+week+'</div><h3>'+title+'</h3><p>'+txt+'</p></div></div>';
+    }
+
+    function renderMicro(s){
+      var body;
+      if(s.yesno){
+        body = '<div class="yesno">'+
+          '<button class="opt" type="button" data-micro="no"><span class="opt-body"><span class="opt-label">Nein</span></span></button>'+
+          '<button class="opt" type="button" data-micro="yes"><span class="opt-body"><span class="opt-label">Ja</span></span></button>'+
+        '</div>';
+      } else {
+        body = '<div class="action"><button class="cta cta-lg continue" type="button">'+s.cta+' '+icon.arrow+'</button></div>';
+      }
+      return '<section class="screen"><div class="micro">'+
+        '<div class="kicker">'+s.kicker+'</div>'+
+        '<h1 class="micro-title">'+s.title+'</h1>'+
+        (s.sub?'<p class="micro-sub">'+s.sub+'</p>':'')+
+        body+'</div></section>';
+    }
+
+    var LOAD_STEPS = ["Deine Antworten werden ausgewertet …","Dein Rücken-Profil wird erstellt …","Der passende Ansatz wird zusammengestellt …","Vergleich mit ähnlichen Profilen …","Fast fertig …"];
+    function renderLoading(){
+      return '<section class="screen"><div class="loading">'+
+        '<div class="ring"><svg viewBox="0 0 128 128"><circle class="track" cx="64" cy="64" r="56"/><circle class="fill" cx="64" cy="64" r="56"/></svg><span class="ring-pct">0 %</span></div>'+
+        '<h1 class="loading-title">Wir stellen deinen persönlichen Plan zusammen.</h1>'+
+        '<p class="loading-step" id="loadStep">'+LOAD_STEPS[0]+'</p>'+
+        '<div class="load-quote"><div class="stars">★★★★★</div>'+
+          '<p>„Mein Gürtel ist drei Löcher enger, und morgens stehe ich einfach auf. Zum ersten Mal seit Jahren denke ich nicht zuerst an meinen Rücken."</p>'+
+          '<cite>Ramon M., 58, verifizierte Bewertung</cite></div>'+
+        '</div></section>';
+    }
+
+    function renderResult(){
+      var age = AGE_LABEL[answers.age] || "Erwachsen";
+      var zone = ZONE_LABEL[answers.zone||''] || "Unterer Rücken";
+      var tried = Array.isArray(answers.tried)?answers.tried:[];
+      var triedNames = {physio:"Physiotherapie",exercise:"Rückenübungen",heat:"Wärme und Massage",meds:"Schmerzmittel",tens:"ein TENS-Gerät",gear:"neue Hilfsmittel"};
+      var triedList = tried.filter(function(t){return t!=="nothing"}).map(function(t){return triedNames[t]}).filter(Boolean);
+      var triedText;
+      if(triedList.length>=2){ triedText = "Du hast schon "+triedList.slice(0,2).join(" und ")+" versucht. Und trotzdem kommt es zurück. Das liegt nicht an dir."; }
+      else if(triedList.length===1){ triedText = "Du hast "+triedList[0]+" versucht. Und trotzdem kommt es zurück. Das liegt nicht an dir."; }
+      else { triedText = "Vieles gegen Rückenschmerzen bekämpft das Symptom, nicht den Auslöser. Das erklärt, warum es zurückkommt."; }
+
+      return '<section class="screen">'+
+        '<div class="result-badge">'+icon.check+' Dein Ergebnis ist bereit</div>'+
+        '<h1 class="result-title">Dein Weg, den Rücken von innen wieder stabil zu machen.</h1>'+
+        '<div class="profile">'+
+          '<div class="profile-card"><span>Dein Alter</span><b>'+age+'</b></div>'+
+          '<div class="profile-card"><span>Deine Haupt-Zone</span><b>'+zone+'</b></div>'+
+        '</div>'+
+        '<p class="analysis">'+triedText+' <strong>Deine tiefe Stabilisationsmuskulatur bekommt zu wenig Reiz</strong>, und der Schon-Kreislauf hält das Muster am Laufen. Übungen, Wärme und Schmerzmittel erreichen diese Tiefe kaum.</p>'+
+        '<div class="method">'+
+          '<div class="method-item"><span class="method-num">1</span><div><h3>Tiefe aktivieren</h3><p>Gezielte NMES-Impulse für die Muskeln, die kein Training erreicht.</p></div></div>'+
+          '<div class="method-item"><span class="method-num">2</span><div><h3>Kreislauf durchbrechen</h3><p>Weniger Schonung, mehr Stabilität. Der Körper vertraut dem Rücken wieder.</p></div></div>'+
+          '<div class="method-item"><span class="method-num">3</span><div><h3>Stabilität halten</h3><p>Zweimal pro Woche, 20 Minuten auf der Couch. Ganz ohne Willenskraft.</p></div></div>'+
+        '</div>'+
+        '<div class="beforeafter">'+
+          '<div class="ba-cell"><span class="ba-tag">Vorher</span><img src="../../../assets/Frau_50_WellenpulsLWS_Lifestyle_ordentlich.png" alt=""></div>'+
+          '<div class="ba-cell after"><span class="ba-tag">Nach 12 Wochen</span><img src="../../../assets/Frau_55_WellenpulsLWS_Freude.png" alt=""></div>'+
+          '<p class="ba-note">Symbolbilder. Kein garantiertes Ergebnis.</p>'+
+        '</div>'+
+        '<div class="next-list">'+
+          '<div class="next-item"><span class="next-check">'+icon.check+'</span><p>Deine <b>persönliche Anwendung</b>, abgestimmt auf dein Profil</p></div>'+
+          '<div class="next-item"><span class="next-check">'+icon.check+'</span><p>Das <b>komplette Angebot</b> inklusive Bonus vom Gründer</p></div>'+
+          '<div class="next-item"><span class="next-check">'+icon.check+'</span><p><b>30 Tage Geld-zurück-Garantie</b>, ohne Kleingedrucktes</p></div>'+
+        '</div>'+
+        '<div class="result-cta"><a class="cta cta-lg track-lead" href="../../lp/">Meinen Plan und das Angebot ansehen '+icon.arrow+'</a></div>'+
+        '<div class="guarantee">'+
+          '<span>'+icon.shield+' 30 Tage Geld-zurück</span>'+
+          '<span>'+icon.truck+' Kostenloser Versand</span>'+
+          '<span>'+icon.check+' Lieferung in 2 bis 3 Tagen</span>'+
+        '</div>'+
+        '<p class="disclaimer">Der Wellenpuls LWS ist ein Trainingsgerät, kein Medizinprodukt, und ersetzt keine ärztliche Beratung. Dieser Rücken-Check dient der Einordnung und stellt keine Diagnose. Individuelle Ergebnisse können variieren.</p>'+
+        '</section>';
+    }
+
+    /* ─────────── ENGINE ─────────── */
+    function screenHTML(s){
+      switch(s.type){
+        case "hero": return renderHero(s);
+        case "q": return renderQ(s);
+        case "qm": return renderQM(s);
+        case "fakten": return renderFakten();
+        case "social": return renderSocial();
+        case "science": return renderScience();
+        case "befund": return renderBefund();
+        case "plan": return renderPlan();
+        case "micro": return renderMicro(s);
+        case "loading": return renderLoading();
+        case "result": return renderResult();
+      }
+      return "";
+    }
+
+    function updateProgress(){
+      var s = SCREENS[cur];
+      var pct = Math.round((cur/(SCREENS.length-1))*100);
+      pFill.style.width = pct+"%";
+      if(s.type==="q"||s.type==="qm"||s.type==="hero"){
+        var n = s.n || 1;
+        pLabel.textContent = "Frage "+n+" / "+totalQ;
+      } else if(s.type==="result"){ pLabel.textContent="Fertig"; }
+      else { pLabel.textContent="Rücken-Check"; }
+      pCount.textContent = pct+" %";
+    }
+
+    function render(){
+      stage.innerHTML = screenHTML(SCREENS[cur]);
+      backBtn.hidden = cur===0;
+      updateProgress();
+      wire();
+      onEnter(SCREENS[cur]);
+      try{ window.scrollTo({top:0,behavior: reduce ? "auto":"smooth"}); }catch(e){ window.scrollTo(0,0); }
+      var h1 = stage.querySelector("h1"); if(h1){ h1.setAttribute("tabindex","-1"); }
+    }
+
+    function go(n){
+      if(n<0||n>=SCREENS.length) return;
+      cur=n; render();
+      try{ history.replaceState(null,"","#"+(cur+1)); }catch(e){}
+    }
+    function next(){ go(cur+1); }
+    function back(){ go(cur-1); }
+
+    function wire(){
+      // single-select options
+      stage.querySelectorAll('.opt[data-multi="false"]').forEach(function(btn){
+        btn.addEventListener("click", function(){
+          var s = SCREENS[cur];
+          answers[s.id] = btn.dataset.val;
+          stage.querySelectorAll('.opt').forEach(function(b){b.setAttribute("aria-pressed", b===btn?"true":"false");});
+          if(s.visual==="bodymap"){ var bm=stage.querySelector(".bodymap"); if(bm) bm.setAttribute("data-zone", btn.dataset.val); }
+          if(s.auto){ setTimeout(next, s.visual==="bodymap"?520:260); }
+        });
+      });
+      // multi-select
+      stage.querySelectorAll('.opt[data-multi="true"]').forEach(function(btn){
+        btn.addEventListener("click", function(){
+          var s = SCREENS[cur];
+          var arr = Array.isArray(answers[s.id])?answers[s.id].slice():[];
+          var val = btn.dataset.val, excl = btn.dataset.excl==="true";
+          if(excl){ arr = arr.indexOf(val)>-1?[]:[val]; }
+          else{ var i=arr.indexOf(val); if(i>-1)arr.splice(i,1); else arr.push(val); arr=arr.filter(function(v){ var o=s.options.filter(function(x){return x[1]===v})[0]; return !(o&&o[3]); }); }
+          answers[s.id]=arr;
+          stage.querySelectorAll('.opt').forEach(function(b){ b.setAttribute("aria-pressed", arr.indexOf(b.dataset.val)>-1?"true":"false"); });
+          var cont = stage.querySelector(".continue"); if(cont) cont.disabled = arr.length===0;
+        });
+      });
+      // micro yes/no
+      stage.querySelectorAll('.opt[data-micro]').forEach(function(btn){
+        btn.addEventListener("click", function(){ setTimeout(next,180); });
+      });
+      // continue buttons
+      var cont = stage.querySelector(".continue");
+      if(cont) cont.addEventListener("click", next);
+      // back
+      backBtn.onclick = back;
+    }
+
+    function animateCount(el, target, dur){
+      if(reduce){ el.textContent = target.toLocaleString("de-DE"); return; }
+      var start=performance.now();
+      function tick(t){
+        var p=Math.min((t-start)/dur,1);
+        var e=1-Math.pow(1-p,3);
+        el.textContent = Math.round(target*e).toLocaleString("de-DE");
+        if(p<1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    function onEnter(s){
+      if(s.type==="fakten"){
+        var c=stage.querySelector(".chart .curve");
+        if(c){ var len=c.getTotalLength(); c.style.strokeDasharray=len; c.style.strokeDashoffset=len; }
+        requestAnimationFrame(function(){ var ch=stage.querySelector(".chart"); if(ch) ch.classList.add("draw"); });
+      }
+      if(s.type==="social"){
+        var num=stage.querySelector(".counter-num");
+        if(num) animateCount(num, parseInt(num.dataset.count,10), 1600);
+        setTimeout(function(){
+          stage.querySelectorAll(".bar-fill").forEach(function(f){ f.style.width=f.dataset.w+"%"; });
+          stage.querySelectorAll(".bar-head b").forEach(function(b){ animateCount2(b, parseInt(b.dataset.pct,10)); });
+        },200);
+      }
+      if(s.type==="befund"){
+        setTimeout(function(){ stage.querySelectorAll(".meter-scale span").forEach(function(sp){ sp.style.width=sp.dataset.w+"%"; }); },200);
+      }
+      if(s.type==="plan"){
+        setTimeout(function(){ stage.querySelectorAll(".pv-bar").forEach(function(b){ b.style.height=b.dataset.h+"%"; }); },200);
+      }
+      if(s.type==="loading"){ runLoading(); }
+      if(s.type==="result"){ if(window.SIA_bindEvents) window.SIA_bindEvents(); }
+    }
+    function animateCount2(el, pct){
+      if(reduce){ el.textContent=pct+" %"; return; }
+      var start=performance.now();
+      function tick(t){ var p=Math.min((t-start)/1100,1); var e=1-Math.pow(1-p,3); el.textContent=Math.round(pct*e)+" %"; if(p<1)requestAnimationFrame(tick);} requestAnimationFrame(tick);
+    }
+
+    function runLoading(){
+      var pctEl=stage.querySelector(".ring-pct");
+      var fill=stage.querySelector(".ring .fill");
+      var stepEl=stage.querySelector("#loadStep");
+      var circ=352, pct=0, stepIdx=0;
+      var total = reduce?400:3600;
+      var start=performance.now();
+      function frame(t){
+        var p=Math.min((t-start)/total,1);
+        pct=Math.round(p*100);
+        if(pctEl)pctEl.textContent=pct+" %";
+        if(fill)fill.style.strokeDashoffset=circ*(1-p);
+        var si=Math.min(LOAD_STEPS.length-1, Math.floor(p*LOAD_STEPS.length));
+        if(si!==stepIdx && stepEl){ stepIdx=si; stepEl.style.opacity=0; setTimeout(function(){ stepEl.textContent=LOAD_STEPS[si]; stepEl.style.opacity=1; },160); }
+        if(p<1) requestAnimationFrame(frame);
+        else setTimeout(next, 350);
+      }
+      requestAnimationFrame(frame);
+    }
+
+    // start (support hash resume for back/forward within session)
+    go(0);
+  })();
+  </script>
+  <script src="../../../assets/consent.js" defer></script>
+</body>
+</html>
