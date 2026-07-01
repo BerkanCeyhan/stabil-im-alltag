@@ -206,17 +206,39 @@
 
     /* ── FAKTEN chart ── */
     .chart-card{margin-top:20px;padding:18px 16px 14px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-sm)}
-    .chart-cap{font-size:.72rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
-    .chart{width:100%;height:auto;display:block}
+    .chart-cap{font-size:.72rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+    .chart{width:100%;height:auto;display:block;overflow:visible}
     .chart .grid-line{stroke:var(--line-soft);stroke-width:1}
-    .chart .curve{fill:none;stroke:var(--danger);stroke-width:3.5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
-    .chart .area{fill:url(#fadeDanger);opacity:0}
-    .chart.draw .curve{animation:draw 1.6s var(--ease) forwards}
-    .chart.draw .area{animation:fadein 1.2s ease .5s forwards}
-    @keyframes draw{to{stroke-dashoffset:0}}
-    @keyframes fadein{to{opacity:1}}
-    .chart-axis{display:flex;justify-content:space-between;margin-top:6px;font-size:.66rem;font-weight:700;color:var(--muted)}
-    .chart-note{margin-top:10px;font-size:.68rem;color:var(--muted);line-height:1.4}
+    .chart .axis-line{stroke:var(--line);stroke-width:1.5}
+    .chart .tick,.chart .ylab{font-size:9px;font-weight:700;fill:var(--muted);font-family:"Libre Franklin",sans-serif}
+    .chart .risk{fill:var(--danger);opacity:0}
+    .chart .area{opacity:0}
+    .chart .curve{fill:none;stroke:var(--danger);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}
+    .chart .marker-line{stroke:var(--primary-deep);stroke-width:1.5;stroke-dasharray:3 3;opacity:0}
+    .chart .dot-halo{fill:var(--primary);opacity:0}
+    .chart .dot{fill:var(--primary-deep);stroke:var(--surface);stroke-width:2.5;opacity:0;transform-box:fill-box;transform-origin:center}
+    .chart .du-pill{opacity:0}
+    .chart .du-pill rect{fill:var(--primary-deep)}
+    .chart .du-pill text{fill:var(--surface);font-size:9px;font-weight:800;font-family:"Libre Franklin",sans-serif}
+    /* staged reveal, pure CSS, GPU-friendly */
+    .chart .curve{animation:cDraw .9s var(--ease) .1s forwards}
+    .chart .area{animation:cFade .7s ease .5s forwards}
+    .chart .risk{animation:cRisk .6s ease .3s forwards}
+    .chart .marker-line{animation:cFade .4s ease .95s forwards}
+    .chart .dot-halo{animation:cHalo 1.6s ease-out 1.05s infinite}
+    .chart .dot{animation:cPop .5s var(--ease) 1s forwards}
+    .chart .du-pill{animation:cFade .4s ease 1.15s forwards}
+    @keyframes cDraw{to{stroke-dashoffset:0}}
+    @keyframes cFade{to{opacity:1}}
+    @keyframes cRisk{to{opacity:.09}}
+    @keyframes cPop{0%{opacity:0;transform:scale(0)}60%{opacity:1;transform:scale(1.3)}100%{opacity:1;transform:scale(1)}}
+    @keyframes cHalo{0%{opacity:.5;transform:scale(.6);transform-box:fill-box;transform-origin:center}70%,100%{opacity:0;transform:scale(2.4);transform-box:fill-box;transform-origin:center}}
+    .chart-note{margin-top:12px;font-size:.68rem;color:var(--muted);line-height:1.4}
+    .fakten-insight{margin-top:12px;display:flex;align-items:flex-start;gap:10px;padding:13px 15px;border-radius:var(--r);background:var(--primary-pale);opacity:0;transform:translateY(6px);animation:cRise .5s var(--ease) 1.2s forwards}
+    .fakten-insight svg{width:18px;height:18px;flex:none;color:var(--primary-deep);margin-top:1px}
+    .fakten-insight p{font-size:.9rem;line-height:1.45;color:var(--ink)}
+    .fakten-insight b{color:var(--primary-deep)}
+    @keyframes cRise{to{opacity:1;transform:none}}
 
     .steps{margin-top:20px;display:grid;gap:12px}
     .step{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
@@ -394,8 +416,13 @@
 
     @media(prefers-reduced-motion:reduce){
       *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+      .chart *{animation:none!important}
       .chart .curve{stroke-dashoffset:0}
       .chart .area{opacity:1}
+      .chart .risk{opacity:.09}
+      .chart .marker-line,.chart .dot,.chart .du-pill{opacity:1;transform:none}
+      .chart .dot-halo{opacity:0}
+      .fakten-insight{animation:none!important;opacity:1;transform:none}
     }
   </style>
 </head>
@@ -434,6 +461,7 @@
       check:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
       warn:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 2 20h20L12 3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v4m0 3h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
       spark:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v4m0 10v4M3 12h4m10 0h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+      pin:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.8"/></svg>',
       shield:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
       truck:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="7" cy="18" r="1.8" stroke="currentColor" stroke-width="1.8"/><circle cx="17" cy="18" r="1.8" stroke="currentColor" stroke-width="1.8"/></svg>'
     };
@@ -679,24 +707,68 @@
         '</section>';
     }
 
+    var FAKTEN_DATA = [[25,.96],[35,.89],[42,.8],[48,.62],[54,.44],[60,.3],[67,.22]];
+    function smoothPath(pts){
+      if(pts.length<2) return "";
+      var d="M"+pts[0].x+","+pts[0].y;
+      for(var i=0;i<pts.length-1;i++){
+        var p0=pts[i-1]||pts[i], p1=pts[i], p2=pts[i+1], p3=pts[i+2]||p2;
+        var c1x=p1.x+(p2.x-p0.x)/6, c1y=p1.y+(p2.y-p0.y)/6;
+        var c2x=p2.x-(p3.x-p1.x)/6, c2y=p2.y-(p3.y-p1.y)/6;
+        d+="C"+c1x.toFixed(1)+","+c1y.toFixed(1)+" "+c2x.toFixed(1)+","+c2y.toFixed(1)+" "+p2.x.toFixed(1)+","+p2.y.toFixed(1);
+      }
+      return d;
+    }
+    function interp(data,a){
+      for(var i=0;i<data.length-1;i++){
+        if(a<=data[i+1][0]){ var t=(a-data[i][0])/(data[i+1][0]-data[i][0]); return data[i][1]+t*(data[i+1][1]-data[i][1]); }
+      }
+      return data[data.length-1][1];
+    }
+    function buildFaktenChart(ageKey){
+      var W=320,H=172, x0=18,x1=304, yTop=20,yBot=134, aMin=25,aMax=67;
+      var ax=function(a){return x0+(a-aMin)/(aMax-aMin)*(x1-x0);};
+      var ay=function(v){return yBot-v*(yBot-yTop);};
+      var pts=FAKTEN_DATA.map(function(d){return {x:ax(d[0]),y:ay(d[1])};});
+      var curve=smoothPath(pts);
+      var area=curve+" L"+x1.toFixed(1)+","+yBot+" L"+x0.toFixed(1)+","+yBot+" Z";
+      var mAge=({u45:41,"45":50,"55":60,"65":66})[ageKey]||50;
+      var mx=ax(mAge), my=ay(interp(FAKTEN_DATA,mAge)), riskX=ax(45);
+      var pillW=30, pillX=Math.max(x0,Math.min(mx-pillW/2,x1-pillW));
+      var ticks=[[25,"25"],[40,"40"],[55,"55"],[67,"65+"]];
+      var s='<svg class="chart" viewBox="0 0 '+W+' '+H+'" aria-hidden="true">';
+      s+='<defs><linearGradient id="gArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--danger)" stop-opacity=".2"/><stop offset="1" stop-color="var(--danger)" stop-opacity="0"/></linearGradient></defs>';
+      [0.33,0.66].forEach(function(f){ var gy=(yTop+f*(yBot-yTop)).toFixed(1); s+='<line class="grid-line" x1="'+x0+'" y1="'+gy+'" x2="'+x1+'" y2="'+gy+'"/>'; });
+      s+='<rect class="risk" x="'+riskX.toFixed(1)+'" y="'+yTop+'" width="'+(x1-riskX).toFixed(1)+'" height="'+(yBot-yTop)+'"/>';
+      s+='<path class="area" d="'+area+'" fill="url(#gArea)"/>';
+      s+='<path class="curve" pathLength="1" d="'+curve+'"/>';
+      s+='<line class="axis-line" x1="'+x0+'" y1="'+yBot+'" x2="'+x1+'" y2="'+yBot+'"/>';
+      s+='<text class="ylab" x="'+x0+'" y="'+(yTop+3)+'">hoch</text>';
+      s+='<text class="ylab" x="'+x0+'" y="'+(yBot-4)+'">niedrig</text>';
+      ticks.forEach(function(t){ s+='<text class="tick" x="'+ax(t[0]).toFixed(1)+'" y="'+(yBot+14)+'" text-anchor="middle">'+t[1]+'</text>'; });
+      s+='<line class="marker-line" x1="'+mx.toFixed(1)+'" y1="'+yTop+'" x2="'+mx.toFixed(1)+'" y2="'+my.toFixed(1)+'"/>';
+      s+='<circle class="dot-halo" cx="'+mx.toFixed(1)+'" cy="'+my.toFixed(1)+'" r="6"/>';
+      s+='<circle class="dot" cx="'+mx.toFixed(1)+'" cy="'+my.toFixed(1)+'" r="6"/>';
+      s+='<g class="du-pill"><rect x="'+pillX.toFixed(1)+'" y="'+(yTop-14)+'" width="'+pillW+'" height="14" rx="7"/><text x="'+(pillX+pillW/2).toFixed(1)+'" y="'+(yTop-4)+'" text-anchor="middle">Du</text></g>';
+      return s+'</svg>';
+    }
+    function faktenInsight(ageKey){
+      var m={ u45:"Bei dir beginnt der Abbau gerade erst. Der beste Zeitpunkt, gegenzusteuern.",
+              "45":"In deinem Alter läuft der Abbau bereits spürbar.",
+              "55":"In deinem Alter hat der Abbau meist schon deutlich Fahrt aufgenommen.",
+              "65":"In deinem Alter zählt jeder gezielte Reiz für die Tiefe." };
+      return '<div class="fakten-insight">'+icon.pin+'<p><b>Du bist hier.</b> '+(m[ageKey]||m["45"])+'</p></div>';
+    }
+
     function renderFakten(){
       return '<section class="screen">'+
         '<div class="kicker">Kurzer Fakten-Check</div>'+
-        '<h1 class="q-title">Dein Rücken wird nicht zufällig schlechter ab 45.</h1>'+
-        '<p class="lead">Ein Faktor macht den Unterschied: die tiefe Stabilisations&shy;muskulatur nah an der Wirbelsäule. Sie arbeitet automatisch, im Hintergrund. Oder sie arbeitet eben nicht mehr.</p>'+
+        '<h1 class="q-title">Ab etwa 45 verliert dein Rücken seine tiefe Stütze.</h1>'+
+        '<p class="lead">Die tiefe Muskulatur nah an der Wirbelsäule stützt automatisch. Bekommt sie keinen gezielten Reiz, baut sie mit den Jahren ab.</p>'+
         '<div class="chart-card">'+
-          '<div class="chart-cap">Aktivität der tiefen Stabilisatoren im Verlauf des Lebens</div>'+
-          '<svg class="chart" viewBox="0 0 320 150" preserveAspectRatio="none" aria-hidden="true">'+
-            '<defs><linearGradient id="fadeDanger" x1="0" y1="0" x2="0" y2="1">'+
-              '<stop offset="0" stop-color="oklch(56% 0.16 28)" stop-opacity="0.22"/>'+
-              '<stop offset="1" stop-color="oklch(56% 0.16 28)" stop-opacity="0"/></linearGradient></defs>'+
-            '<line class="grid-line" x1="0" y1="40" x2="320" y2="40"/>'+
-            '<line class="grid-line" x1="0" y1="80" x2="320" y2="80"/>'+
-            '<line class="grid-line" x1="0" y1="120" x2="320" y2="120"/>'+
-            '<path class="area" d="M0,34 C70,40 110,52 160,78 C210,104 260,120 320,128 L320,150 L0,150 Z"/>'+
-            '<path class="curve" d="M0,34 C70,40 110,52 160,78 C210,104 260,120 320,128"/>'+
-          '</svg>'+
-          '<div class="chart-axis"><span>25</span><span>40</span><span>55</span><span>65+</span></div>'+
+          '<div class="chart-cap">Aktivität der tiefen Stützmuskulatur nach Alter</div>'+
+          buildFaktenChart(answers.age)+
+          faktenInsight(answers.age)+
           '<p class="chart-note">Schematische Darstellung auf Basis sportwissenschaftlicher Erkenntnisse zur Rumpf&shy;stabilisierung. Keine individuelle Messung.</p>'+
         '</div>'+
         '<div class="steps">'+
@@ -960,11 +1032,6 @@
     }
 
     function onEnter(s){
-      if(s.type==="fakten"){
-        var c=stage.querySelector(".chart .curve");
-        if(c){ var len=c.getTotalLength(); c.style.strokeDasharray=len; c.style.strokeDashoffset=len; }
-        requestAnimationFrame(function(){ var ch=stage.querySelector(".chart"); if(ch) ch.classList.add("draw"); });
-      }
       if(s.type==="social"){
         var num=stage.querySelector(".counter-num");
         if(num) animateCount(num, parseInt(num.dataset.count,10), 1600);
