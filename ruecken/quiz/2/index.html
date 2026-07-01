@@ -307,6 +307,18 @@
     .yesno .opt{grid-template-columns:1fr;justify-items:center;text-align:center;min-height:64px}
     .yesno .opt-label{font-size:1.05rem}
 
+    /* ── IMAGE OPTIONS (Frage 2) ── */
+    .img-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+    .img-opt{display:block;padding:0;min-height:0;overflow:hidden;border:1.5px solid var(--line);border-radius:var(--r);background:var(--surface);text-align:left;cursor:pointer;transition:border-color .18s ease,box-shadow .18s ease,transform .18s var(--ease)}
+    .img-opt:active{transform:scale(.985)}
+    @media(hover:hover){.img-opt:hover{border-color:color-mix(in oklch,var(--teal) 55%,var(--line));box-shadow:var(--shadow-sm)}}
+    .img-opt[aria-pressed="true"]{border-color:var(--teal);background:var(--surface);box-shadow:0 0 0 1.5px var(--teal) inset}
+    .img-opt .thumb{display:block;aspect-ratio:1/1;background:var(--primary-pale)}
+    .img-opt .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .img-opt .cap{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 13px}
+    .img-opt .cap .opt-label{font-weight:700;font-size:.9rem;line-height:1.25}
+    .img-opt .opt-mark{width:22px;height:22px}
+
     /* ── LOADING ── */
     .loading{text-align:center;padding-top:24px}
     .ring{width:132px;height:132px;margin:0 auto 22px;position:relative;display:grid;place-items:center}
@@ -431,20 +443,20 @@
       { type:"hero", id:"age",
         eyebrow:"Rücken-Check · 11 Fragen · ca. 60 Sekunden",
         title:'Kehren deine Rücken&shy;schmerzen immer wieder, obwohl du <em>alles richtig machst</em>?',
-        sub:"Finde heraus, ob deine tiefe Stabilisationsmuskulatur der Grund ist. Ehrlich, ohne Konto, ohne E-Mail.",
+        sub:"Du hast schon vieles versucht und trotzdem kehrt es zurück? Finde in 60 Sekunden heraus, woran es wirklich liegt. Kein Konto oder E-Mail-Adresse erforderlich.",
         qtitle:"Wie alt bist du?",
         options:[["Unter 45 Jahre","u45"],["45 bis 54 Jahre","45"],["55 bis 64 Jahre","55"],["65 Jahre oder älter","65"]],
         privacy:true, auto:true },
 
       { type:"q", id:"zone", n:2,
         title:"Wo sitzen die Beschwerden am stärksten?",
-        sub:"Die Stelle verrät uns viel über das Muster dahinter.",
-        visual:"bodymap", auto:true,
+        sub:"Tippe auf die Stelle, die am ehesten passt.",
+        imgOptions:true, auto:true,
         options:[
-          ["Mittig im unteren Rücken","mid","Direkt oberhalb des Beckens"],
-          ["Seitlich, in den Flanken","side","Eine Seite stärker als die andere"],
-          ["Breit wie ein Gürtel","band","Quer über den ganzen Lendenbereich"],
-          ["Strahlt ins Gesäß oder Bein","radiate","Zieht nach unten weg"]
+          ["Mittig im unteren Rücken","mid","zone-mid.jpg"],
+          ["Seitlich, in den Flanken","side","zone-side.jpg"],
+          ["Breit wie ein Gürtel","band","zone-band.jpg"],
+          ["Ins Gesäß oder Bein","radiate","zone-radiate.jpg"]
         ]},
 
       { type:"fakten" },
@@ -625,18 +637,33 @@
         '<p class="hero-sub">'+s.sub+'</p>'+
         '<h2 class="q-title" style="font-size:1.15rem;margin-top:26px">'+s.qtitle+'</h2>'+
         optionsHTML(s.options, s.id, false)+
-        '<div class="privacy">'+icon.lock+' 100 % anonym. Keine E-Mail nötig.</div>'+
+        '<div class="privacy">'+icon.lock+' 100 % anonym. Kein Konto oder E-Mail-Adresse erforderlich.</div>'+
         '</section>';
+    }
+
+    function imgOptionsHTML(opts, id){
+      var sel = answers[id];
+      var html = '<div class="img-options" role="group">';
+      opts.forEach(function(o){
+        var label=o[0], val=o[1], img=o[2];
+        var on = sel===val;
+        html += '<button class="opt img-opt" type="button" data-val="'+val+'" data-excl="false" data-multi="false" aria-pressed="'+on+'">'+
+          '<span class="thumb"><img src="../../../assets/quiz/'+img+'" alt="" loading="lazy"></span>'+
+          '<span class="cap"><span class="opt-label">'+label+'</span><span class="opt-mark" aria-hidden="true"></span></span>'+
+          '</button>';
+      });
+      return html+'</div>';
     }
 
     function renderQ(s){
       var vis = s.visual==="bodymap" ? bodymapHTML((answers[s.id])||"") : "";
+      var body = s.imgOptions ? imgOptionsHTML(s.options, s.id) : optionsHTML(s.options, s.id, false);
       return '<section class="screen">'+
         '<div class="kicker">Frage '+s.n+' von '+totalQ+'</div>'+
         '<h1 class="q-title">'+s.title+'</h1>'+
         (s.sub?'<p class="q-sub">'+s.sub+'</p>':'')+
         vis+
-        optionsHTML(s.options, s.id, false)+
+        body+
         (s.why?'<div class="why">'+s.why+'</div>':'')+
         '</section>';
     }
@@ -675,7 +702,7 @@
         '<div class="steps">'+
           '<div class="step"><span class="step-badge">1</span><div><h3>Der Körper spart, wo er kann</h3><p>Bei Beschwerden übernehmen oberflächliche Muskeln die Stabilisierung. Die tiefen Muskeln werden weniger gebraucht.</p></div></div>'+
           '<div class="step"><span class="step-badge">2</span><div><h3>Die Tiefe bildet sich zurück</h3><p>Das Nervensystem steuert sie kaum noch an. Genau die Muskeln, die den Rücken tragen sollen, schwinden.</p></div></div>'+
-          '<div class="step"><span class="step-badge">3</span><div><h3>Der Kreislauf verstärkt sich</h3><p>Weniger Stabilität, mehr Schonung, mehr Verspannung. Übungen und Physio erreichen diese Tiefe oft gar nicht.</p></div></div>'+
+          '<div class="step"><span class="step-badge">3</span><div><h3>Der Ausweg scheitert am Alltag</h3><p>Der einzige Weg zurück ist regelmäßiges Training der Tiefe, Woche für Woche. Genau da steigen die meisten aus. Nicht aus Faulheit, sondern weil Physio-Termine und tägliche Übungen im Alltag kaum durchzuhalten sind.</p></div></div>'+
         '</div>'+
         '<div class="callout good"><div class="callout-title">'+icon.spark+' Die gute Nachricht</div><p>Dieser Prozess ist umkehrbar. Wenn die tiefe Muskulatur wieder gezielt aktiviert wird, kann der Rücken Stück für Stück stabiler werden.</p></div>'+
         '<div class="action"><button class="cta continue" type="button">Weiter '+icon.arrow+'</button></div>'+
@@ -704,14 +731,14 @@
     function renderScience(){
       return '<section class="screen">'+
         '<div class="kicker">Der wissenschaftliche Hebel</div>'+
-        '<h1 class="q-title">Zwei Dinge erreichen die Tiefe, die kein normales Training schafft.</h1>'+
+        '<h1 class="q-title">Regelmäßig dranbleiben, ohne dass es Überwindung kostet.</h1>'+
         '<div class="duo">'+
-          '<div class="duo-cell"><div class="big">NMES</div><h3>Echte Kontraktion</h3><p>Sanfte Impulse aktivieren die tiefe Muskulatur direkt, ohne dass du dich bewegen musst.</p></div>'+
-          '<div class="duo-cell"><div class="big">+ Wärme</div><h3>Entspannt oben</h3><p>Die Wärme löst die verspannten oberflächlichen Muskeln, während in der Tiefe trainiert wird.</p></div>'+
+          '<div class="duo-cell"><div class="big">NMES</div><h3>Aktiviert die Tiefe</h3><p>Sanfte Impulse erreichen die tiefe Muskulatur direkt, ohne dass du dich bewegen musst.</p></div>'+
+          '<div class="duo-cell"><div class="big">20 Min</div><h3>Passt in den Alltag</h3><p>Zweimal pro Woche auf der Couch. Kein Termin, keine Übungsroutine zum Durchhalten.</p></div>'+
         '</div>'+
-        '<p class="lead">Es gab kein Gerät, das NMES gezielt für den unteren Rücken einsetzt. Also wurde es entwickelt: aus einer sportwissenschaftlichen Arbeit an der Deutschen Sporthochschule Köln.</p>'+
-        '<div class="sci-photo"><img src="../../../assets/Buehnenfoto1_Wellenpuls_Tunis_CYE.jpg" alt="Christian Senfleben präsentiert den Wellenpuls LWS"></div>'+
-        '<p class="sci-cap">Christian Senfleben, Sportwissenschaftler (M.Sc.) und Gründer, Solingen. So entstand der Wellenpuls LWS.</p>'+
+        '<p class="lead">Genau daran scheitern die meisten Rückenprogramme: an der Regelmäßigkeit. Der Wellenpuls LWS nimmt dir diesen Teil ab. Entstanden aus einer sportwissenschaftlichen Arbeit an der Deutschen Sporthochschule Köln, mit integrierter Wärme, die verspannte Muskeln oben löst.</p>'+
+        '<div class="sci-photo"><img src="../../../assets/showcase.gif" alt="Der Wellenpuls LWS in der Anwendung" loading="lazy"></div>'+
+        '<p class="sci-cap">Der Wellenpuls LWS in der Anwendung. Entwickelt von Christian Senfleben, Sportwissenschaftler (M.Sc.), Solingen.</p>'+
         '<div class="action"><button class="cta continue" type="button">Weiter '+icon.arrow+'</button></div>'+
         '</section>';
     }
@@ -731,7 +758,7 @@
           meter("Haupt-Zone",zone,"mid",0,true)+
           meter("Potenzial für Stabilität","Hoch","good",88)+
         '</div>'+
-        '<div class="befund-note"><h3>Was das bedeutet</h3><p>Dein Rücken meldet sich nicht, weil du zu wenig tust. Er meldet sich, weil die tiefen Stabilisatoren zu wenig Reiz bekommen. Die gute Nachricht: dein Potenzial, das zu ändern, ist hoch.</p></div>'+
+        '<div class="befund-note"><h3>Was das bedeutet</h3><p>Dein Rücken meldet sich nicht, weil du zu wenig weißt oder zu wenig willst. Die tiefe Muskulatur braucht regelmäßigen Reiz, und genau der ist mit Physio und täglichen Übungen im Alltag schwer durchzuhalten. Die gute Nachricht: dein Potenzial, das zu ändern, ist hoch.</p></div>'+
         '<div class="action"><button class="cta continue" type="button">Meinen Plan ansehen '+icon.arrow+'</button></div>'+
         '</section>';
     }
@@ -811,14 +838,14 @@
           '<div class="profile-card"><span>Dein Alter</span><b>'+age+'</b></div>'+
           '<div class="profile-card"><span>Deine Haupt-Zone</span><b>'+zone+'</b></div>'+
         '</div>'+
-        '<p class="analysis">'+triedText+' <strong>Deine tiefe Stabilisationsmuskulatur bekommt zu wenig Reiz</strong>, und der Schon-Kreislauf hält das Muster am Laufen. Übungen, Wärme und Schmerzmittel erreichen diese Tiefe kaum.</p>'+
+        '<p class="analysis">'+triedText+' <strong>Der Haken ist die Regelmäßigkeit</strong>, die Physio und Übungen verlangen. Woche für Woche, im vollen Alltag. Genau daran scheitern die meisten. So bekommt deine tiefe Muskulatur zu wenig Reiz, und der Schon-Kreislauf hält das Muster am Laufen.</p>'+
         '<div class="method">'+
-          '<div class="method-item"><span class="method-num">1</span><div><h3>Tiefe aktivieren</h3><p>Gezielte NMES-Impulse für die Muskeln, die kein Training erreicht.</p></div></div>'+
+          '<div class="method-item"><span class="method-num">1</span><div><h3>Tiefe aktivieren</h3><p>Sanfte NMES-Impulse aktivieren die tiefe Muskulatur, während du sitzt.</p></div></div>'+
           '<div class="method-item"><span class="method-num">2</span><div><h3>Kreislauf durchbrechen</h3><p>Weniger Schonung, mehr Stabilität. Der Körper vertraut dem Rücken wieder.</p></div></div>'+
           '<div class="method-item"><span class="method-num">3</span><div><h3>Stabilität halten</h3><p>Zweimal pro Woche, 20 Minuten auf der Couch. Ganz ohne Willenskraft.</p></div></div>'+
         '</div>'+
         '<div class="beforeafter">'+
-          '<div class="ba-cell"><span class="ba-tag">Vorher</span><img src="../../../assets/Frau_50_WellenpulsLWS_Lifestyle_ordentlich.png" alt=""></div>'+
+          '<div class="ba-cell"><span class="ba-tag">Vorher</span><img src="../../../assets/symbolbild.png" alt=""></div>'+
           '<div class="ba-cell after"><span class="ba-tag">Nach 12 Wochen</span><img src="../../../assets/Frau_55_WellenpulsLWS_Freude.png" alt=""></div>'+
           '<p class="ba-note">Symbolbilder. Kein garantiertes Ergebnis.</p>'+
         '</div>'+
@@ -966,7 +993,7 @@
       var fill=stage.querySelector(".ring .fill");
       var stepEl=stage.querySelector("#loadStep");
       var circ=352, pct=0, stepIdx=0;
-      var total = reduce?400:3600;
+      var total = reduce?400:8000;
       var start=performance.now();
       function frame(t){
         var p=Math.min((t-start)/total,1);
