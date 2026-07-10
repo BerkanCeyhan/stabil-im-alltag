@@ -786,6 +786,10 @@
         '<div class="kicker">Kurzer Einschub</div>'+
         '<h1 class="q-title" style="margin-bottom:16px">Du bist nicht allein damit.</h1>'+
         '<div class="counter">'+
+          '<div class="counter-num" data-count="3">0</div>'+
+          '<div class="counter-label">Jede 3. Person in Deutschland hat mit Rückenschmerzen zu tun – rund 26 Millionen Menschen.</div>'+
+        '</div>'+
+        '<div class="counter">'+
           '<div class="counter-num" data-count="2840">0</div>'+
           '<div class="counter-label">Menschen haben diesen Rücken-Check bereits gemacht.</div>'+
         '</div>'+
@@ -1033,8 +1037,7 @@
 
     function onEnter(s){
       if(s.type==="social"){
-        var num=stage.querySelector(".counter-num");
-        if(num) animateCount(num, parseInt(num.dataset.count,10), 1600);
+        stage.querySelectorAll(".counter-num").forEach(function(num){ animateCount(num, parseInt(num.dataset.count,10), 1600); });
         setTimeout(function(){
           stage.querySelectorAll(".bar-fill").forEach(function(f){ f.style.width=f.dataset.w+"%"; });
           stage.querySelectorAll(".bar-head b").forEach(function(b){ animateCount2(b, parseInt(b.dataset.pct,10)); });
