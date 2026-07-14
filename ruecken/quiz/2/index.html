@@ -455,9 +455,9 @@
     "use strict";
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // ── Quiz-Antworten optional ANONYM an eine Google-Tabelle senden (via Make-Webhook) ──
-    // Leer lassen = deaktiviert. Trage die Webhook-URL deines Make-Szenarios ein
-    // (Make: "Webhooks > Custom webhook" -> "Google Sheets > Add a row").
+    // ── Quiz-Antworten optional ANONYM in eine Google-Tabelle schreiben (Google Apps Script) ──
+    // Leer lassen = deaktiviert. Trage hier die /exec-URL deiner Apps-Script-Web-App ein.
+    // Fertiger Code + Anleitung: scripts/quiz-sheet.gs
     // Es werden bewusst NUR die gewählten Antworten gesendet, keine IP, kein Name, keine E-Mail.
     var QUIZ_WEBHOOK = "";
     var quizSent = false;
@@ -473,7 +473,8 @@
         zone: (typeof ZONE_LABEL!=="undefined" && ZONE_LABEL[answers.zone||""]) || null,
         antworten: answers                       // anonym: nur die gewählten Antworten
       };
-      try{ fetch(QUIZ_WEBHOOK, { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload), keepalive:true }).catch(function(){}); }catch(e){}
+      // text/plain vermeidet den CORS-Preflight, no-cors erlaubt den Cross-Origin-Post an Apps Script.
+      try{ fetch(QUIZ_WEBHOOK, { method:"POST", mode:"no-cors", headers:{"Content-Type":"text/plain;charset=utf-8"}, body:JSON.stringify(payload), keepalive:true }).catch(function(){}); }catch(e){}
     }
 
     var icon = {
