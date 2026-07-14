@@ -47,10 +47,6 @@
     fetchClientIp();
     fbq('init', PIXEL_ID);
     fbq('track', 'PageView');
-    // Optionales Purchase-Event (z. B. Danke-Seite): nur mit Einwilligung, da Pixel sonst nicht geladen ist.
-    if (window.SIA_PURCHASE && typeof window.SIA_PURCHASE === 'object') {
-      fbq('track', 'Purchase', window.SIA_PURCHASE);
-    }
   }
 
   /* ---------- Client-IP (für Meta Match Quality) ---------- */
@@ -219,6 +215,7 @@
     saveConsent({ essential: true, marketing: true });
     loadPixel();
     bindEventButtons();
+    firePurchase();
     hideBanner();
   }
   function essentialOnly() {
@@ -229,21 +226,36 @@
     var mkt = document.getElementById('sia-mkt');
     var marketing = !!(mkt && mkt.checked);
     saveConsent({ essential: true, marketing: marketing });
-    if (marketing) { loadPixel(); bindEventButtons(); }
+    if (marketing) { loadPixel(); bindEventButtons(); firePurchase(); }
     hideBanner();
   }
 
-  // Banner nachträglich erneut öffnen (Footer-Link "Cookie-Einstellungen").
-  window.SIA_openConsent = showBanner;
-  // Dynamisch eingefügte Event-Buttons (z. B. Quiz-Ergebnis) nachträglich binden.
-  window.SIA_bindEvents = bindEventButtons;
+  /* ---------- Purchase (Bestätigungsseite): Pixel + CAPI via Make, einmalig ---------- */
+  var purchaseSent = false;
+  function firePurchase() {
+    if (purchaseSent) return;
+    try { if (sessionStorage.getItem('sia_purchase_sent') === '1') return; } catch (e) {}
+    var data = window.SIA_PURCHASE;
+    if (!data || typeof data !== 'object') return;
+    if (!marketingAllowed()) return;
+    purchaseSent = true;
+    try { sessionStorage.setItem('sia_purchase_sent', '1'); } catch (e) {}
+    // Kurze Verzögerung, damit die Client-IP (Match Quality) geladen ist.
+    setTimeout(function () { sendEvent('Purchase', null, data); }, 1200);
+  }
+
+  // Öffentliche Helfer für andere Seiten (Danke-Seite, Quiz).
+  window.SIA_openConsent = showBanner;                 // Cookie-Banner erneut öffnen
+  window.SIA_bindEvents = bindEventButtons;            // dynamisch eingefügte Event-Buttons binden
+  window.SIA_getConsent = readConsent;                 // Consent-Status auslesen
+  window.SIA_trackPurchase = function (d) { if (d && typeof d === 'object') window.SIA_PURCHASE = d; firePurchase(); };
 
   /* ---------- Init ---------- */
   function init() {
     bindEventButtons(); // Buttons binden; sendEvent prüft Consent selbst.
     var consent = readConsent();
     if (consent) {
-      if (consent.marketing) loadPixel();
+      if (consent.marketing) { loadPixel(); firePurchase(); }
     } else {
       showBanner();
     }

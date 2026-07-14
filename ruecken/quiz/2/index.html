@@ -455,6 +455,27 @@
     "use strict";
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    // ── Quiz-Antworten optional ANONYM an eine Google-Tabelle senden (via Make-Webhook) ──
+    // Leer lassen = deaktiviert. Trage die Webhook-URL deines Make-Szenarios ein
+    // (Make: "Webhooks > Custom webhook" -> "Google Sheets > Add a row").
+    // Es werden bewusst NUR die gewählten Antworten gesendet, keine IP, kein Name, keine E-Mail.
+    var QUIZ_WEBHOOK = "";
+    var quizSent = false;
+    function marketingOK(){ try{ var c = window.SIA_getConsent && window.SIA_getConsent(); return !!(c && c.marketing); }catch(e){ return false; } }
+    function sendQuizData(){
+      if(quizSent || !QUIZ_WEBHOOK) return;
+      if(!marketingOK()) return;                 // nur mit Marketing-Einwilligung
+      quizSent = true;
+      var payload = {
+        ts: new Date().toISOString(),
+        quiz: "ruecken-quiz-2",
+        alter: (typeof AGE_LABEL!=="undefined" && AGE_LABEL[answers.age]) || answers.age || null,
+        zone: (typeof ZONE_LABEL!=="undefined" && ZONE_LABEL[answers.zone||""]) || null,
+        antworten: answers                       // anonym: nur die gewählten Antworten
+      };
+      try{ fetch(QUIZ_WEBHOOK, { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload), keepalive:true }).catch(function(){}); }catch(e){}
+    }
+
     var icon = {
       arrow:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
       lock:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" stroke="currentColor" stroke-width="1.8"/></svg>',
@@ -1046,7 +1067,7 @@
         setTimeout(function(){ stage.querySelectorAll(".pv-bar").forEach(function(b){ b.style.height=b.dataset.h+"%"; }); },200);
       }
       if(s.type==="loading"){ runLoading(); }
-      if(s.type==="result"){ if(window.SIA_bindEvents) window.SIA_bindEvents(); }
+      if(s.type==="result"){ if(window.SIA_bindEvents) window.SIA_bindEvents(); sendQuizData(); }
     }
     function animateCount2(el, pct){
       if(reduce){ el.textContent=pct+" %"; return; }
