@@ -459,7 +459,7 @@
     // Leer lassen = deaktiviert. Trage hier die /exec-URL deiner Apps-Script-Web-App ein.
     // Fertiger Code + Anleitung: scripts/quiz-sheet.gs
     // Es werden bewusst NUR die gewählten Antworten gesendet, keine IP, kein Name, keine E-Mail.
-    var QUIZ_WEBHOOK = "";
+    var QUIZ_WEBHOOK = "https://script.google.com/macros/s/AKfycbwraM9stECq1iIpcdo1V--YByP7p78MGb-gpcNxdabL1nzF25OT9pJmfjyxlhrvZlQb3A/exec";
     var quizSent = false;
     function marketingOK(){ try{ var c = window.SIA_getConsent && window.SIA_getConsent(); return !!(c && c.marketing); }catch(e){ return false; } }
     function sendQuizData(){
