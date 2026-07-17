@@ -466,12 +466,29 @@
       if(quizSent || !QUIZ_WEBHOOK) return;
       if(!marketingOK()) return;                 // nur mit Marketing-Einwilligung
       quizSent = true;
+      // Rohwerte (z. B. "1to3") in den ausgeschriebenen Antworttext übersetzen.
+      function optLabel(id, v){
+        for(var i=0;i<SCREENS.length;i++){
+          var s=SCREENS[i];
+          if(s.id===id && s.options){
+            for(var j=0;j<s.options.length;j++){
+              if(s.options[j][1]===v) return String(s.options[j][0]).replace(/&shy;|­/g,"");
+            }
+          }
+        }
+        return v;
+      }
+      var antworten = {};
+      Object.keys(answers).forEach(function(k){
+        var val = answers[k];
+        antworten[k] = Array.isArray(val) ? val.map(function(v){ return optLabel(k,v); }).join(" | ") : optLabel(k,val);
+      });
       var payload = {
         ts: new Date().toISOString(),
         quiz: "ruecken-quiz-2",
         alter: (typeof AGE_LABEL!=="undefined" && AGE_LABEL[answers.age]) || answers.age || null,
         zone: (typeof ZONE_LABEL!=="undefined" && ZONE_LABEL[answers.zone||""]) || null,
-        antworten: answers                       // anonym: nur die gewählten Antworten
+        antworten: antworten                     // anonym: ausgeschriebene Antworttexte
       };
       // text/plain vermeidet den CORS-Preflight, no-cors erlaubt den Cross-Origin-Post an Apps Script.
       try{ fetch(QUIZ_WEBHOOK, { method:"POST", mode:"no-cors", headers:{"Content-Type":"text/plain;charset=utf-8"}, body:JSON.stringify(payload), keepalive:true }).catch(function(){}); }catch(e){}
