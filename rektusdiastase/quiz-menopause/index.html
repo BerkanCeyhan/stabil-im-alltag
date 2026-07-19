@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#f8f1ec">
-  <title>Rektusdiastase-Check: Warum ist dein Bauch nach der Geburt nicht zurückgekommen? | Stabil im Alltag</title>
-  <meta name="description" content="Finde in 60 Sekunden heraus, warum sich deine Körpermitte nach der Geburt nicht erholt hat. 11 kurze Fragen, kein Konto, keine E-Mail.">
+  <meta name="theme-color" content="#f1eef3">
+  <title>Rektusdiastase-Check: Warum wird der Bauch in den Wechseljahren weicher? | Stabil im Alltag</title>
+  <meta name="description" content="Finde in 60 Sekunden heraus, warum sich deine Körpermitte in den Wechseljahren verändert. 11 kurze Fragen, kein Konto, keine E-Mail.">
   <meta name="robots" content="noindex">
   <link rel="icon" type="image/png" href="../../assets/logo_transparent.png">
   <link rel="apple-touch-icon" href="../../assets/logo_transparent.png">
@@ -16,27 +16,27 @@
     *,*::before,*::after{box-sizing:border-box}
 
     :root{
-      --primary:      oklch(45% 0.07 350);
-      --primary-deep: oklch(36% 0.065 350);
-      --primary-pale: oklch(95.5% 0.02 350);
-      --teal:         oklch(52% 0.075 150);
-      --teal-deep:    oklch(43% 0.07 150);
-      --teal-pale:    oklch(95% 0.028 150);
-      --ink:          oklch(28% 0.02 345);
-      --ink-soft:     oklch(44% 0.02 345);
-      --muted:        oklch(56% 0.016 345);
-      --surface:      oklch(99.5% 0.004 40);
-      --canvas:       oklch(97.3% 0.011 40);
-      --line:         oklch(89% 0.015 30);
-      --line-soft:    oklch(93% 0.011 30);
+      --primary:      oklch(42% 0.088 330);
+      --primary-deep: oklch(33% 0.08 330);
+      --primary-pale: oklch(95% 0.022 330);
+      --teal:         oklch(50% 0.072 195);
+      --teal-deep:    oklch(41% 0.066 195);
+      --teal-pale:    oklch(95% 0.026 195);
+      --ink:          oklch(27% 0.022 322);
+      --ink-soft:     oklch(43% 0.022 322);
+      --muted:        oklch(55% 0.018 322);
+      --surface:      oklch(99.5% 0.004 310);
+      --canvas:       oklch(97% 0.008 300);
+      --line:         oklch(89% 0.013 310);
+      --line-soft:    oklch(93% 0.01 310);
       --danger:       oklch(53% 0.16 28);
       --danger-pale:  oklch(95% 0.03 28);
       --amber:        oklch(58% 0.11 68);
       --amber-pale:   oklch(96% 0.04 78);
       --gold:         oklch(74% 0.135 78);
-      --shadow-sm:    0 2px 10px oklch(40% 0.05 350 / .07);
-      --shadow-md:    0 14px 40px oklch(35% 0.05 350 / .12);
-      --shadow-lg:    0 24px 64px oklch(30% 0.05 350 / .16);
+      --shadow-sm:    0 2px 10px oklch(38% 0.05 330 / .08);
+      --shadow-md:    0 14px 40px oklch(33% 0.05 330 / .13);
+      --shadow-lg:    0 24px 64px oklch(28% 0.05 330 / .17);
       --ease:         cubic-bezier(.16,1,.3,1);
       --r:            14px;
       --r-lg:         20px;
@@ -51,8 +51,8 @@
       font-family:"Libre Franklin",system-ui,sans-serif;
       line-height:1.55;
       background:
-        radial-gradient(120% 60% at 82% -8%, oklch(94% 0.035 150 / .5), transparent 60%),
-        radial-gradient(130% 55% at 8% 108%, oklch(94% 0.035 350 / .5), transparent 62%),
+        radial-gradient(120% 60% at 82% -8%, oklch(94% 0.03 195 / .5), transparent 60%),
+        radial-gradient(130% 55% at 8% 108%, oklch(94% 0.035 330 / .5), transparent 62%),
         var(--canvas);
       -webkit-font-smoothing:antialiased;
     }
@@ -461,7 +461,7 @@
     // ── Quiz-Antworten optional ANONYM in eine Google-Tabelle schreiben (Apps Script) ──
     // /exec-URL der Apps-Script-Web-App. Leer = deaktiviert. Blatt wird über das quiz-Feld gesteuert.
     var QUIZ_WEBHOOK = "https://script.google.com/macros/s/AKfycbwraM9stECq1iIpcdo1V--YByP7p78MGb-gpcNxdabL1nzF25OT9pJmfjyxlhrvZlQb3A/exec";
-    var QUIZ_ID = "rektus-schwangerschaft";
+    var QUIZ_ID = "rektus-menopause";
     var quizSent = false;
     function marketingOK(){ try{ var c = window.SIA_getConsent && window.SIA_getConsent(); return !!(c && c.marketing); }catch(e){ return false; } }
     function optLabel(id, v){
@@ -499,12 +499,12 @@
 
     /* ─────────── SCREENS ─────────── */
     var SCREENS = [
-      { type:"hero", id:"time",
+      { type:"hero", id:"age",
         eyebrow:"Rektusdiastase-Check · 11 Fragen · ca. 60 Sekunden",
-        title:'Rückbildung gemacht und trotzdem wölbt sich dein Bauch <em>wie im fünften Monat</em>?',
-        sub:"Wenn sich deine Körpermitte nach der Geburt nie richtig erholt hat, liegt das selten an dir. Finde in 60 Sekunden heraus, woran es wirklich liegt. Kein Konto oder E-Mail-Adresse erforderlich.",
-        qtitle:"Wie lange liegt deine letzte Geburt zurück?",
-        options:[["Unter 1 Jahr","u1"],["1 bis 2 Jahre","1to2"],["2 bis 5 Jahre","2to5"],["Über 5 Jahre","over5"]],
+        title:'Deine Mitte wird weicher, obwohl du <em>nichts anders machst</em> als früher?',
+        sub:"Wenn der Bauch in den Wechseljahren runder wird und Sport nicht mehr greift wie früher, liegt das oft am Bindegewebe, nicht an dir. Finde in 60 Sekunden heraus, woran es wirklich liegt. Kein Konto oder E-Mail-Adresse erforderlich.",
+        qtitle:"Wie alt bist du?",
+        options:[["Unter 45","u45"],["45 bis 54","45to54"],["55 bis 64","55to64"],["65 oder älter","65plus"]],
         privacy:true, auto:true },
 
       { type:"selbsttest" },
@@ -548,11 +548,11 @@
         sub:"Wähle das, was dich am stärksten beschäftigt.",
         auto:true,
         options:[
-          ["Die sichtbare Wölbung","optic","Der Bauch, der nicht zurückgeht"],
-          ["Rückenschmerzen seit der Geburt","backpain"],
+          ["Die sichtbare Wölbung","optic","Der Bauch, der weicher wird"],
+          ["Rückenschmerzen","backpain"],
           ["Die instabile Mitte","instability","Beim Heben, Tragen, Aufstehen"],
-          ["Dass Sport kaum möglich ist","sport","Joggen, Yoga, Schwimmen"],
-          ["Beckenboden-Themen","pelvic","Zum Beispiel beim Niesen oder Hüpfen"]
+          ["Dass Sport kaum noch greift","sport","Joggen, Yoga, Krafttraining"],
+          ["Beckenboden-Themen","pelvic","Zum Beispiel beim Niesen oder Lachen"]
         ]},
 
       { type:"qm", id:"goal", n:6,
@@ -573,8 +573,8 @@
         title:"Was hast du schon ausprobiert?",
         sub:"Kein Urteil. Wähle alles, was zutrifft.",
         options:[
-          ["Rückbildungskurs","rueckbildung"],
-          ["Übungsprogramm für die Rektusdiastase","program"],
+          ["Diäten und weniger essen","diet"],
+          ["Bauch-Workouts, Sit-ups","workout"],
           ["Physiotherapie","physio"],
           ["Gurt, Tape oder Mieder","gear"],
           ["EMS-Studio oder EMSculpt","studio"],
@@ -586,9 +586,9 @@
         sub:"Ehrliche Antwort. Sie ist der Schlüssel zu deinem Plan.",
         auto:true,
         options:[
-          ["Zeit mit Kind und Alltag","time","Übungen bleiben einfach liegen"],
+          ["Zeit im vollen Alltag","time","Übungen bleiben einfach liegen"],
           ["Motivation nach langen Tagen","motivation"],
-          ["Unsicherheit, welche Übungen sicher sind","unsure","Angst, es zu verschlimmern"],
+          ["Unsicherheit, welche Übungen helfen","unsure","Bauch-Workouts wirken kaum"],
           ["Es hat sich nichts verändert","noresult"],
           ["Ich bin noch dran","ongoing"]
         ]},
@@ -607,12 +607,12 @@
       { type:"science" },
 
       { type:"q", id:"backpain", n:10,
-        title:"Hast du seit der Geburt mehr Schmerzen im unteren Rücken?",
+        title:"Hast du in letzter Zeit mehr Schmerzen im unteren Rücken?",
         sub:"Denk an die letzten Wochen.",
-        why:"<b>Warum wir fragen:</b> Wenn die tiefe Bauchmuskulatur die Mitte nicht mehr stabilisiert, übernimmt oft der untere Rücken die Arbeit. Viele Mütter mit Rektusdiastase kennen genau dieses Ziehen in der Lendenwirbelsäule.",
+        why:"<b>Warum wir fragen:</b> Wenn die tiefe Bauchmuskulatur die Mitte nicht mehr stabilisiert, übernimmt oft der untere Rücken die Arbeit. Gerade wenn das Bindegewebe nachlässt, kennen viele Frauen genau dieses Ziehen in der Lendenwirbelsäule.",
         auto:true,
         options:[
-          ["Ja, deutlich","yes","Vor allem nach Tragen und langen Tagen"],
+          ["Ja, deutlich","yes","Vor allem nach langen Tagen"],
           ["Manchmal","sometimes"],
           ["Nein","no"]
         ]},
@@ -620,29 +620,29 @@
       { type:"q", id:"timebudget", n:11,
         title:"Wie viel Zeit kannst du realistisch pro Woche investieren?",
         sub:"Danach berechnen wir dein vollständiges Profil.",
-        why:"<b>Warum wir fragen:</b> Der häufigste Grund, warum die Rückbildung scheitert, ist nicht fehlender Wille, sondern fehlende planbare Zeit. Dein Plan muss in dein Leben passen, nicht umgekehrt.",
+        why:"<b>Warum wir fragen:</b> Der häufigste Grund, warum Training scheitert, ist nicht fehlender Wille, sondern fehlende planbare Zeit. Dein Plan muss in dein Leben passen, nicht umgekehrt.",
         auto:true,
         options:[
           ["Unter 1 Stunde","u1h"],
           ["1 bis 2 Stunden","1to2h"],
           ["Mehr als 2 Stunden","over2h"],
-          ["Ehrlich: kaum planbar","unplannable","Mit Kindern völlig normal"]
+          ["Ehrlich: kaum planbar","unplannable","Geht vielen so"]
         ]},
 
       { type:"befund" },
       { type:"plan" },
 
       { type:"micro", kicker:"Fast geschafft",
-        title:"Bist du bereit, deiner Mitte endlich den Reiz zu geben, den sie seit der Geburt braucht?",
+        title:"Bist du bereit, deiner Mitte endlich den Reiz zu geben, den sie jetzt braucht?",
         sub:"Dein Befund zeigt einen klaren Ansatzpunkt.",
         cta:"Ja, zeig mir wie" },
 
       { type:"micro", kicker:"Kurze Frage",
-        title:"Hast du das Gefühl, dass zwischen Kind, Haushalt und allem anderen kaum Zeit für tägliche Übungsroutinen bleibt?",
+        title:"Hast du das Gefühl, dass zwischen Job, Alltag und allem anderen kaum Zeit für tägliche Übungsroutinen bleibt?",
         yesno:true },
 
       { type:"micro", kicker:"Letzte Frage",
-        title:"Klingt 20 Minuten auf der Couch, während dein Kind schläft, besser als tägliche Übungen und feste Termine?",
+        title:"Klingt 20 Minuten auf der Couch, während du eine Serie schaust, besser als tägliche Übungen und feste Termine?",
         yesno:true },
 
       { type:"loading" },
@@ -747,8 +747,8 @@
         '</section>';
     }
 
-    /* Anteil der Mütter mit Rektusdiastase über Monate nach der Geburt (schematisch nach Studienlage) */
-    var FAKTEN_DATA = [[0,.98],[1,.75],[1.5,.6],[3,.5],[6,.45],[9,.38],[12,.33],[18,.31],[24,.3]];
+    /* Kollagen im Bindegewebe über das Lebensalter (schematisch, Rückgang ab der Menopause) */
+    var FAKTEN_DATA = [[30,.95],[38,.9],[45,.78],[50,.6],[55,.45],[60,.34],[70,.27]];
     function smoothPath(pts){
       if(pts.length<2) return "";
       var d="M"+pts[0].x+","+pts[0].y;
@@ -766,26 +766,26 @@
       }
       return data[data.length-1][1];
     }
-    function buildFaktenChart(timeKey){
-      var W=320,H=172, x0=18,x1=304, yTop=20,yBot=134, aMin=0,aMax=24;
+    function buildFaktenChart(ageKey){
+      var W=320,H=172, x0=18,x1=304, yTop=20,yBot=134, aMin=30,aMax=70;
       var ax=function(a){return x0+(a-aMin)/(aMax-aMin)*(x1-x0);};
       var ay=function(v){return yBot-v*(yBot-yTop);};
       var pts=FAKTEN_DATA.map(function(d){return {x:ax(d[0]),y:ay(d[1])};});
       var curve=smoothPath(pts);
       var area=curve+" L"+x1.toFixed(1)+","+yBot+" L"+x0.toFixed(1)+","+yBot+" Z";
-      var mMonths=({u1:9,"1to2":18,"2to5":24,over5:24})[timeKey]||12;
-      var mx=ax(mMonths), my=ay(interp(FAKTEN_DATA,mMonths)), plateauX=ax(2);
+      var mAge=({u45:40,"45to54":50,"55to64":60,"65plus":68})[ageKey]||50;
+      var mx=ax(mAge), my=ay(interp(FAKTEN_DATA,mAge)), riskX=ax(45);
       var pillW=30, pillX=Math.max(x0,Math.min(mx-pillW/2,x1-pillW));
-      var ticks=[[0,"Geburt"],[1.5,"6 Wo"],[6,"6 Mo"],[12,"1 Jahr"],[24,"2 J+"]];
+      var ticks=[[30,"30"],[45,"45"],[55,"55"],[70,"70"]];
       var s='<svg class="chart" viewBox="0 0 '+W+' '+H+'" aria-hidden="true">';
       s+='<defs><linearGradient id="gArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--danger)" stop-opacity=".2"/><stop offset="1" stop-color="var(--danger)" stop-opacity="0"/></linearGradient></defs>';
       [0.33,0.66].forEach(function(f){ var gy=(yTop+f*(yBot-yTop)).toFixed(1); s+='<line class="grid-line" x1="'+x0+'" y1="'+gy+'" x2="'+x1+'" y2="'+gy+'"/>'; });
-      s+='<rect class="risk" x="'+plateauX.toFixed(1)+'" y="'+yTop+'" width="'+(x1-plateauX).toFixed(1)+'" height="'+(yBot-yTop)+'"/>';
+      s+='<rect class="risk" x="'+riskX.toFixed(1)+'" y="'+yTop+'" width="'+(x1-riskX).toFixed(1)+'" height="'+(yBot-yTop)+'"/>';
       s+='<path class="area" d="'+area+'" fill="url(#gArea)"/>';
       s+='<path class="curve" pathLength="1" d="'+curve+'"/>';
       s+='<line class="axis-line" x1="'+x0+'" y1="'+yBot+'" x2="'+x1+'" y2="'+yBot+'"/>';
-      s+='<text class="ylab" x="'+x0+'" y="'+(yTop+3)+'">viele</text>';
-      s+='<text class="ylab" x="'+x0+'" y="'+(yBot-4)+'">wenige</text>';
+      s+='<text class="ylab" x="'+x0+'" y="'+(yTop+3)+'">hoch</text>';
+      s+='<text class="ylab" x="'+x0+'" y="'+(yBot-4)+'">niedrig</text>';
       ticks.forEach(function(t){ s+='<text class="tick" x="'+ax(t[0]).toFixed(1)+'" y="'+(yBot+14)+'" text-anchor="middle">'+t[1]+'</text>'; });
       s+='<line class="marker-line" x1="'+mx.toFixed(1)+'" y1="'+yTop+'" x2="'+mx.toFixed(1)+'" y2="'+my.toFixed(1)+'"/>';
       s+='<circle class="dot-halo" cx="'+mx.toFixed(1)+'" cy="'+my.toFixed(1)+'" r="6"/>';
@@ -793,31 +793,31 @@
       s+='<g class="du-pill"><rect x="'+pillX.toFixed(1)+'" y="'+(yTop-14)+'" width="'+pillW+'" height="14" rx="7"/><text x="'+(pillX+pillW/2).toFixed(1)+'" y="'+(yTop-4)+'" text-anchor="middle">Du</text></g>';
       return s+'</svg>';
     }
-    function faktenInsight(timeKey){
-      var m={ u1:"Die natürliche Rückbildung flacht bei dir bereits ab. Ab jetzt schließt sich die Lücke selten von allein weiter.",
-              "1to2":"Die natürliche Rückbildung ist bei dir abgeschlossen. Deine Lücke braucht jetzt einen gezielten Reiz, um sich zu verändern.",
-              "2to5":"Von allein verändert sich nach so langer Zeit meist nichts mehr. Mit gezieltem Training der tiefen Muskulatur aber schon.",
-              over5:"Auch Jahre später reagiert die Muskulatur noch auf gezielte Reize. Von allein passiert allerdings nichts mehr." };
-      return '<div class="fakten-insight">'+icon.pin+'<p><b>Du bist hier.</b> '+(m[timeKey]||m["1to2"])+'</p></div>';
+    function faktenInsight(ageKey){
+      var m={ u45:"Bei dir beginnt der Rückgang gerade erst. Der beste Zeitpunkt, die Mitte jetzt zu stärken.",
+              "45to54":"In deinem Alter lässt das Bindegewebe bereits spürbar nach. Mit gezieltem Reiz lässt sich gegensteuern.",
+              "55to64":"Der Kollagenrückgang hat bei dir meist schon Fahrt aufgenommen. Die tiefe Muskulatur reagiert trotzdem weiter auf Training.",
+              "65plus":"Auch jetzt reagiert die Muskulatur noch auf gezielte Reize. Von allein verändert sich allerdings nichts." };
+      return '<div class="fakten-insight">'+icon.pin+'<p><b>Du bist hier.</b> '+(m[ageKey]||m["45to54"])+'</p></div>';
     }
 
     function renderFakten(){
       return '<section class="screen">'+
         '<div class="kicker">Kurzer Fakten-Check</div>'+
-        '<h1 class="q-title">Nach etwa 8 Wochen stoppt die natürliche Rückbildung.</h1>'+
-        '<p class="lead">Direkt nach der Geburt schließt sich die Lücke teilweise von allein. Dann flacht die Kurve ab: Rund 1 von 3 Müttern hat auch ein Jahr später noch eine Rektusdiastase.</p>'+
+        '<h1 class="q-title">Ab etwa 45 verliert dein Bindegewebe an Halt.</h1>'+
+        '<p class="lead">In den Wechseljahren sinkt das Östrogen, und damit die Kollagenbildung. Das Bindegewebe im ganzen Körper wird lockerer, auch die Naht zwischen den Bauchmuskeln. Eine früher kaum sichtbare Lücke kann jetzt aufgehen.</p>'+
         '<div class="chart-card">'+
-          '<div class="chart-cap">Anteil der Mütter mit Rektusdiastase nach der Geburt</div>'+
-          buildFaktenChart(answers.time)+
-          faktenInsight(answers.time)+
-          '<p class="chart-note">Schematische Darstellung auf Basis publizierter Studien zur Häufigkeit der Rektusdiastase nach der Geburt. Keine individuelle Messung.</p>'+
+          '<div class="chart-cap">Kollagen im Bindegewebe nach Alter</div>'+
+          buildFaktenChart(answers.age)+
+          faktenInsight(answers.age)+
+          '<p class="chart-note">Schematische Darstellung auf Basis von Erkenntnissen zum Kollagenrückgang nach der Menopause. Keine individuelle Messung.</p>'+
         '</div>'+
         '<div class="steps">'+
-          '<div class="step"><span class="step-badge">1</span><div><h3>Die Schwangerschaft dehnt die Mitte</h3><p>Die Linea alba, die Bindegewebsnaht zwischen den geraden Bauchmuskeln, wird über Monate gedehnt. Die Muskelstränge weichen auseinander.</p></div></div>'+
-          '<div class="step"><span class="step-badge">2</span><div><h3>Die tiefe Muskulatur bleibt inaktiv</h3><p>Ohne gezielten Reiz wird vor allem der quere Bauchmuskel, das natürliche Korsett der Körpermitte, kaum noch angesteuert. Die Lücke bleibt, der Bauch wölbt sich vor.</p></div></div>'+
-          '<div class="step"><span class="step-badge">3</span><div><h3>Der Ausweg scheitert am Mama-Alltag</h3><p>Der Weg zurück ist regelmäßiges Training der tiefen Bauchmuskulatur, Woche für Woche. Genau daran scheitern die meisten. Nicht aus Faulheit, sondern weil zwischen Kind, Haushalt und Job kaum planbare Zeit bleibt.</p></div></div>'+
+          '<div class="step"><span class="step-badge">1</span><div><h3>Das Östrogen sinkt</h3><p>Mit den Wechseljahren fällt der Östrogenspiegel. Östrogen steuert mit, wie viel Kollagen dein Körper bildet, den Baustoff für festes Bindegewebe.</p></div></div>'+
+          '<div class="step"><span class="step-badge">2</span><div><h3>Die Mitte verliert Halt</h3><p>Die Linea alba, die Naht zwischen den geraden Bauchmuskeln, wird lockerer. Dazu lagert sich mehr Fett im Bauchraum ein und drückt von innen. Der Bauch wölbt sich vor.</p></div></div>'+
+          '<div class="step"><span class="step-badge">3</span><div><h3>Der Ausweg scheitert am Alltag</h3><p>Der Weg zurück ist regelmäßiges Training der tiefen Bauchmuskulatur, Woche für Woche. Genau daran scheitern die meisten. Nicht aus Faulheit, sondern weil im vollen Alltag kaum planbare Zeit bleibt.</p></div></div>'+
         '</div>'+
-        '<div class="callout good"><div class="callout-title">'+icon.spark+' Die gute Nachricht</div><p>Die Muskulatur reagiert auch Monate und Jahre nach der Geburt noch auf gezielte Reize. Studien zeigen Verbesserungen selbst bei lange bestehender Rektusdiastase.</p></div>'+
+        '<div class="callout good"><div class="callout-title">'+icon.spark+' Die gute Nachricht</div><p>Die Muskulatur reagiert auch in den Wechseljahren noch auf gezielte Reize. Der quere Bauchmuskel, das natürliche Korsett der Mitte, lässt sich in jedem Alter wieder aktivieren.</p></div>'+
         '<div class="action"><button class="cta continue" type="button">Weiter '+icon.arrow+'</button></div>'+
         '</section>';
     }
@@ -827,13 +827,13 @@
         '<div class="kicker">Kurzer Einschub</div>'+
         '<h1 class="q-title" style="margin-bottom:16px">Du bist nicht allein damit.</h1>'+
         '<div class="counter">'+
-          '<div class="counter-num" data-count="3">0</div>'+
-          '<div class="counter-label">Rund jede 3. Mutter hat auch ein Jahr nach der Geburt noch eine Rektusdiastase.</div>'+
+          '<div class="counter-num" data-count="30">0</div>'+
+          '<div class="counter-label">Prozent ihres Kollagens verliert die Haut in den ersten 5 Jahren nach der Menopause. Das Bindegewebe darunter genauso.</div>'+
         '</div>'+
         '<div class="rating"><span class="stars">★★★★★</span><span>4,9 von 5 aus 29 verifizierten Bewertungen</span></div>'+
         '<div class="bars">'+
           '<div class="bar-row"><div class="bar-head"><span>Fühlten sich in der Mitte stabiler</span><b data-pct="89">0 %</b></div><div class="bar-track"><div class="bar-fill" data-w="89"></div></div></div>'+
-          '<div class="bar-row"><div class="bar-head"><span>Der Bauch wirkte flacher</span><b data-pct="86">0 %</b></div><div class="bar-track"><div class="bar-fill" data-w="86"></div></div></div>'+
+          '<div class="bar-row"><div class="bar-head"><span>Der Bauch wirkte flacher</span><b data-pct="84">0 %</b></div><div class="bar-track"><div class="bar-fill" data-w="84"></div></div></div>'+
           '<div class="bar-row"><div class="bar-head"><span>Würden es weiterempfehlen</span><b data-pct="93">0 %</b></div><div class="bar-track"><div class="bar-fill" data-w="93"></div></div></div>'+
         '</div>'+
         '<p class="chart-note" style="margin-top:14px">Interne Kundenbefragung. Individuelle Ergebnisse können abweichen.</p>'+
@@ -847,9 +847,9 @@
         '<h1 class="q-title">Die Tiefe trainieren, ohne dass es Zeit und Willenskraft kostet.</h1>'+
         '<div class="duo">'+
           '<div class="duo-cell"><div class="big">NMES</div><h3>Aktiviert die Tiefe</h3><p>Sanfte Impulse erreichen die tiefe Bauch- und Rumpfmuskulatur direkt, ohne dass du dich bewegen musst.</p></div>'+
-          '<div class="duo-cell"><div class="big">20 Min</div><h3>Passt in dein Leben</h3><p>Zweimal pro Woche auf der Couch, zum Beispiel während dein Kind schläft. Kein Termin, keine Übungsroutine.</p></div>'+
+          '<div class="duo-cell"><div class="big">20 Min</div><h3>Passt in dein Leben</h3><p>Zweimal pro Woche auf der Couch, zum Beispiel während du eine Serie schaust. Kein Termin, keine Übungsroutine.</p></div>'+
         '</div>'+
-        '<p class="lead">In einer randomisierten Studie mit Frauen nach der Geburt verringerte sich die Rektusdiastase mit Training plus NMES etwa doppelt so stark wie mit Training allein.* Der Wellenpuls LWS bringt genau diesen Reiz zu dir nach Hause: Er aktiviert die seitliche Bauchmuskulatur und den unteren Rücken. Entstanden aus einer sportwissenschaftlichen Arbeit an der Deutschen Sporthochschule Köln, mit integrierter Wärmefunktion für eine angenehme Anwendung.</p>'+
+        '<p class="lead">In einer randomisierten Studie verringerte sich die Rektusdiastase mit Training plus NMES etwa doppelt so stark wie mit Training allein.* Der Wellenpuls LWS bringt genau diesen Reiz zu dir nach Hause: Er aktiviert die seitliche Bauchmuskulatur und den unteren Rücken. Entstanden aus einer sportwissenschaftlichen Arbeit an der Deutschen Sporthochschule Köln, mit integrierter Wärmefunktion für eine angenehme Anwendung.</p>'+
         '<div class="sci-photo"><img src="../../assets/showcase.gif" alt="Der Wellenpuls LWS in der Anwendung" loading="lazy"></div>'+
         '<p class="sci-cap">Der Wellenpuls LWS in der Anwendung. Entwickelt von Christian Senfleben, Sportwissenschaftler (M.Sc.), Solingen.<br>*Kamel &amp; Yousif 2017, randomisierte kontrollierte Studie mit 60 Frauen nach der Geburt.</p>'+
         '<div class="action"><button class="cta continue" type="button">Weiter '+icon.arrow+'</button></div>'+
@@ -857,7 +857,7 @@
     }
 
     var GAP_LABEL = {two:"Ca. 2 Fingerbreit",three:"Ca. 3 Fingerbreit",four:"4+ Fingerbreit",unknown:"Noch nicht gemessen",'':"Nicht gemessen"};
-    var TIME_LABEL = {u1:"Unter 1 Jahr",'1to2':"1 bis 2 Jahre",'2to5':"2 bis 5 Jahre",over5:"Über 5 Jahre"};
+    var AGE_LABEL = {u45:"Unter 45",'45to54':"45 bis 54",'55to64':"55 bis 64",'65plus':"65 oder älter"};
 
     function renderBefund(){
       var gap = GAP_LABEL[answers.gap||''] || "Nicht gemessen";
@@ -871,7 +871,7 @@
           meter("Deine Lücke",gap,"mid",0,true)+
           meter("Potenzial für eine stabile Mitte","Hoch","good",88)+
         '</div>'+
-        '<div class="befund-note"><h3>Was das bedeutet</h3><p>Deine Rektusdiastase ist nicht bestehen geblieben, weil du zu wenig gemacht hast. Entscheidend ist, dass die tiefe Bauchmuskulatur regelmäßig und gezielt aktiviert wird. Genau das ist im Alltag mit Kind mit Übungsprogrammen allein oft kaum durchzuhalten. Die gute Nachricht: Du hast sehr gute Voraussetzungen, daran etwas zu verändern.</p></div>'+
+        '<div class="befund-note"><h3>Was das bedeutet</h3><p>Deine Mitte wird nicht weicher, weil du zu wenig machst. Entscheidend ist, dass die tiefe Bauchmuskulatur regelmäßig und gezielt aktiviert wird. Gerade wenn das Bindegewebe nachlässt, ist genau das mit Bauch-Workouts allein im Alltag kaum durchzuhalten. Die gute Nachricht: Du hast sehr gute Voraussetzungen, daran etwas zu verändern.</p></div>'+
         '<div class="action"><button class="cta continue" type="button">Meinen Plan ansehen '+icon.arrow+'</button></div>'+
         '</section>';
     }
@@ -884,12 +884,12 @@
       return '<section class="screen">'+
         '<div class="kicker">Dein Fahrplan</div>'+
         '<h1 class="q-title">12 Wochen, zweimal pro Woche, 20 Minuten.</h1>'+
-        '<p class="q-sub">Kein weiteres Übungsprogramm, das nach zwei Wochen liegen bleibt. Nur ein Reiz, der dort ankommt, wo er seit der Geburt gefehlt hat.</p>'+
+        '<p class="q-sub">Kein weiteres Übungsprogramm, das nach zwei Wochen liegen bleibt. Nur ein Reiz, der dort ankommt, wo dem Bindegewebe der Halt fehlt.</p>'+
         '<div class="timeline">'+
-          tl("1","Woche 1 und 2","Ankommen","Die Stimulation fühlt sich zunächst ungewohnt, aber angenehm an. Viele spüren nach den ersten Anwendungen Muskelkater an Stellen, die sie seit der Schwangerschaft nicht mehr bewusst wahrgenommen haben.")+
+          tl("1","Woche 1 und 2","Ankommen","Die Stimulation fühlt sich zunächst ungewohnt, aber angenehm an. Viele spüren nach den ersten Anwendungen Muskelkater an Stellen, die sie lange nicht mehr bewusst wahrgenommen haben.")+
           tl("2","Woche 3 und 4","Erste Veränderung","Die Mitte spannt beim Heben und Tragen besser mit. Die Haltung wird aufrechter, ohne Zwang.")+
           tl("3","Woche 5 bis 8","Spürbar stabiler","Der Bauch fühlt sich fester an, der untere Rücken wird im Alltag spürbar entlastet.")+
-          tl("4","Woche 9 bis 12","Neuer Alltag","Tragen, Bücken und Spielen am Boden fühlen sich sicherer an. Viele fühlen sich in ihrer Kleidung wieder wohler.")+
+          tl("4","Woche 9 bis 12","Neuer Alltag","Bücken, Heben und lange Tage fühlen sich sicherer an. Viele fühlen sich in ihrer Kleidung wieder wohler.")+
         '</div>'+
         '<div class="progress-viz">'+
           '<div class="pv-head"><span>Vorher</span><span>Nach 12 Wochen</span></div>'+
@@ -934,20 +934,20 @@
     }
 
     function renderResult(){
-      var time = TIME_LABEL[answers.time] || "Nach der Geburt";
+      var ageL = AGE_LABEL[answers.age] || "In den Wechseljahren";
       var gap = GAP_LABEL[answers.gap||''] || "Nicht gemessen";
       var tried = Array.isArray(answers.tried)?answers.tried:[];
-      var triedNames = {rueckbildung:"einen Rückbildungskurs",program:"ein Übungsprogramm",physio:"Physiotherapie",gear:"Gurt oder Tape",studio:"EMS-Studio-Behandlungen"};
+      var triedNames = {diet:"Diäten",workout:"Bauch-Workouts",physio:"Physiotherapie",gear:"Gurt oder Tape",studio:"EMS-Studio-Behandlungen"};
       var triedList = tried.filter(function(t){return t!=="nothing"}).map(function(t){return triedNames[t]}).filter(Boolean);
       var triedText;
       if(triedList.length>=2){ triedText = "Du hast schon "+triedList.slice(0,2).join(" und ")+" versucht. Und trotzdem ist die Lücke geblieben. Das liegt nicht an dir."; }
       else if(triedList.length===1){ triedText = "Du hast "+triedList[0]+" versucht. Und trotzdem ist die Lücke geblieben. Das liegt nicht an dir."; }
-      else { triedText = "Die natürliche Rückbildung schließt die Lücke nur teilweise. Ohne gezielten, regelmäßigen Reiz bleibt sie danach meist bestehen."; }
+      else { triedText = "Diäten und Bauch-Workouts erreichen die tiefe Muskulatur kaum. Ohne gezielten, regelmäßigen Reiz verändert sich die Lücke selten."; }
 
       var angle = deriveAngle();
       var rTitle = angle==="aesthetic" ? "Dein Weg zu einer flacheren, festeren Mitte."
                  : angle==="stability" ? "Dein Weg zu einer stabilen, tragfähigen Mitte."
-                 : "Dein Weg zu einer festen, stabilen Mitte nach der Geburt.";
+                 : "Dein Weg zu einer festen, stabilen Mitte.";
       var angleLine = angle==="aesthetic" ? " Dich beschäftigt vor allem die sichtbare Wölbung. Hält die tiefe Muskulatur die Mitte wieder von innen, wird die Kontur flacher." :
                       angle==="stability" ? " Dich beschäftigt vor allem die instabile Mitte. Genau dort setzt der quere Bauchmuskel an, der die Körpermitte stützt und den Rücken entlastet." : "";
 
@@ -955,29 +955,29 @@
         '<div class="result-badge">'+icon.check+' Dein Ergebnis ist bereit</div>'+
         '<h1 class="result-title">'+rTitle+'</h1>'+
         '<div class="profile">'+
-          '<div class="profile-card"><span>Zeit seit der Geburt</span><b>'+time+'</b></div>'+
+          '<div class="profile-card"><span>Dein Alter</span><b>'+ageL+'</b></div>'+
           '<div class="profile-card"><span>Deine Lücke</span><b>'+gap+'</b></div>'+
         '</div>'+
-        '<p class="analysis">'+triedText+' <strong>Der Haken ist die Regelmäßigkeit</strong>, die Übungsprogramme und Kurse verlangen. Woche für Woche, in einem Alltag, der sich nach dem Kind richtet. Genau daran scheitern die meisten. So bekommt die tiefe Bauchmuskulatur nicht den Reiz, den sie braucht, und die Lücke bleibt.'+angleLine+'</p>'+
+        '<p class="analysis">'+triedText+' <strong>Der Haken ist die Regelmäßigkeit</strong>, die Training verlangt. Woche für Woche, in einem vollen Alltag. Genau daran scheitern die meisten. So bekommt die tiefe Bauchmuskulatur nicht den Reiz, den sie braucht, und die Lücke bleibt.'+angleLine+'</p>'+
         '<div class="method">'+
           '<div class="method-item"><span class="method-num">1</span><div><h3>Tiefe aktivieren</h3><p>Sanfte NMES-Impulse aktivieren die tiefe Bauch- und Rumpfmuskulatur, während du sitzt.</p></div></div>'+
           '<div class="method-item"><span class="method-num">2</span><div><h3>Mitte stabilisieren</h3><p>Die Muskulatur lernt wieder, die Körpermitte von innen zu stützen und den Rücken zu entlasten.</p></div></div>'+
           '<div class="method-item"><span class="method-num">3</span><div><h3>Dranbleiben, ohne Willenskraft</h3><p>Zweimal pro Woche, 20 Minuten auf der Couch. Auch wenn der Tag chaotisch war.</p></div></div>'+
         '</div>'+
-        '<figure class="app-shot"><img src="../../assets/rektus/anwendung-postpartum.jpg" alt="Anwendung des Wellenpuls auf der Körpermitte" loading="lazy"></figure>'+
+        '<figure class="app-shot"><img src="../../assets/rektus/anwendung-menopause.jpg" alt="Anwendung des Wellenpuls auf der Körpermitte" loading="lazy"></figure>'+
         '<p class="ba-note">So sieht die Anwendung aus: 20 Minuten, zweimal pro Woche, auf der Couch. Symbolbild.</p>'+
         '<div class="next-list">'+
           '<div class="next-item"><span class="next-check">'+icon.check+'</span><p>Deine <b>persönliche Anwendung</b>, abgestimmt auf dein Profil</p></div>'+
           '<div class="next-item"><span class="next-check">'+icon.check+'</span><p>Das <b>komplette Angebot</b> inklusive Bonus vom Gründer</p></div>'+
           '<div class="next-item"><span class="next-check">'+icon.check+'</span><p><b>30 Tage Geld-zurück-Garantie</b>, ohne Kleingedrucktes</p></div>'+
         '</div>'+
-        '<div class="result-cta"><a class="cta cta-lg track-lead" href="../lp-schwangerschaft/">Meinen Plan und das Angebot ansehen '+icon.arrow+'</a></div>'+
+        '<div class="result-cta"><a class="cta cta-lg track-lead" href="../lp-menopause/">Meinen Plan und das Angebot ansehen '+icon.arrow+'</a></div>'+
         '<div class="guarantee">'+
           '<span>'+icon.shield+' 30 Tage Geld-zurück</span>'+
           '<span>'+icon.truck+' Kostenloser Versand</span>'+
           '<span>'+icon.check+' Lieferung in 2 bis 3 Tagen</span>'+
         '</div>'+
-        '<p class="disclaimer">Der Wellenpuls LWS ist ein Trainingsgerät, kein Medizinprodukt, und ersetzt keine ärztliche Beratung. Dieser Check dient der Einordnung und stellt keine Diagnose. Nicht in der Schwangerschaft anwenden; beginne frühestens 6 Wochen nach der Geburt und kläre die Anwendung bei Beschwerden ärztlich ab. Individuelle Ergebnisse können variieren.</p>'+
+        '<p class="disclaimer">Der Wellenpuls LWS ist ein Trainingsgerät, kein Medizinprodukt, und ersetzt keine ärztliche Beratung. Dieser Check dient der Einordnung und stellt keine Diagnose. Bei starken Beschwerden sowie einem Nabel- oder Bauchwandbruch kläre die Anwendung ärztlich ab. Individuelle Ergebnisse können variieren.</p>'+
         '</section>';
     }
 

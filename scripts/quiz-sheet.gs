@@ -1,48 +1,46 @@
 /**
- * Rücken-Check Quiz -> Google Tabelle (ohne Make, nur Google Apps Script).
+ * Quiz-Antworten -> Google Tabelle (ohne Make, nur Google Apps Script).
+ * Ein Endpoint für alle Funnels. Jedes Quiz schreibt in ein eigenes Tabellenblatt,
+ * dessen Name aus dem Feld "quiz" im Payload kommt (z. B. "ruecken-quiz-2",
+ * "rektus-schwangerschaft", "rektus-menopause").
  *
  * EINRICHTUNG
- * 1. Neue Google Tabelle anlegen (oder bestehende öffnen).
- * 2. Erweiterungen > Apps Script. Den gesamten Code hier hineinkopieren, speichern.
- * 3. Bereitstellen > Neue Bereitstellung > Typ: Web-App.
- *      - Ausführen als: Ich
- *      - Zugriff: "Jeder" (nötig, damit der Browser anonym posten darf)
- *    Bereitstellen, Zugriff autorisieren, die /exec-URL kopieren.
- * 4. In ruecken/quiz/2/index.html:  var QUIZ_WEBHOOK = "…/exec";  eintragen.
+ * 1. Google Tabelle öffnen. Erweiterungen > Apps Script. Diesen Code einfügen, speichern.
+ * 2. Bereitstellen > Bereitstellung verwalten (bestehende Web-App) > Bearbeiten >
+ *    Version: Neu > Bereitstellen. So bleibt die /exec-URL gleich.
+ *    (Neue Web-App nur, falls noch keine existiert: Ausführen als Ich, Zugriff Jeder.)
  *
- * Datenschutz: Es kommen nur die gewählten Antworten + grobes Profil (Alter/Zone)
- * an. Keine IP, kein Name, keine E-Mail. Sende-Vorgang ist im Quiz an die
- * Marketing-Einwilligung gekoppelt. Gesundheitsbezug (Art. 9 DSGVO) in der
- * Datenschutzerklärung erwähnen.
- *
- * Test: Nach dem Deploy im Quiz einmal durchklicken (mit Cookie-Zustimmung),
- * dann erscheint eine neue Zeile im Blatt "Quiz".
+ * Datenschutz: nur gewählte Antworten + grobes Profil, keine IP, kein Name, keine E-Mail.
+ * Der Sende-Vorgang ist im Quiz an die Marketing-Einwilligung gekoppelt.
  */
 
 function doPost(e) {
   var lock = LockService.getScriptLock();
-  lock.waitLock(30000); // parallele Anfragen serialisieren -> keine Race-Conditions
+  lock.waitLock(30000);
   try {
     var data = {};
     try { data = JSON.parse(e.postData.contents); } catch (err) { data = {}; }
 
     var ss = SpreadsheetApp.getActiveSpreadsheet();
-    var sh = ss.getSheetByName('Quiz') || ss.insertSheet('Quiz');
+    var name = String(data.quiz || 'Quiz').replace(/[^\w\- ]/g, '').slice(0, 80) || 'Quiz';
+    var sh = ss.getSheetByName(name) || ss.insertSheet(name);
 
+    // Zeile aufbauen: Zeitpunkt, dann alle einfachen Top-Level-Felder (angle, alter, zone …),
+    // danach jede Antwort als eigene Spalte (Mehrfachauswahl kommagetrennt).
+    var row = { 'Zeitpunkt': new Date() };
+    Object.keys(data).forEach(function (k) {
+      if (k === 'antworten' || k === 'ts' || k === 'quiz') return;
+      var v = data[k];
+      if (v !== null && typeof v === 'object') return;
+      row[k.charAt(0).toUpperCase() + k.slice(1)] = v;
+    });
     var ans = data.antworten || {};
-    var row = {
-      'Zeitpunkt': new Date(),
-      'Quiz': data.quiz || '',
-      'Alter': data.alter || '',
-      'Zone': data.zone || ''
-    };
-    // Jede Antwort als eigene Spalte (Mehrfachauswahl kommagetrennt).
     Object.keys(ans).forEach(function (k) {
       var v = ans[k];
       row['q_' + k] = Array.isArray(v) ? v.join(', ') : v;
     });
 
-    // Kopfzeile ermitteln / bei neuen Fragen erweitern.
+    // Kopfzeile ermitteln, bei neuen Feldern erweitern.
     var headers = sh.getLastRow() > 0
       ? sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0]
       : [];
@@ -61,7 +59,7 @@ function doPost(e) {
     }));
 
     return ContentService
-      .createTextOutput(JSON.stringify({ ok: true }))
+      .createTextOutput(JSON.stringify({ ok: true, sheet: name }))
       .setMimeType(ContentService.MimeType.JSON);
   } catch (err) {
     return ContentService
@@ -72,9 +70,8 @@ function doPost(e) {
   }
 }
 
-// Optionaler Health-Check im Browser (GET auf die /exec-URL).
 function doGet() {
   return ContentService
-    .createTextOutput('Rücken-Check Sheet-Endpoint aktiv.')
+    .createTextOutput('Quiz Sheet-Endpoint aktiv.')
     .setMimeType(ContentService.MimeType.TEXT);
 }
