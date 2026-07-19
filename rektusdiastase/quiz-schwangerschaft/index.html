@@ -378,11 +378,35 @@
     @media(hover:hover){.foot a:hover{color:var(--primary)}}
 
     /* ── DESKTOP enhance ── */
+    /* image option cards (Frage mit Bildern) */
+    .img-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+    .img-opt{display:block;padding:0;min-height:0;overflow:hidden;border:1.5px solid var(--line);border-radius:var(--r);background:var(--surface);text-align:left;cursor:pointer;transition:border-color .18s ease,box-shadow .18s ease,transform .18s var(--ease)}
+    .img-opt:active{transform:scale(.985)}
+    @media(hover:hover){.img-opt:hover{border-color:color-mix(in oklch,var(--teal) 55%,var(--line));box-shadow:var(--shadow-sm)}}
+    .img-opt[aria-pressed="true"]{border-color:var(--teal);background:var(--surface);box-shadow:0 0 0 1.5px var(--teal) inset}
+    .img-opt .thumb{display:block;aspect-ratio:1/1;background:var(--primary-pale)}
+    .img-opt .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .img-opt .cap{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 13px}
+    .img-opt .cap .opt-label{font-weight:700;font-size:.9rem;line-height:1.25}
+    .img-opt .opt-mark{width:22px;height:22px}
+    /* Selbsttest-Schritte */
+    .st-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+    .st-card{position:relative;margin:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--surface)}
+    .st-card img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
+    .st-num{position:absolute;top:8px;left:8px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--primary-deep);color:var(--surface);font-family:"Lora",serif;font-weight:700;font-size:.85rem;z-index:1}
+    .st-card figcaption{padding:10px 12px}
+    .st-card figcaption b{display:block;font-size:.86rem;color:var(--ink);line-height:1.25}
+    .st-card figcaption span{display:block;margin-top:2px;font-size:.76rem;color:var(--muted);line-height:1.4}
+    .text-skip{background:none;border:0;color:var(--muted);font-weight:600;font-size:.82rem;cursor:pointer;padding:8px;text-decoration:underline;justify-self:center}
+    .app-shot{margin:24px 0 0;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-md)}
+    .app-shot img{width:100%;display:block;aspect-ratio:3/4;object-fit:cover}
+
     @media(min-width:640px){
       html{font-size:18px}
       .stage{max-width:600px}
       .options.two-col{grid-template-columns:1fr 1fr}
       .duo,.profile,.beforeafter{gap:14px}
+      .st-grid{grid-template-columns:repeat(4,1fr)}
     }
 
     @media(prefers-reduced-motion:reduce){
@@ -426,6 +450,42 @@
     "use strict";
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    // Abgeleiteter Angle aus der Frage "Was stört dich am meisten?" (bother).
+    function deriveAngle(){
+      var b = answers.bother;
+      if(b==="optic") return "aesthetic";
+      if(b==="backpain"||b==="instability"||b==="pelvic") return "stability";
+      return "mixed";
+    }
+
+    // ── Quiz-Antworten optional ANONYM in eine Google-Tabelle schreiben (Apps Script) ──
+    // /exec-URL der Apps-Script-Web-App. Leer = deaktiviert. Blatt wird über das quiz-Feld gesteuert.
+    var QUIZ_WEBHOOK = "https://script.google.com/macros/s/AKfycbwraM9stECq1iIpcdo1V--YByP7p78MGb-gpcNxdabL1nzF25OT9pJmfjyxlhrvZlQb3A/exec";
+    var QUIZ_ID = "rektus-schwangerschaft";
+    var quizSent = false;
+    function marketingOK(){ try{ var c = window.SIA_getConsent && window.SIA_getConsent(); return !!(c && c.marketing); }catch(e){ return false; } }
+    function optLabel(id, v){
+      for(var i=0;i<SCREENS.length;i++){ var s=SCREENS[i]; if(s.id===id && s.options){ for(var j=0;j<s.options.length;j++){ if(s.options[j][1]===v) return String(s.options[j][0]).replace(/&shy;|­/g,""); } } }
+      return v;
+    }
+    function sendQuizData(){
+      if(quizSent || !QUIZ_WEBHOOK) return;
+      if(!marketingOK()) return;
+      quizSent = true;
+      var antworten = {};
+      Object.keys(answers).forEach(function(k){
+        var val = answers[k];
+        antworten[k] = Array.isArray(val) ? val.map(function(v){ return optLabel(k,v); }).join(" | ") : optLabel(k,val);
+      });
+      var payload = {
+        ts: new Date().toISOString(),
+        quiz: QUIZ_ID,
+        angle: deriveAngle(),
+        antworten: antworten
+      };
+      try{ fetch(QUIZ_WEBHOOK, { method:"POST", mode:"no-cors", headers:{"Content-Type":"text/plain;charset=utf-8"}, body:JSON.stringify(payload), keepalive:true }).catch(function(){}); }catch(e){}
+    }
+
     var icon = {
       arrow:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
       lock:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" stroke="currentColor" stroke-width="1.8"/></svg>',
@@ -447,15 +507,17 @@
         options:[["Unter 1 Jahr","u1"],["1 bis 2 Jahre","1to2"],["2 bis 5 Jahre","2to5"],["Über 5 Jahre","over5"]],
         privacy:true, auto:true },
 
+      { type:"selbsttest" },
+
       { type:"q", id:"gap", n:2,
         title:"Wie breit ist die Lücke zwischen deinen Bauchmuskeln?",
-        sub:"Der Selbsttest: Rückenlage, Beine aufgestellt, Kopf leicht anheben. Lege die Finger quer oberhalb des Bauchnabels und spüre, wie viele Finger in die Lücke passen.",
-        auto:true,
+        sub:"Wähle, was am ehesten passt. Der Selbsttest davor hilft, wenn du unsicher bist.",
+        imgOptions:true, auto:true,
         options:[
-          ["Etwa 2 Fingerbreit","two"],
-          ["Etwa 3 Fingerbreit","three"],
-          ["4 Fingerbreit oder mehr","four"],
-          ["Habe ich noch nie gemessen","unknown","Kein Problem, wir ordnen es trotzdem ein"]
+          ["Schmal, etwa 2 Finger","two","luecke-1.jpg"],
+          ["Deutlich, etwa 3 Finger","three","luecke-2.jpg"],
+          ["Breit, 4 Finger oder mehr","four","luecke-3.jpg"],
+          ["Noch nie gemessen","unknown","selbsttest-4.jpg"]
         ]},
 
       { type:"fakten" },
@@ -625,13 +687,52 @@
         '</section>';
     }
 
+    function imgOptionsHTML(opts, id){
+      var sel = answers[id];
+      var html = '<div class="img-options" role="group">';
+      opts.forEach(function(o){
+        var label=o[0], val=o[1], img=o[2];
+        var on = sel===val;
+        html += '<button class="opt img-opt" type="button" data-val="'+val+'" data-excl="false" data-multi="false" aria-pressed="'+on+'">'+
+          '<span class="thumb"><img src="../../assets/rektus/'+img+'" alt="" loading="lazy"></span>'+
+          '<span class="cap"><span class="opt-label">'+label+'</span><span class="opt-mark" aria-hidden="true"></span></span>'+
+          '</button>';
+      });
+      return html+'</div>';
+    }
+
     function renderQ(s){
+      var body = s.imgOptions ? imgOptionsHTML(s.options, s.id) : optionsHTML(s.options, s.id, false);
       return '<section class="screen">'+
         '<div class="kicker">Frage '+s.n+' von '+totalQ+'</div>'+
         '<h1 class="q-title">'+s.title+'</h1>'+
         (s.sub?'<p class="q-sub">'+s.sub+'</p>':'')+
-        optionsHTML(s.options, s.id, false)+
+        body+
         (s.why?'<div class="why">'+s.why+'</div>':'')+
+        '</section>';
+    }
+
+    function renderSelbsttest(s){
+      var steps = [
+        ["1","Leg dich auf den Rücken","Beine aufgestellt, Füße flach am Boden, Kopf entspannt ab."],
+        ["2","Finger auf die Bauchmitte","Zwei Finger längs knapp oberhalb des Bauchnabels auflegen."],
+        ["3","Kopf leicht anheben","Nur Kopf und Schultern etwas vom Boden lösen, die Mitte spannt an."],
+        ["4","Lücke ertasten","Fühle, wie viele Finger nebeneinander in die Rille passen."]
+      ];
+      var cards = steps.map(function(st,i){
+        return '<figure class="st-card">'+
+          '<span class="st-num">'+st[0]+'</span>'+
+          '<img src="../../assets/rektus/selbsttest-'+(i+1)+'.jpg" alt="" loading="lazy">'+
+          '<figcaption><b>'+st[1]+'</b><span>'+st[2]+'</span></figcaption>'+
+        '</figure>';
+      }).join("");
+      return '<section class="screen">'+
+        '<div class="kicker">30-Sekunden-Selbsttest</div>'+
+        '<h1 class="q-title">So findest du deine Lücke</h1>'+
+        '<p class="q-sub">Kurz zum Mitmachen, wenn du magst. Danach kannst du die Breite gleich einordnen.</p>'+
+        '<div class="st-grid">'+cards+'</div>'+
+        '<div class="action"><button class="cta continue" type="button">Habe ich, weiter '+icon.arrow+'</button>'+
+        '<button class="text-skip continue" type="button">Überspringen</button></div>'+
         '</section>';
     }
 
@@ -843,24 +944,28 @@
       else if(triedList.length===1){ triedText = "Du hast "+triedList[0]+" versucht. Und trotzdem ist die Lücke geblieben. Das liegt nicht an dir."; }
       else { triedText = "Die natürliche Rückbildung schließt die Lücke nur teilweise. Ohne gezielten, regelmäßigen Reiz bleibt sie danach meist bestehen."; }
 
+      var angle = deriveAngle();
+      var rTitle = angle==="aesthetic" ? "Dein Weg zu einer flacheren, festeren Mitte."
+                 : angle==="stability" ? "Dein Weg zu einer stabilen, tragfähigen Mitte."
+                 : "Dein Weg zu einer festen, stabilen Mitte nach der Geburt.";
+      var angleLine = angle==="aesthetic" ? " Dich beschäftigt vor allem die sichtbare Wölbung. Hält die tiefe Muskulatur die Mitte wieder von innen, wird die Kontur flacher." :
+                      angle==="stability" ? " Dich beschäftigt vor allem die instabile Mitte. Genau dort setzt der quere Bauchmuskel an, der die Körpermitte stützt und den Rücken entlastet." : "";
+
       return '<section class="screen">'+
         '<div class="result-badge">'+icon.check+' Dein Ergebnis ist bereit</div>'+
-        '<h1 class="result-title">Dein Weg zu einer stabilen Mitte nach der Geburt.</h1>'+
+        '<h1 class="result-title">'+rTitle+'</h1>'+
         '<div class="profile">'+
           '<div class="profile-card"><span>Zeit seit der Geburt</span><b>'+time+'</b></div>'+
           '<div class="profile-card"><span>Deine Lücke</span><b>'+gap+'</b></div>'+
         '</div>'+
-        '<p class="analysis">'+triedText+' <strong>Der Haken ist die Regelmäßigkeit</strong>, die Übungsprogramme und Kurse verlangen. Woche für Woche, in einem Alltag, der sich nach dem Kind richtet. Genau daran scheitern die meisten. So bekommt die tiefe Bauchmuskulatur nicht den Reiz, den sie braucht, und die Lücke bleibt.</p>'+
+        '<p class="analysis">'+triedText+' <strong>Der Haken ist die Regelmäßigkeit</strong>, die Übungsprogramme und Kurse verlangen. Woche für Woche, in einem Alltag, der sich nach dem Kind richtet. Genau daran scheitern die meisten. So bekommt die tiefe Bauchmuskulatur nicht den Reiz, den sie braucht, und die Lücke bleibt.'+angleLine+'</p>'+
         '<div class="method">'+
           '<div class="method-item"><span class="method-num">1</span><div><h3>Tiefe aktivieren</h3><p>Sanfte NMES-Impulse aktivieren die tiefe Bauch- und Rumpfmuskulatur, während du sitzt.</p></div></div>'+
           '<div class="method-item"><span class="method-num">2</span><div><h3>Mitte stabilisieren</h3><p>Die Muskulatur lernt wieder, die Körpermitte von innen zu stützen und den Rücken zu entlasten.</p></div></div>'+
           '<div class="method-item"><span class="method-num">3</span><div><h3>Dranbleiben, ohne Willenskraft</h3><p>Zweimal pro Woche, 20 Minuten auf der Couch. Auch wenn der Tag chaotisch war.</p></div></div>'+
         '</div>'+
-        '<div class="beforeafter">'+
-          '<div class="ba-cell"><span class="ba-tag">Vorher</span><img src="../../assets/symbolbild.png" alt=""></div>'+
-          '<div class="ba-cell after"><span class="ba-tag">Nach 12 Wochen</span><img src="../../assets/Frau_55_WellenpulsLWS_Freude.png" alt=""></div>'+
-          '<p class="ba-note">Symbolbilder. Kein garantiertes Ergebnis.</p>'+
-        '</div>'+
+        '<figure class="app-shot"><img src="../../assets/rektus/anwendung-postpartum.jpg" alt="Anwendung des Wellenpuls auf der Körpermitte" loading="lazy"></figure>'+
+        '<p class="ba-note">So sieht die Anwendung aus: 20 Minuten, zweimal pro Woche, auf der Couch. Symbolbild.</p>'+
         '<div class="next-list">'+
           '<div class="next-item"><span class="next-check">'+icon.check+'</span><p>Deine <b>persönliche Anwendung</b>, abgestimmt auf dein Profil</p></div>'+
           '<div class="next-item"><span class="next-check">'+icon.check+'</span><p>Das <b>komplette Angebot</b> inklusive Bonus vom Gründer</p></div>'+
@@ -882,6 +987,7 @@
         case "hero": return renderHero(s);
         case "q": return renderQ(s);
         case "qm": return renderQM(s);
+        case "selbsttest": return renderSelbsttest(s);
         case "fakten": return renderFakten();
         case "social": return renderSocial();
         case "science": return renderScience();
@@ -951,9 +1057,8 @@
       stage.querySelectorAll('.opt[data-micro]').forEach(function(btn){
         btn.addEventListener("click", function(){ setTimeout(next,180); });
       });
-      // continue buttons
-      var cont = stage.querySelector(".continue");
-      if(cont) cont.addEventListener("click", next);
+      // continue buttons (auch "Überspringen" im Selbsttest)
+      stage.querySelectorAll(".continue").forEach(function(c){ c.addEventListener("click", next); });
       // back
       backBtn.onclick = back;
     }
@@ -985,7 +1090,7 @@
         setTimeout(function(){ stage.querySelectorAll(".pv-bar").forEach(function(b){ b.style.height=b.dataset.h+"%"; }); },200);
       }
       if(s.type==="loading"){ runLoading(); }
-      if(s.type==="result"){ if(window.SIA_bindEvents) window.SIA_bindEvents(); }
+      if(s.type==="result"){ if(window.SIA_bindEvents) window.SIA_bindEvents(); sendQuizData(); }
     }
     function animateCount2(el, pct){
       if(reduce){ el.textContent=pct+" %"; return; }
