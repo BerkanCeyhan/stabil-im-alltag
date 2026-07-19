@@ -400,6 +400,11 @@
     .text-skip{background:none;border:0;color:var(--muted);font-weight:600;font-size:.82rem;cursor:pointer;padding:8px;text-decoration:underline;justify-self:center}
     .app-shot{margin:24px 0 0;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-md)}
     .app-shot img{width:100%;display:block;aspect-ratio:3/4;object-fit:cover}
+    .hero-figure{margin:18px 0 4px;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-md);aspect-ratio:3/2}
+    .hero-figure img{width:100%;height:100%;object-fit:cover;object-position:center 32%}
+    .hero-promise{margin-top:14px;display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:var(--r);background:var(--teal-pale);border:1px solid color-mix(in oklch,var(--teal) 30%,var(--line))}
+    .hero-promise svg{width:18px;height:18px;color:var(--teal-deep);flex:none;margin-top:1px}
+    .hero-promise span{font-size:.9rem;color:var(--ink);line-height:1.45}
 
     @media(min-width:640px){
       html{font-size:18px}
@@ -502,7 +507,9 @@
       { type:"hero", id:"time",
         eyebrow:"Rektusdiastase-Check · 11 Fragen · ca. 60 Sekunden",
         title:'Rückbildung gemacht und trotzdem wölbt sich dein Bauch <em>wie im fünften Monat</em>?',
-        sub:"Wenn sich deine Körpermitte nach der Geburt nie richtig erholt hat, liegt das selten an dir. Finde in 60 Sekunden heraus, woran es wirklich liegt. Kein Konto oder E-Mail-Adresse erforderlich.",
+        heroImg:"hero-schwangerschaft.jpg",
+        sub:"Wenn sich deine Körpermitte nach der Geburt nie richtig erholt hat, liegt das selten an dir. Finde in 60 Sekunden heraus, woran es wirklich liegt.",
+        promise:"Am Ende bekommst du dein persönliches Ergebnis und den Ansatz, der ohne tägliche Übungen in deinen Alltag passt.",
         qtitle:"Wie lange liegt deine letzte Geburt zurück?",
         options:[["Unter 1 Jahr","u1"],["1 bis 2 Jahre","1to2"],["2 bis 5 Jahre","2to5"],["Über 5 Jahre","over5"]],
         privacy:true, auto:true },
@@ -514,10 +521,10 @@
         sub:"Wähle, was am ehesten passt. Der Selbsttest davor hilft, wenn du unsicher bist.",
         imgOptions:true, auto:true,
         options:[
-          ["Schmal, etwa 2 Finger","two","luecke-1.jpg"],
-          ["Deutlich, etwa 3 Finger","three","luecke-2.jpg"],
-          ["Breit, 4 Finger oder mehr","four","luecke-3.jpg"],
-          ["Noch nie gemessen","unknown","selbsttest-4.jpg"]
+          ["Ein Finger passt","one","luecke-1.jpg"],
+          ["Zwei Finger passen","two","luecke-2.jpg"],
+          ["Drei Finger oder mehr","three","luecke-3.jpg"],
+          ["Noch nie gemessen","unknown","luecke-unknown.jpg"]
         ]},
 
       { type:"fakten" },
@@ -680,8 +687,10 @@
       return '<section class="screen">'+
         '<div class="hero-eyebrow">'+s.eyebrow+'</div>'+
         '<h1 class="hero-title">'+s.title+'</h1>'+
+        (s.heroImg ? '<figure class="hero-figure"><img src="../../assets/rektus/'+s.heroImg+'" alt="" loading="eager"></figure>' : '')+
         '<p class="hero-sub">'+s.sub+'</p>'+
-        '<h2 class="q-title" style="font-size:1.15rem;margin-top:26px">'+s.qtitle+'</h2>'+
+        (s.promise ? '<div class="hero-promise">'+icon.check+'<span>'+s.promise+'</span></div>' : '')+
+        '<h2 class="q-title" style="font-size:1.1rem;margin-top:22px">'+s.qtitle+'</h2>'+
         optionsHTML(s.options, s.id, false)+
         '<div class="privacy">'+icon.lock+' 100 % anonym. Kein Konto oder E-Mail-Adresse erforderlich.</div>'+
         '</section>';
@@ -856,7 +865,7 @@
         '</section>';
     }
 
-    var GAP_LABEL = {two:"Ca. 2 Fingerbreit",three:"Ca. 3 Fingerbreit",four:"4+ Fingerbreit",unknown:"Noch nicht gemessen",'':"Nicht gemessen"};
+    var GAP_LABEL = {one:"Ca. 1 Fingerbreit",two:"Ca. 2 Fingerbreit",three:"3+ Fingerbreit",unknown:"Noch nicht gemessen",'':"Nicht gemessen"};
     var TIME_LABEL = {u1:"Unter 1 Jahr",'1to2':"1 bis 2 Jahre",'2to5':"2 bis 5 Jahre",over5:"Über 5 Jahre"};
 
     function renderBefund(){
