@@ -673,7 +673,8 @@
       { type:"result" }
     ];
 
-    var totalQ = 11;
+    var totalQ = 12;
+    var lastQn = 1;
     var answers = {};
     var cur = 0;
 
@@ -1053,13 +1054,13 @@
 
     function updateProgress(){
       var s = SCREENS[cur];
-      var pct = Math.round((cur/(SCREENS.length-1))*100);
+      var n;
+      if(s.type==="q"||s.type==="qm"||s.type==="hero"){ n = s.n || 1; lastQn = n; pLabel.textContent = "Frage "+n+" / "+totalQ; }
+      else if(s.type==="result"){ n = totalQ; pLabel.textContent="Fertig"; }
+      else if(s.type==="loading"){ n = totalQ; pLabel.textContent="Rektusdiastase-Check"; }
+      else { n = lastQn; pLabel.textContent="Rektusdiastase-Check"; }
+      var pct = Math.round((n/totalQ)*100);
       pFill.style.width = pct+"%";
-      if(s.type==="q"||s.type==="qm"||s.type==="hero"){
-        var n = s.n || 1;
-        pLabel.textContent = "Frage "+n+" / "+totalQ;
-      } else if(s.type==="result"){ pLabel.textContent="Fertig"; }
-      else { pLabel.textContent="Rektusdiastase-Check"; }
       pCount.textContent = pct+" %";
     }
 

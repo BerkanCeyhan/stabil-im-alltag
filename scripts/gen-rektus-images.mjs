@@ -83,8 +83,9 @@ const JOBS = [
   // Lückenbreite
   { name: "luecke-1", aspect: "1:1", prompt: GAP_STYLE +
     "Zwischen den beiden Bauchmuskelsträngen liegt eine sehr schmale Lücke von etwa einer Fingerbreite. Eine Hand legt einen einzelnen Finger längs in die schmale Rille oberhalb des Nabels." },
-  { name: "luecke-2", aspect: "1:1", prompt: GAP_STYLE +
-    "Zwischen den beiden Bauchmuskelsträngen liegt eine deutliche Lücke von etwa zwei Fingerbreiten. Eine Hand legt zwei Finger nebeneinander längs in die Rille oberhalb des Nabels." },
+  { name: "luecke-2", aspect: "1:1", attachFile: "assets/rektus/luecke-1.jpg", prompt: GAP_STYLE +
+    "Identischer Stil, gleiche Perspektive, gleiche Frau und gleiche Bauchdarstellung wie in der Referenz. " +
+    "Zwischen den beiden Bauchmuskelsträngen liegt eine schmale Lücke von etwa zwei Fingerbreiten. Eine Hand legt zwei Finger nebeneinander längs in die schmale Rille oberhalb des Nabels." },
   { name: "luecke-3", aspect: "1:1", prompt: GAP_STYLE +
     "Zwischen den beiden Bauchmuskelsträngen liegt eine breite Lücke von etwa drei bis vier Fingerbreiten. Eine Hand legt drei Finger nebeneinander längs in die breite Rille oberhalb des Nabels, die Bauchmitte wölbt sich dabei leicht vor." },
   // Anwendung, mit PackShot als Referenz
@@ -97,9 +98,11 @@ const JOBS = [
 async function main() {
   const key = loadKey();
   mkdirSync(OUT, { recursive: true });
+  const only = process.argv.slice(2); // z.B. "node gen-rektus-images.mjs luecke-2"
   const results = [];
   for (let i = 0; i < JOBS.length; i++) {
     const j = JOBS[i];
+    if (only.length && !only.includes(j.name)) continue;
     const attach = [];
     if (j.attachFile) attach.push(j.attachFile);
     if (typeof j.attachFrom === "number" && results[j.attachFrom]) attach.push(results[j.attachFrom]);
@@ -108,8 +111,7 @@ async function main() {
       try {
         process.stdout.write(`${j.name} (${j.aspect}${attach.length ? ", +ref" : ""}) via ${model} ... `);
         const { b64, mime } = await generate(model, j.prompt, j.aspect, attach, key);
-        const ext = mime.includes("jpeg") ? "jpg" : mime.includes("webp") ? "webp" : "png";
-        const rel = `assets/rektus/${j.name}.${ext}`;
+        const rel = `assets/rektus/${j.name}.jpg`; // Quizzes referenzieren .jpg
         writeFileSync(resolve(ROOT, rel), Buffer.from(b64, "base64"));
         results[i] = rel;
         console.log(`ok -> ${rel}`);
