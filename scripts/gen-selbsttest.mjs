@@ -76,21 +76,30 @@ const JOBS = [
     "the two vertical abdominal muscle bands, just above the navel. The two side-by-side fingers clearly sink into " +
     "the gap and visually show a width of about two finger-widths. The gap between the muscles is clearly visible." },
   { name: "luecke-2", aspect: "1:1", attachIdx: 3, prompt: STYLE.replace("She lies on a light grey exercise mat on a plain floor. ", "") +
-    "Close-up top-down bird's-eye view looking straight down onto a woman's bare relaxed midsection around the navel. " +
-    "Exactly two fingers of one hand are laid completely flat and horizontal, side by side and touching each other, " +
-    "and pressed gently down into the soft vertical groove between the two vertical abdominal muscle bands, just above the navel. " +
-    "The two fingers together fill the gap and clearly measure about two finger-widths. Emphasise the two fingers laid " +
-    "side by side from above inside the gap, unmistakably visible. Soft natural belly, calm neutral clinical-friendly illustration." },
+    "Strict overhead top-down bird's-eye view: the camera looks straight down from directly above onto a woman's bare " +
+    "relaxed midsection around the navel, so the belly is seen flat from above like the other test illustrations. " +
+    "The vertical midline groove (the gap between the two abdominal muscle bands) runs from the top to the bottom of the frame. " +
+    "One hand comes in from the bottom of the frame, and exactly two fingers (index and middle) are laid flat DOWN FROM ABOVE, " +
+    "stacked one above the other along the midline, pressed gently INTO the vertical gap just above the navel. The two fingers " +
+    "sit inside the groove and clearly span about two finger-widths of gap. Do NOT place the hand or fingers from the side. " +
+    "The fingers must be pressed straight down into the gap from directly above, unmistakably visible. Soft natural non-athletic " +
+    "belly, calm neutral clinical-friendly illustration." },
 ];
 
 async function main() {
   const key = loadKey();
   mkdirSync(OUT, { recursive: true });
+  const only = process.argv.slice(2); // z.B. "node gen-selbsttest.mjs luecke-2"
   const results = [];
   for (let i = 0; i < JOBS.length; i++) {
     const j = JOBS[i];
+    if (only.length && !only.includes(j.name)) continue;
     const attach = [];
-    if (typeof j.attachIdx === "number" && results[j.attachIdx]) attach.push(results[j.attachIdx]);
+    // Referenz aus vorherigem Job ODER (bei Einzellauf) aus vorhandener Datei
+    if (typeof j.attachIdx === "number") {
+      if (results[j.attachIdx]) attach.push(results[j.attachIdx]);
+      else attach.push(`assets/rektus/${JOBS[j.attachIdx].name}.jpg`);
+    }
     let done = false;
     for (const model of MODELS) {
       try {
