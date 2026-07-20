@@ -785,7 +785,7 @@
       var mMonths=({u1:9,"1to2":18,"2to5":24,over5:24})[timeKey]||12;
       var mx=ax(mMonths), my=ay(interp(FAKTEN_DATA,mMonths)), plateauX=ax(2);
       var pillW=30, pillX=Math.max(x0,Math.min(mx-pillW/2,x1-pillW));
-      var ticks=[[0,"Geburt"],[1.5,"6 Wo"],[6,"6 Mo"],[12,"1 Jahr"],[24,"2 J+"]];
+      var ticks=[[0,"Geburt"],[6,"6 Mo"],[12,"1 Jahr"],[24,"2 J+"]];
       var s='<svg class="chart" viewBox="0 0 '+W+' '+H+'" aria-hidden="true">';
       s+='<defs><linearGradient id="gArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--danger)" stop-opacity=".2"/><stop offset="1" stop-color="var(--danger)" stop-opacity="0"/></linearGradient></defs>';
       [0.33,0.66].forEach(function(f){ var gy=(yTop+f*(yBot-yTop)).toFixed(1); s+='<line class="grid-line" x1="'+x0+'" y1="'+gy+'" x2="'+x1+'" y2="'+gy+'"/>'; });
@@ -795,7 +795,7 @@
       s+='<line class="axis-line" x1="'+x0+'" y1="'+yBot+'" x2="'+x1+'" y2="'+yBot+'"/>';
       s+='<text class="ylab" x="'+x0+'" y="'+(yTop+3)+'">viele</text>';
       s+='<text class="ylab" x="'+x0+'" y="'+(yBot-4)+'">wenige</text>';
-      ticks.forEach(function(t){ s+='<text class="tick" x="'+ax(t[0]).toFixed(1)+'" y="'+(yBot+14)+'" text-anchor="middle">'+t[1]+'</text>'; });
+      ticks.forEach(function(t,i){ var last=ticks.length-1; var anc=i===0?"start":i===last?"end":"middle"; var tx=i===0?x0:i===last?x1:ax(t[0]); s+='<text class="tick" x="'+tx.toFixed(1)+'" y="'+(yBot+14)+'" text-anchor="'+anc+'">'+t[1]+'</text>'; });
       s+='<line class="marker-line" x1="'+mx.toFixed(1)+'" y1="'+yTop+'" x2="'+mx.toFixed(1)+'" y2="'+my.toFixed(1)+'"/>';
       s+='<circle class="dot-halo" cx="'+mx.toFixed(1)+'" cy="'+my.toFixed(1)+'" r="6"/>';
       s+='<circle class="dot" cx="'+mx.toFixed(1)+'" cy="'+my.toFixed(1)+'" r="6"/>';
@@ -858,7 +858,7 @@
           '<div class="duo-cell"><div class="big">NMES</div><h3>Aktiviert die Tiefe</h3><p>Sanfte Impulse erreichen die tiefe Bauch- und Rumpfmuskulatur direkt, ohne dass du dich bewegen musst.</p></div>'+
           '<div class="duo-cell"><div class="big">20 Min</div><h3>Passt in dein Leben</h3><p>Zweimal pro Woche auf der Couch, zum Beispiel während dein Kind schläft. Kein Termin, keine Übungsroutine.</p></div>'+
         '</div>'+
-        '<p class="lead">In einer randomisierten Studie mit Frauen nach der Geburt verringerte sich die Rektusdiastase mit Training plus NMES etwa doppelt so stark wie mit Training allein.* Der Wellenpuls LWS bringt genau diesen Reiz zu dir nach Hause: Er aktiviert die seitliche Bauchmuskulatur und den unteren Rücken. Entstanden aus einer sportwissenschaftlichen Arbeit an der Deutschen Sporthochschule Köln, mit integrierter Wärmefunktion für eine angenehme Anwendung.</p>'+
+        '<p class="lead">In einer randomisierten Studie mit Frauen nach der Geburt verringerte sich die Lücke (Rektusdiastase) mit Training plus NMES etwa doppelt so stark wie mit Training allein.* Der Wellenpuls LWS bringt genau diesen Reiz zu dir nach Hause: Er aktiviert die seitliche Bauchmuskulatur und den unteren Rücken. Entstanden aus einer sportwissenschaftlichen Arbeit an der Deutschen Sporthochschule Köln, mit integrierter Wärmefunktion für eine angenehme Anwendung.</p>'+
         '<div class="sci-photo"><img src="../../assets/showcase.gif" alt="Der Wellenpuls LWS in der Anwendung" loading="lazy"></div>'+
         '<p class="sci-cap">Der Wellenpuls LWS in der Anwendung. Entwickelt von Christian Senfleben, Sportwissenschaftler (M.Sc.), Solingen.<br>*Kamel &amp; Yousif 2017, randomisierte kontrollierte Studie mit 60 Frauen nach der Geburt.</p>'+
         '<div class="action"><button class="cta continue" type="button">Weiter '+icon.arrow+'</button></div>'+

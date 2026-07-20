@@ -723,10 +723,10 @@
 
     function renderSelbsttest(s){
       var steps = [
-        ["1","Leg dich auf den Rücken","Beine aufgestellt, Füße flach am Boden, Kopf entspannt ab."],
-        ["2","Finger auf die Bauchmitte","Zwei Finger längs knapp oberhalb des Bauchnabels auflegen."],
-        ["3","Kopf leicht anheben","Nur Kopf und Schultern etwas vom Boden lösen, die Mitte spannt an."],
-        ["4","Lücke ertasten","Fühle, wie viele Finger nebeneinander in die Rille passen."]
+        ["1","Leg dich auf den Rücken","Stelle die Beine auf, Füße flach am Boden. Der Kopf bleibt entspannt auf der Unterlage."],
+        ["2","Bauchmuskelkanten ertasten","Hebe den Kopf leicht an, spanne die Bauchmuskeln an und ertaste mit den Fingern die inneren Kanten der beiden geraden Bauchmuskelstränge."],
+        ["3","Muskulatur entspannen","Lege den Kopf wieder ab und entspanne den Bauch vollständig. Bleibe mit den Fingern auf den inneren Kanten."],
+        ["4","Lücke messen","Lege die Finger nebeneinander zwischen die Muskelkanten und prüfe, wie viele Fingerbreiten hineinpassen."]
       ];
       var cards = steps.map(function(st,i){
         return '<figure class="st-card">'+
@@ -795,7 +795,7 @@
       s+='<line class="axis-line" x1="'+x0+'" y1="'+yBot+'" x2="'+x1+'" y2="'+yBot+'"/>';
       s+='<text class="ylab" x="'+x0+'" y="'+(yTop+3)+'">hoch</text>';
       s+='<text class="ylab" x="'+x0+'" y="'+(yBot-4)+'">niedrig</text>';
-      ticks.forEach(function(t){ s+='<text class="tick" x="'+ax(t[0]).toFixed(1)+'" y="'+(yBot+14)+'" text-anchor="middle">'+t[1]+'</text>'; });
+      ticks.forEach(function(t,i){ var last=ticks.length-1; var anc=i===0?"start":i===last?"end":"middle"; var tx=i===0?x0:i===last?x1:ax(t[0]); s+='<text class="tick" x="'+tx.toFixed(1)+'" y="'+(yBot+14)+'" text-anchor="'+anc+'">'+t[1]+'</text>'; });
       s+='<line class="marker-line" x1="'+mx.toFixed(1)+'" y1="'+yTop+'" x2="'+mx.toFixed(1)+'" y2="'+my.toFixed(1)+'"/>';
       s+='<circle class="dot-halo" cx="'+mx.toFixed(1)+'" cy="'+my.toFixed(1)+'" r="6"/>';
       s+='<circle class="dot" cx="'+mx.toFixed(1)+'" cy="'+my.toFixed(1)+'" r="6"/>';
@@ -814,7 +814,7 @@
       return '<section class="screen">'+
         '<div class="kicker">Kurzer Fakten-Check</div>'+
         '<h1 class="q-title">Ab etwa 45 verliert dein Bindegewebe an Halt.</h1>'+
-        '<p class="lead">In den Wechseljahren sinkt das Östrogen, und damit die Kollagenbildung. Das Bindegewebe im ganzen Körper wird lockerer, auch die Naht zwischen den Bauchmuskeln. Eine früher kaum sichtbare Lücke kann jetzt aufgehen.</p>'+
+        '<p class="lead">In den Wechseljahren sinkt das Östrogen, und damit die Kollagenbildung. Das Bindegewebe im ganzen Körper wird lockerer, auch die Sehne zwischen den Bauchmuskeln. Dadurch kann eine sichtbare Lücke (Diastase) zwischen den geraden Bauchmuskeln entstehen.</p>'+
         '<div class="chart-card">'+
           '<div class="chart-cap">Kollagen im Bindegewebe nach Alter</div>'+
           buildFaktenChart(answers.age)+
@@ -823,7 +823,7 @@
         '</div>'+
         '<div class="steps">'+
           '<div class="step"><span class="step-badge">1</span><div><h3>Das Östrogen sinkt</h3><p>Mit den Wechseljahren fällt der Östrogenspiegel. Östrogen steuert mit, wie viel Kollagen dein Körper bildet, den Baustoff für festes Bindegewebe.</p></div></div>'+
-          '<div class="step"><span class="step-badge">2</span><div><h3>Die Mitte verliert Halt</h3><p>Die Linea alba, die Naht zwischen den geraden Bauchmuskeln, wird lockerer. Dazu lagert sich mehr Fett im Bauchraum ein und drückt von innen. Der Bauch wölbt sich vor.</p></div></div>'+
+          '<div class="step"><span class="step-badge">2</span><div><h3>Die Mitte verliert Halt</h3><p>Die Linea alba, die Sehne zwischen den geraden Bauchmuskeln, wird lockerer. Dazu lagert sich mehr Fett im Bauchraum ein und drückt von innen. Der Bauch wölbt sich vor.</p></div></div>'+
           '<div class="step"><span class="step-badge">3</span><div><h3>Der Ausweg scheitert am Alltag</h3><p>Der Weg zurück ist regelmäßiges Training der tiefen Bauchmuskulatur, Woche für Woche. Genau daran scheitern die meisten. Nicht aus Faulheit, sondern weil im vollen Alltag kaum planbare Zeit bleibt.</p></div></div>'+
         '</div>'+
         '<div class="callout good"><div class="callout-title">'+icon.spark+' Die gute Nachricht</div><p>Die Muskulatur reagiert auch in den Wechseljahren noch auf gezielte Reize. Der quere Bauchmuskel, das natürliche Korsett der Mitte, lässt sich in jedem Alter wieder aktivieren.</p></div>'+
@@ -858,7 +858,7 @@
           '<div class="duo-cell"><div class="big">NMES</div><h3>Aktiviert die Tiefe</h3><p>Sanfte Impulse erreichen die tiefe Bauch- und Rumpfmuskulatur direkt, ohne dass du dich bewegen musst.</p></div>'+
           '<div class="duo-cell"><div class="big">20 Min</div><h3>Passt in dein Leben</h3><p>Zweimal pro Woche auf der Couch, zum Beispiel während du eine Serie schaust. Kein Termin, keine Übungsroutine.</p></div>'+
         '</div>'+
-        '<p class="lead">In einer randomisierten Studie verringerte sich die Rektusdiastase mit Training plus NMES etwa doppelt so stark wie mit Training allein.* Der Wellenpuls LWS bringt genau diesen Reiz zu dir nach Hause: Er aktiviert die seitliche Bauchmuskulatur und den unteren Rücken. Entstanden aus einer sportwissenschaftlichen Arbeit an der Deutschen Sporthochschule Köln, mit integrierter Wärmefunktion für eine angenehme Anwendung.</p>'+
+        '<p class="lead">In einer randomisierten Studie verringerte sich die Lücke (Rektusdiastase) mit Training plus NMES etwa doppelt so stark wie mit Training allein.* Der Wellenpuls LWS bringt genau diesen Reiz zu dir nach Hause: Er aktiviert die seitliche Bauchmuskulatur und den unteren Rücken. Entstanden aus einer sportwissenschaftlichen Arbeit an der Deutschen Sporthochschule Köln, mit integrierter Wärmefunktion für eine angenehme Anwendung.</p>'+
         '<div class="sci-photo"><img src="../../assets/showcase.gif" alt="Der Wellenpuls LWS in der Anwendung" loading="lazy"></div>'+
         '<p class="sci-cap">Der Wellenpuls LWS in der Anwendung. Entwickelt von Christian Senfleben, Sportwissenschaftler (M.Sc.), Solingen.<br>*Kamel &amp; Yousif 2017, randomisierte kontrollierte Studie mit 60 Frauen nach der Geburt.</p>'+
         '<div class="action"><button class="cta continue" type="button">Weiter '+icon.arrow+'</button></div>'+
