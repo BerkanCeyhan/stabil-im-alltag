@@ -18,7 +18,8 @@ function loadKey() {
   if (!m) throw new Error("GEMINI_API_KEY nicht in .env");
   return m[1].replace(/^["']|["']$/g, "").trim();
 }
-const MODELS = ["gemini-3-pro-image-preview", "gemini-3-pro-image", "gemini-2.5-flash-image"];
+// Immer gemini-3.1-flash-image (Nano Banana 2). Kein Fallback auf andere Modelle.
+const MODELS = ["gemini-3.1-flash-image"];
 function fileToPart(path) {
   const buf = readFileSync(resolve(ROOT, path));
   const ext = path.split(".").pop().toLowerCase();

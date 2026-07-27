@@ -23,11 +23,8 @@ function loadKey() {
 }
 
 // Modelle in Reihenfolge probieren (Nano Banana Pro -> Fallbacks).
-const MODELS = [
-  "gemini-3-pro-image-preview",
-  "gemini-3-pro-image",
-  "gemini-2.5-flash-image",
-];
+// Immer gemini-3.1-flash-image (Nano Banana 2). Kein Fallback auf andere Modelle.
+const MODELS = ["gemini-3.1-flash-image"];
 
 const STYLE =
   "Redaktionelle, ruhige Medizin-Illustration in warmem, vertrauenswürdigem Stil. " +
