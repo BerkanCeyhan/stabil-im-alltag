@@ -14,7 +14,9 @@ Werkzeug ist `scripts/gsuite.mjs`. Keine npm-Abhaengigkeiten, nur `fetch`.
 | Drive-Connector (schon verbunden) | nur lesen | nein | reicht fuer einen Blick, sonst nichts |
 | Google Sheets MCP (`sheetsmcp.googleapis.com`) | ja | **nein** | Developer Preview, verlangt ein Workspace-Konto |
 | `clasp` | nein | ja | zweites Auth-System, Login braucht trotzdem den Browser |
-| `scripts/gsuite.mjs` | ja | ja | ein einmaliges OAuth-Setup |
+| Cloud SDK, Standardclient | **nein** | offen | Scope gesperrt, siehe unten |
+| Dienstkonto | ja | **nein** | Apps Script API nimmt keine Dienstkonten an |
+| `scripts/gsuite.mjs` mit eigenem Client | ja | ja | ein einmaliges OAuth-Setup |
 
 Der Sheets-MCP-Server deckt nur `get_values`, `update_values`, `insert_dimension`
 und Verwandte ab. Script-Code aendern geht dort nicht. Deshalb ein eigenes CLI
@@ -23,39 +25,77 @@ fuer beides, mit einer Anmeldung.
 Falls spaeter ein Workspace-Konto dazukommt, kann der Sheets-MCP-Server
 zusaetzlich als Connector eingehaengt werden. Er ersetzt das CLI nicht.
 
+### Zwei Abkuerzungen, die nicht funktionieren
+
+**Den Standardclient der Cloud SDK mitbenutzen.** Naheliegend, spart den
+ganzen Console-Teil, geht aber nicht:
+
+```
+WARNING: The following scopes will be blocked soon for the default client ID:
+https://www.googleapis.com/auth/spreadsheets
+```
+
+Danach bricht die Anmeldung mit *Diese App ist blockiert* ab. Google fuehrt
+eine serverseitige Sperrliste fuer sensible Scopes am Standardclient. Ein
+eigener OAuth-Client ist Pflicht.
+
+**Ein Dienstkonto nehmen.** Fuer Sheets ginge das, man teilt die Tabelle mit
+der Dienstkonto-Adresse und spart das Refresh-Token. Die Apps Script API
+nimmt Dienstkonto-Tokens aber grundsaetzlich nicht an. Da die Script-Haelfte
+der eigentliche Zweck ist, faellt der Weg weg. Domainweite Delegierung waere
+die Ausnahme, und die setzt wieder ein Workspace-Konto voraus.
+
 ---
 
 ## 2. Einmaliges Setup
 
-Alles in der Google Cloud Console, `gcloud` ist hier nicht installiert.
+`gcloud` liegt unter `/opt/google-cloud-sdk`, verlinkt nach `/usr/local/bin`.
+Projekt und APIs gehen damit von der Kommandozeile, den Rest verlangt die
+Console.
 
-1. **Projekt** anlegen oder ein bestehendes waehlen.
-2. **APIs aktivieren**: `sheets.googleapis.com` und `script.googleapis.com`.
-3. **Zustimmungsbildschirm**: Nutzertyp *Extern*, Status *Test*, die eigene
-   Adresse als Testnutzer eintragen. Ohne Testnutzer schlaegt die Anmeldung
-   mit `access_denied` fehl.
-4. **Anmeldedaten → OAuth-Client-ID → Desktop**. Client-ID und Secret kopieren.
+1. **Einmal anmelden**, mit den Standardscopes der Cloud SDK. Die sind nicht
+   gesperrt, nur `spreadsheets` ist es:
+
+   ```sh
+   gcloud auth login --no-launch-browser
+   ```
+
+2. **Projekt und APIs**, von der Kommandozeile:
+
+   ```sh
+   gcloud projects create stabil-im-alltag-tools --name="Stabil im Alltag"
+   gcloud config set project stabil-im-alltag-tools
+   gcloud services enable sheets.googleapis.com script.googleapis.com
+   ```
+
+3. **Zustimmungsbildschirm**, nur in der Console: Nutzertyp *Extern*, Status
+   *Test*, die eigene Adresse als Testnutzer eintragen. Ohne Testnutzer
+   schlaegt die Anmeldung mit `access_denied` fehl.
+4. **Clients → Client erstellen → Typ Desktop**, danach die
+   `client_secret_….json` herunterladen.
 5. **Apps Script API einschalten** unter
    <https://script.google.com/home/usersettings>. Eigener Schalter, unabhaengig
    von der Cloud Console. Fehlt er, kommt beim ersten Script-Aufruf
    `User has not enabled the Apps Script API`.
-6. In `.env` (steht in `.gitignore`, gehoert nie ins Repo):
-
-   ```
-   GOOGLE_CLIENT_ID=...
-   GOOGLE_CLIENT_SECRET=...
-   ```
-
-7. Anmelden:
+6. Anmelden:
 
    ```sh
-   node scripts/gsuite.mjs auth
+   node scripts/gsuite.mjs auth ~/client_secret_....json
    ```
 
    Das oeffnet einen lokalen Listener auf `127.0.0.1:4573`, gibt eine URL aus
    und wartet auf die Weiterleitung. Danach die ausgegebene Zeile
-   `GOOGLE_REFRESH_TOKEN=...` in `.env` nachtragen. Ab hier laeuft alles ohne
-   Browser.
+   `GOOGLE_REFRESH_TOKEN=...` in `.env` nachtragen, dazu `GOOGLE_CLIENT_ID`
+   und `GOOGLE_CLIENT_SECRET` aus der JSON-Datei. Ab hier laeuft alles ohne
+   Browser. `.env` steht in `.gitignore` und gehoert nie ins Repo.
+7. Pruefen:
+
+   ```sh
+   node scripts/gsuite.mjs whoami
+   ```
+
+   Zeigt Konto und die tatsaechlich erteilten Berechtigungen. Fehlt einer der
+   drei Scopes, steht es dort, statt spaeter als 403 aufzutauchen.
 
 Scopes bewusst knapp: `spreadsheets`, `script.projects`, `script.deployments`.
 Kein Drive-Scope, das CLI braucht keinen Vollzugriff auf die Ablage.

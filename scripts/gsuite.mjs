@@ -3,14 +3,15 @@
  * Google Sheets + Apps Script vom Terminal aus, damit der Agent direkt drankommt.
  * Keine npm-Abhaengigkeiten, nur fetch.
  *
- * ANMELDUNG, kurzer Weg (Details in docs/SOP-google-apps-script.md)
- *   gcloud auth application-default login --scopes=<siehe SCOPES unten>
- *   Danach ist nichts weiter zu tun, das CLI liest die Credentials der Cloud SDK.
- *   Zusaetzlich einmal den Schalter auf https://script.google.com/home/usersettings.
+ * ANMELDUNG (Details in docs/SOP-google-apps-script.md)
+ *   Eigener OAuth-Client Typ "Desktop", dann eines von beiden:
+ *     node scripts/gsuite.mjs auth ~/client_secret_....json
+ *     node scripts/gsuite.mjs auth            # liest GOOGLE_CLIENT_* aus .env
+ *   Dazu einmal der Schalter auf https://script.google.com/home/usersettings.
  *
- * ANMELDUNG, langer Weg, falls die Cloud SDK die Script-Scopes ablehnt
- *   Eigenen OAuth-Client Typ "Desktop" anlegen, GOOGLE_CLIENT_ID und
- *   GOOGLE_CLIENT_SECRET in .env, dann `node scripts/gsuite.mjs auth`.
+ *   Die Credentials der Cloud SDK gehen NICHT. Deren Client-ID ist fuer
+ *   .../auth/spreadsheets gesperrt, die Anmeldung endet in "Diese App ist
+ *   blockiert". Ein eigener Client ist Pflicht.
  *
  *   gsuite.mjs whoami        zeigt, welche Berechtigungen wirklich erteilt sind
  *
@@ -67,10 +68,10 @@ function env(name, required = true) {
 }
 
 /* Zwei Quellen fuer die Anmeldung, in dieser Reihenfolge:
-   1. Application Default Credentials von
-      `gcloud auth application-default login --scopes=...`.
-      Kein eigener OAuth-Client noetig, der Client der Cloud SDK wird genutzt.
-   2. Ein selbst angelegter Desktop-Client, GOOGLE_* in .env, siehe `auth`. */
+   1. GOOGLE_* in .env, geschrieben von `gsuite.mjs auth`. Der normale Weg.
+   2. Application Default Credentials, falls jemand sie mit einem eigenen
+      Client-ID-File erzeugt hat. Mit dem Standardclient der Cloud SDK
+      funktioniert das nicht, der ist fuer den Sheets-Scope gesperrt. */
 const ADC_PATH =
   process.env.GOOGLE_APPLICATION_CREDENTIALS ||
   resolve(process.env.HOME || "/root", ".config/gcloud/application_default_credentials.json");
@@ -89,9 +90,9 @@ function credentials() {
     adc = JSON.parse(readFileSync(ADC_PATH, "utf8"));
   } catch {
     throw new Error(
-      "Keine Anmeldung gefunden. Entweder\n" +
-        "  gcloud auth application-default login --scopes=" + SCOPES.join(",") + "\n" +
-        "oder GOOGLE_CLIENT_ID/SECRET in .env und `node scripts/gsuite.mjs auth`."
+      "Keine Anmeldung gefunden. Eigenen OAuth-Client Typ \"Desktop\" anlegen, dann\n" +
+        "  node scripts/gsuite.mjs auth <client_secret_....json>\n" +
+        "Siehe docs/SOP-google-apps-script.md."
     );
   }
   if (!adc.refresh_token) throw new Error(`${ADC_PATH} enthaelt kein refresh_token.`);
@@ -141,9 +142,21 @@ async function readStdin() {
   return Buffer.concat(chunks).toString("utf8");
 }
 
-async function cmdAuth() {
-  const clientId = env("GOOGLE_CLIENT_ID");
-  const clientSecret = env("GOOGLE_CLIENT_SECRET");
+async function cmdAuth([file]) {
+  // Entweder die aus der Console geladene client_secret_*.json, oder .env.
+  let clientId;
+  let clientSecret;
+  if (file) {
+    const j = JSON.parse(readFileSync(resolve(process.cwd(), file), "utf8"));
+    const c = j.installed || j.web || j;
+    clientId = c.client_id;
+    clientSecret = c.client_secret;
+    if (!clientId || !clientSecret) throw new Error(`${file} enthaelt keine client_id/client_secret.`);
+    console.log(`Client aus ${file}\n`);
+  } else {
+    clientId = env("GOOGLE_CLIENT_ID");
+    clientSecret = env("GOOGLE_CLIENT_SECRET");
+  }
   const verifier = randomBytes(48).toString("base64url");
   const challenge = createHash("sha256").update(verifier).digest("base64url");
 
