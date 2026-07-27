@@ -390,13 +390,13 @@
     .img-opt .cap .opt-label{font-weight:700;font-size:.9rem;line-height:1.25}
     .img-opt .opt-mark{width:22px;height:22px}
     /* Selbsttest-Schritte */
-    .st-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
-    .st-card{position:relative;margin:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--surface)}
-    .st-card img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
-    .st-num{position:absolute;top:8px;left:8px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--primary-deep);color:var(--surface);font-family:"Lora",serif;font-weight:700;font-size:.85rem;z-index:1}
-    .st-card figcaption{padding:10px 12px}
-    .st-card figcaption b{display:block;font-size:.86rem;color:var(--ink);line-height:1.25}
-    .st-card figcaption span{display:block;margin-top:2px;font-size:.76rem;color:var(--muted);line-height:1.4}
+    .st-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:20px}
+    .st-card{position:relative;margin:0;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);display:flex;align-items:center;gap:12px;padding:10px;min-width:0}
+    .st-card img{width:34%;max-width:132px;flex:none;aspect-ratio:1/1;object-fit:cover;display:block;border-radius:calc(var(--r) - 5px)}
+    .st-num{position:absolute;top:6px;left:6px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--primary-deep);color:var(--surface);font-family:"Lora",serif;font-weight:700;font-size:.8rem;z-index:1}
+    .st-card figcaption{min-width:0;flex:1 1 auto}
+    .st-card figcaption b{display:block;font-size:.88rem;color:var(--ink);line-height:1.3;overflow-wrap:anywhere;hyphens:auto}
+    .st-card figcaption span{display:block;margin-top:3px;font-size:.78rem;color:var(--muted);line-height:1.45;overflow-wrap:anywhere;hyphens:auto}
     .text-skip{background:none;border:0;color:var(--muted);font-weight:600;font-size:.82rem;cursor:pointer;padding:8px;text-decoration:underline;justify-self:center}
     .app-shot{margin:24px 0 0;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-md)}
     .app-shot img{width:100%;display:block;aspect-ratio:3/4;object-fit:cover}
@@ -419,7 +419,11 @@
       .stage{max-width:600px}
       .options.two-col{grid-template-columns:1fr 1fr}
       .duo,.profile,.beforeafter{gap:14px}
-      .st-grid{grid-template-columns:repeat(4,1fr)}
+      .st-grid{grid-template-columns:1fr 1fr;gap:12px}
+      .st-card{flex-direction:column;align-items:stretch;gap:0;padding:0}
+      .st-card img{width:100%;max-width:none;border-radius:calc(var(--r) - 1px) calc(var(--r) - 1px) 0 0}
+      .st-num{top:8px;left:8px;width:26px;height:26px;font-size:.85rem}
+      .st-card figcaption{padding:10px 12px}
     }
 
     @media(prefers-reduced-motion:reduce){
@@ -747,10 +751,11 @@
         ["3","Muskulatur entspannen","Lege den Kopf wieder ab und entspanne den Bauch vollständig. Bleibe mit den Fingern auf den inneren Kanten."],
         ["4","Lücke messen","Lege die Finger nebeneinander zwischen die Muskelkanten und prüfe, wie viele Fingerbreiten hineinpassen."]
       ];
+      var stImgs = ["selbsttest-1.jpg","selbsttest-2.jpg","selbsttest-3.jpg","luecke-2.jpg"];
       var cards = steps.map(function(st,i){
         return '<figure class="st-card">'+
           '<span class="st-num">'+st[0]+'</span>'+
-          '<img src="../../assets/rektus/selbsttest-'+(i+1)+'.jpg" alt="" loading="lazy">'+
+          '<img src="../../assets/rektus/'+stImgs[i]+'" alt="" loading="lazy">'+
           '<figcaption><b>'+st[1]+'</b><span>'+st[2]+'</span></figcaption>'+
         '</figure>';
       }).join("");
@@ -865,7 +870,7 @@
         '</div>'+
         '<div class="steps">'+
           '<div class="step"><span class="step-badge">1</span><div><h3>Die Schwangerschaft dehnt die Mitte</h3><p>Die Linea alba, die Bindegewebsnaht zwischen den geraden Bauchmuskeln, wird über Monate gedehnt. Die Muskelstränge weichen auseinander.</p></div></div>'+
-          '<div class="step"><span class="step-badge">2</span><div><h3>Die tiefe Muskulatur muss neu angesteuert werden</h3><p>Vor allem der quere Bauchmuskel, das natürliche Korsett der Körpermitte, muss wieder gezielt aktiviert werden, damit die Mitte Spannung und Stabilität zurückgewinnt.</p></div></div>'+
+          '<div class="step"><span class="step-badge">2</span><div><h3>Die tiefe Muskulatur muss neu angesteuert werden</h3><p>Vor allem der tiefe Bauchmuskel, das natürliche Korsett der Körpermitte, muss wieder gezielt aktiviert werden, damit die Mitte Spannung und Stabilität zurückgewinnt.</p></div></div>'+
           '<div class="step"><span class="step-badge">3</span><div><h3>Der Ausweg scheitert am Mama-Alltag</h3><p>Der Weg zurück ist regelmäßiges Training der tiefen Bauchmuskulatur, Woche für Woche. Genau daran scheitern die meisten. Nicht aus Faulheit, sondern weil zwischen Kind, Haushalt und Job kaum planbare Zeit bleibt.</p></div></div>'+
         '</div>'+
         '<div class="callout good"><div class="callout-title">'+icon.spark+' Die gute Nachricht</div><p>Die Muskulatur reagiert auch Monate und Jahre nach der Geburt noch auf gezielte Reize. Studien zeigen Verbesserungen selbst bei lange bestehender Rektusdiastase.</p></div>'+
@@ -938,7 +943,7 @@
         '<p class="q-sub">Kein weiteres Übungsprogramm, das nach zwei Wochen liegen bleibt. Nur ein Reiz, der dort ankommt, wo er seit der Geburt gefehlt hat.</p>'+
         '<div class="timeline">'+
           tl("1","Woche 1 und 2","Ankommen","Die Stimulation fühlt sich zunächst ungewohnt, aber angenehm an. Viele spüren nach den ersten Anwendungen Muskelkater an Stellen, die sie seit der Schwangerschaft nicht mehr bewusst wahrgenommen haben.")+
-          tl("2","Woche 3 und 4","Erste Veränderung","Die Mitte spannt beim Heben und Tragen besser mit. Die Haltung wird aufrechter, ohne Zwang.")+
+          tl("2","Woche 3 und 4","Erste Veränderung","Deine Mitte fühlt sich beim Heben und Tragen stabiler an.")+
           tl("3","Woche 5 bis 8","Spürbar stabiler","Der Bauch fühlt sich fester an, der untere Rücken wird im Alltag spürbar entlastet.")+
           tl("4","Woche 9 bis 12","Neuer Alltag","Tragen, Bücken und Spielen am Boden fühlen sich sicherer an. Viele fühlen sich in ihrer Kleidung wieder wohler.")+
         '</div>'+
@@ -1000,7 +1005,7 @@
                  : angle==="stability" ? "Dein Weg zu einer stabilen, tragfähigen Mitte."
                  : "Dein Weg zu einer festen, stabilen Mitte nach der Geburt.";
       var angleLine = angle==="aesthetic" ? " Dich beschäftigt vor allem die sichtbare Wölbung. Hält die tiefe Muskulatur die Mitte wieder von innen, wird die Kontur flacher." :
-                      angle==="stability" ? " Dich beschäftigt vor allem die instabile Mitte. Genau dort setzt der quere Bauchmuskel an, der die Körpermitte stützt und den Rücken entlastet." : "";
+                      angle==="stability" ? " Dich beschäftigt vor allem die instabile Mitte. Genau dort setzt der tiefe Bauchmuskel an, der die Körpermitte stützt und den Rücken entlastet." : "";
 
       return '<section class="screen">'+
         '<div class="result-badge">'+icon.check+' Dein Ergebnis ist bereit</div>'+
@@ -1022,7 +1027,7 @@
           '<div class="next-item"><span class="next-check">'+icon.check+'</span><p>Das <b>komplette Angebot</b> inklusive Bonus vom Gründer</p></div>'+
           '<div class="next-item"><span class="next-check">'+icon.check+'</span><p><b>30 Tage Geld-zurück-Garantie</b>, ohne Kleingedrucktes</p></div>'+
         '</div>'+
-        '<div class="result-cta"><a class="cta cta-lg track-lead" href="../lp-schwangerschaft/?angle='+angle+'">Meinen Plan und das Angebot ansehen '+icon.arrow+'</a></div>'+
+        '<div class="result-cta"><a class="cta cta-lg" href="../lp-schwangerschaft/?angle='+angle+'">Meinen Plan und das Angebot ansehen '+icon.arrow+'</a></div>'+
         '<div class="guarantee">'+
           '<span>'+icon.shield+' 30 Tage Geld-zurück</span>'+
           '<span>'+icon.truck+' Kostenloser Versand</span>'+
@@ -1143,7 +1148,12 @@
         setTimeout(function(){ stage.querySelectorAll(".pv-bar").forEach(function(b){ b.style.height=b.dataset.h+"%"; }); },200);
       }
       if(s.type==="loading"){ runLoading(); }
-      if(s.type==="result"){ if(window.SIA_bindEvents) window.SIA_bindEvents(); sendQuizData(); }
+      if(s.type==="result"){
+        if(window.SIA_bindEvents) window.SIA_bindEvents();
+        sendQuizData();
+        // Quiz abgeschlossen = Lead. Pixel + CAPI mit gemeinsamer eventID.
+        if(window.SIA_track) window.SIA_track("Lead", { content_name: QUIZ_ID, content_category: "rektusdiastase-quiz", angle: deriveAngle() });
+      }
     }
     function animateCount2(el, pct){
       if(reduce){ el.textContent=pct+" %"; return; }

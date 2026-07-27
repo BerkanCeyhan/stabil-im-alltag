@@ -791,7 +791,10 @@ document.getElementById('checkout-form').addEventListener('submit', async functi
     var data = await res.json();
 
     if(data && data.payment_url){
-      if(typeof fbq !== 'undefined'){
+      // Pixel + Conversions-API (gemeinsame eventID, Consent-geprüft) statt reinem Browser-Pixel.
+      if(typeof window.SIA_track === 'function'){
+        window.SIA_track('InitiateCheckout', { value: 489.00, currency: 'EUR', content_name: 'Wellenpuls LWS' });
+      } else if(typeof fbq !== 'undefined'){
         fbq('track', 'InitiateCheckout', { value: 489.00, currency: 'EUR' });
       }
       window.location.href = data.payment_url;

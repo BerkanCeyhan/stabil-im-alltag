@@ -23,6 +23,47 @@
     try { return new URL(window.location.href).searchParams.get(n); } catch (e) { return null; }
   }
 
+  /* ---------- Attribution (UTM + fbclid) funnelweit festhalten ---------- */
+  // Meta hängt die UTM-Parameter nur an den ersten Klick. Auf dem Weg
+  // Quiz -> LP -> Checkout -> Danke gehen sie sonst verloren. Deshalb einmal
+  // in einem Cookie sichern und an interne Links wieder anhängen.
+  var ATTR_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id', 'fbclid'];
+  var ATTR_COOKIE = 'sia_attr';
+
+  function readAttr() {
+    var c = getCookie(ATTR_COOKIE);
+    if (!c) return {};
+    try { return JSON.parse(c) || {}; } catch (e) { return {}; }
+  }
+  function captureAttr() {
+    var stored = readAttr();
+    var fresh = {};
+    var hasFresh = false;
+    ATTR_KEYS.forEach(function (k) {
+      var v = getParam(k);
+      if (v) { fresh[k] = v; hasFresh = true; }
+    });
+    // Ein neuer Klick aus einer Anzeige überschreibt die alte Attribution komplett.
+    var out = hasFresh ? fresh : stored;
+    if (hasFresh) setCookie(ATTR_COOKIE, JSON.stringify(out), MAXAGE);
+    return out;
+  }
+  function decorateLinks() {
+    var attr = readAttr();
+    var keys = Object.keys(attr);
+    if (!keys.length) return;
+    document.querySelectorAll('a[href]').forEach(function (a) {
+      if (a.__siaDecorated) return;
+      var url;
+      try { url = new URL(a.getAttribute('href'), window.location.href); } catch (e) { return; }
+      if (url.origin !== window.location.origin) return;
+      keys.forEach(function (k) { if (!url.searchParams.has(k)) url.searchParams.set(k, attr[k]); });
+      a.__siaDecorated = true;
+      a.setAttribute('href', url.pathname + url.search + url.hash);
+    });
+  }
+  window.SIA_decorateLinks = decorateLinks;
+
   function readConsent() {
     var c = getCookie(COOKIE);
     if (!c) return null;
@@ -68,7 +109,7 @@
   /* ---------- Lead-Tracking (Browser-Pixel + Server-CAPI via Make) ---------- */
   function ensureFbc() {
     var e = getCookie('_fbc'); if (e) return e;
-    var id = getParam('fbclid'); if (!id) return null;
+    var id = getParam('fbclid') || readAttr().fbclid; if (!id) return null;
     var fbc = 'fb.1.' + Date.now() + '.' + id;
     setCookie('_fbc', fbc, MAXAGE);
     return fbc;
@@ -79,17 +120,30 @@
   }
   // Feuert ein Standard-Event über Pixel (Browser) UND Conversions-API (Server, via Make).
   // Beide nutzen dieselbe eventID -> Meta dedupliziert. btn ist optional (für Klick-Weiterleitung).
+  // Events, die vor der Einwilligung ausgelöst wurden (z. B. Quiz-Abschluss,
+  // während das Banner noch offen ist), werden nachgefeuert, sobald zugestimmt wird.
+  var pending = [];
+  function flushPending() {
+    var q = pending; pending = [];
+    q.forEach(function (e) { sendEvent(e.name, null, e.data); });
+  }
+
   function sendEvent(eventName, btn, customData) {
     var href = btn && btn.href;
 
     if (!marketingAllowed()) {
       // Ohne Marketing-Einwilligung kein Pixel/CAPI – nur weiterleiten.
+      if (!href && pending.length < 10) pending.push({ name: eventName, data: customData });
       if (href) window.location.href = href;
       return;
     }
 
+    var attr = readAttr();
+    customData = customData || {};
+    Object.keys(attr).forEach(function (k) { if (customData[k] == null) customData[k] = attr[k]; });
+
     var eventId = eventName.toLowerCase() + '-' + Math.random().toString(36).substring(2, 12);
-    if (typeof fbq === 'function') fbq('track', eventName, customData || {}, { eventID: eventId });
+    if (typeof fbq === 'function') fbq('track', eventName, customData, { eventID: eventId });
 
     var payload = {
       trigger: true,
@@ -102,9 +156,9 @@
       client_user_agent: navigator.userAgent,
       fbp: getCookie('_fbp'),
       fbc: ensureFbc(),
-      fbclid: getParam('fbclid'),
+      fbclid: getParam('fbclid') || readAttr().fbclid || null,
       client_ip_address: clientIp,
-      custom_data: customData || {}
+      custom_data: customData
     };
 
     var navigated = false;
@@ -119,6 +173,7 @@
   }
 
   function bindEventButtons() {
+    decorateLinks();
     // Advertorial: Klick auf CTA -> Lead
     document.querySelectorAll('.track-lead').forEach(function (btn) {
       if (btn.__siaBound) return;
@@ -215,6 +270,7 @@
     saveConsent({ essential: true, marketing: true });
     loadPixel();
     bindEventButtons();
+    flushPending();
     firePurchase();
     hideBanner();
   }
@@ -226,7 +282,7 @@
     var mkt = document.getElementById('sia-mkt');
     var marketing = !!(mkt && mkt.checked);
     saveConsent({ essential: true, marketing: marketing });
-    if (marketing) { loadPixel(); bindEventButtons(); firePurchase(); }
+    if (marketing) { loadPixel(); bindEventButtons(); flushPending(); firePurchase(); }
     hideBanner();
   }
 
@@ -249,13 +305,17 @@
   window.SIA_bindEvents = bindEventButtons;            // dynamisch eingefügte Event-Buttons binden
   window.SIA_getConsent = readConsent;                 // Consent-Status auslesen
   window.SIA_trackPurchase = function (d) { if (d && typeof d === 'object') window.SIA_PURCHASE = d; firePurchase(); };
+  // Beliebiges Standard-Event feuern: Pixel + CAPI mit gemeinsamer eventID.
+  // Ohne Marketing-Einwilligung wird das Event gepuffert und nach Zustimmung nachgefeuert.
+  window.SIA_track = function (name, customData) { if (name) sendEvent(name, null, customData || {}); };
 
   /* ---------- Init ---------- */
   function init() {
+    captureAttr();      // UTM/fbclid aus der URL sichern, bevor navigiert wird.
     bindEventButtons(); // Buttons binden; sendEvent prüft Consent selbst.
     var consent = readConsent();
     if (consent) {
-      if (consent.marketing) { loadPixel(); firePurchase(); }
+      if (consent.marketing) { loadPixel(); flushPending(); firePurchase(); }
     } else {
       showBanner();
     }
