@@ -35,6 +35,33 @@ Bevor irgendetwas gebaut wird, die tatsächlich vorhandenen Tools auflisten
 übernehmen. Dann einmal die Ad-Accounts auflisten lassen und die Account-ID
 gegen die erwartete prüfen, bevor geschrieben wird.
 
+### Die Tools, die für einen Launch gebraucht werden
+
+Stand 2026-07-27, alle mit Präfix `mcp__facebook-ads__`:
+
+| Tool | Wofür |
+|---|---|
+| `ads_get_ad_accounts` | Account-ID finden, `is_ads_mcp_enabled` prüfen |
+| `ads_get_user_pages` | Page-ID |
+| `ads_get_ig_accounts` | Instagram-ID (braucht `ad_account_id`) |
+| `ads_get_datasets` | Pixel-ID und ob Browser **und** Server feuern |
+| `ads_get_ad_entities` | bestehende Kampagnen/Ad Sets als Vorlage lesen |
+| `ads_get_creatives` | bestehende Creatives inkl. Text und Page-ID lesen |
+| `ads_create_campaign` / `ads_create_ad_set` / `ads_create_creative` / `ads_create_ad` | anlegen |
+| `ads_update_entity` | Budget, Name, Targeting nachträglich ändern |
+| `ads_get_ad_preview` | Rendering prüfen, gibt eine `preview_url` zurück |
+| `ads_get_errors` | auslieferungsblockierende Fehler |
+| `ads_activate_entity` | erst nach dem Go auf aktiv setzen |
+
+Zwei Eigenheiten, die Zeit kosten, wenn man sie nicht kennt:
+
+- **`ads_get_ad_entities` hat pro Level eine eigene Feldliste.** `promoted_object`,
+  `billing_event`, `destination_type` und `special_ad_categories` sind dort nicht
+  lesbar. Die Fehlermeldung listet die erlaubten Felder auf, also einmal absichtlich
+  falsch abfragen ist der schnellste Weg an die Liste.
+- **`ads_get_errors` will die Ad-Account-ID**, nicht die Kampagnen-IDs. Mit
+  Kampagnen-IDs kommt „Could not resolve an ad account from entity_ids".
+
 ---
 
 ## 1. Informations-Checkliste vor dem Launch
@@ -124,6 +151,22 @@ Bei 40 €/Tag und einem 489-€-Produkt mit CPA 120 € sind das 2,3 Käufe pro
 Woche. Das reicht nicht. Dann eine Ebene früher optimieren (Lead = Quizabschluss
 oder AddToCart), Volumen sammeln und erst später auf Purchase hochziehen.
 
+### Welche Events unter welchem Ziel erlaubt sind
+
+**`OUTCOME_SALES` akzeptiert `custom_event_type: "LEAD"` nicht.** Der Versuch
+scheitert mit „Conversion-Event nicht verfügbar", Fehlercode 100, Subcode
+**2446814**. Das ist eine harte Grenze, kein Rechteproblem. Wer auf Lead
+optimieren will, braucht `OUTCOME_LEADS` als Kampagnenziel und muss die Kampagne
+neu anlegen, denn das Objective ist nach dem Anlegen nicht mehr änderbar.
+
+Deshalb: **vor dem Anlegen entscheiden, worauf optimiert wird.** Der Rückgabewert
+von `ads_create_campaign` enthält `valid_optimization_goals` und
+`recommended_optimization_goal` für das gewählte Ziel. Diese Liste lesen, bevor
+das Ad Set gebaut wird.
+
+Unter `OUTCOME_SALES` sind an Pixel-Events unter anderem PURCHASE, ADD_TO_CART
+und INITIATE_CHECKOUT nutzbar, LEAD nicht.
+
 ---
 
 ## 4. Creative: Texte, Limits, Formatierung
@@ -189,37 +232,53 @@ Metas Personal-Attributes-Policy, „Bleibt der Bauch trotz Rückbildung?" nicht
 
 ## 5. Bilder: schnellster Weg in die Ad
 
-Meta nimmt in einem Creative kein Bild als Datei entgegen. Der Ablauf ist immer:
+**Der MCP nimmt kein lokales Bild entgegen. Beide Wege brauchen eine öffentlich
+erreichbare URL.** Das ist die wichtigste Planungsentscheidung: die Creatives
+müssen vor dem Kampagnenbau auf einer öffentlichen Domain liegen. In diesem Repo
+heißt das: Bilder committen, pushen, GitHub Pages ausliefern lassen, dann mit
+`curl -o /dev/null -w "%{http_code}"` prüfen, dass jede Datei 200 liefert.
 
-1. **Upload ins Ad-Account-Bildarchiv.** Endpoint `POST /act_<ID>/adimages`, Body
-   als Base64 oder Multipart. Über den MCP heißt das Tool je nach Version
-   sinngemäß „upload ad image". Rückgabe ist ein **`image_hash`**.
-2. **Creative bauen** und dort `image_hash` referenzieren, nicht die Datei.
-3. **Ad** auf das Creative zeigen lassen.
+Zwei Wege:
 
-Praktische Punkte:
+**A) Vorab ins Bildarchiv hochladen (wenn verfügbar).**
+`ads_creative_upload_image` mit `image_url`, liefert einen `image_hash` zurück,
+den man dann in beliebig vielen Creatives wiederverwendet.
+Achtung: Das Tool ist **pro Ad-Account freigeschaltet**. Für Wellenpuls kam am
+2026-07-27 „This tool is new and is being gradually rolled out across ad
+accounts." Das ist kein Fehler in der Anfrage, es gibt nur noch keinen Zugang.
 
-- Der schnellste Weg ist, **alle Bilder einer Kampagne in einem Rutsch** hochzuladen
-  und die Hashes einzusammeln, bevor die Creatives gebaut werden. Ein Roundtrip
-  pro Bild plus ein Roundtrip pro Creative, sonst wird es unnötig langsam.
-- Wenn der MCP nur Dateipfade akzeptiert, müssen die Bilder lokal liegen. URLs
-  von der eigenen Domain gehen bei manchen Toolversionen auch, das ist aber
-  nicht verlässlich. Lokale Datei ist der sichere Weg.
+**B) URL direkt ins Creative (funktioniert immer).**
+`ads_create_creative` akzeptiert `image_url` anstelle von `image_hash`. Meta holt
+sich das Bild beim Anlegen selbst. Ein Roundtrip weniger pro Bild, und es
+umgeht die Freischaltung komplett. Für einen Launch mit acht Motiven ist das der
+schnellste Weg.
+
+Weitere Punkte:
+
+- Google Drive, Dropbox und ähnliche Share-Links funktionieren **nicht**. Meta
+  bekommt dort eine HTML-Zwischenseite statt der Bildbytes. Es muss ein direkter
+  Link auf die Datei sein.
 - Format: JPG oder PNG, unter 30 MB. Für Feed und Reels ist **3:4 oder 4:5** die
   beste Wahl, 1:1 nur wenn es sein muss. Mindestens 1080 px auf der kurzen Kante.
 - Textanteil im Bild spielt seit dem 20-Prozent-Aus keine formale Rolle mehr,
   wenig Text liefert aber weiterhin messbar bessere Auslieferung.
-- Bildhashes sind pro Ad-Account gültig und bleiben erhalten. Wiederverwendung
-  über mehrere Creatives ist explizit erwünscht.
+- **KI-generierte Motive:** `self_ai_disclosure: "OPT_IN"` am Creative setzen.
+  Meta blendet je nach Auslieferungsregion ein „AI info"-Label ein.
+
+### Creatives sind unveränderlich
+
+`ads_update_entity` kann Namen, Budget und Targeting ändern, aber **keinen
+Creative-Inhalt**. Wer Primary Text, Headline, Bild oder CTA ändern will, legt
+ein neues Creative an und darauf eine neue Ad. Deshalb: Texte vorher final
+abstimmen, nicht im Ads Manager nachbessern wollen.
 
 ---
 
 ## 6. UTM-Parameter
 
-UTMs gehören **nicht** in die `link`-URL, sondern in das Feld `url_tags` am
-Creative. Meta hängt sie dann an jeden Klick an und du kannst die Ziel-URL sauber
-halten. Wenn der MCP `url_tags` nicht anbietet, hilfsweise direkt an die URL
-hängen, dann aber bei jeder Ad einzeln.
+Im Ads Manager gehören UTMs ins Feld `url_tags`. **Der MCP bietet `url_tags`
+nicht an** (`ads_create_creative` kennt das Feld nicht). Sie werden deshalb direkt
+an `link_url` gehängt. Die dynamischen Platzhalter funktionieren dort genauso.
 
 Bewährtes Schema:
 
@@ -266,24 +325,46 @@ gemeint war.
 
 ## 8. Ablauf eines Launches
 
-1. Checkliste aus Abschnitt 1 vollständig vorliegen.
-2. Tools auflisten, Ad-Account verifizieren.
-3. Bilder hochladen, Hashes sammeln.
-4. Kampagne anlegen: Objective, Kaufart `AUCTION`, Budget (bei CBO),
-   `status: PAUSED`, `special_ad_categories: []` (bzw. die zutreffende Kategorie,
-   siehe unten).
-5. Ad Set anlegen: Geo, Advantage+ Audience ohne Alters-/Demoeinschränkung,
-   Placements automatisch, Optimierungsziel + Pixel + `custom_event_type`,
-   `bid_strategy: LOWEST_COST_WITHOUT_CAP`, `conversion_domain`, `status: PAUSED`.
-6. Pro Ad: Creative anlegen (Page-ID, IG-ID, `image_hash`, `message`, `name`,
-   `link`, `call_to_action`, `url_tags`), dann Ad anlegen, `status: PAUSED`.
-7. Alles im Ads Manager visuell gegenlesen. Der MCP zeigt keine Vorschau.
-8. Erst nach explizitem Go auf `ACTIVE` setzen, Kampagne zuerst, dann Ad Set,
+1. Checkliste aus Abschnitt 1 vollständig vorliegen, **inklusive der Entscheidung
+   für das Optimierungs-Event** (siehe Abschnitt 3, danach nicht mehr änderbar).
+2. Tools auflisten, Ad-Account verifizieren, bestehende Kampagne als Vorlage lesen.
+3. Bilder pushen und öffentliche Erreichbarkeit mit `curl` prüfen.
+4. `ads_create_campaign`: Objective, `buying_type: AUCTION`,
+   `campaign_daily_budget` in Cent (bei CBO), `campaign_bid_strategy`,
+   `special_ad_categories: "[]"`. Antwort enthält `valid_optimization_goals`.
+5. `ads_create_ad_set`: `billing_event: IMPRESSIONS`,
+   `optimization_goal: OFFSITE_CONVERSIONS`, `destination_type: WEBSITE`,
+   `promoted_object` mit `pixel_id` und `custom_event_type`, Targeting mit
+   `geo_locations` und `targeting_automation.advantage_audience: 1`.
+6. Pro Ad: `ads_create_creative` (Page-ID, `image_url`, `message`, `headline`,
+   `link_url` inklusive UTMs, `call_to_action_type`, `self_ai_disclosure`), dann
+   `ads_create_ad` mit `creative_id` und `conversion_domain`.
+7. `ads_get_ad_preview` pro Ad, mindestens `MOBILE_FEED_STANDARD`. Die
+   zurückgegebene `preview_url` an den Auftraggeber weitergeben.
+8. `ads_get_errors` mit der **Ad-Account-ID** laufen lassen, muss leer sein.
+9. Erst nach explizitem Go `ads_activate_entity`, Kampagne zuerst, dann Ad Set,
    dann Ads.
+
+### Was der MCP automatisch macht
+
+- **Alles wird als `PAUSED` angelegt.** Auch `ads_update_entity` erzwingt PAUSED
+  (`status_forced_to_paused: true`). Aktivieren geht nur über `ads_activate_entity`.
+- **DSA-Felder** (`dsa_beneficiary`, `dsa_payor`) werden bei EU-Geo automatisch
+  aus dem Business-Namen gefüllt. Nur explizit setzen, wenn ein anderer
+  Auftraggeber genannt werden muss.
+- **Attribution** wird auf `7d click + 1d view` gesetzt, wenn nichts angegeben ist.
+- **Advantage+ Audience:** Mit `advantage_audience: 1` werden `age_min` und
+  `age_max` zu `age_min_suggestion` / `age_max_suggestion` umgeschrieben, also zu
+  Signalen statt harten Grenzen. Wer ein echtes Alterslimit braucht, muss
+  `advantage_audience: 0` setzen und damit A+ abschalten.
 
 **Special Ad Categories:** Gesundheitsprodukte fallen in Deutschland nicht
 automatisch darunter. Kredit, Wohnen, Beschäftigung und Politik schon. Falsch
 gesetzt kostet es Targeting-Optionen, gar nicht gesetzt kann zur Sperre führen.
+
+**Budget in Cent:** 10 € = `1000`. Und die Frage „10 € pro Ad" oder „10 € pro
+Funnel" vorher klären, das ist bei vier Ads der Unterschied zwischen 1000 und
+4000.
 
 ---
 
@@ -334,12 +415,40 @@ Vor jedem Launch einmal durchgehen:
 
 ---
 
-## 12. Referenzsetup (funktioniert, zum Abgucken)
+## 12. Referenzsetup (real gebaut, zum Abgucken)
 
-BrustBizeps-Quizfunnels, dokumentiert in
-`/root/projects/bb-projects/bb-aktion-landingpages/docs/quiz-ad-campaigns.md`:
+### Wellenpuls, Rektusdiastase-Quizfunnels (2026-07-27)
 
-Ziel `OUTCOME_SALES`, CBO 10 €/Tag pro Kampagne, Optimierung Purchase, Lowest
-Cost, Geo DACH, Advantage+ Audience broad ohne Demoeinschränkung, Placements
-automatisch, CTA `LEARN_MORE`, Struktur 1 Kampagne → 1 Ad Set → 4 Ads, alles im
-Status `PAUSED` zum Review.
+Ad-Account `1314232876440022` (Wellenpuls, EUR) · Business `439198905947427`
+Page `1176219138898672` (Stabil im Alltag) · Pixel `576311248662294`
+IG verfügbar: `17841470317450937` (`wellenpuls_gmbh`), hier nicht gesetzt,
+damit die Page-eigene IG-Identität greift wie in der bestehenden Quiz-Kampagne.
+
+| Einstellung | Wert |
+|---|---|
+| Ziel | `OUTCOME_SALES` |
+| Budget | CBO **10 €/Tag pro Kampagne** (`campaign_daily_budget: 1000`) |
+| Gebot | `LOWEST_COST_WITHOUT_CAP` |
+| Optimierung | `OFFSITE_CONVERSIONS`, `custom_event_type: PURCHASE` |
+| Abrechnung | `IMPRESSIONS` |
+| Geo | DE, `location_types: home, recent` |
+| Zielgruppe | Advantage+ Audience, Alter nur als Signal (25–45 bzw. 42–62) |
+| Placements | automatisch |
+| CTA | `LEARN_MORE` |
+| `conversion_domain` | `stabil-im-alltag.de` |
+| Struktur | 1 Kampagne → 1 Ad Set → 4 Ads |
+| Status | alles `PAUSED` |
+
+| | Postpartum | Wechseljahre |
+|---|---|---|
+| Kampagne | `120253988128180029` | `120253988128850029` |
+| Ad Set | `120253988318020029` | `120253988318920029` |
+| Ads | `120253988367300029`, `120253988370520029`, `120253988373810029`, `120253988377330029` | `120253988394940029`, `120253988399300029`, `120253988402240029`, `120253988404800029` |
+
+Copy und Bildzuordnung: `rektusdiastase/ads/ADS-2026.md`.
+
+### BrustBizeps-Quizfunnels
+
+Dokumentiert in
+`/root/projects/bb-projects/bb-aktion-landingpages/docs/quiz-ad-campaigns.md`.
+Gleiche Struktur, aber Geo DACH und CBO 10 €/Tag bei ebenfalls vier Ads.
