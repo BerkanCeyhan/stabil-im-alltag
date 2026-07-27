@@ -3,12 +3,16 @@
  * Google Sheets + Apps Script vom Terminal aus, damit der Agent direkt drankommt.
  * Keine npm-Abhaengigkeiten, nur fetch.
  *
- * EINMALIGES SETUP (Details in docs/SOP-google-apps-script.md)
- *   1. GCP-Projekt, APIs an: sheets.googleapis.com, script.googleapis.com
- *   2. OAuth-Client Typ "Desktop" anlegen -> Client-ID + Secret
- *   3. Apps Script API einschalten: https://script.google.com/home/usersettings
- *   4. In .env eintragen:  GOOGLE_CLIENT_ID=...   GOOGLE_CLIENT_SECRET=...
- *   5. node scripts/gsuite.mjs auth      -> Browser, danach GOOGLE_REFRESH_TOKEN in .env
+ * ANMELDUNG, kurzer Weg (Details in docs/SOP-google-apps-script.md)
+ *   gcloud auth application-default login --scopes=<siehe SCOPES unten>
+ *   Danach ist nichts weiter zu tun, das CLI liest die Credentials der Cloud SDK.
+ *   Zusaetzlich einmal den Schalter auf https://script.google.com/home/usersettings.
+ *
+ * ANMELDUNG, langer Weg, falls die Cloud SDK die Script-Scopes ablehnt
+ *   Eigenen OAuth-Client Typ "Desktop" anlegen, GOOGLE_CLIENT_ID und
+ *   GOOGLE_CLIENT_SECRET in .env, dann `node scripts/gsuite.mjs auth`.
+ *
+ *   gsuite.mjs whoami        zeigt, welche Berechtigungen wirklich erteilt sind
  *
  * SHEETS
  *   gsuite.mjs sheets:tabs   <sheetId>
@@ -62,17 +66,50 @@ function env(name, required = true) {
   return val;
 }
 
+/* Zwei Quellen fuer die Anmeldung, in dieser Reihenfolge:
+   1. Application Default Credentials von
+      `gcloud auth application-default login --scopes=...`.
+      Kein eigener OAuth-Client noetig, der Client der Cloud SDK wird genutzt.
+   2. Ein selbst angelegter Desktop-Client, GOOGLE_* in .env, siehe `auth`. */
+const ADC_PATH =
+  process.env.GOOGLE_APPLICATION_CREDENTIALS ||
+  resolve(process.env.HOME || "/root", ".config/gcloud/application_default_credentials.json");
+
+function credentials() {
+  if (env("GOOGLE_REFRESH_TOKEN", false)) {
+    return {
+      source: ".env",
+      client_id: env("GOOGLE_CLIENT_ID"),
+      client_secret: env("GOOGLE_CLIENT_SECRET"),
+      refresh_token: env("GOOGLE_REFRESH_TOKEN"),
+    };
+  }
+  let adc;
+  try {
+    adc = JSON.parse(readFileSync(ADC_PATH, "utf8"));
+  } catch {
+    throw new Error(
+      "Keine Anmeldung gefunden. Entweder\n" +
+        "  gcloud auth application-default login --scopes=" + SCOPES.join(",") + "\n" +
+        "oder GOOGLE_CLIENT_ID/SECRET in .env und `node scripts/gsuite.mjs auth`."
+    );
+  }
+  if (!adc.refresh_token) throw new Error(`${ADC_PATH} enthaelt kein refresh_token.`);
+  return { source: ADC_PATH, ...adc };
+}
+
 let cachedToken = null;
 
 async function accessToken() {
   if (cachedToken && cachedToken.exp > Date.now() + 30000) return cachedToken.value;
+  const c = credentials();
   const res = await fetch("https://oauth2.googleapis.com/token", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({
-      client_id: env("GOOGLE_CLIENT_ID"),
-      client_secret: env("GOOGLE_CLIENT_SECRET"),
-      refresh_token: env("GOOGLE_REFRESH_TOKEN"),
+      client_id: c.client_id,
+      client_secret: c.client_secret,
+      refresh_token: c.refresh_token,
       grant_type: "refresh_token",
     }),
   });
@@ -301,8 +338,21 @@ const [cmd, ...args] = process.argv.slice(2);
 const [group, sub] = String(cmd || "").split(":");
 const table = { sheets: sheetsCmds, script: scriptCmds };
 
+async function cmdWhoami() {
+  const c = credentials();
+  const res = await fetch("https://oauth2.googleapis.com/tokeninfo?access_token=" + (await accessToken()));
+  const j = await res.json();
+  console.log(`Quelle    ${c.source}`);
+  console.log(`Konto     ${j.email || "(keine E-Mail im Token)"}`);
+  console.log("Scopes");
+  String(j.scope || "").split(" ").filter(Boolean).forEach((s) => console.log("  " + s));
+  const missing = SCOPES.filter((s) => !String(j.scope || "").includes(s));
+  if (missing.length) console.log("\nFehlt:\n" + missing.map((s) => "  " + s).join("\n"));
+}
+
 try {
   if (cmd === "auth") await cmdAuth();
+  else if (cmd === "whoami") await cmdWhoami();
   else if (table[group] && table[group][sub]) await table[group][sub](args);
   else {
     console.log(readFileSync(fileURLToPath(import.meta.url), "utf8").split("*/")[0].replace(/^#![^\n]*\n\/\*\*\n/, "").replace(/^ \* ?/gm, ""));
