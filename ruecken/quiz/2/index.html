@@ -460,7 +460,49 @@
     // Fertiger Code + Anleitung: scripts/quiz-sheet.gs
     // Es werden bewusst NUR die gewählten Antworten gesendet, keine IP, kein Name, keine E-Mail.
     var QUIZ_WEBHOOK = "https://script.google.com/macros/s/AKfycbwraM9stECq1iIpcdo1V--YByP7p78MGb-gpcNxdabL1nzF25OT9pJmfjyxlhrvZlQb3A/exec";
+    var QUIZ_ID = "ruecken-quiz-2";
     var quizSent = false;
+
+    // ── Schrittmessung ──────────────────────────────────────────────────
+    // Pro Bildschirmwechsel ein Ereignis statt nur einem beim Abschluss. Damit
+    // wird sichtbar, WO abgebrochen wird, nicht nur DASS abgebrochen wurde.
+    // Bewusst ohne Antwortinhalt und ohne Kennung: die Sitzungs-ID lebt nur im
+    // Speicher, kein Cookie, kein localStorage. Deshalb haengt es nicht an der
+    // Marketing-Einwilligung und gilt fuer den gesamten Verkehr.
+    var SID = (function(){
+      try {
+        if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+        if (window.crypto && crypto.getRandomValues) {
+          var a = new Uint32Array(4); crypto.getRandomValues(a);
+          return Array.prototype.map.call(a, function(n){ return n.toString(36); }).join("");
+        }
+      } catch(e){}
+      return Date.now().toString(36) + Math.random().toString(36).slice(2);
+    })();
+    var schrittBeginn = Date.now();
+
+    function sendeSchritt(index, screenId, ereignis){
+      if(!QUIZ_WEBHOOK) return;
+      var jetzt = Date.now();
+      var nutzlast = {
+        typ: "schritt",
+        sid: SID,
+        quiz: QUIZ_ID,
+        index: index,
+        screen: screenId || "",
+        ereignis: ereignis || "view",
+        dwell: jetzt - schrittBeginn
+      };
+      schrittBeginn = jetzt;
+      try {
+        var blob = new Blob([JSON.stringify(nutzlast)], { type: "text/plain;charset=utf-8" });
+        if(navigator.sendBeacon && navigator.sendBeacon(QUIZ_WEBHOOK, blob)) return;
+      } catch(e){}
+      // Rueckfall, wenn sendBeacon fehlt oder ablehnt.
+      try{ fetch(QUIZ_WEBHOOK, { method:"POST", mode:"no-cors",
+        headers:{"Content-Type":"text/plain;charset=utf-8"},
+        body:JSON.stringify(nutzlast), keepalive:true }).catch(function(){}); }catch(e){}
+    }
     function marketingOK(){ try{ var c = window.SIA_getConsent && window.SIA_getConsent(); return !!(c && c.marketing); }catch(e){ return false; } }
     function sendQuizData(){
       if(quizSent || !QUIZ_WEBHOOK) return;
@@ -483,12 +525,24 @@
         var val = answers[k];
         antworten[k] = Array.isArray(val) ? val.map(function(v){ return optLabel(k,v); }).join(" | ") : optLabel(k,val);
       });
+      var attr = {};
+      try { if (window.SIA_getAttr) attr = window.SIA_getAttr() || {}; } catch(e){}
       var payload = {
+        typ: "quiz",
         ts: new Date().toISOString(),
-        quiz: "ruecken-quiz-2",
+        sid: SID,                                  // verknuepft mit den Schritt-Ereignissen
+        quiz: QUIZ_ID,
         alter: (typeof AGE_LABEL!=="undefined" && AGE_LABEL[answers.age]) || answers.age || null,
         zone: (typeof ZONE_LABEL!=="undefined" && ZONE_LABEL[answers.zone||""]) || null,
-        antworten: antworten                     // anonym: ausgeschriebene Antworttexte
+        antworten: antworten,                    // anonym: ausgeschriebene Antworttexte
+        // Attribution direkt an der Eintragung: nur so laesst sich ein
+        // Abschluss einer Anzeige zuordnen, auch ohne E-Mail.
+        utm_source: attr.utm_source || "", utm_medium: attr.utm_medium || "",
+        utm_campaign: attr.utm_campaign || "", utm_content: attr.utm_content || "",
+        fbclid: attr.fbclid || "",
+        referrer: attr.referrer || "",
+        user_agent: navigator.userAgent || "",
+        page_url: attr.page_url || location.href
       };
       // text/plain vermeidet den CORS-Preflight, no-cors erlaubt den Cross-Origin-Post an Apps Script.
       try{ fetch(QUIZ_WEBHOOK, { method:"POST", mode:"no-cors", headers:{"Content-Type":"text/plain;charset=utf-8"}, body:JSON.stringify(payload), keepalive:true }).catch(function(){}); }catch(e){}
@@ -1010,6 +1064,7 @@
       backBtn.hidden = cur===0;
       updateProgress();
       wire();
+      sendeSchritt(cur, SCREENS[cur].id || SCREENS[cur].type, "view");
       onEnter(SCREENS[cur]);
       try{ window.scrollTo({top:0,behavior: reduce ? "auto":"smooth"}); }catch(e){ window.scrollTo(0,0); }
       var h1 = stage.querySelector("h1"); if(h1){ h1.setAttribute("tabindex","-1"); }
@@ -1112,6 +1167,18 @@
       }
       requestAnimationFrame(frame);
     }
+
+    // Letzter erreichter Bildschirm beim Verlassen. Erst damit laesst sich der
+    // Abbruch einem Schritt zuordnen — ohne dieses Ereignis fehlt bei jedem
+    // Abbrecher genau die Information, warum er weg ist.
+    // `pagehide` statt `unload`: `unload` feuert auf iOS/Safari oft nicht.
+    var abbruchGesendet = false;
+    window.addEventListener("pagehide", function(){
+      if(abbruchGesendet) return;
+      abbruchGesendet = true;
+      var s = SCREENS[cur];
+      sendeSchritt(cur, (s && (s.id || s.type)) || "", quizSent ? "ende" : "abbruch");
+    });
 
     // start (support hash resume for back/forward within session)
     go(0);

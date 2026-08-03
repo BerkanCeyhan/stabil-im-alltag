@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Autorisierung</title>
+<style>
+  :root{--ink:#12263a;--soft:#5b6b7c;--line:#dfe6ee;--bg:#f6f8fb}
+  *{box-sizing:border-box}
+  body{margin:0;padding:40px 20px;background:var(--bg);color:var(--ink);
+       font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  .box{max-width:620px;margin:0 auto;background:#fff;border:1px solid var(--line);
+       border-radius:14px;padding:28px}
+  h1{font-size:1.15rem;margin:0 0 6px}
+  p{color:var(--soft);margin:0 0 18px;font-size:.94rem}
+  code{display:block;background:#0f1b28;color:#8be9a4;padding:16px;border-radius:10px;
+       font:14px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-all;
+       user-select:all;margin-bottom:14px}
+  button{background:var(--ink);color:#fff;border:0;border-radius:9px;padding:11px 18px;
+         font-size:.94rem;font-weight:600;cursor:pointer}
+  button:disabled{opacity:.5;cursor:default}
+  .leer{color:var(--soft);font-style:italic}
+</style>
+</head>
+<body>
+  <div class="box">
+    <h1>Autorisierung</h1>
+    <p>Diese Seite nimmt nichts entgegen und speichert nichts. Sie zeigt nur den
+       Code aus der Adresszeile an, damit er sich bequem kopieren lässt.</p>
+    <code id="code" class="leer">Kein Code in der Adresszeile.</code>
+    <button id="kopieren" disabled>Kopieren</button>
+  </div>
+<script>
+(function(){
+  var p = new URLSearchParams(location.search);
+  var code = p.get("code");
+  var feld = document.getElementById("code");
+  var btn  = document.getElementById("kopieren");
+  if(!code) return;
+  feld.textContent = code;
+  feld.classList.remove("leer");
+  btn.disabled = false;
+  btn.addEventListener("click", function(){
+    navigator.clipboard.writeText(code).then(function(){
+      btn.textContent = "Kopiert";
+      setTimeout(function(){ btn.textContent = "Kopieren"; }, 1600);
+    });
+  });
+})();
+</script>
+</body>
+</html>

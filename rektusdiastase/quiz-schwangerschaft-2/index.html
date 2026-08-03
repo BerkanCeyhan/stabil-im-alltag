@@ -330,6 +330,23 @@
     .load-quote cite{display:block;margin-top:8px;font-size:.8rem;font-style:normal;font-weight:700;color:var(--primary-deep)}
 
     /* ── RESULT ── */
+    /* E-Mail-Tor vor dem Ergebnis */
+    .gate-form{margin-top:22px;display:grid;gap:14px;max-width:26rem}
+    .gate-form input[type=email]{
+      width:100%;min-height:54px;padding:14px 16px;border:1.5px solid var(--line);
+      border-radius:12px;background:var(--surface);color:var(--ink);
+      font:inherit;font-size:1rem;transition:border-color .18s}
+    .gate-form input[type=email]:focus{outline:none;border-color:var(--teal-deep)}
+    .gate-form input[type=email][aria-invalid="true"]{border-color:oklch(58% .17 25)}
+    .gate-check{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;
+      font-size:.86rem;color:var(--ink-soft);line-height:1.45;cursor:pointer}
+    .gate-check input{margin-top:3px;width:19px;height:19px;flex:none;accent-color:var(--teal-deep);cursor:pointer}
+    .gate-note{margin-top:2px;font-size:.74rem;color:var(--muted);line-height:1.5}
+    .gate-trust{margin-top:16px;display:flex;flex-wrap:wrap;gap:6px 14px;
+      font-size:.74rem;color:var(--muted);font-weight:600}
+    .gate-trust span{display:inline-flex;align-items:center;gap:5px}
+    .gate-trust svg{width:14px;height:14px;color:var(--teal-deep)}
+
     .result-badge{display:inline-flex;align-items:center;gap:8px;margin-bottom:14px;padding:6px 12px;border-radius:99px;background:var(--teal-pale);color:var(--teal-deep);font-size:.74rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
     .result-badge svg{width:15px;height:15px}
     .result-title{font-size:clamp(1.55rem,6.2vw,2.15rem);line-height:1.16;color:var(--primary-deep)}
@@ -481,6 +498,45 @@
     var QUIZ_ID = "rektus-schwangerschaft-2";
     var quizSent = false;
     function marketingOK(){ try{ var c = window.SIA_getConsent && window.SIA_getConsent(); return !!(c && c.marketing); }catch(e){ return false; } }
+
+    // ── Schrittmessung ──────────────────────────────────────────────────
+    // Pro Bildschirmwechsel ein Ereignis statt nur einem beim Abschluss. Damit
+    // wird sichtbar, WO abgebrochen wird, nicht nur DASS abgebrochen wurde —
+    // besonders wichtig, weil dieser Funnel als einziger das E-Mail-Tor traegt
+    // und wir dessen Kosten messen wollen.
+    // Bewusst ohne Antwortinhalt und ohne Kennung: die Sitzungs-ID lebt nur im
+    // Speicher, kein Cookie. Deshalb haengt es nicht an der Marketing-
+    // Einwilligung und gilt fuer den gesamten Verkehr.
+    var SID = (function(){
+      try {
+        if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+        if (window.crypto && crypto.getRandomValues) {
+          var a = new Uint32Array(4); crypto.getRandomValues(a);
+          return Array.prototype.map.call(a, function(n){ return n.toString(36); }).join("");
+        }
+      } catch(e){}
+      return Date.now().toString(36) + Math.random().toString(36).slice(2);
+    })();
+    var schrittBeginn = Date.now();
+
+    function postePayload(obj){
+      if(!QUIZ_WEBHOOK) return;
+      try {
+        var blob = new Blob([JSON.stringify(obj)], { type: "text/plain;charset=utf-8" });
+        if(navigator.sendBeacon && navigator.sendBeacon(QUIZ_WEBHOOK, blob)) return;
+      } catch(e){}
+      try{ fetch(QUIZ_WEBHOOK, { method:"POST", mode:"no-cors",
+        headers:{"Content-Type":"text/plain;charset=utf-8"},
+        body:JSON.stringify(obj), keepalive:true }).catch(function(){}); }catch(e){}
+    }
+
+    function sendeSchritt(index, screenId, ereignis){
+      var jetzt = Date.now();
+      var dwell = jetzt - schrittBeginn;
+      schrittBeginn = jetzt;
+      postePayload({ typ:"schritt", sid:SID, quiz:QUIZ_ID, index:index,
+                     screen:screenId || "", ereignis:ereignis || "view", dwell:dwell });
+    }
     function optLabel(id, v){
       for(var i=0;i<SCREENS.length;i++){ var s=SCREENS[i]; if(s.id===id && s.options){ for(var j=0;j<s.options.length;j++){ if(s.options[j][1]===v) return String(s.options[j][0]).replace(/&shy;|­/g,""); } } }
       return v;
@@ -494,13 +550,52 @@
         var val = answers[k];
         antworten[k] = Array.isArray(val) ? val.map(function(v){ return optLabel(k,v); }).join(" | ") : optLabel(k,val);
       });
-      var payload = {
+      var attr = {};
+      try { if (window.SIA_getAttr) attr = window.SIA_getAttr() || {}; } catch(e){}
+      postePayload({
+        typ: "quiz",
         ts: new Date().toISOString(),
+        sid: SID,                                  // verknuepft mit Schritt- und Identitaetszeilen
         quiz: QUIZ_ID,
         angle: deriveAngle(),
-        antworten: antworten
-      };
-      try{ fetch(QUIZ_WEBHOOK, { method:"POST", mode:"no-cors", headers:{"Content-Type":"text/plain;charset=utf-8"}, body:JSON.stringify(payload), keepalive:true }).catch(function(){}); }catch(e){}
+        antworten: antworten,
+        // Attribution direkt an der Eintragung: nur so laesst sich ein
+        // Abschluss einer Anzeige zuordnen, auch ohne E-Mail. Die Adresse
+        // bleibt getrennt im Blatt Identitaet.
+        utm_source: attr.utm_source || "", utm_medium: attr.utm_medium || "",
+        utm_campaign: attr.utm_campaign || "", utm_content: attr.utm_content || "",
+        fbclid: attr.fbclid || "",
+        referrer: attr.referrer || "",
+        user_agent: navigator.userAgent || "",
+        page_url: attr.page_url || location.href
+      });
+    }
+
+    // ── Identitaet: E-Mail + Attribution ────────────────────────────────
+    // Geht in ein eigenes Blatt, nie in dieselbe Zeile wie die Antworten:
+    // Antworten sind Gesundheitsdaten (Art. 9 DSGVO), mit Adresse verknuepft
+    // steigt die Huerde erheblich. Verknuepfung nur ueber die Sitzungs-ID.
+    // Zwei Einwilligungen, zwei Zwecke:
+    //   consentHealth  Pflicht — Auswertung der Gesundheitsangaben und Zusendung
+    //                  des Ergebnisses (Art. 9 DSGVO)
+    //   consentNews    freiwillig — Werbung (§7 UWG), koppelt nie den Zugang
+    function sendeIdentitaet(email, vorname, consentHealth, consentNews){
+      var attr = {};
+      try { if (window.SIA_getAttr) attr = window.SIA_getAttr() || {}; } catch(e){}
+      postePayload({
+        typ: "identitaet",
+        sid: SID,
+        email: email,
+        vorname: vorname || "",
+        quiz: QUIZ_ID,
+        angle: deriveAngle(),
+        fbc: attr.fbc || "", fbp: attr.fbp || "", fbclid: attr.fbclid || "",
+        utm_source: attr.utm_source || "", utm_medium: attr.utm_medium || "",
+        utm_campaign: attr.utm_campaign || "", utm_content: attr.utm_content || "",
+        referrer: attr.referrer || "", page_url: attr.page_url || "",
+        consent_health: !!consentHealth,
+        consent_news: !!consentNews
+      });
     }
 
     var icon = {
@@ -674,6 +769,7 @@
         yesno:true },
 
       { type:"loading" },
+      { type:"gate" },
       { type:"result" }
     ];
 
@@ -1037,9 +1133,52 @@
         '</section>';
     }
 
+    /**
+     * E-Mail-Tor. Steht zwischen Ladeanimation und Ergebnis: der Wert ist zu
+     * diesem Zeitpunkt am hoechsten, die Auswertung ist fertig und noch ungesehen.
+     * Nur in diesem Funnel — `ruecken` laeuft ohne Tor weiter und dient als
+     * Vergleichsgroesse fuer die Kosten der Huerde.
+     */
+    function renderGate(){
+      return '<section class="screen">'+
+        '<div class="result-badge">'+icon.check+' Auswertung fertig</div>'+
+        '<h1 class="result-title">Wohin dürfen wir deine Auswertung schicken?</h1>'+
+        '<p class="analysis">Du bekommst deine persönliche Einordnung und den passenden '+
+          'Trainingsplan als E-Mail — damit du sie in Ruhe nachlesen kannst, auch wenn '+
+          'gerade wenig Zeit ist.</p>'+
+        '<div class="gate-form">'+
+          '<input type="email" id="gateMail" inputmode="email" autocomplete="email" '+
+            'placeholder="deine@email.de" aria-label="E-Mail-Adresse">'+
+          // Pflicht: die Leistung, um die sie gebeten hat — Verarbeitung der
+          // Angaben und Zusendung der Auswertung. Art. 9 DSGVO verlangt hier
+          // die ausdrueckliche Einwilligung.
+          '<label class="gate-check">'+
+            '<input type="checkbox" id="gateHealth">'+
+            '<span>Ja, meine Angaben aus dem Check dürfen ausgewertet und mir das '+
+              'Ergebnis per E-Mail zugeschickt werden. Es handelt sich dabei um '+
+              'Gesundheitsangaben.</span>'+
+          '</label>'+
+          // Freiwillig und davon getrennt: Werbung. Nie Bedingung fuer den Zugang.
+          '<label class="gate-check">'+
+            '<input type="checkbox" id="gateNews">'+
+            '<span>Zusätzlich möchte ich Tipps, Angebote und Neuigkeiten rund um '+
+              'Rektusdiastase per E-Mail erhalten (freiwillig, jederzeit abbestellbar).</span>'+
+          '</label>'+
+          '<button class="cta cta-lg" id="gateGo" disabled>Auswertung ansehen '+icon.arrow+'</button>'+
+          '<p class="gate-note">Wir geben deine E-Mail-Adresse nicht weiter. Deine Antworten '+
+            'aus dem Check werden getrennt von deiner E-Mail-Adresse gespeichert.</p>'+
+        '</div>'+
+        '<div class="gate-trust">'+
+          '<span>'+icon.lock+' Verschlüsselte Übertragung</span>'+
+          '<span>'+icon.check+' Kein Spam</span>'+
+        '</div>'+
+        '</section>';
+    }
+
     /* ─────────── ENGINE ─────────── */
     function screenHTML(s){
       switch(s.type){
+        case "gate": return renderGate();
         case "hero": return renderHero(s);
         case "q": return renderQ(s);
         case "qm": return renderQM(s);
@@ -1062,6 +1201,7 @@
       var n;
       if(s.type==="q"||s.type==="qm"||s.type==="hero"){ n = s.n || 1; lastQn = n; pLabel.textContent = "Frage "+n+" / "+totalQ; }
       else if(s.type==="result"){ n = totalQ; pLabel.textContent="Fertig"; }
+      else if(s.type==="gate"){ n = totalQ; pLabel.textContent="Fast fertig"; }
       else if(s.type==="loading"){ n = totalQ; pLabel.textContent="Rektusdiastase-Check"; }
       else { n = lastQn; pLabel.textContent="Rektusdiastase-Check"; }
       var pct = Math.round((n/totalQ)*100);
@@ -1071,9 +1211,10 @@
 
     function render(){
       stage.innerHTML = screenHTML(SCREENS[cur]);
-      backBtn.hidden = cur===0;
+      backBtn.hidden = cur===0 || SCREENS[cur].type==="gate";
       updateProgress();
       wire();
+      sendeSchritt(cur, SCREENS[cur].id || SCREENS[cur].type, "view");
       onEnter(SCREENS[cur]);
       try{ window.scrollTo({top:0,behavior: reduce ? "auto":"smooth"}); }catch(e){ window.scrollTo(0,0); }
       var h1 = stage.querySelector("h1"); if(h1){ h1.setAttribute("tabindex","-1"); }
@@ -1117,8 +1258,52 @@
       // continue buttons (auch "Überspringen" im Selbsttest)
       stage.querySelectorAll(".continue").forEach(function(c){ c.addEventListener("click", next); });
       stage.querySelectorAll("[data-goback]").forEach(function(c){ c.addEventListener("click", back); });
+      // E-Mail-Tor
+      wireGate();
       // back
       backBtn.onclick = back;
+    }
+
+    function wireGate(){
+      var feld = stage.querySelector("#gateMail");
+      if(!feld) return;
+      var health = stage.querySelector("#gateHealth");
+      var news = stage.querySelector("#gateNews");
+      var knopf = stage.querySelector("#gateGo");
+
+      function gueltig(){
+        // Bewusst nachsichtig: eine strengere Pruefung sperrt eher gueltige
+        // Adressen aus, als dass sie ungueltige faengt.
+        return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(feld.value.trim());
+      }
+      function pruefe(){
+        // Bedingung ist nur die Einwilligung in die Auswertung selbst. Die
+        // Werbeeinwilligung darf den Zugang nicht koppeln — sie ist freiwillig.
+        knopf.disabled = !(gueltig() && health.checked);
+      }
+      feld.addEventListener("input", function(){ feld.removeAttribute("aria-invalid"); pruefe(); });
+      feld.addEventListener("blur", function(){
+        if(feld.value.trim() && !gueltig()) feld.setAttribute("aria-invalid","true");
+      });
+      health.addEventListener("change", pruefe);
+      feld.addEventListener("keydown", function(e){
+        if(e.key === "Enter" && !knopf.disabled){ e.preventDefault(); knopf.click(); }
+      });
+
+      knopf.addEventListener("click", function(){
+        if(knopf.disabled) return;
+        knopf.disabled = true;
+        sendeIdentitaet(feld.value.trim().toLowerCase(), "", health.checked, news.checked);
+        // Eigenes Ereignis fuer die E-Mail. `Lead` bleibt beim Quiz-Abschluss,
+        // damit die laufende Aussteuerung nicht bricht.
+        if(window.SIA_track) window.SIA_track("CompleteRegistration",
+          { content_name: QUIZ_ID, content_category: "rektusdiastase-quiz", angle: deriveAngle() });
+        // Das Ergebnis wird nicht vom Versand abhaengig gemacht: der Beacon ist
+        // abgeschickt, ob Zoho ihn annimmt, darf die Nutzerin nicht aufhalten.
+        next();
+      });
+
+      pruefe();
     }
 
     function animateCount(el, target, dur){
@@ -1148,11 +1333,22 @@
         setTimeout(function(){ stage.querySelectorAll(".pv-bar").forEach(function(b){ b.style.height=b.dataset.h+"%"; }); },200);
       }
       if(s.type==="loading"){ runLoading(); }
+      if(s.type==="gate"){
+        // Antworten schon hier absenden, nicht erst am Ergebnis: wer am Tor
+        // abspringt, hat das Quiz trotzdem ausgefuellt. Diese Antworten sind
+        // fuer die Sprachschleife dasselbe wert wie die der Durchlaeufer.
+        sendQuizData();
+        // `Lead` bleibt bewusst an "Quiz abgeschlossen" haengen, nicht an der
+        // E-Mail. Wuerde es erst nach dem Tor feuern, saehe Meta einen Einbruch
+        // der Conversions und das Adset ginge zurueck in die Lernphase. Die
+        // E-Mail bekommt ein eigenes Ereignis (siehe wireGate).
+        if(window.SIA_track) window.SIA_track("Lead", { content_name: QUIZ_ID, content_category: "rektusdiastase-quiz", angle: deriveAngle() });
+        var feld = stage.querySelector("#gateMail");
+        if(feld && !("ontouchstart" in window)) feld.focus();   // auf Mobil kein Tastatur-Sprung
+      }
       if(s.type==="result"){
         if(window.SIA_bindEvents) window.SIA_bindEvents();
         sendQuizData();
-        // Quiz abgeschlossen = Lead. Pixel + CAPI mit gemeinsamer eventID.
-        if(window.SIA_track) window.SIA_track("Lead", { content_name: QUIZ_ID, content_category: "rektusdiastase-quiz", angle: deriveAngle() });
       }
     }
     function animateCount2(el, pct){
@@ -1180,6 +1376,19 @@
       }
       requestAnimationFrame(frame);
     }
+
+    // Letzter erreichter Bildschirm beim Verlassen. Erst damit laesst sich ein
+    // Abbruch einem Schritt zuordnen — und nur so wird sichtbar, wie viele am
+    // E-Mail-Tor umkehren.
+    // `pagehide` statt `unload`: `unload` feuert auf iOS/Safari oft nicht.
+    var abbruchGesendet = false;
+    window.addEventListener("pagehide", function(){
+      if(abbruchGesendet) return;
+      abbruchGesendet = true;
+      var s = SCREENS[cur];
+      sendeSchritt(cur, (s && (s.id || s.type)) || "",
+                   (s && s.type === "result") ? "ende" : "abbruch");
+    });
 
     // start (support hash resume for back/forward within session)
     go(0);

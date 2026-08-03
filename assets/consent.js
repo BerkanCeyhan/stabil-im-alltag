@@ -64,6 +64,22 @@
   }
   window.SIA_decorateLinks = decorateLinks;
 
+  // Attributionsblock fuer eigene Payloads (Quiz, Checkout). Ohne diese Werte
+  // laesst sich eine spaetere Bestellung keinem Klick zuordnen — der Cookie
+  // allein nuetzt nichts, wenn ihn niemand ausliest.
+  // Haengt bewusst NICHT an der Marketing-Einwilligung: der Aufrufer entscheidet,
+  // was er damit tut, und schreibt den Einwilligungsstatus mit.
+  window.SIA_getAttr = function () {
+    var attr = readAttr();
+    var out = {};
+    Object.keys(attr).forEach(function (k) { out[k] = attr[k]; });
+    out.fbc = getCookie('_fbc') || ensureFbc() || '';
+    out.fbp = getCookie('_fbp') || '';
+    out.referrer = document.referrer || '';
+    out.page_url = window.location.href;
+    return out;
+  };
+
   function readConsent() {
     var c = getCookie(COOKIE);
     if (!c) return null;
