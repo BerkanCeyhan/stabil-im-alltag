@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wellenpuls LWS – 100 € günstiger bis Sonntag</title>
+<meta name="description" content="Das komplette Wellenpuls-Paket für 389 € statt 489 €. Gerät, 1:1 Gespräch mit dem Gründer, Videokurs, E-Book, Versand. Bis Sonntag, 16. August.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/png" href="../assets/logo_transparent.png">
+<link rel="apple-touch-icon" href="../assets/logo_transparent.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Libre+Franklin:wght@400;500;600;700;800;900&display=swap" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Libre+Franklin:wght@400;500;600;700;800;900&display=swap"></noscript>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary:oklch(38% 0.1 240);
+  --primary-dark:oklch(30% 0.1 240);
+  --primary-light:oklch(96% 0.02 240);
+  --teal:oklch(48% 0.1 165);
+  --teal-dark:oklch(38% 0.1 165);
+  --teal-light:oklch(96% 0.02 165);
+  --bg:oklch(97% 0.008 240);
+  --white:oklch(99.5% 0.003 240);
+  --text:oklch(20% 0.02 240);
+  --text-muted:oklch(52% 0.02 240);
+  --text-body:oklch(32% 0.025 240);
+  --border:oklch(88% 0.02 240);
+  --star:oklch(75% 0.16 75);
+  --green:oklch(52% 0.14 155);
+}
+html{font-size:17px}
+body{font-family:'Libre Franklin',sans-serif;background:var(--white);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased;padding-bottom:76px}
+a{color:inherit;text-decoration:none}
+img{display:block;width:100%;height:auto}
+
+/* AKTIONSLEISTE
+   Ein Datum, keine tickende Uhr. Die Marke verbietet Teleshopping-Optik
+   ausdruecklich, und ein Countdown, der bei jedem Neuladen von vorn beginnt,
+   kostet bei dieser Zielgruppe mehr Glaubwuerdigkeit als er Druck erzeugt. */
+.aktions-bar{background:var(--primary);color:#fff;text-align:center;padding:11px 16px;font-size:14px;font-weight:600;line-height:1.45}
+.aktions-bar strong{font-weight:800}
+.aktions-bar .ab-sep{opacity:.45;margin:0 8px}
+@media(max-width:420px){.aktions-bar .ab-sep{display:block;height:0;overflow:hidden;margin:0}}
+
+/* HEADER */
+.site-header{background:var(--white);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;justify-content:center;align-items:center}
+.site-header img{height:64px;width:auto}
+
+/* SHARED */
+.section{padding:48px 20px}
+.inner{max-width:600px;margin:0 auto}
+.bg-white{background:var(--white)}
+.bg-light{background:var(--bg)}
+.bg-blue{background:var(--primary-light)}
+.bg-teal{background:var(--teal-light)}
+.section-h2{font-family:'Lora',serif;font-size:clamp(22px,5vw,31px);font-weight:700;line-height:1.25;color:var(--primary);margin-bottom:18px}
+.section-h2.center{text-align:center}
+.body-text{font-size:1rem;color:var(--text-body);line-height:1.75;margin-bottom:16px;max-width:68ch}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+.eyebrow.center{text-align:center}
+
+/* BUTTONS */
+.btn{display:block;width:100%;background:var(--teal);color:#fff;font-size:17px;font-weight:800;padding:20px 24px;border-radius:6px;border:none;cursor:pointer;text-align:center;transition:background .18s,transform .1s,box-shadow .18s;box-shadow:0 4px 18px oklch(48% 0.1 165 / 0.35);letter-spacing:.01em;min-height:52px}
+.btn:hover{background:var(--teal-dark);transform:translateY(-1px);box-shadow:0 6px 24px oklch(48% 0.1 165 / 0.45)}
+.btn-wrap{max-width:500px;margin:0 auto}
+.btn-sub{text-align:center;font-size:13px;color:var(--text-muted);margin-top:10px;line-height:1.5}
+.trust-pills{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 14px;margin-top:14px}
+.trust-pills span{font-size:12px;font-weight:600;color:var(--text-muted)}
+.trust-pills span::before{content:'·  '}
+.trust-pills span:first-child::before{content:''}
+
+/* HERO – das Angebot steht ganz oben, nicht die Problembeschreibung.
+   Wer hierher kommt, kennt das Produkt aus der Anzeige bereits. */
+.hero{background:var(--primary-light);padding:30px 20px 40px}
+.hero h1{font-family:'Lora',serif;font-size:clamp(27px,6.2vw,38px);font-weight:700;line-height:1.2;color:var(--primary);text-align:center;margin-bottom:14px}
+.hero-sub{font-size:1.02rem;color:var(--text-body);text-align:center;line-height:1.7;max-width:52ch;margin:0 auto}
+.hero-img{max-width:460px;margin:22px auto 0}
+.hero-img img{filter:drop-shadow(0 14px 34px oklch(38% 0.1 240 / 0.22))}
+
+/* PREISKARTE – der Rabatt ist das lauteste Element der Seite, aber in der
+   Markenfarbe, nicht in Signalrot. */
+.preis-karte{background:var(--primary);border-radius:12px;padding:26px 22px 24px;text-align:center;color:#fff;margin:22px auto 0;max-width:500px;box-shadow:0 14px 40px oklch(38% 0.1 240 / 0.28)}
+.pk-label{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;opacity:.75;margin-bottom:14px}
+.pk-zeile{display:flex;align-items:baseline;justify-content:center;gap:14px;flex-wrap:wrap}
+.pk-alt{font-size:26px;font-weight:600;opacity:.6;text-decoration:line-through;text-decoration-thickness:2px}
+.pk-neu{font-size:clamp(52px,13vw,68px);font-weight:900;line-height:.95;letter-spacing:-.03em}
+.pk-rabatt{display:inline-block;background:oklch(99.5% 0.003 240);color:var(--primary);font-size:15px;font-weight:900;padding:8px 18px;border-radius:100px;margin-top:16px;letter-spacing:.01em}
+.pk-fuss{font-size:13.5px;opacity:.82;margin-top:14px;line-height:1.6}
+.pk-fuss strong{font-weight:800;opacity:1}
+
+/* OFFER STACK */
+.offer-items{display:flex;flex-direction:column;margin:22px 0 0;border-radius:10px;overflow:hidden;border:1px solid var(--border)}
+.offer-item{display:flex;align-items:center;justify-content:space-between;padding:15px 17px;background:var(--white);border-bottom:1px solid var(--border);gap:12px}
+.offer-item.main-item{background:oklch(96% 0.018 240)}
+.offer-item-left{display:flex;align-items:center;gap:12px;flex:1;min-width:0}
+.offer-check{color:var(--teal);font-size:18px;flex-shrink:0;line-height:1}
+.offer-item-name{font-size:15px;font-weight:600;color:var(--text-body)}
+.offer-item-name small{display:block;font-size:12px;font-weight:400;color:var(--text-muted);margin-top:1px}
+.offer-item-price{font-size:14px;font-weight:700;color:var(--text-muted);text-align:right;flex-shrink:0}
+.offer-item-price .gratis{color:var(--teal);font-weight:800;font-size:13px;display:block}
+.offer-item-price .original{text-decoration:line-through;font-size:12px;font-weight:500;color:var(--text-muted);opacity:.7}
+.offer-total{display:flex;justify-content:space-between;align-items:center;padding:15px 17px;background:var(--bg);font-weight:700;font-size:15px;color:var(--text-body);border-bottom:1px solid var(--border)}
+.offer-total span:last-child{text-decoration:line-through;color:var(--text-muted)}
+.offer-deal{display:flex;justify-content:space-between;align-items:center;padding:17px;background:var(--primary);color:#fff;font-weight:800;font-size:17px}
+.offer-deal .od-preis{font-size:22px;font-weight:900;letter-spacing:-.01em}
+
+/* WARUM JETZT */
+.grund-liste{display:flex;flex-direction:column;gap:14px;margin:22px 0}
+.grund{display:flex;gap:14px;align-items:flex-start;background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px 18px}
+.grund-num{font-family:'Lora',serif;font-size:20px;font-weight:700;color:var(--teal);line-height:1.2;flex-shrink:0;width:24px}
+.grund-titel{font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px;line-height:1.35}
+.grund-text{font-size:14.5px;color:var(--text-body);line-height:1.65}
+
+/* KURZ-FAKTEN */
+.fakten{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0}
+.fakt{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px 14px;text-align:center}
+.fakt-zahl{font-family:'Lora',serif;font-size:26px;font-weight:700;color:var(--primary);line-height:1.1}
+.fakt-text{font-size:13px;color:var(--text-muted);font-weight:600;margin-top:5px;line-height:1.45}
+
+/* PHYSIO-ZITAT */
+.zitat{display:flex;gap:15px;align-items:flex-start;background:var(--white);border-left:3px solid var(--teal);border-radius:0 10px 10px 0;padding:18px 18px 18px 16px;margin:20px 0}
+.zitat img{width:58px;height:58px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.zitat-text{font-size:14.5px;color:var(--text-body);line-height:1.7}
+.zitat-name{font-size:12.5px;font-weight:700;color:var(--text);margin-top:7px;display:block}
+
+/* TESTIMONIALS */
+.testi{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px;margin-bottom:12px}
+.testi-stars{color:var(--star);font-size:14px;letter-spacing:1.5px;margin-bottom:8px}
+.testi-text{font-size:14.5px;color:var(--text-body);line-height:1.7;margin-bottom:9px}
+.testi-name{font-size:12.5px;font-weight:700;color:var(--text-muted)}
+
+/* GARANTIE */
+.garantie{background:var(--white);border:1px solid var(--teal);border-radius:12px;padding:26px 22px;text-align:center}
+.garantie-icon{font-size:32px;margin-bottom:10px}
+.garantie h2{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--primary);margin-bottom:12px;line-height:1.3}
+.garantie p{font-size:15px;color:var(--text-body);line-height:1.72;max-width:52ch;margin:0 auto}
+
+/* FAQ */
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{padding:16px 34px 16px 0;font-size:15.5px;font-weight:700;color:var(--text);cursor:pointer;position:relative;line-height:1.45}
+.faq-q .chev{position:absolute;right:4px;top:16px;color:var(--teal);transition:transform .2s;font-size:14px}
+.faq-item.open .faq-q .chev{transform:rotate(180deg)}
+.faq-a{display:none;padding:0 0 16px;font-size:14.5px;color:var(--text-body);line-height:1.72}
+.faq-item.open .faq-a{display:block}
+
+/* FOOTER */
+.footer{background:var(--primary-dark);color:oklch(99% 0.003 240 / 0.62);padding:30px 20px 40px;text-align:center;font-size:12.5px;line-height:1.7}
+.footer a{color:oklch(99% 0.003 240 / 0.82);text-decoration:underline;margin:0 8px;display:inline-block}
+.footer-recht{max-width:60ch;margin:0 auto 14px}
+
+/* STICKY */
+.sticky{position:fixed;left:0;right:0;bottom:0;background:var(--white);border-top:1px solid var(--border);box-shadow:0 -4px 20px oklch(38% 0.1 240 / 0.12);padding:10px 16px;z-index:900;display:flex;align-items:center;gap:12px;max-width:600px;margin:0 auto}
+.sticky-preis{flex:1;min-width:0;line-height:1.3}
+.sticky-preis .sp-name{font-size:11.5px;color:var(--text-muted);font-weight:600;display:block}
+.sticky-preis .sp-zahl{font-size:19px;font-weight:900;color:var(--primary)}
+.sticky-preis .sp-alt{font-size:12.5px;color:var(--text-muted);text-decoration:line-through;margin-left:5px;font-weight:600}
+.sticky .btn{width:auto;flex-shrink:0;padding:14px 22px;font-size:15px;box-shadow:none}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<!-- AKTIONSLEISTE -->
+<div class="aktions-bar">
+  <strong>Sommer-Aktion: 100 € Rabatt</strong><span class="ab-sep">·</span>noch bis Sonntag, 16. August
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <a href="/"><img src="../assets/logo_transparent.png" alt="Stabil im Alltag" style="height:64px;width:auto;display:inline-block"></a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Das komplette Wellenpuls-Paket.<br>Jetzt 100 € günstiger.</h1>
+  <p class="hero-sub">Gerät, 1:1 Gespräch mit dem Gründer, Videokurs, E-Book und Versand. Alles zusammen, einmalig zu zahlen. Bis Sonntag zum Aktionspreis.</p>
+
+  <div class="hero-img">
+    <img src="../assets/product-image-1.png" alt="Wellenpuls LWS – das komplette Paket mit Bonus-Paket" loading="eager">
+  </div>
+
+  <div class="preis-karte">
+    <div class="pk-label">Aktionspreis bis 16. August</div>
+    <div class="pk-zeile">
+      <span class="pk-alt">489 €</span>
+      <span class="pk-neu">389 €</span>
+    </div>
+    <div class="pk-rabatt">Du sparst 100 €</div>
+    <div class="pk-fuss"><strong>Einmalige Zahlung.</strong> Kein Abo, keine Folgekosten.<br>Kostenloser Versand · 30 Tage Geld-zurück-Garantie</div>
+  </div>
+
+  <div class="btn-wrap" style="margin-top:20px">
+    <a href="checkout/" class="btn track-atc">Jetzt für 389 € bestellen</a>
+    <div class="btn-sub">Lieferung in 2 Werktagen · Rückgabe ohne Begründung</div>
+  </div>
+</section>
+
+<!-- WAS DRIN IST -->
+<section class="section bg-light" id="paket">
+  <div class="inner">
+    <div class="eyebrow center">Das bekommst du</div>
+    <h2 class="section-h2 center">Alles im Paket. Nichts kommt später dazu.</h2>
+
+    <div class="offer-items">
+      <div class="offer-item main-item">
+        <div class="offer-item-left">
+          <span class="offer-check">✓</span>
+          <div class="offer-item-name">Wellenpuls LWS Gerät inkl. Reiseetui</div>
+        </div>
+        <div class="offer-item-price">489,00 €</div>
+      </div>
+      <div class="offer-item">
+        <div class="offer-item-left">
+          <span class="offer-check">✓</span>
+          <div class="offer-item-name">1:1 Gespräch mit Christian, dem Gründer und Forscher</div>
+        </div>
+        <div class="offer-item-price"><span class="gratis">Gratis</span><span class="original">120,00 €</span></div>
+      </div>
+      <div class="offer-item">
+        <div class="offer-item-left">
+          <span class="offer-check">✓</span>
+          <div class="offer-item-name">Videokurs: Die 3 häufigsten Fehler bei Rückenschmerzen<small>3 Videos</small></div>
+        </div>
+        <div class="offer-item-price"><span class="gratis">Gratis</span><span class="original">79,00 €</span></div>
+      </div>
+      <div class="offer-item">
+        <div class="offer-item-left">
+          <span class="offer-check">✓</span>
+          <div class="offer-item-name">E-Book und Checkliste: Dein persönlicher Rücken-Startplan</div>
+        </div>
+        <div class="offer-item-price"><span class="gratis">Gratis</span><span class="original">34,90 €</span></div>
+      </div>
+      <div class="offer-item">
+        <div class="offer-item-left">
+          <span class="offer-check">✓</span>
+          <div class="offer-item-name">Versand, Lieferung in 2 Werktagen</div>
+        </div>
+        <div class="offer-item-price"><span class="gratis">Gratis</span><span class="original">9,90 €</span></div>
+      </div>
+      <div class="offer-total">
+        <span>Gesamtwert</span>
+        <span>732,80 €</span>
+      </div>
+      <div class="offer-deal">
+        <span>Dein Aktionspreis</span>
+        <span class="od-preis">389,00 €</span>
+      </div>
+    </div>
+
+    <div class="btn-wrap" style="margin-top:22px">
+      <a href="checkout/" class="btn track-atc">Paket für 389 € sichern</a>
+      <div class="trust-pills">
+        <span>30 Tage Geld-zurück</span>
+        <span>Einmalige Zahlung</span>
+        <span>Keine Abofalle</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KURZE ERINNERUNG AN DEN MECHANISMUS -->
+<section class="section bg-white">
+  <div class="inner">
+    <div class="eyebrow">Kurz zur Erinnerung</div>
+    <h2 class="section-h2">Warum ein Gürtel dort ansetzt, wo Übungen nicht hinkommen</h2>
+
+    <p class="body-text">Die tiefliegende Rumpfmuskulatur stabilisiert deinen unteren Rücken. Bei vielen Menschen mit anhaltenden Beschwerden ist genau diese Muskulatur geschwächt: Sie liegt so tief, dass das Nervensystem sie kaum noch ansteuert. Die Arbeit übernehmen dann oberflächliche Muskeln, die verkrampfen, und Strukturen, die dafür nicht gebaut sind.</p>
+
+    <p class="body-text">Der Wellenpuls LWS nutzt neuromuskuläre Elektrostimulation, wie sie seit Jahrzehnten in Kliniken und in der Reha eingesetzt wird. Elektrische Impulse lösen echte Muskelkontraktionen aus, ohne dass du dich dafür bewegen musst. Entwickelt wurde er gezielt für den Lendenwirbelbereich, weil es dafür bis dahin kein Gerät gab.</p>
+
+    <div style="border-radius:10px;overflow:hidden;margin:22px 0 6px;box-shadow:0 8px 28px oklch(38% 0.1 240 / 0.15)">
+      <img src="../assets/showcase.gif" alt="Wellenpuls LWS in Anwendung" loading="lazy">
+    </div>
+
+    <div class="fakten">
+      <div class="fakt"><div class="fakt-zahl">20 Min.</div><div class="fakt-text">pro Anwendung,<br>im Sitzen</div></div>
+      <div class="fakt"><div class="fakt-zahl">2 ×</div><div class="fakt-text">pro Woche<br>laut Studienprotokoll</div></div>
+      <div class="fakt"><div class="fakt-zahl">78–130</div><div class="fakt-text">cm Bauchumfang<br>passt der Gurt</div></div>
+      <div class="fakt"><div class="fakt-zahl">120+</div><div class="fakt-text">Kundinnen<br>und Kunden</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GLAUBWÜRDIGKEIT -->
+<section class="section bg-blue">
+  <div class="inner">
+    <h2 class="section-h2 center">Kein Gadget. Ein Gerät aus echter Forschung.</h2>
+
+    <div class="grund-liste">
+      <div class="grund">
+        <div class="grund-num">01</div>
+        <div>
+          <div class="grund-titel">Entwickelt an der Deutschen Sporthochschule Köln</div>
+          <div class="grund-text">Von Christian Senfleben, M.Sc. Human Technology in Sports and Medicine, aus seiner eigenen sportwissenschaftlichen Studie heraus. Elektrodenposition, Intensität und Protokoll stammen aus dieser Arbeit.</div>
+        </div>
+      </div>
+      <div class="grund">
+        <div class="grund-num">02</div>
+        <div>
+          <div class="grund-titel">Patentangemeldet und öffentlich gefördert</div>
+          <div class="grund-text">Patentanmeldung im Juni 2024. Gefördert durch das Land NRW, den Bund und die EU. Mehrfach ausgezeichnet.</div>
+        </div>
+      </div>
+      <div class="grund">
+        <div class="grund-num">03</div>
+        <div>
+          <div class="grund-titel">Im Einsatz in Physiotherapie-Praxen</div>
+          <div class="grund-text">Der Wellenpuls LWS wird nicht nur zu Hause genutzt, sondern auch von Therapeutinnen und Therapeuten in der Praxis eingesetzt.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="zitat">
+      <img src="../assets/Arno-Neu-1024x1024.png" alt="Arno van Vonderen" loading="lazy">
+      <div class="zitat-text">„Mit dem Wellenpuls LWS gibt es erstmals eine Möglichkeit, die wichtige Tiefenmuskulatur im Rumpf einfach und effektiv zu trainieren."
+        <span class="zitat-name">Arno van Vonderen · Diplom-Gesundheitswissenschaftler und Physiotherapeut</span>
+      </div>
+    </div>
+
+    <div style="border-radius:10px;overflow:hidden;margin-top:16px">
+      <img src="../assets/Frau_55_Frontalansicht_WellenpulsLWS_Lifestyle.png" alt="Wellenpuls LWS in der Anwendung" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- STIMMEN -->
+<section class="section bg-white">
+  <div class="inner">
+    <h2 class="section-h2 center">Was Kundinnen und Kunden berichten</h2>
+    <div class="testi">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">„Die Wärmefunktion entspannt den Rücken spürbar. Absolut empfehlenswert, gerade für den Preis."</div>
+      <div class="testi-name">Verifizierter Kauf</div>
+    </div>
+    <div class="testi">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">„Nach der zweiten Anwendung hatte ich einen Muskelkater an einer Stelle, an der ich noch nie einen hatte. Da war klar, dass da wirklich etwas arbeitet."</div>
+      <div class="testi-name">Verifizierter Kauf</div>
+    </div>
+    <div class="testi">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">„Ich schaffe 20 Minuten vor dem Fernseher. Einen Physiotermin schaffe ich seit Jahren nicht regelmäßig. So einfach ist der Unterschied."</div>
+      <div class="testi-name">Verifizierter Kauf</div>
+    </div>
+  </div>
+</section>
+
+<!-- GARANTIE -->
+<section class="section bg-teal">
+  <div class="inner">
+    <div class="garantie">
+      <div class="garantie-icon">🛡</div>
+      <h2>30 Tage testen. Ohne Risiko.</h2>
+      <p>Vier Wochen Zeit, das Gerät im eigenen Alltag auszuprobieren. Wenn du keinen Unterschied spürst, schreibst du Christian eine E-Mail und bekommst den vollen Kaufpreis zurück. Ohne Begründung, ohne Rückfragen.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ANGEBOT WIEDERHOLUNG -->
+<section class="section bg-light" id="bestellen">
+  <div class="inner">
+    <h2 class="section-h2 center">Bis Sonntag, 16. August</h2>
+
+    <div class="preis-karte" style="margin-top:6px">
+      <div class="pk-label">Komplettpaket, einmalig</div>
+      <div class="pk-zeile">
+        <span class="pk-alt">489 €</span>
+        <span class="pk-neu">389 €</span>
+      </div>
+      <div class="pk-rabatt">Du sparst 100 €</div>
+      <div class="pk-fuss">Gerät · 1:1 Gespräch · Videokurs · E-Book · Versand<br><strong>Gesamtwert 732,80 €</strong></div>
+    </div>
+
+    <div class="btn-wrap" style="margin-top:20px">
+      <a href="checkout/" class="btn track-atc">Jetzt für 389 € bestellen</a>
+      <div class="trust-pills">
+        <span>30 Tage Geld-zurück</span>
+        <span>Kostenloser Versand</span>
+        <span>Einmalige Zahlung</span>
+      </div>
+    </div>
+
+    <p class="body-text" style="text-align:center;font-size:14px;color:var(--text-muted);margin:22px auto 0">Nach dem 16. August gilt wieder der reguläre Preis von 489 €.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section bg-white">
+  <div class="inner">
+    <h2 class="section-h2 center">Häufige Fragen</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">Ist das wirklich dasselbe Paket wie sonst? <span class="chev">▾</span></div>
+        <div class="faq-a">Ja. Gerät, Reiseetui, 1:1 Gespräch mit Christian, Videokurs, E-Book und Versand. Es ist nichts herausgenommen und nichts eingeschränkt. Nur der Preis ist bis Sonntag um 100 € reduziert.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Wann spüre ich erste Ergebnisse? <span class="chev">▾</span></div>
+        <div class="faq-a">Viele Kundinnen und Kunden berichten nach zwei bis drei Anwendungen von einem Muskelkater tief im unteren Rücken. Das ist ein Zeichen, dass dort Muskeln beansprucht wurden, die vorher kaum aktiviert waren. Spürbare Veränderungen im Alltag zeigen sich bei den meisten nach einigen Wochen regelmäßiger Nutzung.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Ist die Elektrostimulation unangenehm? <span class="chev">▾</span></div>
+        <div class="faq-a">Beim ersten Mal fühlt sie sich ungewohnt an: ein Kribbeln, das zu einem Pulsieren wird. Du regelst die Intensität selbst hoch und bestimmst, wie stark es ist. Die integrierte Wärmefunktion macht den Einstieg deutlich angenehmer.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Für wen ist das Gerät nicht geeignet? <span class="chev">▾</span></div>
+        <div class="faq-a">Nicht geeignet für Personen mit Herzschrittmacher, Metallimplantaten im Rumpfbereich, Epilepsie, Herzrhythmusstörungen, in der Schwangerschaft oder bei stark veränderten Blutdruckwerten. Bei bestehenden Erkrankungen bitte vorher ärztlich Rücksprache halten.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Gibt es laufende Kosten? <span class="chev">▾</span></div>
+        <div class="faq-a">Nein. Der Wellenpuls LWS ist ein einmaliger Kauf. Kein Abo, keine Verbrauchsmaterialien, die du nachkaufen musst. Die Elektroden werden vor der Anwendung nur mit Wasser befeuchtet.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-recht">
+    Aktionspreis 389,00 € statt regulär 489,00 €, gültig bis einschließlich Sonntag, 16. August 2026.
+    Alle Preise inklusive gesetzlicher Mehrwertsteuer. Der Wellenpuls LWS ist ein Trainingsgerät und ersetzt keine ärztliche Behandlung.
+  </div>
+  <div>
+    <a href="/impressum/">Impressum</a>
+    <a href="/datenschutz/">Datenschutz</a>
+    <a href="#" onclick="if(window.SIA_openConsent)SIA_openConsent();return false;">Cookie-Einstellungen</a>
+  </div>
+</footer>
+
+<!-- STICKY -->
+<div class="sticky">
+  <div class="sticky-preis">
+    <span class="sp-name">Wellenpuls LWS + Bonus-Paket</span>
+    <span class="sp-zahl">389 €</span><span class="sp-alt">489 €</span>
+  </div>
+  <a href="checkout/" class="btn track-atc">Bestellen</a>
+</div>
+
+<script>
+// FAQ
+document.querySelectorAll('.faq-q').forEach(function(q){
+  q.addEventListener('click', function(){ q.parentElement.classList.toggle('open'); });
+});
+// Die Sticky-Leiste verdeckt sonst den Bestell-Block am Seitenende.
+(function(){
+  var bar = document.querySelector('.sticky');
+  var ziel = document.getElementById('bestellen');
+  if(!bar || !ziel || !('IntersectionObserver' in window)) return;
+  new IntersectionObserver(function(eintraege){
+    bar.style.display = eintraege[0].isIntersecting ? 'none' : 'flex';
+  }, { threshold: 0.25 }).observe(ziel);
+})();
+</script>
+<script src="../assets/consent.js" defer></script>
+</body>
+</html>
