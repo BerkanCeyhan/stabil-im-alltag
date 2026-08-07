@@ -735,6 +735,13 @@ function hideBannerError(){
 }
 
 // Submit
+// Eine Kennung je Bestellversuch. Browser und Server melden denselben Kauf
+// unter derselben event_id, damit Meta dedupliziert statt doppelt zu zaehlen.
+var SIA_EVENT_ID = 'purchase-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+var ATTR = {};
+try { if (window.SIA_getAttr) ATTR = window.SIA_getAttr() || {}; } catch(e){}
+try { sessionStorage.setItem('sia_event_id', SIA_EVENT_ID); } catch(e){}
+
 document.getElementById('checkout-form').addEventListener('submit', async function(e){
   e.preventDefault();
   hideBannerError();
@@ -764,6 +771,15 @@ document.getElementById('checkout-form').addEventListener('submit', async functi
     payment_method:      document.querySelector('input[name="payment_method"]:checked').value,
     product_id:          4220,
     quantity:            1,
+    // Attribution: reist ueber die Mollie-Metadata mit und kommt im
+    // Bezahlt-Webhook zurueck. Nur damit laesst sich ein Kauf der Anzeige
+    // zuordnen, die ihn ausgeloest hat -- Cookies ueberleben den Umweg nicht.
+    aktion:              'sommer100',
+    event_id:            SIA_EVENT_ID,
+    fbc:                 ATTR.fbc || '',
+    fbp:                 ATTR.fbp || '',
+    client_user_agent:   ATTR.client_user_agent || navigator.userAgent || '',
+    client_ip_address:   ATTR.client_ip_address || '',
     amount:              '389.00',
     currency:            'EUR'
   };

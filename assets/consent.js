@@ -77,6 +77,10 @@
     out.fbp = getCookie('_fbp') || '';
     out.referrer = document.referrer || '';
     out.page_url = window.location.href;
+    // Der Checkout reicht beides an Mollie durch, damit der serverseitige
+    // Kauf-Rueckmeldung dieselben Kennungen tragen kann wie der Browser.
+    out.client_ip_address = clientIp || '';
+    out.client_user_agent = navigator.userAgent || '';
     return out;
   };
 
