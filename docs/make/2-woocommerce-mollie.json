@@ -691,7 +691,7 @@
                                 "__IMTCONN__": 14232475
                             },
                             "mapper": {
-                                "amount": "{{6.amount}}",
+                                "amount": "489.00",
                                 "locale": "de_DE",
                                 "method": [
                                     "creditcard",
@@ -1555,7 +1555,7 @@
                                 "__IMTCONN__": 14232475
                             },
                             "mapper": {
-                                "amount": "{{6.amount}}",
+                                "amount": "389.00",
                                 "locale": "de_DE",
                                 "method": [
                                     "creditcard",

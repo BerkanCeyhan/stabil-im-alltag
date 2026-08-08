@@ -41,6 +41,16 @@ Ohne den Gutschein zieht Mollie 389,00 € ein, während die WooCommerce-Bestell
 aus den fest verdrahteten Produkten 489,00 € bildet. Der Gutschein bringt beide
 Seiten auf denselben Betrag.
 
+**Der Betrag ist je Route fest verdrahtet.** `mollie:createPayment` nimmt nicht
+mehr `{{6.amount}}` aus dem Webhook, sondern `489.00` in Route 1 und `389.00` in
+Route 2. Die Nutzlast aus dem Browser ist frei manipulierbar; wer sie ändert,
+konnte sich vorher einen beliebigen Preis setzen. Der Betrag gehört auf die
+Serverseite, dorthin, wo auch WooCommerce seinen Warenkorb aus Produkten und
+Gutschein bildet.
+
+Eine neue Preisstufe braucht damit eine eigene Route, kein neues Feld im
+Checkout. Das ist gewollt: eine Route ist sichtbar, ein Feld nicht.
+
 **Attribution reist in der Mollie-Metadata mit.** Statt nur der Bestellnummer:
 
     {"order_id":"…","email":"…","fbc":"…","fbp":"…",
