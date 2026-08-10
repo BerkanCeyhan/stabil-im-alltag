@@ -785,7 +785,9 @@ document.getElementById('checkout-form').addEventListener('submit', async functi
     // Attribution: reist ueber die Mollie-Metadata mit und kommt im
     // Bezahlt-Webhook zurueck. Nur damit laesst sich ein Kauf der Anzeige
     // zuordnen, die ihn ausgeloest hat -- Cookies ueberleben den Umweg nicht.
-    aktion:              null,
+    // Kein aktion-Feld: der Router in Make unterscheidet die Zweige ueber
+    // "existiert nicht". Ein vorhandener Schluessel mit Wert null waere
+    // mehrdeutig -- dann greift moeglicherweise keine der beiden Routen.
     event_id:            SIA_EVENT_ID,
     fbc:                 ATTR.fbc || '',
     fbp:                 ATTR.fbp || '',
