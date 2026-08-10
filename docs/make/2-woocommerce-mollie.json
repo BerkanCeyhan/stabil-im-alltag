@@ -1562,7 +1562,7 @@
                                     "paypal"
                                 ],
                                 "currency": "EUR",
-                                "metadata": "{\"order_id\":\"{{2.id}}\",\"email\":\"{{6.email}}\",\"fbc\":\"{{6.fbc}}\",\"fbp\":\"{{6.fbp}}\",\"event_id\":\"{{6.event_id}}\",\"ua\":\"{{6.client_user_agent}}\",\"ip\":\"{{6.client_ip_address}}\",\"src\":\"aktion\"}",
+                                "metadata": "{\"order_id\":\"{{20.id}}\",\"email\":\"{{6.email}}\",\"fbc\":\"{{6.fbc}}\",\"fbp\":\"{{6.fbp}}\",\"event_id\":\"{{6.event_id}}\",\"ua\":\"{{6.client_user_agent}}\",\"ip\":\"{{6.client_ip_address}}\",\"src\":\"aktion\"}",
                                 "profileId": "pfl_FkCVKjEnzh",
                                 "webhookUrl": "https://hook.eu2.make.com/wk4v2q911h2j1nx89voqd25lq80ymuln",
                                 "description": "Wellenpuls LWS – Komplettpaket, Sommer-Aktion (statt 489,00 € nur 389,00 €)",
@@ -2481,7 +2481,7 @@
                             },
                             "metadata": {
                                 "designer": {
-                                    "x": 900,
+                                    "x": 1200,
                                     "y": 300
                                 },
                                 "restore": {
