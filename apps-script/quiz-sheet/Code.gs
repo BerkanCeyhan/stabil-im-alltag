@@ -312,119 +312,253 @@ function auswertungTexte_(antworten, angle) {
 }
 
 /**
- * E-Mail-HTML. Bewusst Tabellenlayout mit Inline-CSS: Outlook rendert kein
- * Flexbox und ignoriert externe Stylesheets. Feste Breite 600px, eine Spalte.
+ * E-Mail-HTML. Tabellenlayout mit Inline-CSS: Outlook rendert kein Flexbox und
+ * ignoriert externe Stylesheets. Feste Breite 600px, eine Spalte.
+ *
+ * Die Farben sind die Tokens der Seite, aus oklch nach sRGB uebersetzt —
+ * Mailclients kennen oklch nicht. Die Dunkelfassung steht im style-Block;
+ * Clients, die ihn verwerfen, sehen die helle Fassung. Hell ist die Referenz.
+ *
+ * Bilder liegen unter assets/mail/ in doppelter Anzeigebreite und werden per
+ * width-Attribut halbiert. In keinem Bild steckt Text, der Knopf ist HTML:
+ * bei blockierten Bildern bleibt die Mail vollstaendig lesbar.
  */
 function auswertungHtml_(antworten, angle, token) {
-  var t = auswertungTexte_(antworten, angle);
+  var a = antworten || {};
+  var t = auswertungTexte_(a, angle);
   var ziel = auswertungsLink_(token);
+  var lpZiel = LP_BASIS + (angle ? '?angle=' + encodeURIComponent(angle) : '');
+  var bild = 'https://stabil-im-alltag.de/assets/mail/';
+  var schrift = '\'Libre Franklin\',-apple-system,BlinkMacSystemFont,\'Segoe UI\',Arial,sans-serif';
 
+  // Eine Zeile der Angaben-Tabelle. Leere Antworten fallen weg.
+  function zeile(label, wert) {
+    if (!wert) return '';
+    return '<tr>' +
+      '<td class="rule soft" style="padding:10px 0;border-bottom:1px solid #efe5e3;font-size:14px;' +
+        'line-height:1.5;color:#5b4e55;" width="52%">' + htmlEsc_(label) + '</td>' +
+      '<td class="rule ink" style="padding:10px 0;border-bottom:1px solid #efe5e3;font-size:14px;' +
+        'line-height:1.5;color:#30252b;font-weight:700;text-align:right;">' +
+        htmlEsc_(String(wert).split('|').map(function (s) { return s.trim(); }).join(' · ')) +
+      '</td></tr>';
+  }
+
+  var angaben =
+    zeile('Zeit seit der Geburt', a.time) +
+    zeile('Deine Lücke', a.gap) +
+    zeile('Wölbung im Tagesverlauf', a.bulge) +
+    zeile('Belastung im Alltag', a.burden) +
+    zeile('Was am meisten stört', a.bother) +
+    zeile('Schon versucht', a.tried);
+
+  // Ein Schritt des Plans.
   function schritt(nr, kopf, text) {
-    return '<tr><td style="padding:0 0 18px 0;">' +
+    return '<tr><td style="padding:0 0 16px 0;">' +
       '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">' +
       '<tr>' +
-      '<td width="34" valign="top" style="font-size:15px;font-weight:800;color:#0f7d78;">' + nr + '.</td>' +
-      '<td valign="top">' +
-        '<div style="font-size:15px;font-weight:700;color:#12263a;margin-bottom:3px;">' + kopf + '</div>' +
-        '<div style="font-size:14px;line-height:1.6;color:#5b6b7c;">' + text + '</div>' +
+      '<td width="30" valign="top" class="akzent" style="font-family:' + schrift + ';font-size:15px;' +
+        'font-weight:800;color:#73455b;">' + nr + '.</td>' +
+      '<td valign="top" style="font-family:' + schrift + ';">' +
+        '<div class="ink" style="font-size:15px;font-weight:700;color:#30252b;">' + kopf + '</div>' +
+        '<div class="soft" style="font-size:14px;line-height:1.6;color:#5b4e55;margin-top:2px;">' + text + '</div>' +
       '</td></tr></table></td></tr>';
   }
 
   return '' +
-'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#f4f7fa;margin:0;padding:0;">' +
-'<tr><td align="center" style="padding:24px 12px;">' +
-  '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" style="width:600px;max-width:100%;background:#ffffff;border-radius:14px;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',Arial,sans-serif;">' +
+'<!doctype html><html lang="de"><head><meta charset="utf-8">' +
+'<meta name="viewport" content="width=device-width,initial-scale=1">' +
+'<meta name="color-scheme" content="light dark">' +
+'<meta name="supported-color-schemes" content="light dark">' +
+'<title>Deine Auswertung</title>' +
+'<!--[if !mso]><!--><link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;700;800&display=swap" rel="stylesheet"><!--<![endif]-->' +
+'<style>' +
+  'body{margin:0;padding:0;width:100%!important;}' +
+  'img{border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;}' +
+  'a{color:#73455b;}' +
+  '@media (max-width:620px){' +
+    '.huelle{padding:12px 8px!important;}' +
+    '.innen{padding-left:20px!important;padding-right:20px!important;}' +
+    '.h1{font-size:22px!important;}' +
+  '}' +
+  '@media (prefers-color-scheme:dark){' +
+    '.canvas{background:#1a1417!important;}' +
+    '.karte{background:#282024!important;border-color:#3e353a!important;}' +
+    '.ink{color:#f3ecf0!important;}' +
+    '.soft{color:#cac1c6!important;}' +
+    '.mut{color:#9e959a!important;}' +
+    '.akzent{color:#ce8fac!important;}' +
+    '.rule{border-color:#3e353a!important;}' +
+    '.pale{background:#412331!important;}' +
+    '.paleTxt{color:#f3ecf0!important;}' +
+    '.knopf{background:#b36c8f!important;}' +
+    '.knopfTxt{color:#1a1417!important;}' +
+    'a{color:#ce8fac!important;}' +
+  '}' +
+'</style></head>' +
+'<body class="canvas" style="margin:0;padding:0;background:#fdf4f1;">' +
 
-    '<tr><td style="padding:26px 30px 0 30px;">' +
-      '<div style="font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#0f7d78;">Stabil im Alltag</div>' +
+// Vorschauzeile im Posteingang. Die Fuellzeichen verhindern, dass der Client
+// stattdessen den Beginn des Fliesstextes anreisst.
+'<div style="display:none;font-size:1px;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all;">' +
+  'Deine Angaben, die Einordnung dazu und dein Plan für die nächsten zwölf Wochen.' +
+  '&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;' +
+'</div>' +
+
+'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" class="canvas" style="background:#fdf4f1;">' +
+'<tr><td align="center" class="huelle" style="padding:24px 12px;">' +
+  '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" class="karte" style="width:600px;max-width:100%;background:#fffdfb;border:1px solid #efe5e3;border-radius:14px;overflow:hidden;font-family:' + schrift + ';">' +
+
+    // Farbkante. Outlook zeigt den Verlauf nicht und faellt auf die Grundfarbe zurueck.
+    '<tr><td height="3" bgcolor="#73455b" style="height:3px;line-height:3px;font-size:3px;background:#73455b;background-image:linear-gradient(90deg,#73455b,#487552);">&nbsp;</td></tr>' +
+
+    // Kopf. Das Feld bleibt auch im Dunkelmodus hell: das Logo ist eine
+    // transparente Datei auf heller Flaeche und verschwaende im Dunkeln.
+    '<tr><td align="center" bgcolor="#fffdfb" style="background:#fffdfb;padding:20px 30px;border-bottom:1px solid #efe5e3;">' +
+      '<img src="' + bild + 'logo-264.png" width="132" alt="Stabil im Alltag" style="display:block;width:132px;height:auto;">' +
     '</td></tr>' +
 
-    '<tr><td style="padding:14px 30px 0 30px;">' +
-      '<h1 style="margin:0;font-size:24px;line-height:1.25;color:#12263a;font-weight:800;">' + htmlEsc_(t.titel) + '</h1>' +
+    '<tr><td style="font-size:0;line-height:0;">' +
+      '<img src="' + bild + 'hero-1200.jpg" width="600" alt="Junge Mutter mit Kind auf dem Arm, trägt den Wellenpuls LWS um die Körpermitte" style="display:block;width:100%;max-width:600px;height:auto;">' +
     '</td></tr>' +
 
-    '<tr><td style="padding:16px 30px 0 30px;">' +
-      '<p style="margin:0;font-size:15px;line-height:1.65;color:#5b6b7c;">Hier ist deine Auswertung aus dem Rektusdiastase-Check — in Ruhe nachlesbar, wann immer es gerade passt.</p>' +
+    '<tr><td class="innen" style="padding:26px 30px 0 30px;">' +
+      '<div class="akzent" style="font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#73455b;">Deine Auswertung</div>' +
+      '<h1 class="h1 ink" style="margin:10px 0 0;font-size:25px;line-height:1.22;color:#30252b;font-weight:800;letter-spacing:-.01em;">' + htmlEsc_(t.titel) + '</h1>' +
+      '<p class="soft" style="margin:10px 0 0;font-size:15px;line-height:1.65;color:#5b4e55;">Deine Angaben, die Einordnung dazu und dein Plan für die nächsten zwölf Wochen.</p>' +
     '</td></tr>' +
 
-    // Bewusst KEINE Gesundheitsangaben im Mailtext. Eine E-Mail liegt im
-    // Klartext auf fremden Servern; "Deine Luecke: 2 Fingerbreit" waere dort
-    // eine Gesundheitsaussage. Die persoenliche Auswertung steht hinter dem
-    // Link, erreichbar nur mit dem Einmal-Schluessel aus dieser Mail.
-    '<tr><td style="padding:22px 30px 0 30px;">' +
-      '<p style="margin:0;font-size:15px;line-height:1.7;color:#12263a;">Deine persönliche Auswertung liegt auf einer geschützten Seite bereit — erreichbar nur über den Link in dieser E-Mail. So stehen deine Angaben nicht im Klartext im Postfach.</p>' +
-      '<p style="margin:12px 0 0 0;font-size:15px;line-height:1.7;color:#5b6b7c;"><strong style="color:#12263a;">Der Haken ist die Regelmäßigkeit</strong>, die Übungsprogramme und Kurse verlangen. Woche für Woche, in einem Alltag, der sich nach dem Kind richtet. Genau daran scheitern die meisten.</p>' +
-    '</td></tr>' +
-
-    '<tr><td style="padding:26px 30px 0 30px;">' +
-      '<div style="font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#8494a3;margin-bottom:14px;">Dein Plan für die nächsten 12 Wochen</div>' +
-      '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">' +
-        schritt(1, 'Woche 1 bis 4 — die Tiefe wieder ansprechen',
-          'Die tiefe Bauchmuskulatur arbeitet vor allem über die Atmung. Beim Ausatmen den Bauchnabel sanft nach innen ziehen, ohne die Luft anzuhalten, ohne zu pressen. Zweimal täglich zehn ruhige Atemzüge reichen in dieser Phase.') +
-        schritt(2, 'Woche 5 bis 8 — Belastung dosiert dazunehmen',
-          'Alltagsbewegungen bewusst mit gehaltener Mitte: aufstehen, das Kind hochnehmen, Treppen. Wölbt sich der Bauch dabei kegelförmig vor, war der Reiz zu groß — eine Stufe zurück, nicht durchbeißen.') +
-        schritt(3, 'Woche 9 bis 12 — halten statt neu anfangen',
-          'Jetzt entscheidet nicht die Intensität, sondern dass es überhaupt stattfindet. Zwei feste Termine pro Woche, verknüpft mit etwas, das ohnehin passiert.') +
+    (angaben ?
+    '<tr><td class="innen" style="padding:24px 30px 0 30px;">' +
+      '<div class="mut" style="font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7c7177;">Deine Angaben</div>' +
+      '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-top:6px;border-collapse:collapse;font-family:' + schrift + ';">' +
+        angaben +
       '</table>' +
-      '<p style="margin:4px 0 0 0;font-size:13px;line-height:1.6;color:#8494a3;">Klassische Sit-ups, Crunches und Planks bleiben in dieser Zeit meist außen vor — sie belasten die Mittellinie genau dort, wo sie zusammenwachsen soll. Das ist eine allgemeine Orientierung und ersetzt keine physiotherapeutische Anleitung.</p>' +
+    '</td></tr>' : '') +
+
+    '<tr><td class="innen" style="padding:20px 30px 0 30px;">' +
+      '<p class="ink" style="margin:0;font-size:15px;line-height:1.7;color:#30252b;">' + htmlEsc_(t.einordnung) + '</p>' +
+      (t.schwerpunkt ? '<p class="soft" style="margin:10px 0 0;font-size:15px;line-height:1.7;color:#5b4e55;">' + htmlEsc_(t.schwerpunkt) + '</p>' : '') +
+      '<p class="soft" style="margin:10px 0 0;font-size:15px;line-height:1.7;color:#5b4e55;"><strong class="ink" style="color:#30252b;">Der Haken ist die Regelmäßigkeit.</strong> Woche für Woche, in einem Alltag, der sich nach dem Kind richtet. Daran scheitern die meisten.</p>' +
     '</td></tr>' +
 
-    '<tr><td style="padding:24px 30px 0 30px;">' +
-      '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#eef7f6;border-radius:12px;">' +
-        '<tr><td style="padding:18px 20px;">' +
-          '<div style="font-size:15px;font-weight:700;color:#12263a;margin-bottom:6px;">Der Selbsttest, falls du die Lücke noch nicht gemessen hast</div>' +
-          '<div style="font-size:14px;line-height:1.65;color:#5b6b7c;">Flach auf den Rücken, Beine angewinkelt. Zwei Finger längs oberhalb des Bauchnabels auflegen. Kopf und Schultern leicht anheben. Wie viele Finger passen quer in die Lücke? Miss auch auf Nabelhöhe und darunter — die Breite ist selten überall gleich.</div>' +
+    '<tr><td align="center" class="innen" style="padding:24px 30px 0 30px;">' +
+      '<table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center">' +
+        '<tr><td class="knopf" bgcolor="#73455b" align="center" style="background:#73455b;border-radius:11px;">' +
+          '<a href="' + htmlEsc_(lpZiel) + '" class="knopfTxt" style="display:inline-block;padding:16px 30px;font-family:' + schrift + ';font-size:16px;font-weight:700;color:#fffdfb;text-decoration:none;border-radius:11px;">Plan und Angebot ansehen</a>' +
         '</td></tr>' +
       '</table>' +
     '</td></tr>' +
 
-    '<tr><td align="center" style="padding:28px 30px 0 30px;">' +
-      '<a href="' + htmlEsc_(ziel) + '" style="display:inline-block;background:#0f7d78;color:#ffffff;text-decoration:none;font-size:16px;font-weight:700;padding:16px 30px;border-radius:11px;">Auswertung ansehen</a>' +
-      '<div style="margin-top:10px;font-size:12px;color:#9aa8b5;">Der Link ist persönlich. Gib ihn nicht weiter.</div>' +
+    '<tr><td class="innen" style="padding:28px 30px 0 30px;">' +
+      '<div class="mut" style="font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7c7177;margin-bottom:12px;">Dein Plan für die nächsten 12 Wochen</div>' +
+      '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">' +
+        schritt(1, 'Woche 1 bis 4 — die Tiefe wieder ansprechen',
+          'Beim Ausatmen den Bauchnabel sanft nach innen ziehen, ohne zu pressen. Zweimal täglich zehn ruhige Atemzüge.') +
+        schritt(2, 'Woche 5 bis 8 — Belastung dosiert dazunehmen',
+          'Aufstehen, das Kind hochnehmen, Treppen — bewusst mit gehaltener Mitte. Wölbt sich der Bauch kegelförmig vor, eine Stufe zurück.') +
+        schritt(3, 'Woche 9 bis 12 — halten statt neu anfangen',
+          'Nicht die Intensität entscheidet, sondern dass es stattfindet. Zwei feste Termine pro Woche, verknüpft mit etwas, das ohnehin passiert.') +
+      '</table>' +
+      '<p class="mut" style="margin:0;font-size:13px;line-height:1.6;color:#7c7177;">Sit-ups, Crunches und Planks bleiben vorerst außen vor — sie belasten die Mittellinie dort, wo sie zusammenwachsen soll. Das ist eine allgemeine Orientierung und ersetzt keine physiotherapeutische Anleitung.</p>' +
     '</td></tr>' +
 
-    '<tr><td style="padding:22px 30px 0 30px;">' +
-      '<p style="margin:0;font-size:15px;line-height:1.7;color:#5b6b7c;">Wenn du Fragen hast, antworte einfach auf diese Mail.</p>' +
-      '<p style="margin:14px 0 0 0;font-size:15px;line-height:1.7;color:#5b6b7c;">Herzliche Grüße<br><strong style="color:#12263a;">Christian Senfleben</strong><br>Wellenpuls</p>' +
+    '<tr><td class="innen" style="padding:22px 30px 0 30px;">' +
+      '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" class="pale" style="background:#fbebf2;border-radius:12px;">' +
+        '<tr><td style="padding:14px 14px 0 14px;font-size:0;line-height:0;">' +
+          '<img src="' + bild + 'anatomie-1024.jpg" width="512" alt="Schematische Darstellung der Rektusdiastase: die Bauchmuskeln weichen entlang der Mittellinie auseinander" style="display:block;width:100%;max-width:512px;height:auto;border-radius:8px;">' +
+        '</td></tr>' +
+        '<tr><td style="padding:12px 16px 16px 16px;font-family:' + schrift + ';">' +
+          '<div class="ink" style="font-size:15px;font-weight:700;color:#30252b;">Der Selbsttest, falls du die Lücke noch nicht gemessen hast</div>' +
+          '<div class="soft" style="font-size:14px;line-height:1.6;color:#5b4e55;margin-top:5px;">Flach auf den Rücken, Beine angewinkelt. Zwei Finger längs über dem Nabel, Kopf und Schultern leicht anheben. Wie viele Finger passen quer in die Lücke? Miss auch auf Nabelhöhe und darunter — die Breite ist selten überall gleich.</div>' +
+        '</td></tr>' +
+      '</table>' +
     '</td></tr>' +
 
-    '<tr><td style="padding:24px 30px 0 30px;">' +
-      '<p style="margin:0;font-size:12px;line-height:1.6;color:#9aa8b5;border-top:1px solid #e7ecf1;padding-top:16px;">Der Wellenpuls LWS ist ein Trainingsgerät, kein Medizinprodukt, und ersetzt keine ärztliche Beratung. Dieser Check dient der Einordnung und stellt keine Diagnose. Nicht in der Schwangerschaft anwenden; beginne frühestens 6 Wochen nach der Geburt und kläre die Anwendung bei Beschwerden ärztlich ab. Individuelle Ergebnisse können variieren.</p>' +
+    '<tr><td align="center" class="innen" style="padding:18px 30px 0 30px;">' +
+      '<a href="' + htmlEsc_(ziel) + '" class="mut" style="font-size:13px;line-height:1.6;color:#7c7177;">Diese Auswertung im Browser ansehen</a>' +
     '</td></tr>' +
 
-    '<tr><td style="padding:14px 30px 28px 30px;">' +
-      '<p style="margin:0;font-size:12px;line-height:1.6;color:#9aa8b5;">Du bekommst diese E-Mail, weil du den Rektusdiastase-Check auf stabil-im-alltag.de gemacht und um deine Auswertung gebeten hast.<br>' +
-      'Wellenpuls GmbH · <a href="https://stabil-im-alltag.de/impressum/" style="color:#9aa8b5;">Impressum</a> · <a href="https://stabil-im-alltag.de/datenschutz/" style="color:#9aa8b5;">Datenschutz</a></p>' +
+    '<tr><td class="innen" style="padding:24px 30px 0 30px;">' +
+      '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-top:1px solid #efe5e3;" class="rule">' +
+        '<tr><td width="56" valign="top" style="padding:18px 12px 0 0;">' +
+          '<img src="' + bild + 'portrait-112.jpg" width="56" alt="" style="display:block;width:56px;height:56px;border-radius:28px;">' +
+        '</td>' +
+        '<td valign="top" style="padding:18px 0 0 0;font-family:' + schrift + ';">' +
+          '<p class="soft" style="margin:0;font-size:15px;line-height:1.6;color:#5b4e55;">Fragen? Antworte einfach auf diese Mail.</p>' +
+          '<p class="soft" style="margin:8px 0 0;font-size:15px;line-height:1.6;color:#5b4e55;">Herzliche Grüße<br><strong class="ink" style="color:#30252b;">Christian Senfleben</strong> · Wellenpuls</p>' +
+        '</td></tr>' +
+      '</table>' +
+    '</td></tr>' +
+
+    '<tr><td class="innen" style="padding:22px 30px 0 30px;">' +
+      '<p class="mut rule" style="margin:0;font-size:12px;line-height:1.6;color:#7c7177;border-top:1px solid #efe5e3;padding-top:16px;">Der Wellenpuls LWS ist ein Trainingsgerät, kein Medizinprodukt, und ersetzt keine ärztliche Beratung. Dieser Check dient der Einordnung und stellt keine Diagnose. Nicht in der Schwangerschaft anwenden; beginne frühestens 6 Wochen nach der Geburt und kläre die Anwendung bei Beschwerden ärztlich ab. Individuelle Ergebnisse können variieren.</p>' +
+    '</td></tr>' +
+
+    '<tr><td class="innen" style="padding:14px 30px 28px 30px;">' +
+      '<p class="mut" style="margin:0;font-size:12px;line-height:1.6;color:#7c7177;">Du bekommst diese E-Mail, weil du den Rektusdiastase-Check auf stabil-im-alltag.de gemacht und um deine Auswertung gebeten hast.<br>' +
+      'Wellenpuls GmbH · <a href="https://stabil-im-alltag.de/impressum/" class="mut" style="color:#7c7177;">Impressum</a> · <a href="https://stabil-im-alltag.de/datenschutz/" class="mut" style="color:#7c7177;">Datenschutz</a></p>' +
     '</td></tr>' +
 
   '</table>' +
-'</td></tr></table>';
+'</td></tr></table></body></html>';
 }
 
-/** Nur-Text-Fassung. Fehlt sie, stufen viele Filter die Mail herab. */
+/**
+ * Nur-Text-Fassung. Zoho Mail nimmt ueber die Messages-API keine Textalternative
+ * entgegen, dort geht die Mail als reines HTML raus. Diese Fassung traegt den
+ * MailApp-Rueckfall und bleibt die Grundlage, falls der Versandweg wechselt.
+ */
 function auswertungText_(antworten, angle, token) {
-  var t = auswertungTexte_(antworten, angle);
+  var a = antworten || {};
+  var t = auswertungTexte_(a, angle);
   var z = [];
+
+  function zeile(label, wert) {
+    if (!wert) return;
+    z.push('- ' + label + ': ' +
+      String(wert).split('|').map(function (s) { return s.trim(); }).join(', '));
+  }
+
   z.push(t.titel.toUpperCase());
   z.push('');
-  z.push('Hier ist deine Auswertung aus dem Rektusdiastase-Check.');
+  z.push('Deine Angaben, die Einordnung dazu und dein Plan fuer die naechsten');
+  z.push('zwoelf Wochen.');
   z.push('');
-  z.push('Deine persoenliche Auswertung liegt auf einer geschuetzten Seite bereit,');
-  z.push('erreichbar nur ueber den Link unten. So stehen deine Angaben nicht im');
-  z.push('Klartext im Postfach. Der Link ist persoenlich, gib ihn nicht weiter.');
+  z.push('DEINE ANGABEN');
+  zeile('Zeit seit der Geburt', a.time);
+  zeile('Deine Luecke', a.gap);
+  zeile('Woelbung im Tagesverlauf', a.bulge);
+  zeile('Belastung im Alltag', a.burden);
+  zeile('Was am meisten stoert', a.bother);
+  zeile('Schon versucht', a.tried);
+  z.push('');
+  z.push(t.einordnung);
+  if (t.schwerpunkt) { z.push(''); z.push(t.schwerpunkt); }
+  z.push('');
+  z.push('Der Haken ist die Regelmaessigkeit. Woche fuer Woche, in einem Alltag,');
+  z.push('der sich nach dem Kind richtet. Daran scheitern die meisten.');
+  z.push('');
+  z.push('Plan und Angebot ansehen: ' + LP_BASIS +
+         (angle ? '?angle=' + encodeURIComponent(angle) : ''));
   z.push('');
   z.push('DEIN PLAN FUER DIE NAECHSTEN 12 WOCHEN');
-  z.push('1. Woche 1-4: Die tiefe Bauchmuskulatur ueber die Atmung ansprechen.');
-  z.push('   Beim Ausatmen den Bauchnabel sanft nach innen ziehen, ohne zu pressen.');
-  z.push('2. Woche 5-8: Alltagsbewegungen mit gehaltener Mitte. Woelbt sich der');
-  z.push('   Bauch kegelfoermig vor, eine Stufe zurueck.');
-  z.push('3. Woche 9-12: Zwei feste Termine pro Woche. Dranbleiben schlaegt Intensitaet.');
-  z.push('   Sit-ups, Crunches und Planks bleiben in dieser Zeit meist aussen vor.');
-  z.push('   Allgemeine Orientierung, ersetzt keine physiotherapeutische Anleitung.');
+  z.push('1. Woche 1-4: Beim Ausatmen den Bauchnabel sanft nach innen ziehen,');
+  z.push('   ohne zu pressen. Zweimal taeglich zehn ruhige Atemzuege.');
+  z.push('2. Woche 5-8: Aufstehen, das Kind hochnehmen, Treppen - bewusst mit');
+  z.push('   gehaltener Mitte. Woelbt sich der Bauch kegelfoermig vor, eine Stufe zurueck.');
+  z.push('3. Woche 9-12: Nicht die Intensitaet entscheidet, sondern dass es');
+  z.push('   stattfindet. Zwei feste Termine pro Woche.');
+  z.push('Sit-ups, Crunches und Planks bleiben vorerst aussen vor. Allgemeine');
+  z.push('Orientierung, ersetzt keine physiotherapeutische Anleitung.');
   z.push('');
-  z.push('Auswertung ansehen: ' + auswertungsLink_(token));
+  z.push('DER SELBSTTEST, FALLS DU DIE LUECKE NOCH NICHT GEMESSEN HAST');
+  z.push('Flach auf den Ruecken, Beine angewinkelt. Zwei Finger laengs ueber dem');
+  z.push('Nabel, Kopf und Schultern leicht anheben. Wie viele Finger passen quer');
+  z.push('in die Luecke? Miss auch auf Nabelhoehe und darunter.');
   z.push('');
-  z.push('Antworte einfach auf diese Mail, wenn du Fragen hast.');
+  z.push('Diese Auswertung im Browser ansehen: ' + auswertungsLink_(token));
+  z.push('');
+  z.push('Fragen? Antworte einfach auf diese Mail.');
   z.push('Herzliche Gruesse, Christian Senfleben / Wellenpuls');
   z.push('');
   z.push('Der Wellenpuls LWS ist ein Trainingsgeraet, kein Medizinprodukt, und');
@@ -435,9 +569,13 @@ function auswertungText_(antworten, angle, token) {
 }
 
 /**
- * Die geschuetzte Auswertungsseite. Hier — und nur hier — stehen die konkreten
- * Angaben. Erreichbar ausschliesslich mit dem Schluessel aus der E-Mail.
- * `noindex` und `noarchive`, damit die Seite nirgends auftaucht.
+ * Die geschuetzte Auswertungsseite. Erreichbar ausschliesslich mit dem
+ * Schluessel aus der E-Mail, `noindex` und `noarchive`.
+ *
+ * Seit 2026-08-10 stehen dieselben Angaben auch in der E-Mail selbst — auf
+ * ausdrueckliche Entscheidung. Die Seite ist damit nicht mehr der einzige Ort
+ * der Gesundheitsangaben, sondern der Zweitweg fuer Postfaecher, die HTML
+ * schlecht darstellen.
  */
 function auswertungsSeite_(token) {
   var s = sitzungZuToken_(token);
@@ -525,10 +663,13 @@ function auswertungsSeite_(token) {
  *
  * Gibt einen Statustext zurueck oder null, wenn nicht konfiguriert.
  */
-function zohoMailSenden_(an, betreff, html, text) {
+function zohoMailSenden_(an, betreff, html) {
   var k = zohoKonf_();
   if (!k || !k.mail_account_id || !k.mail_from) return null;
 
+  // Nur die dokumentierten Schluessel. Zoho antwortet auf jeden unbekannten
+  // Schluessel mit 404 EXTRA_KEY_FOUND_IN_JSON — eine Nur-Text-Fassung nimmt
+  // dieser Endpunkt nicht entgegen, die Mail geht als reines HTML raus.
   var nutzlast = {
     fromAddress: k.mail_from,
     toAddress: an,
@@ -536,7 +677,6 @@ function zohoMailSenden_(an, betreff, html, text) {
     content: html,
     mailFormat: 'html'
   };
-  if (text) nutzlast.plainText = text;
 
   var res = UrlFetchApp.fetch(
     'https://mail.zoho.' + k.dc + '/api/accounts/' + k.mail_account_id + '/messages',
@@ -578,7 +718,7 @@ function sendeAuswertung_(email, sid, quiz, angle) {
     var text = auswertungText_(antworten, winkel, token);
 
     // Regelweg: Zoho Mail, Absender auf der eigenen Domain.
-    var status = zohoMailSenden_(email, betreff, html, text);
+    var status = zohoMailSenden_(email, betreff, html);
 
     // Rueckfall nur, solange Zoho Mail nicht konfiguriert ist. MailApp sendet
     // vom Google-Konto des Bereitstellers — als Dauerloesung fuer Kundenpost

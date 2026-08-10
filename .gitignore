@@ -3,3 +3,6 @@
 .env
 self_client.json
 *self_client*.json
+
+# Visual-Companion-Entwuerfe, nicht Teil der Seite
+.superpowers/
