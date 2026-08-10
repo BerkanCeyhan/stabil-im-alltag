@@ -7,6 +7,19 @@ Import: Make → Szenario öffnen → drei Punkte oben rechts → **Import Bluep
 | `1-capi-relay.json` | Integration Webhooks, HTTP | `hook.eu2.make.com/7omhyj9v…` |
 | `2-woocommerce-mollie.json` | Integration WooCommerce, Mollie | `hook.eu2.make.com/wk4v2q91…` |
 
+## Eine Regel für alle Ausdrücke
+
+**Make kennt kein Escaping für `"` innerhalb einer Zeichenkette.** Ein Ausdruck
+darf deshalb nie JSON zusammenbauen. Die Anführungszeichen gehören ins
+umgebende JSON, nie in den Ausdruck:
+
+    falsch   {{if(1.fbc; "\"fbc\": \"" + 1.fbc + "\","; "")}}
+    richtig  "fbc": "{{1.fbc}}"
+
+Makes Parser liest `"\"` als „String auf, Backslash, String zu" und zerlegt den
+Rest in Bruchstücke. Verschachtelte Aufrufe sind dagegen erlaubt, solange das
+Literal selbst kein Anführungszeichen enthält — `ifempty(x; "EUR")` geht.
+
 ## Vor dem Import
 
 **Das Meta-Zugriffstoken steht als `PLATZHALTER_NEUES_TOKEN` in Datei 1.**
@@ -20,13 +33,15 @@ was in der URL steht, landet in jedem exportierten Blueprint und in jedem Log.
 ### 1 — CAPI-Relay
 
 - Token wandert von der URL in den `Authorization`-Header.
-- `em` (SHA-256 der E-Mail) wird mitgeschickt, sobald der Aufrufer eine
-  Adresse liefert. Ohne sie kann Meta einen späteren Kauf auf einem anderen
-  Gerät niemandem zuordnen — Cookies überleben das nicht.
-- `fbc`, `fbp`, `client_ip_address` werden nur gesetzt, wenn sie gefüllt sind.
-  Ein leerer String gilt bei Meta als ungültiger Wert und senkt die Event
-  Match Quality.
-- `action_source` und `currency` haben Rückfallwerte.
+- `action_source`, `currency` und `value` haben Rückfallwerte.
+- Kein `em` in diesem Szenario: `consent.js` schickt bei Lead, AddToCart und
+  CompleteRegistration keine Adresse mit. Ein `sha256("")` wäre ein erfundener
+  Match-Key und schlechter als gar keiner. Sobald der Aufrufer eine Adresse
+  liefert, kommt die Zeile aus dem Purchase-Modul hier hinein.
+- Die Struktur des Rumpfs bleibt bewusst unverändert: `fbc`, `fbp` und
+  `client_ip_address` gehen weiter als leere Zeichenketten mit, wenn sie fehlen.
+  Das lief 162-mal fehlerfrei; ein bedingter Zusammenbau ist in Make nicht
+  sauber möglich (siehe Regel oben).
 
 ### 2 — WooCommerce und Mollie
 
