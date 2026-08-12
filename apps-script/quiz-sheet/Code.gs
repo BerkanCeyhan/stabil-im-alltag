@@ -700,19 +700,27 @@ function zohoMailSenden_(an, betreff, html) {
  * Betreten des Tors gesendet wird.
  */
 function sendeAuswertung_(email, sid, quiz, angle) {
+  var e = auswertungAufbauenUndSenden_(email, sid, angle);
+  if (e.token) setzeLetzte_(BLATT_IDENTITAET, 'token', e.token);
+  setzeLetzte_(BLATT_IDENTITAET, 'mail', e.status);
+}
+
+/**
+ * Baut die Auswertung und schickt sie ab. Schreibt bewusst NICHT in die
+ * Tabelle — der Aufrufer weiss, welche Zeile gemeint ist. Beim regulaeren
+ * Eingang ist das die letzte, beim Nachsenden eine beliebige weiter oben.
+ *
+ * Rueckgabe: { status: <Text fuer die Spalte 'mail'>, token: <oder ''> }
+ */
+function auswertungAufbauenUndSenden_(email, sid, angle) {
   try {
-    if (!versandErlaubt_(email)) {
-      setzeLetzte_(BLATT_IDENTITAET, 'mail', 'übersprungen (Testmodus)');
-      return;
-    }
+    if (!versandErlaubt_(email)) return { status: 'übersprungen (Testmodus)', token: '' };
+
     var gefunden = antwortenZurSitzung_(sid);
     var antworten = gefunden.antworten || {};
     var winkel = angle || gefunden.angle || '';
 
-    // Schluessel fuer die geschuetzte Seite, in derselben Zeile abgelegt.
     var token = tokenNeu_();
-    setzeLetzte_(BLATT_IDENTITAET, 'token', token);
-
     var betreff = 'Deine Auswertung aus dem Rektusdiastase-Check';
     var html = auswertungHtml_(antworten, winkel, token);
     var text = auswertungText_(antworten, winkel, token);
@@ -725,21 +733,94 @@ function sendeAuswertung_(email, sid, quiz, angle) {
     // ungeeignet, deshalb wird es in der Tabelle deutlich vermerkt.
     if (status === null) {
       MailApp.sendEmail({
-        to: email,
-        name: ABSENDER_NAME,
-        replyTo: ANTWORT_AN,
-        subject: betreff,
-        body: text,
-        htmlBody: html
+        to: email, name: ABSENDER_NAME, replyTo: ANTWORT_AN,
+        subject: betreff, body: text, htmlBody: html
       });
       status = 'gesendet (MailApp, Rückfall)';
     }
     if (!Object.keys(antworten).length) status += ' — ohne Antworten';
-    setzeLetzte_(BLATT_IDENTITAET, 'mail', status);
+    return { status: status, token: token };
   } catch (err) {
     fehler_('sendeAuswertung', err);
-    setzeLetzte_(BLATT_IDENTITAET, 'mail', 'fehler: ' + String(err));
+    return { status: 'fehler: ' + String(err), token: '' };
   }
+}
+
+/* ───────────────────── Nachsenden liegengebliebener Mails ───────────────────
+ *
+ * Waehrend `TESTMODUS` gesetzt war, sind Eintragungen mit gueltiger
+ * Gesundheitseinwilligung ohne ihre zugesagte Auswertung geblieben. Die Zusage
+ * steht am Tor, also wird sie eingeloest, sobald der Versand offen ist.
+ *
+ *   1. `nachsendenPruefen()`  — zeigt im Protokoll, wer drankaeme. Sendet nichts.
+ *   2. `nachsendenOffene()`   — sendet und traegt das Ergebnis je Zeile ein.
+ *
+ * Beide ueberspringen Zeilen, deren `sid` mit TEST beginnt, und alles, was
+ * bereits 'gesendet' traegt. Mehrfaches Ausfuehren schickt deshalb nichts
+ * doppelt.
+ */
+
+/** Sammelt die Zeilen, die eine Auswertung schulden. */
+function offeneAuswertungen_() {
+  var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(BLATT_IDENTITAET);
+  if (!sh || sh.getLastRow() < 2) return { kopf: [], zeilen: [], blatt: sh };
+  var kopf = sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0];
+  var iMail = kopf.indexOf('mail'), iEmail = kopf.indexOf('E-Mail'),
+      iSid = kopf.indexOf('sid'), iHealth = kopf.indexOf('consent_health'),
+      iAngle = kopf.indexOf('Angle'), iZeit = kopf.indexOf('Zeitpunkt');
+  var werte = sh.getRange(2, 1, sh.getLastRow() - 1, sh.getLastColumn()).getValues();
+  var offen = [];
+  for (var i = 0; i < werte.length; i++) {
+    var r = werte[i];
+    var email = String(r[iEmail] || '').trim();
+    var sid = String(r[iSid] || '');
+    var mail = String(r[iMail] || '');
+    if (!email || email.indexOf('@') < 0) continue;
+    if (String(r[iHealth]).toLowerCase() !== 'ja') continue;   // ohne Einwilligung nie
+    if (mail.indexOf('gesendet') === 0) continue;              // schon raus
+    if (sid.indexOf('TEST') === 0) continue;                   // eigene Testzeilen
+    offen.push({
+      zeile: i + 2, email: email, sid: sid, angle: String(r[iAngle] || ''),
+      zeitpunkt: r[iZeit], bisher: mail
+    });
+  }
+  return { kopf: kopf, zeilen: offen, blatt: sh };
+}
+
+/** Trockenlauf. Zeigt, wer drankaeme, und sendet nichts. */
+function nachsendenPruefen() {
+  var d = offeneAuswertungen_();
+  var p = PropertiesService.getScriptProperties();
+  var sperre = p.getProperty('TESTMODUS') || p.getProperty('ZOHO_TESTMODUS');
+  Logger.log(sperre
+    ? 'ACHTUNG: Sperre aktiv (' + sperre + ') — es ginge nur an diese Adressen.'
+    : 'Keine Sperre gesetzt, Versand ginge an alle unten.');
+  Logger.log('Offen: ' + d.zeilen.length);
+  d.zeilen.forEach(function (z) {
+    Logger.log('  Zeile %s  %s  %s  bisher: "%s"',
+               z.zeile, z.zeitpunkt, z.email, z.bisher);
+  });
+}
+
+/** Sendet die offenen Auswertungen und traegt Status und Token je Zeile ein. */
+function nachsendenOffene() {
+  var d = offeneAuswertungen_();
+  var iMail = d.kopf.indexOf('mail'), iToken = d.kopf.indexOf('token');
+  var heute = Utilities.formatDate(new Date(), 'Europe/Berlin', 'dd.MM.');
+  Logger.log('Nachzusenden: ' + d.zeilen.length);
+
+  d.zeilen.forEach(function (z) {
+    var e = auswertungAufbauenUndSenden_(z.email, z.sid, z.angle);
+    var status = e.status.indexOf('gesendet') === 0
+      ? e.status + ' — nachgesendet ' + heute
+      : e.status;
+    d.blatt.getRange(z.zeile, iMail + 1).setValue(status);
+    if (e.token && iToken >= 0) d.blatt.getRange(z.zeile, iToken + 1).setValue(e.token);
+    Logger.log('  Zeile %s  %s  ->  %s', z.zeile, z.email, status);
+    SpreadsheetApp.flush();
+    Utilities.sleep(1200);   // Zoho Mail nicht in einem Rutsch anfahren
+  });
+  Logger.log('Fertig.');
 }
 
 /**
