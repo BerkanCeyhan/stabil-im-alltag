@@ -34,7 +34,7 @@ Motiv: `assets/ads/aktion/akt-01-packshot-rabatt.jpg` (4:5) — echter Packshot
 
 ## akt-02 · Anwendung am unteren Rücken
 
-Motiv: `assets/ads/aktion/akt-02-anwendung-ruecken.jpg` (4:5) — echtes Foto
+Motiv: `assets/ads/aktion/akt-02-anwendung-ruecken.jpg` (4:5) — echtes Foto, mit Rabattplakette
 
 **Primary Text**
 
@@ -99,12 +99,22 @@ oklch-Token wie die Landingpage.
 **Nicht verwenden: `assets/Anwendung-wellenpuls.jpg`.** Das Bild zeigt ein
 anderes Gerät — Elektrodenpads außen, abweichende Bedieneinheit.
 
+## Warum jedes Motiv den Rabatt trägt
+
+Im Instagram-Feed wird der Primary Text abgeschnitten — dort trägt das Bild die
+Aussage allein. Deshalb steht der Preisvorteil auf allen vier Motiven, bei
+`akt-02` als ruhige Plakette in der Markenfarbe statt als Störer.
+
+Nicht verwendet: „Sommerschlussverkauf", „Nur noch heute", Countdown, Sterne,
+Signalrot. Teleshopping-Optik steht bei Wellenpuls auf der Tabu-Liste, und diese
+Zielgruppe kauft über Glaubwürdigkeit, nicht über Druck.
+
 ## Warum vier verschiedene Bildsprachen
 
 Meta clustert visuell ähnliche Creatives in dieselben Delivery-Buckets. Vier
 Motive im gleichen Stil konkurrieren dann gegeneinander statt die Auslieferung zu
-verbreitern. Deshalb bewusst: Packshot mit Typo, Reportage mit Mensch, Flatlay
-von oben, reine Preistypografie.
+verbreitern. Deshalb bewusst: Packshot, Reportage mit Mensch, Komplettpaket,
+reine Preistypografie.
 
 ## Warum kein Countdown
 

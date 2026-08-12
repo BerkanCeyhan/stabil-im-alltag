@@ -130,12 +130,37 @@ u = mitte(d, 940, "100 € günstiger", font(112, 800), NAVY)
 mitte(d, u + 46, "Nur für kurze Zeit", font(46, 400), GRAU)
 sichern(im, "akt-01-packshot-rabatt")
 
-# ── akt-02  Anwendung, echtes Foto, ohne Text ──────────────────────────────
+# ── akt-02  Anwendung, echtes Foto, mit Rabattplakette ─────────────────────
 # Der Guertel sitzt am unteren Ruecken unter der Bluse. Genau die Darstellung,
-# die im generierten Motiv falsch war. Bewusst ohne Schrift: vier Motive im
-# selben Look landen bei Meta im selben Delivery-Bucket.
+# die im generierten Motiv falsch war.
+#
+# Die Plakette ist noetig, weil der Primary Text im Instagram-Feed abgeschnitten
+# wird — dort traegt das Bild die Aussage allein. Bewusst eine ruhige Flaeche in
+# der Markenfarbe statt Stoerer, Sterne oder Signalrot: die Marke verbietet
+# Teleshopping-Optik, und die Zielgruppe kauft ueber Glaubwuerdigkeit.
 foto = zuschneiden("assets/Frau_50_WellenpulsLWS_Lifestyle_Rückansicht.png",
-                   B, H, fokus_x=0.30)
+                   B, H, fokus_x=0.30).convert("RGBA")
+
+f_gross, f_klein = font(58, 800), font(34, 500)
+z1, z2 = "100 € günstiger", "nur bis 16. August"
+d = ImageDraw.Draw(foto)
+b1 = d.textbbox((0, 0), z1, font=f_gross)
+b2 = d.textbbox((0, 0), z2, font=f_klein)
+pad_x, pad_y, luft = 44, 34, 14
+pb = max(b1[2] - b1[0], b2[2] - b2[0]) + 2 * pad_x
+ph = (b1[3] - b1[1]) + luft + (b2[3] - b2[1]) + 2 * pad_y
+px, py = 56, H - ph - 56
+
+plakette = Image.new("RGBA", (pb, ph), (0, 0, 0, 0))
+ImageDraw.Draw(plakette).rounded_rectangle([0, 0, pb - 1, ph - 1], radius=18,
+                                           fill=NAVY + (242,))
+schatten(foto, plakette, (px, py), unschaerfe=26, deckung=90, versatz=(0, 10))
+foto.alpha_composite(plakette, (px, py))
+
+d = ImageDraw.Draw(foto)
+d.text((px + pad_x - b1[0], py + pad_y - b1[1]), z1, font=f_gross, fill=(255, 255, 255))
+d.text((px + pad_x - b2[0], py + pad_y + (b1[3] - b1[1]) + luft - b2[1]), z2,
+       font=f_klein, fill=(255, 255, 255, 225))
 sichern(foto, "akt-02-anwendung-ruecken")
 
 # ── akt-03  Komplettpaket ──────────────────────────────────────────────────
