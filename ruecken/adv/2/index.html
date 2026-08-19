@@ -508,17 +508,6 @@
     .option-stack p { font-size: 16px; margin-bottom: 10px; }
     .option-stack p:last-child { margin-bottom: 0; }
 
-    /* ── GRUENDER-BOX ── */
-    .founder-box { display: flex; gap: 18px; align-items: flex-start; }
-    .founder-box img {
-      width: 84px; height: 84px;
-      border-radius: 50%;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-    .founder-box p { font-size: 16px; margin-bottom: 12px; }
-    .founder-box p:last-child { margin-bottom: 0; }
-
     /* ── ABSCHLUSS-CTA ── */
     .cta-final { margin: 40px 0 44px; }
     .cta-final .btn-primary {
@@ -538,7 +527,6 @@
     }
 
     @media(max-width:600px) {
-      .founder-box { flex-direction: column; align-items: center; text-align: center; }
       .option-stack { padding: 2px 18px; }
     }
   </style>
@@ -563,14 +551,10 @@
       Eine Botschaft an alle mit Rückenleiden
     </h1>
 
-    <p class="article-deck">
-      Lieber Freund, Liebe Freundin, wenn du diese Nachricht liest, dann sicherlich zu einem Zeitpunkt, an dem es wieder mal schlimmer geworden ist…
-    </p>
-
     <!-- Hero -->
     <img
-      src="https://images.pexels.com/photos/10066347/pexels-photo-10066347.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-      alt="Hände am unteren Rücken"
+      src="../../../assets/pexels-beytlik-7522172.jpg"
+      alt="Rückenschmerzen im Alltag"
       class="article-img"
       style="margin-top:24px;margin-bottom:6px"
     >
@@ -586,6 +570,10 @@
 
     <!-- ─── BODY ─── -->
     <div class="article-body">
+
+      <p>Lieber Freund, Liebe Freundin,</p>
+
+      <p>wenn du diese Nachricht liest, dann sicherlich zu einem Zeitpunkt, an dem es wieder mal schlimmer geworden ist…</p>
 
       <p class="beat">…an dem jede kleine Bewegung wehtut…</p>
       <p class="beat">…an dem du an nichts anderes denken kannst…</p>
@@ -626,9 +614,11 @@
 
       <p>Ja… Ich kenne das.</p>
 
-      <div class="pullquote">
-        Wenn es nicht besser wird, sondern gefühlt schlimmer – dreht sich das Leben nur noch darum. Um deinen Rücken.
-      </div>
+      <p class="beat">Wenn es nicht besser wird, sondern gefühlt schlimmer</p>
+
+      <p class="beat">– dreht sich das Leben nur noch darum</p>
+
+      <p class="beat">Um deinen Rücken.</p>
 
       <p>Und wie du alles andere dafür um- oder zurückstellen musst.</p>
 
@@ -767,28 +757,19 @@
 
       <p>Ich brauchte etwas, das zu Hause funktioniert, ohne dass ich alles perfekt machen muss.</p>
 
-      <div class="science-box">
-        <div class="founder-box">
-          <img src="../../../assets/Portrait_Gruender_Christian_Senfleben.jpg" alt="Christian Senfleben, Sportwissenschaftler und Gründer">
-          <div>
-            <p>An der Deutschen Sporthochschule Köln hat ein Sportwissenschaftler etwas untersucht, das mir bis dahin keiner gesagt hatte:</p>
-            <p>Bei Menschen mit Rückenschmerzen ist ausgerechnet die tief liegende Rumpfmuskulatur messbar geschwächt.</p>
-            <p>Also die Muskulatur, die deine Wirbelsäule in jeder Sekunde hält, ohne dass du davon etwas mitbekommst.</p>
-            <p>Er wollte eine Studie machen und brauchte ein Gerät, das genau diese Muskeln anspricht.</p>
-            <p>Es gab keines. Also hat er es gebaut.</p>
-            <p>Die Ergebnisse waren so gut, dass daraus eine Firma wurde.</p>
-          </div>
-        </div>
-      </div>
+      <p>An der Deutschen Sporthochschule Köln hat ein Sportwissenschaftler etwas untersucht, das mir bis dahin keiner gesagt hatte:</p>
+
+      <p>Bei Menschen mit Rückenschmerzen ist ausgerechnet die tief liegende Rumpfmuskulatur messbar geschwächt.</p>
+
+      <p>Also die Muskulatur, die deine Wirbelsäule in jeder Sekunde hält, ohne dass du davon etwas mitbekommst.</p>
+
+      <p>Er wollte eine Studie machen und brauchte ein Gerät, das genau diese Muskeln anspricht.</p>
+
+      <p>Es gab keines. Also hat er es gebaut.</p>
+
+      <p>Die Ergebnisse waren so gut, dass daraus eine Firma wurde.</p>
 
       <p>Das Gerät heißt <strong>Wellenpuls LWS</strong>. Ein Gurt, den du dir um den unteren Rücken legst.</p>
-
-      <img
-        src="../../../assets/PackShot_01.png"
-        alt="Wellenpuls LWS – Gurt für den unteren Rücken"
-        class="article-img"
-        style="background:var(--surface);object-fit:contain;padding:12px"
-      >
 
       <p>Der Wellenpuls arbeitet mit Elektrostimulation. Der Impuls geht direkt an den Muskel, und der zieht sich zusammen.</p>
 
@@ -810,9 +791,12 @@
 
       <p>Es fühlt sich einfach gut an. Du musst dich nicht überwinden. Du freust dich sogar drauf!</p>
 
-      <div class="img-crop-43">
-        <img src="../../../assets/Anwendung-wellenpuls.jpg" alt="Wellenpuls LWS in der Anwendung">
-      </div>
+      <img
+        src="../../../assets/PackShot_01.png"
+        alt="Wellenpuls LWS – Gurt für den unteren Rücken"
+        class="article-img"
+        style="background:var(--surface);object-fit:contain;padding:12px"
+      >
 
       <p>Hört sich verlockend an.. aber da war wieder mein Misstrauen.</p>
 
@@ -896,11 +880,6 @@
 
       <p>Das ist kein kleiner Betrag, und ich will das nicht schönreden.</p>
 
-      <div class="update-box">
-        <div class="update-label">EDIT 16.08</div>
-        <p>Ich habe gesehen, dass es den Wellenpuls mittlerweile auch zum Mieten gibt. Das kostet wesentlich weniger. ca. 50€ Pro Monat</p>
-      </div>
-
       <p>Ich habe damals nur eines gemacht: zusammengerechnet, was die Jahre davor gekostet haben. Zuzahlungen, Geräte, Studiobeiträge, Matratze, Lattenrost, alles zusammen. Ich bin bei über 5.000 Euro rausgekommen. Verbessert hatte sich nichts.</p>
 
       <p>Ich habe den Wellenpuls jetzt über 4 Monate regelmäßig genutzt. Bei 64 Einheiten sind das gerade mal 7€ pro Einheit..</p>
@@ -927,19 +906,8 @@
 
     <!-- ═══ CTA ═══ -->
     <div class="cta-final">
-      <a href="../../lp/" class="btn-primary track-lead">→ Hier kannst du den Wellenpuls LWS bestellen</a>
+      <a href="../../lp2/" class="btn-primary track-lead">→ Hier kannst du den Wellenpuls LWS bestellen</a>
       <div class="cta-terms">489 € · kostenloser Versand · 30 Tage Geld zurück · Lieferung in der Regel innerhalb von 2 Werktagen</div>
-    </div>
-
-    <!-- ═══ AUTHOR BIO ═══ -->
-    <div class="author-bio">
-      <div>
-        <div class="author-bio-name">Georg</div>
-        <div class="author-bio-role">Leserzuschrift · Stabil im Alltag</div>
-        <div class="author-bio-text">
-          Georg hat seinen Bericht als Zuschrift an die Redaktion geschickt und der Veröffentlichung zugestimmt. Der Name ist zum Schutz der Privatsphäre geändert. Er beschreibt ausschließlich seinen eigenen Verlauf und gibt keine medizinische Empfehlung ab.
-        </div>
-      </div>
     </div>
 
     <!-- ═══ ABOUT ═══ -->

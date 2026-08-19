@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wellenpuls LWS – Das komplette Paket für deinen Rücken</title>
+<link rel="icon" type="image/png" href="../../assets/logo_transparent.png">
+<link rel="apple-touch-icon" href="../../assets/logo_transparent.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Libre+Franklin:wght@400;500;600;700;800;900&display=swap" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Libre+Franklin:wght@400;500;600;700;800;900&display=swap"></noscript>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary:oklch(38% 0.1 240);
+  --primary-dark:oklch(30% 0.1 240);
+  --primary-light:oklch(96% 0.02 240);
+  --teal:oklch(48% 0.1 165);
+  --teal-dark:oklch(38% 0.1 165);
+  --teal-light:oklch(96% 0.02 165);
+  --bg:oklch(97% 0.008 240);
+  --white:oklch(99.5% 0.003 240);
+  --text:oklch(20% 0.02 240);
+  --text-muted:oklch(52% 0.02 240);
+  --text-body:oklch(32% 0.025 240);
+  --border:oklch(88% 0.02 240);
+  --star:oklch(75% 0.16 75);
+  --red:oklch(42% 0.14 25);
+  --green:oklch(52% 0.14 155);
+}
+html{font-size:17px}
+body{font-family:'Libre Franklin',sans-serif;background:var(--white);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;width:100%;height:auto}
+
+/* TOP BAR */
+.top-bar{background:var(--red);color:#fff;text-align:center;padding:11px 16px;font-size:13px;font-weight:700;line-height:1.4}
+.top-bar .cd{font-size:15px;font-weight:900;letter-spacing:.06em}
+
+/* HEADER */
+.site-header{background:var(--white);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;justify-content:center;align-items:center}
+.site-header img{height:80px;width:auto}
+
+/* SHARED */
+.section{padding:52px 20px}
+.inner{max-width:600px;margin:0 auto}
+.bg-white{background:var(--white)}
+.bg-light{background:var(--bg)}
+.bg-blue{background:var(--primary-light)}
+.bg-teal{background:var(--teal-light)}
+
+.section-h2{font-family:'Lora',serif;font-size:clamp(22px,5vw,32px);font-weight:700;line-height:1.25;color:var(--primary);margin-bottom:20px}
+.section-h2.center{text-align:center}
+.body-text{font-size:1rem;color:var(--text-body);line-height:1.75;margin-bottom:16px;max-width:68ch}
+
+/* BUTTONS */
+.btn{display:block;width:100%;background:var(--teal);color:#fff;font-family:'Libre Franklin',sans-serif;font-size:17px;font-weight:800;padding:20px 28px;border-radius:6px;text-decoration:none;border:none;cursor:pointer;text-align:center;transition:background .18s,transform .1s,box-shadow .18s;box-shadow:0 4px 18px oklch(48% 0.1 165 / 0.35);letter-spacing:.01em}
+.btn:hover{background:var(--teal-dark);transform:translateY(-1px);box-shadow:0 6px 24px oklch(48% 0.1 165 / 0.45)}
+.btn-blue{background:var(--primary);box-shadow:0 4px 18px oklch(38% 0.1 240 / 0.35)}
+.btn-blue:hover{background:var(--primary-dark);box-shadow:0 6px 24px oklch(38% 0.1 240 / 0.45)}
+.btn-wrap{max-width:500px;margin:0 auto}
+
+.trust-pills{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 16px;margin-top:16px}
+.trust-pills span{font-size:12px;font-weight:600;color:var(--text-muted)}
+.trust-pills span::before{content:'·  '}
+.trust-pills span:first-child::before{content:''}
+
+/* HERO */
+.hero{background:var(--primary-light);padding:0 0 48px}
+.hero-cert{text-align:center;padding:24px 20px 0}
+.hero-cert-badge{display:inline-block;background:var(--white);border:1px solid var(--border);border-radius:4px;padding:7px 16px;font-size:12px;font-weight:600;color:var(--text-muted);letter-spacing:.03em}
+.hero-text{padding:24px 20px 0;max-width:600px;margin:0 auto}
+.hero h1{font-family:'Lora',serif;font-size:clamp(28px,6.5vw,42px);font-weight:700;line-height:1.18;color:var(--primary);text-align:center;margin-bottom:18px}
+.hero-sub{font-size:1.05rem;color:var(--text-body);text-align:center;margin-bottom:0;line-height:1.7;max-width:56ch;margin-left:auto;margin-right:auto}
+
+.proof-strip{display:flex;justify-content:center;align-items:center;gap:6px 18px;flex-wrap:wrap;margin:20px 0;font-size:13px;font-weight:600;color:var(--text-muted)}
+.proof-strip .stars{color:var(--star);font-size:15px;letter-spacing:1px}
+
+.hero-img{max-width:540px;margin:0 auto 28px;padding:0 20px}
+.hero-img img{border-radius:10px;box-shadow:0 12px 40px oklch(38% 0.1 240 / 0.2)}
+
+/* BRIDGE */
+.bridge-intro{font-size:1.1rem;color:var(--text-body);line-height:1.75;margin-bottom:18px;max-width:64ch}
+.bridge-intro strong{color:var(--text);font-weight:700}
+
+/* OFFER STACK */
+.offer-items{display:flex;flex-direction:column;gap:0;margin:24px 0;border-radius:10px;overflow:hidden;border:1px solid var(--border)}
+.offer-item{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;background:var(--white);border-bottom:1px solid var(--border);gap:12px}
+.offer-item:last-child{border-bottom:none;background:var(--bg)}
+.offer-item.main-item{background:oklch(96% 0.018 240)}
+.offer-item-left{display:flex;align-items:center;gap:12px;flex:1;min-width:0}
+.offer-check{color:var(--teal);font-size:18px;flex-shrink:0;line-height:1}
+.offer-item-name{font-size:15px;font-weight:600;color:var(--text-body)}
+.offer-item-name small{display:block;font-size:12px;font-weight:400;color:var(--text-muted);margin-top:1px}
+.offer-item-price{font-size:14px;font-weight:700;color:var(--text-muted);text-align:right;flex-shrink:0}
+.offer-item-price .gratis{color:var(--teal);font-weight:800;font-size:13px;display:block}
+.offer-item-price .original{text-decoration:line-through;font-size:12px;font-weight:500;color:var(--text-muted);opacity:.7}
+.offer-total{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;background:var(--primary);border-radius:0 0 10px 10px;color:#fff;font-weight:800;font-size:16px}
+.offer-total-old{font-size:13px;text-decoration:line-through;opacity:.6;font-weight:500}
+
+.price-hero{background:var(--primary);border-radius:10px;padding:28px 24px;text-align:center;margin:24px 0;color:#fff}
+.price-hero-amount{font-size:clamp(44px,10vw,56px);font-weight:900;line-height:1;font-family:'Libre Franklin',sans-serif;letter-spacing:-.02em}
+.price-hero-save{font-size:14px;margin-top:10px;opacity:.85;line-height:1.6}
+.price-hero-save strong{font-size:17px;font-weight:800}
+
+/* MECHANISM */
+.pain-cycle{background:var(--primary-light);border-radius:10px;padding:24px 20px;margin:24px 0;text-align:center}
+.pain-cycle-title{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--primary);margin-bottom:16px}
+.pain-cycle-steps{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px 0;font-size:14px;font-weight:600;color:var(--text-body)}
+.pain-cycle-steps .arrow{color:var(--primary);margin:0 6px;font-size:16px;font-weight:700}
+.pain-cycle-note{font-size:13px;color:var(--text-muted);margin-top:12px}
+
+.solution-lead{font-size:1.05rem;font-weight:700;color:var(--text);margin:28px 0 12px;line-height:1.4}
+
+/* COMPARISON */
+.comp-wrap{margin:24px 0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.comp-table{width:100%;border-collapse:collapse;font-size:14px;min-width:380px}
+.comp-table thead th{padding:11px 10px;text-align:center;font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;background:var(--primary);color:#fff;border-right:1px solid var(--primary-dark)}
+.comp-table thead th:first-child{text-align:left;background:var(--primary-dark);border-right:none}
+.comp-table thead th:last-child{border-right:none}
+.comp-table tbody tr:nth-child(even) td{background:var(--white)}
+.comp-table tbody tr:nth-child(odd) td{background:var(--primary-light)}
+.comp-table td{padding:11px 10px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);text-align:center;vertical-align:middle;line-height:1.4}
+.comp-table td:first-child{text-align:left;font-weight:600;color:var(--text-body);background:var(--bg);border-right:2px solid var(--border)}
+.comp-table td:last-child{border-right:none}
+.comp-table tbody tr:last-child td{border-bottom:none}
+.ck{color:var(--green);font-size:17px;font-weight:900}
+.cx{color:var(--border);font-size:13px}
+
+/* VIDEO */
+.video-wrap{margin:24px 0;border-radius:10px;overflow:hidden;box-shadow:0 8px 28px oklch(38% 0.1 240 / 0.15)}
+.video-wrap video{width:100%;display:block;border-radius:10px}
+
+/* CREDIBILITY */
+.cred-list{display:flex;flex-direction:column;gap:0;margin:24px 0}
+.cred-item{display:flex;gap:20px;padding:24px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.cred-item:last-child{border-bottom:none}
+.cred-num{font-family:'Lora',serif;font-size:36px;font-weight:700;color:var(--primary);line-height:1;flex-shrink:0;width:44px;opacity:.35}
+.cred-body{}
+.cred-title{font-weight:800;font-size:16px;color:var(--text);margin-bottom:6px}
+.cred-text{font-size:14px;color:var(--text-muted);line-height:1.6}
+
+.expert-quote{background:var(--primary);border-radius:10px;padding:28px 24px;margin:28px 0;color:#fff;text-align:center}
+.expert-quote blockquote{font-family:'Lora',serif;font-size:1.1rem;font-style:italic;line-height:1.7;margin-bottom:16px;opacity:.95}
+.expert-quote cite{font-style:normal;font-size:13px;font-weight:700;opacity:.75}
+
+/* TESTIMONIALS */
+.testi-list{display:flex;flex-direction:column;gap:20px;margin:24px 0}
+.testi-item{padding:24px 20px;background:var(--bg);border-radius:10px}
+.testi-stars{color:var(--star);font-size:15px;letter-spacing:1px;margin-bottom:12px}
+.testi-text{font-family:'Lora',serif;font-size:1.05rem;font-style:italic;color:var(--text);line-height:1.7;margin-bottom:14px}
+.testi-name{font-size:14px;font-weight:700;color:var(--text-muted)}
+
+.rating-bar{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:28px;padding:20px;background:var(--primary-light);border-radius:10px;text-align:center;flex-wrap:wrap}
+.rating-stars{color:var(--star);font-size:22px;letter-spacing:2px}
+.rating-text{font-size:14px;font-weight:600;color:var(--text-body)}
+
+/* HOW IT WORKS */
+.steps{display:flex;flex-direction:column;gap:0;margin:24px 0}
+.step{display:grid;grid-template-columns:52px 1fr;gap:16px;padding:24px 0;border-bottom:1px solid var(--border);align-items:start}
+.step:last-child{border-bottom:none}
+.step-num{width:48px;height:48px;border-radius:50%;background:var(--primary);color:#fff;font-weight:900;font-size:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-title{font-weight:800;font-size:17px;color:var(--text);margin-bottom:6px}
+.step-text{font-size:15px;color:var(--text-muted);line-height:1.65}
+
+.protocol-callout{background:var(--primary);color:#fff;border-radius:10px;padding:20px 24px;text-align:center;margin:28px 0}
+.protocol-callout strong{display:block;font-size:15px;font-weight:800;margin-bottom:4px;letter-spacing:.02em}
+.protocol-callout span{font-size:14px;opacity:.85}
+
+/* GUARANTEE */
+.guarantee-card{background:var(--white);border:2px solid var(--teal);border-radius:12px;padding:32px 24px;text-align:center}
+.guarantee-icon{font-size:52px;margin-bottom:16px;line-height:1}
+.guarantee-title{font-family:'Lora',serif;font-size:clamp(18px,4vw,24px);font-weight:700;color:var(--primary);margin-bottom:14px}
+.guarantee-body{font-size:16px;color:var(--text-body);line-height:1.75;margin-bottom:24px;max-width:52ch;margin-left:auto;margin-right:auto}
+.guarantee-points{list-style:none;display:flex;flex-direction:column;gap:12px;text-align:left;max-width:380px;margin:0 auto}
+.guarantee-points li{font-size:15px;color:var(--text-body);display:flex;gap:12px;align-items:flex-start;line-height:1.6}
+.guarantee-points li .gi{font-size:17px;flex-shrink:0;margin-top:1px}
+
+/* FOUNDER */
+.founder-layout{display:flex;flex-direction:column;gap:24px;margin:24px 0}
+.founder-photo-wrap{max-width:300px}
+.founder-photo-wrap img{border-radius:10px;box-shadow:0 8px 28px oklch(38% 0.1 240 / 0.18)}
+.founder-name{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--text);margin-bottom:4px}
+.founder-title{font-size:14px;font-weight:600;color:var(--teal);margin-bottom:16px}
+.founder-body{font-size:16px;color:var(--text-body);line-height:1.75}
+
+.bonus-strip{background:var(--teal-light);border:1px solid var(--teal);border-radius:8px;padding:16px 18px;margin:20px 0;display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--text-body);font-weight:600;line-height:1.6}
+.bonus-strip .bi{font-size:20px;flex-shrink:0;margin-top:1px}
+
+/* FAQ */
+.faq-list{margin:24px 0}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{padding:20px 0;font-size:17px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;color:var(--text);user-select:none;line-height:1.4}
+.faq-q .chev{color:var(--primary);font-size:20px;transition:transform .22s ease-out;flex-shrink:0}
+.faq-item.open .chev{transform:rotate(180deg)}
+.faq-a{font-size:16px;color:var(--text-body);line-height:1.75;max-height:0;overflow:hidden;transition:max-height .3s ease-out,padding-bottom .3s}
+.faq-item.open .faq-a{max-height:700px;padding-bottom:20px}
+
+/* FINAL CTA */
+.final-cta{background:var(--primary);color:#fff;padding:56px 20px;text-align:center}
+.final-cta .section-h2{color:#fff}
+.final-cta .body-text{color:oklch(99% 0.005 240 / 0.85);margin-left:auto;margin-right:auto;text-align:center;margin-bottom:0}
+.offer-reminder{background:oklch(99% 0.003 240 / 0.12);border-radius:8px;padding:18px;margin:28px 0;font-size:15px;color:oklch(99% 0.003 240 / 0.9);line-height:1.8;text-align:center}
+.offer-reminder strong{font-size:22px;color:#fff;display:block;margin-bottom:4px}
+.final-trust{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 18px;margin-top:20px}
+.final-trust span{font-size:13px;font-weight:600;color:oklch(99% 0.003 240 / 0.7)}
+.final-cta .btn{background:oklch(99% 0.003 240);color:var(--primary);box-shadow:0 4px 18px oklch(0% 0 0 / 0.2);max-width:480px;margin-left:auto;margin-right:auto}
+.final-cta .btn:hover{background:#fff}
+
+/* FOOTER */
+.footer{background:var(--text);color:oklch(75% 0.01 240);padding:40px 20px;text-align:center;font-size:14px;line-height:1.8}
+.footer img{height:48px;width:auto;margin:0 auto 16px;opacity:.75}
+.footer a{color:oklch(75% 0.01 240)}
+.footer a:hover{color:#fff}
+.footer-disclaimer{font-size:12px;margin-top:16px;line-height:1.8;max-width:560px;margin-left:auto;margin-right:auto;opacity:.6}
+
+/* STICKY BAR */
+.sticky-bottom{position:fixed;bottom:0;left:0;right:0;background:var(--primary-dark);color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;z-index:100;box-shadow:0 -2px 24px oklch(0% 0 0 / 0.25)}
+.sticky-bottom .sticky-price{font-size:13px;font-weight:700;line-height:1.3}
+.sticky-bottom .sticky-price strong{font-size:19px;display:block}
+.sticky-bottom .btn{width:auto;padding:13px 22px;font-size:15px;flex-shrink:0;background:var(--teal)}
+
+/* NOTIFICATION */
+.notif{position:fixed;bottom:84px;left:12px;right:12px;background:var(--white);border:1px solid var(--border);border-radius:8px;padding:13px 16px;box-shadow:0 8px 28px oklch(0% 0 0 / 0.1);z-index:200;display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text-body);transform:translateY(16px);opacity:0;transition:transform .35s ease-out,opacity .35s ease-out;pointer-events:none;max-width:380px;margin:0 auto}
+.notif.show{transform:translateY(0);opacity:1}
+.notif-dot{width:9px;height:9px;background:var(--green);border-radius:50%;flex-shrink:0}
+
+@media(min-width:600px){
+  .sticky-bottom{justify-content:center;gap:28px}
+  .founder-layout{flex-direction:row;align-items:flex-start}
+  .founder-photo-wrap{flex-shrink:0;max-width:220px}
+}
+@media(min-width:768px){
+  .section{padding:64px 20px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  Jetzt bestellen: Gratis Beratung + Videokurs + E-Book &nbsp;·&nbsp; Nur für kurze Zeit &nbsp;·&nbsp; Endet in <span class="cd" id="countdown">23:47:12</span>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <a href="/"><img src="../../assets/logo_transparent.png" alt="Stabil im Alltag" style="height:80px;width:auto;display:inline-block"></a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-cert">
+    <span class="hero-cert-badge">Entwickelt an der Deutschen Sporthochschule Köln &nbsp;·&nbsp; Patentangemeldet &nbsp;·&nbsp; Preisgekrönt</span>
+  </div>
+  <div class="hero-text">
+    <h1>Dein Rücken hat nicht versagt.<br>Er wurde nie richtig trainiert.</h1>
+    <p class="hero-sub">Der Wellenpuls LWS aktiviert die tiefliegende Rumpfmuskulatur. 20 Minuten. Zweimal pro Woche. Auf der Couch. Kein Termin, kein Übungsprogramm, keine Willenskraft nötig.</p>
+    <div class="proof-strip">
+      <span class="stars">★★★★★</span>
+      <span>120+ Kunden</span>
+
+      <span>30 Tage Geld-zurück</span>
+    </div>
+  </div>
+  <div class="hero-img inner">
+    <img src="../../assets/Frau_50_WellenpulsLWS_Lifestyle_ordentlich.png" alt="Wellenpuls LWS – Anwendung" loading="eager">
+  </div>
+  <div class="btn-wrap inner" style="padding:0 20px">
+    <a href="../checkout/" class="btn track-atc">Jetzt Wellenpuls LWS + Bonus-Paket sichern</a>
+    <div class="trust-pills">
+      <span>30 Tage Geld-zurück-Garantie</span>
+      <span>Kostenloser Versand</span>
+      <span>Lieferung in 2 Werktagen</span>
+    </div>
+  </div>
+</section>
+
+<!-- OFFER STACK -->
+<section class="section bg-light" id="bestellen">
+  <div class="inner">
+    <h2 class="section-h2 center">Das komplette Wellenpuls-Paket</h2>
+
+    <div style="background:var(--primary-light);border-radius:12px 12px 0 0;padding:28px 20px 20px;text-align:center;border:1px solid var(--border);border-bottom:none">
+      <img src="../../assets/product-image-1.png" alt="Wellenpuls LWS – das komplette Paket" loading="lazy" style="width:100%;max-width:520px;display:block;margin:0 auto;filter:drop-shadow(0 12px 28px oklch(38% 0.1 240 / 0.22))">
+    </div>
+
+    <div class="offer-items" style="border-radius:0 0 10px 10px;border-top:none">
+      <div class="offer-item main-item">
+        <div class="offer-item-left">
+          <span class="offer-check">✓</span>
+          <div class="offer-item-name">Wellenpuls LWS Gerät inkl. Reiseetui</div>
+        </div>
+        <div class="offer-item-price">489,00 €</div>
+      </div>
+      <div class="offer-item">
+        <div class="offer-item-left">
+          <span class="offer-check">✓</span>
+          <div class="offer-item-name">1:1 Gespräch mit Christian, dem Gründer und Forscher</div>
+        </div>
+        <div class="offer-item-price">
+          <span class="gratis">Gratis</span>
+          <span class="original">120,00 €</span>
+        </div>
+      </div>
+      <div class="offer-item">
+        <div class="offer-item-left">
+          <span class="offer-check">✓</span>
+          <div class="offer-item-name">
+            Videokurs: Die 3 häufigsten Fehler bei Rückenschmerzen
+            <small>3 Videos</small>
+          </div>
+        </div>
+        <div class="offer-item-price">
+          <span class="gratis">Gratis</span>
+          <span class="original">79,00 €</span>
+        </div>
+      </div>
+      <div class="offer-item">
+        <div class="offer-item-left">
+          <span class="offer-check">✓</span>
+          <div class="offer-item-name">E-Book und Checkliste: Dein persönlicher Rücken-Startplan</div>
+        </div>
+        <div class="offer-item-price">
+          <span class="gratis">Gratis</span>
+          <span class="original">34,90 €</span>
+        </div>
+      </div>
+      <div class="offer-item">
+        <div class="offer-item-left">
+          <span class="offer-check">✓</span>
+          <div class="offer-item-name">Kostenloser Versand, Lieferung in 2 Werktagen</div>
+        </div>
+        <div class="offer-item-price">
+          <span class="gratis">Gratis</span>
+          <span class="original">9,90 €</span>
+        </div>
+      </div>
+      <div class="offer-total">
+        <span>Gesamtwert</span>
+        <span>732,80 €</span>
+      </div>
+    </div>
+
+    <div class="price-hero">
+      <div class="price-hero-amount">489,00 €</div>
+      <div class="price-hero-save">Du sparst <strong>243,80 € (33 %)</strong> · Nur für kurze Zeit</div>
+    </div>
+
+    <div class="btn-wrap">
+      <a href="../checkout/" class="btn track-atc">Jetzt für 489 € bestellen und Bonus-Paket sichern</a>
+      <div class="trust-pills">
+        <span>30 Tage Geld-zurück-Garantie</span>
+        <span>Einmalige Zahlung</span>
+        <span>Keine Abofalle</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- BRIDGE -->
+<section class="section bg-white">
+  <div class="inner">
+    <h2 class="section-h2">Warum klassische Methoden oft nicht weiterhelfen</h2>
+    <p class="bridge-intro">Verspannungen und Beschwerden im Lendenwirbelbereich entstehen meist nicht durch zu wenig Bewegung. Die eigentliche Ursache liegt tiefer: Bei vielen Betroffenen ist die stabilisierende Tiefenmuskulatur der Lendenwirbelsäule so weit geschwächt, dass sie mit klassischen Methoden nur schwer direkt zu erreichen ist.</p>
+    <p class="bridge-intro">Sportwissenschaftler Christian Senfleben hat dieses Muster in seiner Forschung an der Deutschen Sporthochschule Köln untersucht und den Wellenpuls LWS als gezielte Antwort entwickelt. <strong>Nicht als Gadget. Als wissenschaftliche Konsequenz.</strong></p>
+  </div>
+</section>
+
+<!-- MECHANISM -->
+<section class="section bg-white">
+  <div class="inner">
+    <h2 class="section-h2">Du hast jahrelang alles richtig gemacht. Das Problem war der Ansatzpunkt.</h2>
+
+    <p class="body-text"><strong>Die tiefliegende Rumpfmuskulatur. Das ist der Kern des Problems.</strong></p>
+    <p class="body-text">Bei vielen Menschen mit Verspannungen im Lendenwirbelbereich ist diese Muskulatur stark geschwächt. Sie liegt so tief, dass das Nervensystem sie kaum noch ansteuert. Der Körper hat ihre Aufgabe längst an andere Strukturen abgegeben. An oberflächliche Muskeln, die dadurch verkrampfen. An Bandscheiben, die unter Dauerdruck stehen. An eine Wirbelsäule, die ohne ihr natürliches Korsett arbeiten muss.</p>
+    <p class="body-text">Übungen helfen. Physiotherapie hilft. Das Problem ist ein anderes: Beides erfordert regelmäßigen Aufwand, feste Termine und eine Menge Willenskraft. Genau da scheitern die meisten Menschen nicht an fehlender Disziplin, sondern an einem vollen Alltag.</p>
+
+    <p class="body-text" style="margin-top:28px">Unwohlsein kann zu Schonhaltung führen. Schonhaltung kann Muskelschwund begünstigen. Muskelschwund kann die Instabilität erhöhen. Mehr Instabilität kann das Unwohlsein verstärken.</p>
+
+    <div style="margin:16px 0 8px;border-radius:10px;overflow:hidden;background:var(--primary-light)">
+      <img src="../../assets/teufelskreislauf_clean_bg_mob.png" alt="Der Teufelskreis bei Verspannungen im Lendenwirbelbereich" loading="lazy" style="width:100%;display:block">
+    </div>
+    <p class="body-text" style="font-size:15px;text-align:center;color:var(--text-muted);margin-bottom:28px">Dieser Kreislauf kann sich bei vielen Menschen über Monate oder Jahre aufschaukeln. Klassische Methoden helfen dabei, Verspannungen zu lösen. Der Wellenpuls LWS setzt zusätzlich direkt an der Tiefenmuskulatur an.</p>
+
+    <p class="solution-lead">Neuromuskuläre Elektrostimulation, gezielt für die tiefliegende Rückenmuskulatur.</p>
+    <p class="body-text">NMES wird seit Jahrzehnten in Kliniken und Rehazentren eingesetzt. Nach Operationen, nach Schlaganfällen, bei Muskelschwund nach langer Bettruhe. Das Prinzip: Elektrische Impulse lösen echte Muskelkontraktionen aus, ohne dass du dich aktiv bewegst.</p>
+    <p class="body-text">Das Problem war bisher: Kein Gerät auf dem Markt war gezielt auf die tiefliegende Rumpfmuskulatur des unteren Rückens ausgerichtet. Christian Senfleben hat das in seiner Forschung erkannt und den Wellenpuls LWS entwickelt, um genau diese Lücke zu schließen.</p>
+    <p class="body-text"><strong>Echte Muskelkontraktionen. Echter Muskelaufbau. Echte Veränderung. Ohne Bewegung. Ohne Willenskraft. In 20 Minuten auf der Couch.</strong></p>
+
+    <div style="margin:24px 0;border-radius:10px;overflow:hidden;box-shadow:0 8px 28px oklch(38% 0.1 240 / 0.15)">
+      <img src="../../assets/showcase.gif" alt="Wellenpuls LWS in Aktion" loading="lazy" style="width:100%;display:block">
+    </div>
+
+    <div class="comp-wrap">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Wellenpuls LWS</th>
+            <th>Physiotherapie-Übungen</th>
+            <th>TENS-Gerät</th>
+            <th>Massagen</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Tiefenmuskulatur aktivieren</td><td><span class="ck">✓</span></td><td><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td></tr>
+          <tr><td>Echter Muskelaufbau</td><td><span class="ck">✓</span></td><td><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td></tr>
+          <tr><td>Ohne Termin nutzbar</td><td><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td><span class="ck">✓</span></td><td><span class="cx">✗</span></td></tr>
+          <tr><td>Nutzbar beim Fernsehen</td><td><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td>(ja)</td><td><span class="cx">✗</span></td></tr>
+          <tr><td>Speziell für den Lendenwirbelbereich entwickelt</td><td><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td><td><span class="cx">✗</span></td></tr>
+          <tr><td>Wärmefunktion</td><td><span class="ck">✓</span></td><td><span class="cx">✗</span></td><td>(ja)</td><td><span class="cx">✗</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CREDIBILITY -->
+<section class="section bg-blue">
+  <div class="inner">
+    <h2 class="section-h2 center">Kein Gadget. Ein Gerät aus echter Forschung.</h2>
+
+    <div class="cred-list">
+      <div class="cred-item">
+        <div class="cred-num">01</div>
+        <div class="cred-body">
+          <div class="cred-title">Eigene Studie</div>
+          <div class="cred-text">Der Wellenpuls LWS ist nicht aus einer Produktidee entstanden. Er ist aus einer sportwissenschaftlichen Studie entstanden. Das Studienprotokoll, die Positionierung der Elektroden, die Intensität: alles basiert auf echten Daten.</div>
+        </div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-num">02</div>
+        <div class="cred-body">
+          <div class="cred-title">Entwickelt an der Deutschen Sporthochschule Köln</div>
+          <div class="cred-text">Entwickelt von Christian Senfleben, M.Sc. Human Technology in Sports and Medicine, während seiner Zeit an der Deutschen Sporthochschule Köln.</div>
+        </div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-num">03</div>
+        <div class="cred-body">
+          <div class="cred-title">Physiotherapeuten-Empfehlung</div>
+          <div style="display:flex;gap:16px;align-items:flex-start;margin-top:10px">
+            <img src="../../assets/Arno-Neu-1024x1024.png" alt="Arno van Vonderen, Physiotherapeut" style="width:64px;height:64px;border-radius:50%;object-fit:cover;flex-shrink:0">
+            <div class="cred-text">„Mit dem Wellenpuls LWS gibt es erstmals eine Möglichkeit, die wichtige Tiefenmuskulatur im Rumpf einfach und effektiv zu trainieren."<br><strong style="font-size:13px">Arno van Vonderen, Diplom-Gesundheitswissenschaftler und Physiotherapeut</strong></div>
+          </div>
+        </div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-num">04</div>
+        <div class="cred-body">
+          <div class="cred-title">Auszeichnungen</div>
+          <div class="cred-text">Patentangemeldet Juni 2024 · Gefördert durch Land NRW, Bund und EU · Preisgekrönt</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-radius:10px;overflow:hidden;margin-top:8px">
+      <img src="../../assets/Physio_WellenpulsLWS_Praxis.png" alt="Wellenpuls LWS in der Physiotherapie-Praxis" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section bg-white">
+  <div class="inner">
+    <h2 class="section-h2 center">Über 120 Menschen haben ihren Rücken zurückbekommen</h2>
+
+    <div class="testi-list">
+      <div class="testi-item">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">„Seit ich den Gurt benutze, fühlt sich mein Rücken so viel besser an. Ich würde es jedem weiterempfehlen."</div>
+        <div class="testi-name">Karin Hoops</div>
+      </div>
+      <div class="testi-item">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">„Sehr lange beschäftige ich mich schon mit meinem Rücken. Zum ersten Mal habe ich das Gefühl, etwas gefunden zu haben, was mir wirklich hilft."</div>
+        <div class="testi-name">Sebastian D.</div>
+      </div>
+      <div class="testi-item">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">„Mein Vater arbeitet seit 30 Jahren auf dem Bau. Er hat schon vieles ausprobiert. Der Rücken fühlt sich um Welten entspannter an."</div>
+        <div class="testi-name">Leon H.</div>
+      </div>
+      <div class="testi-item">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">„Ich und meine Frau sind beide zufrieden. Der untere Rücken fühlt sich entspannter und deutlich gekräftigt an. Klare Kaufempfehlung."</div>
+        <div class="testi-name">Ramon M.</div>
+      </div>
+      <div class="testi-item">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">„Die Wärmefunktion entspannt den Rücken spürbar. Absolut empfehlenswert, gerade für den Preis."</div>
+        <div class="testi-name">Bettina B.</div>
+      </div>
+      <div class="testi-item">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">„War echt überrascht. Wenn man sich erstmal dran gewöhnt hat, ist das Gefühl wirklich angenehm. Hab natürlich direkt übertrieben und am nächsten Tag tatsächlich einen spürbaren Muskelkater."</div>
+        <div class="testi-name">Alexander R.</div>
+      </div>
+    </div>
+
+    <div class="rating-bar">
+      <div class="rating-stars">★★★★★</div>
+      <div class="rating-text">Durchschnitt 4,9 von 5 · 29 verifizierte Bewertungen<br><span style="font-weight:500;color:var(--text-muted)">Anna, Melanie und 120+ weitere lieben den Wellenpuls LWS</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section bg-light">
+  <div class="inner">
+    <h2 class="section-h2 center">So funktioniert es</h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">Gurt anlegen, 30 Sekunden</div>
+          <div class="step-text">Die Elektroden kurz mit Wasser befeuchten. Dann den Gurt um die Körpermitte legen. Er passt für Bauchumfänge von 78 bis 130 Zentimeter.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">Intensität einstellen</div>
+          <div class="step-text">Wärmefunktion einschalten. Intensität langsam hochregeln, bis du spürst, dass die Muskeln arbeiten.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title">Zurücklehnen</div>
+          <div class="step-text">20 Minuten. Fernsehen, lesen, telefonieren. Der Wellenpuls LWS arbeitet. Du nicht.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="protocol-callout">
+      <strong>Das Studienprotokoll</strong>
+      <span>2 mal pro Woche · 20 Minuten · 6 bis 12 Wochen für nachhaltige Ergebnisse</span>
+    </div>
+
+    <div style="border-radius:10px;overflow:hidden;margin-top:8px">
+      <img src="../../assets/Frau_55_Frontalansicht_WellenpulsLWS_Lifestyle.png" alt="Wellenpuls LWS Anwendung" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- OFFER REPEAT -->
+<section class="section bg-white" id="jetzt-bestellen">
+  <div class="inner">
+    <h2 class="section-h2 center">Alles zusammen. Zum besten Preis.</h2>
+
+    <div style="background:var(--primary-light);border-radius:12px 12px 0 0;padding:28px 20px 20px;text-align:center;border:1px solid var(--border);border-bottom:none">
+      <img src="../../assets/product-image-1.png" alt="Wellenpuls LWS – das komplette Paket" loading="lazy" style="width:100%;max-width:520px;display:block;margin:0 auto;filter:drop-shadow(0 12px 28px oklch(38% 0.1 240 / 0.22))">
+    </div>
+
+    <div class="offer-items" style="border-radius:0 0 10px 10px;border-top:none">
+      <div class="offer-item main-item">
+        <div class="offer-item-left">
+          <span class="offer-check">✓</span>
+          <div class="offer-item-name">Wellenpuls LWS Gerät und Reiseetui</div>
+        </div>
+        <div class="offer-item-price">489,00 €</div>
+      </div>
+      <div class="offer-item">
+        <div class="offer-item-left">
+          <span class="offer-check">✓</span>
+          <div class="offer-item-name">1:1 Gespräch mit Christian, dem Gründer<small>gratis dazu (Wert 120 €)</small></div>
+        </div>
+        <div class="offer-item-price"><span class="gratis">Gratis</span><span class="original">120,00 €</span></div>
+      </div>
+      <div class="offer-item">
+        <div class="offer-item-left">
+          <span class="offer-check">✓</span>
+          <div class="offer-item-name">Videokurs: 3 häufige Fehler bei Rückenschmerzen<small>gratis dazu (Wert 79 €)</small></div>
+        </div>
+        <div class="offer-item-price"><span class="gratis">Gratis</span><span class="original">79,00 €</span></div>
+      </div>
+      <div class="offer-item">
+        <div class="offer-item-left">
+          <span class="offer-check">✓</span>
+          <div class="offer-item-name">E-Book und Checkliste<small>gratis dazu (Wert 34,90 €)</small></div>
+        </div>
+        <div class="offer-item-price"><span class="gratis">Gratis</span><span class="original">34,90 €</span></div>
+      </div>
+      <div class="offer-item">
+        <div class="offer-item-left">
+          <span class="offer-check">✓</span>
+          <div class="offer-item-name">Kostenloser Versand<small>gratis dazu (Wert 9,90 €)</small></div>
+        </div>
+        <div class="offer-item-price"><span class="gratis">Gratis</span><span class="original">9,90 €</span></div>
+      </div>
+      <div class="offer-total">
+        <span>Gesamtwert</span>
+        <span>732,80 €</span>
+      </div>
+    </div>
+
+    <div class="price-hero">
+      <div class="price-hero-amount">489,00 €</div>
+      <div class="price-hero-save">Dein Preis · Du sparst <strong>243,80 €</strong></div>
+    </div>
+
+    <div class="btn-wrap">
+      <a href="../checkout/" class="btn track-atc">Jetzt sichern für 489,00 €</a>
+      <div class="trust-pills">
+        <span>30 Tage Geld-zurück-Garantie</span>
+        <span>Einmalige Zahlung</span>
+        <span>Keine Abofalle</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<section class="section bg-teal">
+  <div class="inner">
+    <div class="guarantee-card">
+      <div class="guarantee-icon">🛡</div>
+      <h2 class="guarantee-title">Du trägst kein Risiko. Wir tragen es.</h2>
+      <p class="guarantee-body">Der Wellenpuls LWS kommt mit einer 30-tägigen Geld-zurück-Garantie. Vier Wochen Zeit, das Gerät zu testen. Wenn du keinen Unterschied spürst, gibst du das Gerät einfach zurück. Ganz unkompliziert.</p>
+      <ul class="guarantee-points">
+        <li><span class="gi">🛡</span><span>Kein spürbarer Unterschied nach 30 Tagen? Kaufpreis wird vollständig erstattet.</span></li>
+        <li><span class="gi">✉</span><span>Eine E-Mail an Christian reicht.</span></li>
+        <li><span class="gi">⏱</span><span>Rückerstattung innerhalb weniger Werktage.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="section bg-white">
+  <div class="inner">
+    <h2 class="section-h2">Wer hinter dem Wellenpuls LWS steht</h2>
+
+    <div class="founder-layout">
+      <div class="founder-photo-wrap">
+        <img src="../../assets/Portrait_Gruender_Christian_Senfleben.jpg" alt="Christian Senfleben, Gründer Wellenpuls LWS" loading="lazy">
+      </div>
+      <div>
+        <div class="founder-name">Christian Senfleben</div>
+        <div class="founder-title">M.Sc. Human Technology in Sports &amp; Medicine, DSHS Köln</div>
+        <p class="founder-body">Als Christian Senfleben an der Deutschen Sporthochschule Köln seine Masterarbeit schrieb, begleitete er Menschen mit Rückenbeschwerden. Was ihn beschäftigte: Viele wussten, was sie tun sollten. Aber im Alltag fehlte schlicht die Zeit, die Termine, die Konsequenz. Ein Gerät, das das Training einfach und alltagstauglich macht, gab es nicht. Also hat er selbst eines entwickelt.</p>
+        <p class="founder-body" style="margin-top:12px">Die Patentanmeldung folgte im Juni 2024. Das Gerät wird durch Land NRW, Bund und EU gefördert.</p>
+        <p class="founder-body" style="margin-top:12px">Wenn du nach deiner Bestellung Fragen hast, erreichst du Christian persönlich per E-Mail.</p>
+      </div>
+    </div>
+
+    <div class="bonus-strip">
+      <span class="bi">📞</span>
+      <span>Als Teil deines Pakets bekommst du ein persönliches <strong>1:1 Gespräch direkt mit Christian.</strong> Er erklärt dir, wie du das Gerät optimal einsetzt und wie du das Protokoll in deinen Alltag integrierst. Wert: 120,00 €. Heute gratis dabei.</span>
+    </div>
+
+    <div style="border-radius:10px;overflow:hidden;margin-top:8px">
+      <img src="../../assets/Buehnenfoto1_Wellenpuls_Tunis_CYE.jpg" alt="Christian Senfleben beim Vortrag" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section bg-light">
+  <div class="inner">
+    <h2 class="section-h2 center">Häufige Fragen</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">Wann spüre ich erste Ergebnisse? <span class="chev">▾</span></div>
+        <div class="faq-a">Viele Kunden berichten nach 2 bis 3 Anwendungen von einem spürbaren Muskelkater in der Tiefe des unteren Rückens. Das ist ein Zeichen, dass Muskeln beansprucht werden, die vorher kaum aktiviert wurden. Spürbare Veränderungen im Alltag zeigen sich bei den meisten Menschen nach einigen Wochen regelmäßiger Nutzung.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Ist die Elektrostimulation unangenehm? <span class="chev">▾</span></div>
+        <div class="faq-a">Nein. Beim ersten Mal fühlt sich die Stimulation fremd an. Ein Kribbeln, das zu einem Pulsieren wird. Du regelst die Intensität selbst hoch. Die integrierte Wärmefunktion macht den Einstieg deutlich angenehmer.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Ich habe schon alles probiert. Warum sollte das anders sein? <span class="chev">▾</span></div>
+        <div class="faq-a">Weil der Ansatzpunkt ein anderer ist. Der Wellenpuls LWS aktiviert die Tiefenmuskulatur direkt, ohne dass du dafür Termine einhalten, Übungen ausführen oder Willenskraft aufbringen musst. Genau deshalb gibt es die 30-Tage-Garantie, damit du es ohne Risiko selbst ausprobieren kannst.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Für wen ist das Gerät nicht geeignet? <span class="chev">▾</span></div>
+        <div class="faq-a">Der Wellenpuls LWS ist nicht geeignet für Personen mit Herzschrittmacher, Metallimplantaten im Rumpfbereich, Epilepsie, Herzrhythmusstörungen, Schwangerschaft oder stark veränderten Blutdruckwerten. Bei bestehenden Erkrankungen bitte vorher ärztliche Rücksprache halten.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Was ist im 1:1 Gespräch mit Christian enthalten? <span class="chev">▾</span></div>
+        <div class="faq-a">Christian erklärt dir, wie du die Intensität richtig einstellst, welche Fehler du vermeiden solltest und wie du das Gerät am besten in deinen Alltag integrierst. Abgestimmt auf deine persönliche Situation. Normalerweise nicht im Lieferumfang enthalten.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="inner">
+    <h2 class="section-h2 center">Wie lange willst du noch warten?</h2>
+    <p class="body-text" style="text-align:center;color:oklch(99% 0.003 240 / 0.8);margin:0 auto 16px">Du weißt jetzt, warum dein Rücken trotz allem nicht besser geworden ist. Du weißt, was die eigentliche Ursache ist. Und du weißt, dass es eine Methode gibt, die dort ansetzt, wo alle anderen aufgehört haben.</p>
+    <p class="body-text" style="text-align:center;color:oklch(99% 0.003 240 / 0.8);margin:0 auto 16px">Du kannst morgen wieder mit den Übungen anfangen. Noch einen Termin beim Physiotherapeuten buchen. Noch ein paar Wochen abwarten, ob es vielleicht von selbst besser wird.</p>
+    <p class="body-text" style="text-align:center;color:oklch(99% 0.003 240 / 0.8);margin:0 auto 0"><strong style="color:#fff">Oder du bestellst heute.</strong></p>
+
+    <div class="offer-reminder">
+      <strong>Wellenpuls LWS + 1:1 Beratung + Videokurs + E-Book + Gratis-Versand</strong>
+      489,00 € · <span style="text-decoration:line-through;opacity:.65">Gesamtwert 732,80 €</span>
+    </div>
+
+    <div class="btn-wrap">
+      <a href="../checkout/" class="btn track-atc">Jetzt bestellen für 489,00 €</a>
+    </div>
+    <div class="final-trust">
+      <span>30 Tage Geld-zurück</span>
+      <span>Kostenloser Versand</span>
+      <span>Lieferung in 2 Werktagen</span>
+      <span>Deutsches Startup mit Forschungshintergrund</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <img src="../../assets/logo_transparent.png" alt="Stabil im Alltag" style="height:48px;width:auto;display:inline-block">
+  <p style="margin-bottom:8px"><a href="/impressum/">Impressum</a> &nbsp;·&nbsp; <a href="/datenschutz/">Datenschutz</a> &nbsp;·&nbsp; <a href="#" onclick="SIA_openConsent();return false;">Cookie-Einstellungen</a></p>
+  <p class="footer-disclaimer">Der Wellenpuls LWS ist ein Trainingsgerät, kein Medizinprodukt. Er ersetzt keine ärztliche Beratung. Individuelle Ergebnisse können variieren. Bei Vorerkrankungen bitte vor der Nutzung ärztliche Rücksprache halten.</p>
+</footer>
+
+<!-- STICKY BAR -->
+<div class="sticky-bottom" id="sticky-bar" style="display:none">
+  <div class="sticky-price">
+    <span>Wellenpuls LWS + Bonus-Paket</span>
+    <strong>489,00 € <s style="font-size:12px;opacity:.5">732,80 €</s></strong>
+  </div>
+  <a href="../checkout/" class="btn track-atc">Jetzt sichern</a>
+</div>
+
+<!-- NOTIFICATION -->
+<div class="notif" id="notif">
+  <div class="notif-dot"></div>
+  <span id="notif-text">Monika aus München hat gerade bestellt</span>
+</div>
+
+<script>
+(function(){
+  var end=Date.now()+((23*3600+47*60+12)*1000);
+  function fmt(s){return String(s).padStart(2,'0')}
+  function tick(){
+    var r=Math.max(0,Math.floor((end-Date.now())/1000));
+    var el=document.getElementById('countdown');
+    if(el)el.textContent=fmt(Math.floor(r/3600))+':'+fmt(Math.floor((r%3600)/60))+':'+fmt(r%60);
+  }
+  tick();setInterval(tick,1000);
+})();
+
+(function(){
+  var hero=document.querySelector('.hero');
+  var bar=document.getElementById('sticky-bar');
+  var shown=false;
+  window.addEventListener('scroll',function(){
+    var past=window.scrollY>(hero?hero.offsetHeight:400);
+    if(past!==shown){shown=past;bar.style.display=past?'flex':'none';}
+  },{passive:true});
+})();
+
+document.querySelectorAll('.faq-q').forEach(function(q){
+  q.addEventListener('click',function(){
+    var item=this.closest('.faq-item');
+    var was=item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(i){i.classList.remove('open');});
+    if(!was)item.classList.add('open');
+  });
+});
+
+(function(){
+  var names=['Monika aus München','Klaus aus Hamburg','Ingrid aus Berlin','Werner aus Köln','Helga aus Stuttgart','Manfred aus Frankfurt','Ursula aus Düsseldorf','Brigitte aus Dresden'];
+  var idx=0;
+  function show(){
+    var el=document.getElementById('notif');
+    var txt=document.getElementById('notif-text');
+    txt.textContent=names[idx%names.length]+' hat gerade bestellt';
+    idx++;
+    el.classList.add('show');
+    setTimeout(function(){el.classList.remove('show');},3500);
+    setTimeout(show,Math.random()*8000+6000);
+  }
+  setTimeout(show,4000);
+})();
+</script>
+<script src="../../assets/consent.js" defer></script>
+</body>
+</html>
