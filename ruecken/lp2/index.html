@@ -78,7 +78,8 @@ img{display:block;width:100%;height:auto}
 .proof-strip .stars{color:var(--star);font-size:15px;letter-spacing:1px}
 
 .hero-img{max-width:540px;margin:0 auto 28px;padding:0 20px}
-.hero-img img{border-radius:10px;box-shadow:0 12px 40px oklch(38% 0.1 240 / 0.2)}
+.hero-img img,.hero-img video{border-radius:10px;box-shadow:0 12px 40px oklch(38% 0.1 240 / 0.2)}
+.hero-img video{display:block;width:100%;height:auto;background:var(--surface)}
 
 /* BRIDGE */
 .bridge-intro{font-size:1.1rem;color:var(--text-body);line-height:1.75;margin-bottom:18px;max-width:64ch}
@@ -264,7 +265,14 @@ img{display:block;width:100%;height:auto}
     </div>
   </div>
   <div class="hero-img inner">
-    <img src="../../assets/showcase.gif" alt="Wellenpuls LWS in Aktion" loading="eager">
+    <video id="hero-video" src="../../assets/wellenpuls-hero.mp4" poster="../../assets/wellenpuls-hero-poster.jpg"
+           autoplay muted loop playsinline preload="auto" aria-label="Der Wellenpuls LWS von der Elektrodenseite bis zum angelegten Gurt"></video>
+    <script>
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        var hv = document.getElementById('hero-video');
+        hv.removeAttribute('autoplay'); hv.pause(); hv.setAttribute('controls', '');
+      }
+    </script>
   </div>
   <div class="btn-wrap inner" style="padding:0 20px">
     <a href="../checkout/" class="btn track-atc">Jetzt Wellenpuls LWS + Bonus-Paket sichern</a>
@@ -364,7 +372,7 @@ img{display:block;width:100%;height:auto}
   <div class="inner">
     <h2 class="section-h2">Warum klassische Methoden oft nicht weiterhelfen</h2>
     <p class="bridge-intro">Verspannungen und Beschwerden im Lendenwirbelbereich entstehen meist nicht durch zu wenig Bewegung. Die eigentliche Ursache liegt tiefer: Bei vielen Betroffenen ist die stabilisierende Tiefenmuskulatur der Lendenwirbelsäule so weit geschwächt, dass sie mit klassischen Methoden nur schwer direkt zu erreichen ist.</p>
-    <p class="bridge-intro">Sportwissenschaftler Christian Senfleben hat dieses Muster in seiner Forschung an der Deutschen Sporthochschule Köln untersucht und den Wellenpuls LWS als gezielte Antwort entwickelt. <strong>Nicht als Gadget. Als wissenschaftliche Konsequenz.</strong></p>
+    <p class="bridge-intro">Sportwissenschaftler Christian Senfleben hat dieses Muster in seiner Forschung an der Deutschen Sporthochschule Köln untersucht und den Wellenpuls LWS als gezielte Antwort entwickelt.</p>
   </div>
 </section>
 
@@ -374,8 +382,8 @@ img{display:block;width:100%;height:auto}
     <h2 class="section-h2">Du hast jahrelang alles richtig gemacht. Das Problem war der Ansatzpunkt.</h2>
 
     <p class="body-text"><strong>Die tiefliegende Rumpfmuskulatur. Das ist der Kern des Problems.</strong></p>
-    <p class="body-text">Bei vielen Menschen mit Verspannungen im Lendenwirbelbereich ist diese Muskulatur stark geschwächt. Sie liegt so tief, dass das Nervensystem sie kaum noch ansteuert. Der Körper hat ihre Aufgabe längst an andere Strukturen abgegeben. An oberflächliche Muskeln, die dadurch verkrampfen. An Bandscheiben, die unter Dauerdruck stehen. An eine Wirbelsäule, die ohne ihr natürliches Korsett arbeiten muss.</p>
-    <p class="body-text">Übungen helfen. Physiotherapie hilft. Das Problem ist ein anderes: Beides erfordert regelmäßigen Aufwand, feste Termine und eine Menge Willenskraft. Genau da scheitern die meisten Menschen nicht an fehlender Disziplin, sondern an einem vollen Alltag.</p>
+    <p class="body-text">Bei vielen Menschen mit Verspannungen im Lendenwirbelbereich ist diese Muskulatur stark geschwächt. Sie liegt sehr tief. Der Körper hat ihre Aufgabe längst an andere Strukturen abgegeben. An oberflächliche Muskeln, die dadurch verkrampfen. An Bandscheiben, die unter Dauerdruck stehen. An eine Wirbelsäule, die ohne ihr natürliches Korsett arbeiten muss.</p>
+    <p class="body-text">Übungen helfen. Physiotherapie hilft. Das Problem ist ein anderes: Beides erfordert regelmäßigen Aufwand, feste Termine und eine Menge Willenskraft. Genau da scheitern die meisten Menschen: an fehlender Disziplin und einem vollen Alltag.</p>
 
     <div style="margin:16px 0 8px;border-radius:10px;overflow:hidden;background:var(--primary-light)">
       <img src="../../assets/teufelskreislauf_clean_bg_mob.png" alt="Der Teufelskreis bei Verspannungen im Lendenwirbelbereich" loading="lazy" style="width:100%;display:block">
