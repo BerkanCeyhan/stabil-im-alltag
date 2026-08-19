@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eine Botschaft an alle mit Rückenleiden – Stabil im Alltag</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="../../../assets/logo_transparent.png">
+  <link rel="apple-touch-icon" href="../../../assets/logo_transparent.png">
+  <style>
+    :root {
+      --primary:  #1A5C8A;
+      --teal:     #28836A;
+      --amber:    #7A5C12;
+      --green:    #27865A;
+      --red:      #C0392B;
+      --bg:       #F4F7FA;
+      --surface:  #fff;
+      --text:     #1E2D3A;
+      --text-muted: #6B7E8C;
+      --border:   #D0DCE8;
+      --max:      740px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Libre Franklin', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.78;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── HEADER ── */
+    .site-header {
+      background: var(--surface);
+      border-bottom: 3px solid var(--primary);
+      padding: 0 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100px;
+      gap: 16px;
+    }
+    .header-logo {
+      font-family: 'Lora', serif;
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--primary);
+      letter-spacing: -0.3px;
+    }
+    .header-logo span { color: var(--teal); }
+    .header-anzeige {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #6B7E8C;
+      border: 1.5px solid #B0BEC5;
+      border-radius: 3px;
+      padding: 2px 10px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      background: #F0F4F7;
+    }
+
+    /* ── ARTICLE ── */
+    .article-outer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 40px 20px 72px;
+    }
+
+    .article-cat {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .article-headline {
+      font-family: 'Lora', serif;
+      font-size: clamp(24px, 5vw, 36px);
+      font-weight: 600;
+      line-height: 1.25;
+      color: #101E28;
+      margin-bottom: 18px;
+    }
+
+    .article-deck {
+      font-size: 17px;
+      line-height: 1.65;
+      color: #3A5060;
+      font-style: italic;
+      border-left: 3px solid var(--primary);
+      padding-left: 16px;
+      margin-bottom: 24px;
+    }
+
+    /* ── AUTHOR ROW ── */
+    .author-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 28px;
+    }
+    .author-avatar {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: #D9E8F0;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .author-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .author-name  { font-weight: 700; font-size: 15px; color: #1a1a1a; }
+    .author-role  { font-size: 12.5px; color: var(--text-muted); }
+    .author-date  { font-size: 12.5px; color: var(--text-muted); margin-top: 2px; }
+
+    /* ── IMAGES ── */
+    .article-img {
+      width: 100%;
+      border-radius: 10px;
+      margin: 28px 0;
+      display: block;
+      object-fit: cover;
+      max-height: 460px;
+    }
+
+    /* 4:3 crop — zeigt unteren Bildbereich (Gurt sichtbar) */
+    .img-crop-43 {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border-radius: 10px;
+      margin: 28px 0;
+    }
+    .img-crop-43 img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: bottom;
+      display: block;
+    }
+
+    /* ── BODY TEXT ── */
+    .article-body p { margin-bottom: 20px; }
+
+    .article-body h2 {
+      font-family: 'Lora', serif;
+      font-size: clamp(20px, 4vw, 26px);
+      font-weight: 600;
+      line-height: 1.3;
+      color: #101E28;
+      margin: 44px 0 16px;
+    }
+
+    .article-body h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 28px 0 10px;
+    }
+
+    .article-body strong { font-weight: 700; }
+    .article-body em    { font-style: italic; }
+
+    /* ── PULLQUOTE ── */
+    .pullquote {
+      border-left: 4px solid var(--primary);
+      background: #E8F1F8;
+      border-radius: 0 10px 10px 0;
+      padding: 18px 22px;
+      margin: 28px 0;
+      font-style: italic;
+      font-size: 18px;
+      line-height: 1.6;
+      color: #1E2D3A;
+    }
+
+    hr { border: none; border-top: 1px solid var(--border); margin: 36px 0; }
+
+    /* ── SCIENCE / INFO BOX ── */
+    .science-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--primary);
+      border-radius: 0 0 12px 12px;
+      padding: 24px;
+      margin: 28px 0;
+    }
+    .science-box .box-title {
+      font-family: 'Lora', serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+    }
+
+    /* ── TIMELINE (WOCHEN) ── */
+    .woche-item {
+      border-left: 3px solid var(--primary);
+      padding-left: 20px;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .woche-item::before {
+      content: '';
+      width: 12px; height: 12px;
+      background: var(--primary);
+      border-radius: 50%;
+      position: absolute;
+      left: -7.5px; top: 6px;
+    }
+    .woche-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .woche-title {
+      font-family: 'Lora', serif;
+      font-size: 19px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 12px;
+    }
+    .woche-item p { margin-bottom: 12px; font-size: 16px; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonial-grid { display: flex; flex-direction: column; gap: 16px; margin: 28px 0; }
+    .testimonial-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 22px 18px;
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '"';
+      font-family: 'Lora', serif;
+      font-size: 64px;
+      color: #C8DCE8;
+      position: absolute;
+      top: 6px; left: 14px;
+      line-height: 1;
+    }
+    .stars { color: #e6a010; font-size: 13px; margin-bottom: 6px; }
+    .testimonial-text { font-size: 15px; line-height: 1.65; color: #333; font-style: italic; padding-top: 8px; }
+    .testimonial-author { margin-top: 12px; font-size: 13px; font-weight: 700; color: var(--primary); }
+
+    /* ── REASONS LIST ── */
+    .reasons-list { list-style: none; margin: 0 0 24px; }
+    .reasons-list li {
+      padding: 12px 0;
+      font-size: 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .reasons-list li:last-child { border-bottom: none; }
+    .reasons-list .num {
+      background: var(--primary);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      border-radius: 50%;
+      width: 26px; height: 26px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── FAZIT LIST ── */
+    .fazit-list { list-style: none; margin: 16px 0 24px; }
+    .fazit-list li {
+      padding: 7px 0;
+      font-size: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .fazit-list li:last-child { border-bottom: none; }
+
+    /* ── UPDATE BOX ── */
+    .update-box {
+      background: #FFFBEC;
+      border: 2px solid #D4A800;
+      border-radius: 12px;
+      padding: 24px 24px 20px;
+      margin: 40px 0;
+    }
+    .update-label {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 6px;
+    }
+    .update-box h3 {
+      font-family: 'Lora', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 12px;
+      line-height: 1.35;
+    }
+    .update-box p { font-size: 15px; margin-bottom: 10px; }
+    .update-perks { list-style: none; margin: 14px 0; }
+    .update-perks li { padding: 5px 0; font-size: 15px; font-weight: 600; }
+    .update-perks li::before { content: "✅ "; }
+    .update-note { font-size: 12px; color: #888; font-style: italic; margin-top: 8px; }
+
+    /* ── PRODUCT CARD ── */
+    .product-card {
+      background: var(--surface);
+      border: 2px solid var(--primary);
+      border-radius: 16px;
+      padding: 28px 24px;
+      margin: 40px 0;
+      box-shadow: 0 4px 24px rgba(26,92,138,0.10);
+    }
+    .product-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+    .product-name {
+      font-family: 'Lora', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 4px;
+    }
+    .product-tagline { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+    .rating-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; font-size: 14px; }
+    .rating-stars { color: #e6a010; font-size: 18px; }
+
+    .feature-list { list-style: none; margin: 0 0 20px; }
+    .feature-list li {
+      padding: 7px 0;
+      font-size: 14.5px;
+      border-bottom: 1px solid #EEF2F6;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .feature-list li:last-child { border-bottom: none; }
+    .feature-list .chk { color: var(--green); font-weight: 700; flex-shrink: 0; }
+
+    .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 22px; }
+    .pros-box { background: #F0FAF5; border-radius: 8px; padding: 14px; }
+    .cons-box { background: #FEF2F2; border-radius: 8px; padding: 14px; }
+    .pros-box h4 { color: var(--green); font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+    .cons-box h4 { color: var(--red);   font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+    .pros-box ul, .cons-box ul { list-style: none; }
+    .pros-box li, .cons-box li { font-size: 13px; line-height: 1.5; padding: 3px 0; }
+    .pros-box li::before { content: "✅ "; }
+    .cons-box li::before { content: "❌ "; }
+
+    .btn-primary {
+      display: block;
+      width: 100%;
+      background: var(--teal);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 17px 24px;
+      font-family: 'Libre Franklin', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      text-align: center;
+      cursor: pointer;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+    }
+    .guarantee-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ── AUTHOR BIO ── */
+    .author-bio {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 44px 0 28px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+    .author-bio-avatar {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: #D9E8F0;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .author-bio-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .author-bio-name { font-weight: 700; font-size: 16px; margin-bottom: 2px; }
+    .author-bio-role { font-size: 12.5px; color: var(--primary); margin-bottom: 10px; font-weight: 600; }
+    .author-bio-text { font-size: 14px; color: #555; line-height: 1.65; }
+
+    /* ── ABOUT MAG ── */
+    .about-mag {
+      background: #EDF3F8;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 28px 0;
+      font-size: 13px;
+      color: #4A6070;
+      line-height: 1.65;
+    }
+    .about-mag strong { color: #2A3E4E; }
+
+    /* ── DISCLAIMER ── */
+    .disclaimer {
+      background: #EFF2F5;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0 36px;
+      font-size: 11.5px;
+      line-height: 1.65;
+      color: #90A0AC;
+    }
+    .disclaimer strong { color: #6E8090; }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 28px 20px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .footer-logo {
+      font-family: 'Lora', serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 10px;
+      display: block;
+    }
+    .footer-logo span { color: var(--teal); }
+    .footer-links { display: flex; gap: 20px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
+    .footer-links a { color: var(--primary); text-decoration: underline; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:600px) {
+      .pros-cons { grid-template-columns: 1fr; }
+      .author-bio { flex-direction: column; align-items: center; text-align: center; }
+    }
+
+    /* ── BRIEF-REGISTER ── */
+    .article-body p.beat { margin-bottom: 10px; }
+    .article-body p.beat + p:not(.beat) { margin-top: 24px; }
+
+    .signature {
+      font-family: 'Lora', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 4px 0 0;
+    }
+
+    /* ── OPTIONEN-STAPEL ── */
+    .option-stack {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2px 24px;
+      margin: 28px 0;
+    }
+    .option-stack > div { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    .option-stack > div:last-child { border-bottom: none; }
+    .option-stack h3 { margin: 0 0 8px; }
+    .option-stack p { font-size: 16px; margin-bottom: 10px; }
+    .option-stack p:last-child { margin-bottom: 0; }
+
+    /* ── GRUENDER-BOX ── */
+    .founder-box { display: flex; gap: 18px; align-items: flex-start; }
+    .founder-box img {
+      width: 84px; height: 84px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .founder-box p { font-size: 16px; margin-bottom: 12px; }
+    .founder-box p:last-child { margin-bottom: 0; }
+
+    /* ── ABSCHLUSS-CTA ── */
+    .cta-final { margin: 40px 0 44px; }
+    .cta-final .btn-primary {
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 17px;
+      padding: 20px 26px;
+      line-height: 1.35;
+      margin-bottom: 12px;
+    }
+    .cta-terms {
+      text-align: center;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    @media(max-width:600px) {
+      .founder-box { flex-direction: column; align-items: center; text-align: center; }
+      .option-stack { padding: 2px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/"><img src="../../../assets/logo_transparent.png" alt="Stabil im Alltag" style="height:90px;width:auto;display:block;"></a>
+    <div class="header-anzeige">Anzeige &nbsp;·&nbsp; Advertorial</div>
+  </div>
+</header>
+
+<!-- ═══ ARTICLE ═══ -->
+<main>
+  <article class="article-outer">
+
+    <div class="article-cat">Erfahrungsbericht</div>
+
+    <h1 class="article-headline">
+      Eine Botschaft an alle mit Rückenleiden
+    </h1>
+
+    <p class="article-deck">
+      Lieber Freund, Liebe Freundin, wenn du diese Nachricht liest, dann sicherlich zu einem Zeitpunkt, an dem es wieder mal schlimmer geworden ist…
+    </p>
+
+    <!-- Hero -->
+    <img
+      src="https://images.pexels.com/photos/10066347/pexels-photo-10066347.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+      alt="Hände am unteren Rücken"
+      class="article-img"
+      style="margin-top:24px;margin-bottom:6px"
+    >
+    <div style="font-size:12px;color:var(--text-muted);margin:0 0 24px;">(Symbolbild)</div>
+
+    <div class="author-row">
+      <div>
+        <div class="author-name">Georg</div>
+        <div class="author-role">Erfahrungsbericht eines Lesers</div>
+        <div class="author-date">16. August 2026 · 10 Min. Lesezeit</div>
+      </div>
+    </div>
+
+    <!-- ─── BODY ─── -->
+    <div class="article-body">
+
+      <p class="beat">…an dem jede kleine Bewegung wehtut…</p>
+      <p class="beat">…an dem du an nichts anderes denken kannst…</p>
+      <p class="beat">außer deinen Rücken!</p>
+
+      <p>Du bist wahrscheinlich an dem Punkt angekommen, an dem ich auch war…</p>
+
+      <p class="beat">Der Stift ist runtergefallen. Du lässt ihn liegen. Irgendwer hebt ihn schon auf.</p>
+      <p class="beat">Du ziehst nur noch Schuhe ohne Schnürsenkeln an.</p>
+      <p class="beat">Du mähst den Rasen nicht mehr selbst. Das Autowaschen übernimmt auch wer anders.</p>
+      <p class="beat">Im Restaurant suchst du nach den Stühlen aus, nicht nach der Karte.</p>
+      <p class="beat">Erst hast du im Verein aufgehört. Dann mit dem Laufen. Dann mit dem Schwimmen.</p>
+      <p class="beat">Dann war die große Hunderunde weg. Dann die kleine.</p>
+      <p class="beat">Dein Enkelkind hebst du nicht mehr hoch. Du setzt dich hin und wartest, bis es zu dir kommt…</p>
+      <p class="beat">..und obwohl du ein Genießer bist, vermeidest du den Weg in die Küche, weil es einfach nicht anders geht.</p>
+      <p class="beat">..und obwohl es dir riesen Spaß macht, sagst du nicht mehr einfach zu, Du sagst: <em>„Mal schauen, wie es mir geht.“</em></p>
+
+      <p>Ich kann es ganz genau nachvollziehen, wie das ist und was das mit einem macht.</p>
+
+      <p>Denn ich war in genau dieser Situation.</p>
+
+      <p>Ich habe alles probiert.</p>
+
+      <p>Ich war beim Physio. Sechs Termine, zehn Termine, ich weiß es nicht mehr. Er hat mir Übungen mitgegeben, und die haben auch was gebracht.</p>
+
+      <p>Dann hatte ich eine Woche mit viel Arbeit, dann ein Wochenende, dann einen schlechten Tag.</p>
+
+      <p>Die Übungen habe ich dann wieder eine Woche liegen lassen.</p>
+
+      <p>Ich habe Dehn &amp; Trainingsvideos auf Youtube geschaut. Ich wollte es richtig machen, ich wollte nichts falsch machen.</p>
+
+      <p class="beat">Ich hatte eine Faszienrolle, einen Igelball und einen alten Tennisball.</p>
+      <p class="beat">Außerdem eine Massage Pistole. Ein Theraband, einen Stützgürtel.</p>
+      <p class="beat">Ein Kirschkernkissen und eine Akupressurmatte.</p>
+      <p class="beat">Eine Rotlichtlampe, eine Memory Matratze und Lattenrost mit Zonen.</p>
+
+      <p>Der Wasserkocher stand bei mir neben der Couch. Damit ich für meine Wärmflasche nicht durch die halbe Wohnung laufen muss.</p>
+
+      <p>Ja… Ich kenne das.</p>
+
+      <div class="pullquote">
+        Wenn es nicht besser wird, sondern gefühlt schlimmer – dreht sich das Leben nur noch darum. Um deinen Rücken.
+      </div>
+
+      <p>Und wie du alles andere dafür um- oder zurückstellen musst.</p>
+
+      <p>Irgendwann ist der Punkt da, wo man schon innerlich aufgegeben hat.</p>
+
+      <p><em>„Es ist jetzt nunmal so..“</em></p>
+
+      <p>Wenn du an diesem Punkt oder kurz davor bist, dann will ich dich ermutigen, jetzt weiterzulesen.</p>
+
+      <p>Denn ich war auch dort, aber ich bin da rausgekommen.</p>
+
+      <p>Und ich möchte dir zeigen, wie ich das gemacht habe, weil ich genau weiß wie das ist..</p>
+
+      <p>Für einen starken Körper bis ins hohe Alter sind die Muskeln das A und O.</p>
+
+      <p>Doch insbesondere die Muskeln im Rumpf, also unsere Körpermitte ist entscheidend</p>
+
+      <p>Sie stützen die Wirbelsäule, sorgen für eine aufrechte Haltung und verbinden die Kraft von Armen und Beinen.</p>
+
+      <p>Wenn speziell die Rückenmuskeln zu schwach sind oder die Bauchmuskeln dominieren, kippt das Becken.</p>
+
+      <p>Die Folge sind Fehlhaltungen wie ein Rundrücken oder ein extremes Hohlkreuz, was langfristig zu Schmerzen führt.</p>
+
+      <p>Es gilt also, die Muskeln zu stärken.</p>
+
+      <h2>Jetzt kommt aber der Teil, den mir jahrelang keiner gesagt hat.</h2>
+
+      <p>Dein Körper macht nämlich nichts Falsches. Er macht genau das, wofür er gebaut ist.</p>
+
+      <p>Wenn der Rücken weh tut, dann schont er. Er zieht Muskeln zusammen, er hält dich davon ab, dich zu bücken, er sagt dir: lass das lieber.</p>
+
+      <p>Bei einer frischen Verletzung ist das goldrichtig. Zwei, drei Tage schonen, dann heilt es.</p>
+
+      <p>Das Problem beginnt, wenn dieser Schutzmechanismus nicht mehr aufhört.</p>
+
+      <p>Du bückst dich nicht mehr. Also verlernt dein Körper das Bücken. Und beim nächsten Mal tut es schon bei der halben Bewegung weh.</p>
+
+      <p>Du lässt die große Hunderunde weg.</p>
+
+      <p>Also verkleinert sich die Strecke, die du beschwerdefrei schaffst.</p>
+
+      <img
+        src="../../../assets/teufelskreislauf_clean_bg.png"
+        alt="Der Teufelskreis aus Schmerz, Schonung und Rückbildung"
+        class="article-img"
+        style="background:var(--surface);object-fit:contain;padding:12px"
+      >
+
+      <p>Jedes Mal, wenn du etwas weglässt, tut auf einmal etwas weh, was vorher völlig harmlos war. Und weil das wehtut, lässt du das auch weg.</p>
+
+      <p>Das ist der Kreislauf, den die Übungen vom Physio eigentlich unterbrechen sollten!</p>
+
+      <p>Deswegen fühlt es sich an, als würde es immer schlimmer, obwohl du doch alles richtig machst.</p>
+
+      <h2>Und jetzt kommt der Knackpunkt.</h2>
+
+      <p>An guten Tagen willst du Gas geben. Du bist motiviert.</p>
+
+      <p>Der Rücken meldet sich mal nicht, du fühlst dich fast normal – also machst du alles auf einmal.</p>
+
+      <p>Der Keller wird aufgeräumt, der Einkauf gemacht, drei volle Übungen hintereinander, weil es heute ja geht.</p>
+
+      <p>Und zwei Tage später liegst du brach.</p>
+
+      <p>Dann machst du eine Woche gar nichts. Dann kommt der nächste gute Tag. Und du machst wieder zu viel.</p>
+
+      <div class="pullquote">
+        Hoch, runter. Hoch, runter..
+      </div>
+
+      <p>Genau deshalb vernachlässigen ein Großteil der Menschen ihre Physio-Übungen zuhause.</p>
+
+      <p>Dieser Kreislauf hat mich zu immer weniger Bewegung, immer weniger Belastbarkeit geführt.</p>
+
+      <p>Um ihn umzudrehen, braucht ein Muskel genau zwei Dinge.</p>
+
+      <p>Er braucht einen umfangreichen Reiz. Und er braucht ihn regelmäßig.</p>
+
+      <p>Ja logisch… Und trotzdem scheitert fast jeder an einem von beiden (ich eingeschlossen), jahrelang.</p>
+
+      <h2>Schritt 1: Die Regelmäßigkeit des Reizes</h2>
+
+      <p>Damit ein Muskel stabil und kräftig wird, muss man ihn regelmäßig reizen.</p>
+
+      <p>Der Körper baut nämlich alles ab, was er eine Weile nicht braucht. Er ist da völlig unsentimental.</p>
+
+      <p>Wenn du deine Rumpfmuskulatur mit Übungen trainierst, dann musst du diese Übungen regelmäßig machen.</p>
+
+      <p>Sobald du eine Woche trainierst, und zwei Wochen wieder aufhörst, bringt das ganze so gut wie nix!</p>
+
+      <h2>Schritt 2: Die Qualität des Reizes:</h2>
+
+      <p>Denn Regelmäßigkeit allein reicht nicht.</p>
+
+      <p>Du kannst eine Übung 200 Mal machen, und wenn dabei der falsche Muskel arbeitet, passiert genau nichts.</p>
+
+      <p>Das war tatsächlich ein großes Problem bei mir. Ich habe meine Übungen oft einfach zu schlecht ausgeführt.</p>
+
+      <p>Gerade bei der Tiefenmuskulatur im Rücken ist das essentiell.</p>
+
+      <p>Bis hierhin ist die Sache eigentlich klar.</p>
+
+      <p>Du brauchst zwei Dinge. Einen Reiz, der wirklich beim richtigen Muskel ankommt. Und diesen Reiz regelmäßig, auch an den Tagen, an denen dir alles zu viel ist.</p>
+
+      <p>Bleibt nur eine Frage: Woher nimmst du das?</p>
+
+      <p>Ich habe damals alles durchprobiert, was es gibt.</p>
+
+      <img
+        src="https://images.pexels.com/photos/5793653/pexels-photo-5793653.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+        alt="Physiotherapeut behandelt Patienten am Rücken"
+        class="article-img"
+      >
+
+      <div class="option-stack">
+        <div>
+          <h3>Physiotherapie</h3>
+          <p>Physio ist eigentlich die beste Lösung… Die Übungen, die ich bekomme habe, helfen auch da wo sie sollten.</p>
+          <p>Leider ist es die Umsetzung zuhause, bei der der Physio eben nicht da ist.</p>
+          <p>Wohin das führt, muss ich dir nicht erklären.</p>
+        </div>
+        <div>
+          <h3>Das Fitnessstudio</h3>
+          <p>Mein Fitnessstudio ist hervorragend. Die Geräte sind Top und die Bewegungen kommen da an wo sie sollten.</p>
+          <p>Leider muss ich immer dorthin fahren. Jeden zweiten Tag 20 Minuten hin und her ist einfach zuviel in meinem Alltag</p>
+        </div>
+        <div>
+          <h3>Das Zeug bei dir in der Ecke</h3>
+          <p>Die Rolle, der Ball, die Massagepistole, die Akupressurmatte. Diese Dinge lockern die Muskulatur, aber im Muskelaufbau helfen die kaum.</p>
+        </div>
+      </div>
+
+      <p>Und genau da war ich festgefahren.</p>
+
+      <p>Physio kann die Qualität, aber nicht die Regelmäßigkeit. Studio auch. Das Zeug in der Ecke kann beides nicht.</p>
+
+      <p>Ich brauchte etwas, das zu Hause funktioniert, ohne dass ich alles perfekt machen muss.</p>
+
+      <div class="science-box">
+        <div class="founder-box">
+          <img src="../../../assets/Portrait_Gruender_Christian_Senfleben.jpg" alt="Christian Senfleben, Sportwissenschaftler und Gründer">
+          <div>
+            <p>An der Deutschen Sporthochschule Köln hat ein Sportwissenschaftler etwas untersucht, das mir bis dahin keiner gesagt hatte:</p>
+            <p>Bei Menschen mit Rückenschmerzen ist ausgerechnet die tief liegende Rumpfmuskulatur messbar geschwächt.</p>
+            <p>Also die Muskulatur, die deine Wirbelsäule in jeder Sekunde hält, ohne dass du davon etwas mitbekommst.</p>
+            <p>Er wollte eine Studie machen und brauchte ein Gerät, das genau diese Muskeln anspricht.</p>
+            <p>Es gab keines. Also hat er es gebaut.</p>
+            <p>Die Ergebnisse waren so gut, dass daraus eine Firma wurde.</p>
+          </div>
+        </div>
+      </div>
+
+      <p>Das Gerät heißt <strong>Wellenpuls LWS</strong>. Ein Gurt, den du dir um den unteren Rücken legst.</p>
+
+      <img
+        src="../../../assets/PackShot_01.png"
+        alt="Wellenpuls LWS – Gurt für den unteren Rücken"
+        class="article-img"
+        style="background:var(--surface);object-fit:contain;padding:12px"
+      >
+
+      <p>Der Wellenpuls arbeitet mit Elektrostimulation. Der Impuls geht direkt an den Muskel, und der zieht sich zusammen.</p>
+
+      <p>Das heißt: Der Fehler, den ich zu Hause jahrelang gemacht habe, ist damit nicht mehr möglich. Der Reiz kommt da an, wo der Gurt sitzt.</p>
+
+      <p>Du musst dafür keine Technik können.</p>
+
+      <p>Du musst nicht wissen, ob du es gerade richtig machst. Es schaut niemand zu und muss auch niemand.</p>
+
+      <p>Wie stark der Reiz ist, entscheidest du selbst. An guten Tagen mehr, an schlechten weniger.</p>
+
+      <h2>Warum die Regelmäßigkeit klappt</h2>
+
+      <p>Zwanzig Minuten. Gurt umlegen, hinsetzen, fertig.</p>
+
+      <p>Du machst es auf der Couch, während die Serie läuft. Oder am Schreibtisch. Oder abends, wenn du eigentlich schon nichts mehr vorhattest.</p>
+
+      <p>Und dann ist da noch die Wärme, die eingebaut ist. Die die Muskeln noch wunderbar entspannt</p>
+
+      <p>Es fühlt sich einfach gut an. Du musst dich nicht überwinden. Du freust dich sogar drauf!</p>
+
+      <div class="img-crop-43">
+        <img src="../../../assets/Anwendung-wellenpuls.jpg" alt="Wellenpuls LWS in der Anwendung">
+      </div>
+
+      <p>Hört sich verlockend an.. aber da war wieder mein Misstrauen.</p>
+
+      <p>Wird es wieder ein Gerät was ich nicht nutze? Und für knapp 500€ ist das Teil nicht billig.</p>
+
+      <p>Dann habe ich darüber nachgedacht, was ich eigentlich in den letzten Jahren alles ausgegeben habe.</p>
+
+      <p>Es sind deutlich mehr als 5000€ und eine Besserung gab es nicht!</p>
+
+      <p>Aber jetzt wieder Geld ausgeben?</p>
+
+      <p>Naja.. die Bewertungen haben mich überzeugt und ich habe es bestellt.</p>
+
+      <p>Nach 3 Tagen war das Gerät da, mit Videoanleitung und los gehts.</p>
+
+      <p>Das Gerät legt man um den Rücken. Per Klettverschluss passt man es seinem Umfang an und schaltet das Programm an.</p>
+
+      <p>Ich habe mich auf die Couch gelegt und während das Gerät arbeitet was gelesen.</p>
+
+      <p>Die Stimulation fühlt sich wie ein angenehmes Vibrieren und man merkt wie die Muskeln arbeiten.</p>
+
+      <p>Nach 20 Minuten war ich fertig.</p>
+
+      <div class="pullquote">
+        So angenehm hatte ich noch nie trainiert.
+      </div>
+
+      <h2>Der Tag danach</h2>
+
+      <p>Am Abend hatte ich Muskelkater vom feinsten. Wie nach einer guten Physio Stunde.</p>
+
+      <p>Ab diesem Punkt wusste ich, ich werde das Gerät weiter nutzen!</p>
+
+      <p>Und das tue ich jetzt seit einigen Monaten. Jeden zweiten bis dritten Tag Abends auf der Couch.</p>
+
+      <p>Mittlerweile auch beim Kochen, oder zwischendurch</p>
+
+      <p>Der Wellenpuls verfügt über einen Intensitätsregler, sodass ein progressives Training möglich ist.</p>
+
+      <p>Ich habe den Regler jede woche etwas höher gestellt.</p>
+
+      <p>Siehe da! Mein Rücken fühlte sich nach 3 Wochen stabiler an als jemals zuvor.</p>
+
+      <p>Ich kann wieder Laufen gehen und Fahrrad fahren. Mit dem Hund Gassi gehen und meine Enkelin auf die Schaukel heben.</p>
+
+      <img
+        src="../../../assets/Glückliches_älteres_Ehepaar.png"
+        alt="Älteres Paar unterwegs"
+        class="article-img"
+      >
+
+      <p>Die Lebensqualität ist unbezahlbar..</p>
+
+      <p>Aber das wichtigste ist: Ich plane nicht mehr mein gesamtes Leben um meinen Rücken herum.</p>
+
+      <h2>Wenn du jetzt nachdenkst…</h2>
+
+      <p>Ich sage nicht, du sollst das ausprobieren.</p>
+
+      <p>Ich kenne deine Vorgeschichte nicht. Ich weiß nicht, was bei dir los ist und woran es liegt. Und ich bin der Letzte, der dir erzählt, dass ein Gerät alles löst.</p>
+
+      <p>Ich sage dir nur, was bei mir passiert ist.</p>
+
+      <p>Und ich sage dir ehrlich, für wen das nichts ist.</p>
+
+      <p>Wenn du erwartest, dass du den Gurt umlegst und der Schmerz weg ist, lass es. Das passiert nicht.</p>
+
+      <p>Es ist ein Trainingsgerät, und Training braucht nunmal Wochen.</p>
+
+      <p>Wenn du glaubst, dass es reicht, das Ding zu besitzen, lass es auch.</p>
+
+      <p>Dann liegt es in vier Wochen bei dir in derselben Ecke wie meine Faszienrolle.</p>
+
+      <p>Und wenn du es nicht regelmäßig benutzen willst, kannst du dir das Geld sparen. Ohne Regelmäßigkeit passiert nichts. Das ist die halbe Botschaft dieses Briefes.</p>
+
+      <p>Wenn du aber an dem Punkt bist, an dem ich war – du hast es versucht, mehrfach, du weißt eigentlich, was du tun müsstest, du kriegst es nur nicht durchgehalten – dann ist das die eine Sache, die ich an deiner Stelle noch probieren würde.</p>
+
+      <h2>Zum Preis</h2>
+
+      <p>Der Wellenpuls kostet 489 Euro.</p>
+
+      <p>Das ist kein kleiner Betrag, und ich will das nicht schönreden.</p>
+
+      <div class="update-box">
+        <div class="update-label">EDIT 16.08</div>
+        <p>Ich habe gesehen, dass es den Wellenpuls mittlerweile auch zum Mieten gibt. Das kostet wesentlich weniger. ca. 50€ Pro Monat</p>
+      </div>
+
+      <p>Ich habe damals nur eines gemacht: zusammengerechnet, was die Jahre davor gekostet haben. Zuzahlungen, Geräte, Studiobeiträge, Matratze, Lattenrost, alles zusammen. Ich bin bei über 5.000 Euro rausgekommen. Verbessert hatte sich nichts.</p>
+
+      <p>Ich habe den Wellenpuls jetzt über 4 Monate regelmäßig genutzt. Bei 64 Einheiten sind das gerade mal 7€ pro Einheit..</p>
+
+      <p>Der Hersteller bietet eine 30 Tage Geld-zurück Garantie. Falls du es nicht nutzen solltest, schickst du ihn zurück und bekommst dein Geld.</p>
+
+      <h2>Was ich dir noch mitgeben will</h2>
+
+      <p>Der Rücken war nie das eigentliche Problem. Das Problem war, dass mir keiner eine Möglichkeit gegeben hat, die ich auch an einem schlechten Dienstag noch durchziehe.</p>
+
+      <div class="pullquote">
+        Der Reiz muss ankommen. Und er muss regelmäßig kommen. Alles andere ist Nebensache.
+      </div>
+
+      <p>Jetzt liegt es bei dir. Ich habe dir erzählt, was ich weiß und wie es bei mir gelaufen ist. Was du damit machst, entscheidest du.</p>
+
+      <p>Aber entscheide dich für irgendetwas. Der Kreislauf von vorhin läuft nämlich weiter, egal was du tust. Und er läuft in nur eine Richtung, solange du nichts dagegen hältst.</p>
+
+      <p style="margin-bottom:8px;">Alles Gute für deinen Rücken,</p>
+
+      <p class="signature">Georg</p>
+
+    </div><!-- /article-body -->
+
+    <!-- ═══ CTA ═══ -->
+    <div class="cta-final">
+      <a href="../../lp/" class="btn-primary track-lead">→ Hier kannst du den Wellenpuls LWS bestellen</a>
+      <div class="cta-terms">489 € · kostenloser Versand · 30 Tage Geld zurück · Lieferung in der Regel innerhalb von 2 Werktagen</div>
+    </div>
+
+    <!-- ═══ AUTHOR BIO ═══ -->
+    <div class="author-bio">
+      <div>
+        <div class="author-bio-name">Georg</div>
+        <div class="author-bio-role">Leserzuschrift · Stabil im Alltag</div>
+        <div class="author-bio-text">
+          Georg hat seinen Bericht als Zuschrift an die Redaktion geschickt und der Veröffentlichung zugestimmt. Der Name ist zum Schutz der Privatsphäre geändert. Er beschreibt ausschließlich seinen eigenen Verlauf und gibt keine medizinische Empfehlung ab.
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ ABOUT ═══ -->
+    <div class="about-mag">
+      <strong>Über Stabil im Alltag</strong><br><br>
+      Stabil im Alltag ist ein unabhängiges Gesundheitsmagazin für Menschen, die ihren Körper langfristig stärken möchten. Unsere Autoren verbinden aktuelle sportwissenschaftliche und medizinische Erkenntnisse mit dem, was im echten Alltag umsetzbar ist.
+    </div>
+
+    <!-- ═══ DISCLAIMER ═══ -->
+    <div class="disclaimer">
+      <strong>Hinweis:</strong> Bei diesem Artikel handelt es sich um ein Advertorial, das Affiliate-Links enthalten kann. Bei einem Kauf über diese Links kann der Betreiber eine Provision erhalten, ohne Mehrkosten für den Käufer. Der Erfahrungsbericht beruht auf echten Kundenerfahrungen und wird pseudonymisiert veröffentlicht, um die Privatsphäre der betreffenden Person zu schützen. Der Wellenpuls LWS ist ein Trainingsgerät und kein Medizinprodukt. Er ersetzt keine ärztliche Beratung. Individuelle Ergebnisse können variieren.
+    </div>
+
+  </article>
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer">
+  <a href="/"><img src="../../../assets/logo_transparent.png" alt="Stabil im Alltag" style="height:48px;width:auto;display:block;margin:0 auto 10px;"></a>
+  <div>© 2026, Stabil im Alltag</div>
+  <div class="footer-links">
+    <a href="/impressum/">Impressum</a>
+    <a href="/datenschutz/">Datenschutz</a>
+    <a href="#" onclick="SIA_openConsent();return false;">Cookie-Einstellungen</a>
+  </div>
+</footer>
+
+<script src="../../../assets/consent.js" defer></script>
+</body>
+</html>
