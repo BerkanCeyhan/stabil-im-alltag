@@ -11,7 +11,7 @@ Sechs Anzeigen, ein Ad Set, zwei Ziele.
 | a2-02-ruecken-griff | problem aware | Hand am unteren Rücken, Küche | `/ruecken/adv/2/` | Mehr dazu |
 | a2-03-ecke-geraete | problem aware | Stillleben der ausrangierten Geräte | `/ruecken/adv/2/` | Mehr dazu |
 | a2-04-rasen-halb | problem aware | halb gemähter Rasen, Mäher steht | `/ruecken/adv/2/` | Mehr dazu |
-| a2-05-geraet-couch | product aware | Gurt liegt auf dem Sofa | `/ruecken/lp2/` | Jetzt einkaufen |
+| a2-05-produktbild | product aware | echtes Bundle-Foto, nicht generiert | `/ruecken/lp2/` | Jetzt einkaufen |
 | a2-06-anwendung-mann | product aware | Mann trägt den Gurt im Sitzen | `/ruecken/lp2/` | Jetzt einkaufen |
 
 In den vier problem-aware Motiven ist bewusst kein Produkt und kein Text zu sehen.
@@ -120,9 +120,14 @@ Wie ein Leser da rausgekommen ist, ohne Termin und ohne Übungsprogramm, hat er 
 
 ---
 
-## a2-05-geraet-couch
+## a2-05-produktbild
 
 Angle: Old Way vs New Way. Ziel ist die PDP, deshalb steht das Produkt vorn.
+Kein generiertes Motiv: das Bild ist `assets/bundle_image.png`, freigestellt auf
+die Seitenflaeche `#F4F7FA` gesetzt. Damit zeigt die Anzeige exakt das Bild,
+das auf lp2 ueber dem Bestellblock steht, und die Geraetetreue ist keine Frage
+des Modells mehr. Der letzte Absatz nennt deshalb auch das Bonus-Paket, sonst
+verspricht das Bild etwas, das der Text verschweigt.
 
 **Primary Text**
 
@@ -137,7 +142,7 @@ Entstanden ist er aus der Forschung eines Sportwissenschaftlers an der Deutschen
 
 Zweimal die Woche, zwanzig Minuten, im Sitzen. Wärme ist eingebaut, die Intensität stellt man selbst ein.
 
-489 Euro, einmalig. 30 Tage Geld zurück, wenn er liegen bleibt.
+489 Euro, einmalig. Dazu ein Videokurs, ein E-Book mit Checkliste und ein Beratungsgespräch. 30 Tage Geld zurück, wenn er liegen bleibt.
 ```
 
 **Headline:** Training für den unteren Rücken
@@ -202,7 +207,8 @@ Wie stark der Reiz ist, entscheidet man selbst. An guten Tagen mehr, an schlecht
 | a2-02-ruecken-griff | Ad `120254569081770029` · Creative `2039133976721297` |
 | a2-03-ecke-geraete | Ad `120254569082590029` · Creative `1061020640009148` |
 | a2-04-rasen-halb | Ad `120254569093090029` · Creative `2226540274801320` |
-| a2-05-geraet-couch | Ad `120254569094840029` · Creative `1053002610920555` |
+| a2-05-produktbild | Ad `120254572027530029` · Creative `1759762762026062` · **noch PAUSED, muss aktiviert werden** |
+| ~~a2-05-geraet-couch~~ | Ad `120254569094840029` · generiert, durch das echte Produktbild ersetzt, PAUSED |
 | a2-06-anwendung-mann | Ad `120254569096000029` · Creative `1049092304530471` |
 
 Alle drei Ebenen ACTIVE, `start_time` des Ad Sets steht auf
@@ -240,7 +246,7 @@ https://stabil-im-alltag.de/assets/ads/adv2/a2-01-editorial-anriss.jpg
 https://stabil-im-alltag.de/assets/ads/adv2/a2-02-ruecken-griff.jpg
 https://stabil-im-alltag.de/assets/ads/adv2/a2-03-ecke-geraete.jpg
 https://stabil-im-alltag.de/assets/ads/adv2/a2-04-rasen-halb.jpg
-https://stabil-im-alltag.de/assets/ads/adv2/a2-05b-geraet-couch.jpg
+https://stabil-im-alltag.de/assets/ads/adv2/a2-05c-produktbild.jpg
 https://stabil-im-alltag.de/assets/ads/adv2/a2-06b-anwendung-mann.jpg
 ```
 
