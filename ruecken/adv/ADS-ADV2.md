@@ -192,29 +192,46 @@ Wie stark der Reiz ist, entscheidet man selbst. An guten Tagen mehr, an schlecht
 | Struktur | 1 Kampagne → 1 Ad Set → 6 Ads |
 | Startstatus | `PAUSED` |
 
-### Angelegt am 2026-08-20
+### Angelegt am 2026-08-20, Start 2026-08-21 07:00
 
 | Objekt | ID |
 |---|---|
 | Kampagne `wp_adv2_sales_2026-08` | `120254568419400029` |
-| Ad Set `de_broad_purchase` | `120254568428440029` |
-| Ad a2-01-editorial-anriss | `120254568461510029` · Creative `1372506844441258` |
-| Ad a2-02-ruecken-griff | `120254568466500029` · Creative `2039133976721297` |
-| Ad a2-03-ecke-geraete | `120254568471000029` · Creative `1061020640009148` |
-| Ad a2-04-rasen-halb | `120254568478830029` · Creative `2226540274801320` |
-| Ad a2-05-geraet-couch | `120254568480210029` · Creative `1067842139544435` |
-| Ad a2-06-anwendung-mann | `120254568481020029` · Creative `1562785635311896` |
+| Ad Set `de_broad_purchase_0700` | `120254569070510029` |
+| a2-01-editorial-anriss | Ad `120254569075820029` · Creative `1372506844441258` |
+| a2-02-ruecken-griff | Ad `120254569081770029` · Creative `2039133976721297` |
+| a2-03-ecke-geraete | Ad `120254569082590029` · Creative `1061020640009148` |
+| a2-04-rasen-halb | Ad `120254569093090029` · Creative `2226540274801320` |
+| a2-05-geraet-couch | Ad `120254569094840029` · Creative `1053002610920555` |
+| a2-06-anwendung-mann | Ad `120254569096000029` · Creative `1049092304530471` |
 
-Alles `PAUSED`. `ads_get_errors` auf der Ad-Account-ID meldet nichts, alle sechs
-Previews rendern. DSA-Beneficiary und -Payor hat Meta aus dem Geschaeftskonto
-mit „Wellenpuls" gefuellt.
+Alle drei Ebenen ACTIVE, `start_time` des Ad Sets steht auf
+`2026-08-21T07:00:00+02:00`. Vorher faellt kein Budget an.
+`ads_get_errors` auf der Ad-Account-ID ist leer.
 
-Alle sechs Ads liegen im selben Ad Set, damit Advantage+ zwischen ihnen verteilen
-kann. Dass zwei davon auf die PDP und vier auf das Advertorial zeigen, ist für
-Meta unerheblich: optimiert wird auf dasselbe Event auf derselben Domain.
+**`start_time` laesst sich an einem bestehenden Ad Set nicht nachtragen.** Ein Ad
+Set, das ohne `start_time` angelegt wurde, gilt fuer Meta als angelaufen, auch
+wenn es pausiert ist; der Versuch scheitert mit Fehlercode 100, Subcode 1487057.
+Deshalb wurde das erste Ad Set `de_broad_purchase` (`120254568428440029`) samt
+seiner Ads geloescht und durch `de_broad_purchase_0700` ersetzt. Beim naechsten
+Launch die Startzeit direkt beim Anlegen mitgeben.
 
-`self_ai_disclosure: OPT_IN` gilt für die fünf generierten Motive. a2-01 ist ein
-Screenshot der eigenen Seite und damit kein KI-Motiv.
+### Geraetetreue in den Produktmotiven
+
+Die erste Fassung von a2-05 und a2-06 hatte `PackShot_01.png` als Referenz und
+damit ein Geraet gebaut, das es so nicht gibt: Streifenmuster ueber die ganze
+Bahn, eckiger Knopf, kein Elektrodenfeld. Referenz sind jetzt
+`Anwendung-wellenpuls.jpg` und `product-image-1.png`, also die Fotos, die auch
+auf lp2 stehen. Die Geraetebeschreibung im Skript ist dafuer eine Merkmalsliste
+mit Lage und Groesse jedes Bauteils plus einer Verbotsliste.
+
+**Offen: im Asset-Ordner liegen zwei verschiedene Geraetedesigns.**
+`PackShot_01.png` und `Frau_50_WellenpulsLWS_Lifestyle_Rueckansicht.png` zeigen
+eine Bahn mit feinem Linienmuster und aufgedrucktem Wellenpuls-Schriftzug.
+`Anwendung-wellenpuls.jpg` und `product-image-1.png` zeigen vier Elektrodenpads
+und ein ovales Bedienteil, ohne Schriftzug. Die Anzeigen folgen der zweiten
+Variante, weil lp2 sie zeigt. Welche der beiden das ausgelieferte Produkt ist,
+muss der Kunde klaeren — adv/1 arbeitet naemlich mit der ersten.
 
 ### Bild-URLs
 
@@ -223,8 +240,8 @@ https://stabil-im-alltag.de/assets/ads/adv2/a2-01-editorial-anriss.jpg
 https://stabil-im-alltag.de/assets/ads/adv2/a2-02-ruecken-griff.jpg
 https://stabil-im-alltag.de/assets/ads/adv2/a2-03-ecke-geraete.jpg
 https://stabil-im-alltag.de/assets/ads/adv2/a2-04-rasen-halb.jpg
-https://stabil-im-alltag.de/assets/ads/adv2/a2-05-geraet-couch.jpg
-https://stabil-im-alltag.de/assets/ads/adv2/a2-06-anwendung-mann.jpg
+https://stabil-im-alltag.de/assets/ads/adv2/a2-05b-geraet-couch.jpg
+https://stabil-im-alltag.de/assets/ads/adv2/a2-06b-anwendung-mann.jpg
 ```
 
 ### Ziel-URLs inklusive UTMs
