@@ -120,18 +120,33 @@ const KEIN_PRODUKT =
   "There is no medical device, no back brace, no support belt, no electrode pad, no TENS unit and " +
   "no fitness equipment of any kind anywhere in the image. ";
 
-// Der Guertel muss in den Produktmotiven derselbe sein wie auf dem Produktfoto.
-const GERAET =
-  "Reproduce the black lumbar support belt from the attached reference image EXACTLY: same wide " +
-  "matte-black neoprene band, same fine horizontal grey line pattern across the front, same small " +
-  "round brushed-silver control unit with a tiny display, same black velcro strap end. Do not change " +
-  "its shape, proportions or colour, do not add logos or lettering to it. ";
+// Der Guertel muss in den Produktmotiven derselbe sein wie auf den echten
+// Produktfotos. Die frei beschriebene Variante hat beim ersten Durchlauf das
+// Bedienteil eckig gerendert und das Elektrodenfeld weggelassen. Deshalb hier
+// eine Merkmalsliste statt einer Beschreibung: jedes Teil einzeln benannt,
+// mit Lage und Groesse relativ zur Guertelhoehe.
+const GERAET = `
+Reproduce the lumbar EMS belt from the attached reference photographs with
+absolute fidelity. Treat the references as the ground truth for the hardware and
+copy it part by part. Device specification:
+{
+  "band":            "one continuous wide matte-black neoprene band, roughly 18 cm tall, no printed pattern, no stripes, no lettering, no logo anywhere on the fabric",
+  "electrode_field": "on the UPPER half of the band, a raised panel of four separate dark grey rounded-rectangle electrode housings in a row, each about one third of the band height, slightly domed, matte, with a fine dotted texture, separated by narrow gaps",
+  "control_module":  "on the LOWER half, right of centre, one raised black module about half the band height, its left half covered by a fan of thin curved parallel ribs radiating outwards",
+  "control_unit":    "set into the right side of that module, one horizontally oriented OVAL control face framed by a polished brushed-silver bezel ring about 2 cm wide, the face itself flat matte black, carrying four small pale grey symbols: a power symbol upper right, a minus sign on the left, a plus sign on the right, one small icon at the bottom",
+  "closure":         "a plain black velcro strap end on the left side of the band, plus one small brushed metal slider loop on the lower edge",
+  "forbidden":       "no horizontal line pattern, no printed word marks, no brand names, no round coin-shaped button, no square button, no display screen, no cables, no LEDs, no additional controls"
+}
+Shape, proportions, part positions and finish must match the references exactly.
+`;
 
 /* ------------------------------------------------------------------ *
  * Jobs
  * ------------------------------------------------------------------ */
 
 const REF_GERAET = "assets/PackShot_01.png";
+const REF_ANWENDUNG = "assets/Anwendung-wellenpuls.jpg";
+const REF_BUNDLE = "assets/product-image-1.png";
 
 const JOBS = [
   {
@@ -268,6 +283,61 @@ const JOBS = [
       "Vertical 4:5 composition, camera at seated eye level about two and a half metres away, his torso " +
       "sits slightly right of centre, the belt around his lower back sits on the horizontal centre line " +
       "and occupies about one fifth of the image height.",
+  },
+  {
+    // Zweiter Anlauf fuer das Produktmotiv. Referenz ist jetzt das echte
+    // Anwendungsfoto plus das Bundle-Foto, nicht mehr der Packshot: nur diese
+    // beiden zeigen das Elektrodenfeld und das ovale Bedienteil, die auf lp2
+    // ebenfalls zu sehen sind. Message Match faengt beim Geraet an.
+    name: "a2-05b-geraet-couch",
+    aspect: "4:5",
+    seed: 611015,
+    attach: [REF_ANWENDUNG, REF_BUNDLE],
+    prompt:
+      REAL +
+      "The lumbar EMS belt lies loosely open and slightly curved on the worn grey fabric seat of an " +
+      "ordinary German living room sofa, electrode side facing up, as if someone had just taken it off. " +
+      GERAET +
+      "Next to it on the same seat: a television remote control, a folded newspaper and a pair of " +
+      "reading glasses. A crumpled cushion is pushed into the corner of the sofa behind them. " +
+      "Warm low daylight falls from a window on the left across the seat, soft natural shadows, the " +
+      "rest of the room out of focus in the background. " +
+      MARKE +
+      KEIN_TEXT +
+      "Vertical 4:5 composition, camera at seat height about one metre away and angled slightly down, " +
+      "the belt runs diagonally through the middle of the frame and occupies about sixty percent of the " +
+      "image width, the oval silver control unit sits close to the horizontal centre line and is fully " +
+      "visible and in sharp focus.",
+  },
+  {
+    // Anwendung am Mann. Der Guertel sitzt wie auf dem Referenzfoto: Oberkante
+    // auf Hoehe der Taille, Elektrodenfeld auf dem unteren Ruecken, Bedienteil
+    // seitlich rechts. Kleidung bewusst hochgeschoben statt darueber, sonst
+    // sieht man nicht, worum es geht.
+    name: "a2-06b-anwendung-mann",
+    aspect: "4:5",
+    seed: 611016,
+    attach: [REF_ANWENDUNG, REF_BUNDLE],
+    prompt:
+      REAL +
+      ECHTE_MENSCHEN +
+      "A German man of about 57 stands at the kitchen counter of an ordinary lived-in German home in " +
+      "the late morning, photographed from behind and slightly to his right, so that his lower back " +
+      "faces the camera. He wears a soft heather-grey t-shirt that he has pushed up above the belt, and " +
+      "dark comfortable trousers. The lumbar EMS belt is fastened firmly around his lower back and " +
+      "waist, sitting horizontally, its upper edge level with the top of his hip bones, moulded snugly " +
+      "against the curve of his back with the fabric slightly compressed where it meets his body. " +
+      GERAET +
+      "The electrode field sits centred on his lower back over the spine, the control module and its " +
+      "oval silver control unit sit on the right side of his back, easily reachable by his right hand. " +
+      "He holds a mug and looks out of the window to the left, calm and unbothered, not at the camera, " +
+      "not smiling for the photograph. The kitchen is real and untidy: a coffee machine, a fruit bowl, " +
+      "a tea towel over the oven handle. " +
+      MARKE +
+      KEIN_TEXT +
+      "Vertical 4:5 composition, camera at chest height about two metres away, his torso fills the " +
+      "middle of the frame, the belt sits on the horizontal centre line and spans about half the image " +
+      "width, sharp and fully legible in every detail.",
   },
 ];
 
