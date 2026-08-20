@@ -192,6 +192,23 @@ Wie stark der Reiz ist, entscheidet man selbst. An guten Tagen mehr, an schlecht
 | Struktur | 1 Kampagne → 1 Ad Set → 6 Ads |
 | Startstatus | `PAUSED` |
 
+### Angelegt am 2026-08-20
+
+| Objekt | ID |
+|---|---|
+| Kampagne `wp_adv2_sales_2026-08` | `120254568419400029` |
+| Ad Set `de_broad_purchase` | `120254568428440029` |
+| Ad a2-01-editorial-anriss | `120254568461510029` · Creative `1372506844441258` |
+| Ad a2-02-ruecken-griff | `120254568466500029` · Creative `2039133976721297` |
+| Ad a2-03-ecke-geraete | `120254568471000029` · Creative `1061020640009148` |
+| Ad a2-04-rasen-halb | `120254568478830029` · Creative `2226540274801320` |
+| Ad a2-05-geraet-couch | `120254568480210029` · Creative `1067842139544435` |
+| Ad a2-06-anwendung-mann | `120254568481020029` · Creative `1562785635311896` |
+
+Alles `PAUSED`. `ads_get_errors` auf der Ad-Account-ID meldet nichts, alle sechs
+Previews rendern. DSA-Beneficiary und -Payor hat Meta aus dem Geschaeftskonto
+mit „Wellenpuls" gefuellt.
+
 Alle sechs Ads liegen im selben Ad Set, damit Advantage+ zwischen ihnen verteilen
 kann. Dass zwei davon auf die PDP und vier auf das Advertorial zeigen, ist für
 Meta unerheblich: optimiert wird auf dasselbe Event auf derselben Domain.
