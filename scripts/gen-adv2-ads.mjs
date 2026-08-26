@@ -339,6 +339,125 @@ const JOBS = [
       "middle of the frame, the belt sits on the horizontal centre line and spans about half the image " +
       "width, sharp and fully legible in every detail.",
   },
+  {
+    // Nachschub fuer den einzigen Gewinner der Serie: a2-02 laeuft, weil die
+    // Hand am unteren Ruecken das Bild ist, das diese Zielgruppe von sich selbst
+    // kennt. Dieses Motiv nimmt dieselbe Geste, aber die teuerste Szene aus dem
+    // Advertorial: "Dein Enkelkind hebst du nicht mehr hoch. Du setzt dich hin
+    // und wartest, bis es zu dir kommt." Kein Schmerzgesicht, kein Drama -- der
+    // Verzicht ist die Aussage, nicht der Schmerz.
+    name: "a2-07-enkel-wartet",
+    aspect: "4:5",
+    seed: 611007,
+    attach: [],
+    prompt:
+      REAL +
+      ECHTE_MENSCHEN +
+      "A German man of about 60 sits on the front edge of a worn armchair in an ordinary lived-in " +
+      "German living room in the afternoon, leaning forward. His right hand is pressed flat against " +
+      "his own lower back just above the waistband, fingers spread, elbow angled out. His left arm " +
+      "reaches forward and down, low and open, not lifting. In front of him a small grandchild of " +
+      "about three stands on the carpet with both arms stretched straight up, waiting to be picked " +
+      "up. The child is seen mostly from behind and slightly to the side, face turned away from the " +
+      "camera and not readable. The man looks at the child, calm and warm, not in pain, not " +
+      "grimacing, simply staying seated. He wears a washed-out olive shirt and dark trousers. " +
+      "The room is real and untidy: a few wooden toys on the carpet, a folded blanket over the " +
+      "armrest, a coffee cup on a side table, a full laundry basket at the edge of the frame. " +
+      MARKE +
+      KEIN_PRODUKT +
+      KEIN_TEXT +
+      "Vertical 4:5 composition, camera at seated eye level about three metres away, the man sits " +
+      "right of centre and the child stands left of centre, the man's hand on his lower back and the " +
+      "child's raised hands sit on roughly the same horizontal line through the middle of the frame.",
+  },
+  {
+    // Zweiter Nachschub, gleiche Geste, andere Alltagsstelle: "Du ziehst nur
+    // noch Schuhe ohne Schnuersenkel an." Das ist die kleine taegliche
+    // Kapitulation, ueber die niemand spricht, und sie ist ohne ein Wort Text
+    // lesbar, sobald man die Schuhe im Regal sieht. Flur statt Wohnzimmer, kuehles
+    // Licht statt warmes -- damit es bei Meta nicht im selben Delivery-Bucket
+    // wie a2-02 und a2-07 landet.
+    name: "a2-08-schuhe-flur",
+    aspect: "4:5",
+    seed: 611008,
+    attach: [],
+    prompt:
+      REAL +
+      ECHTE_MENSCHEN +
+      "A German man of about 58 sits on a small wooden stool in the narrow hallway of an ordinary " +
+      "German flat, bent forward over his knees, photographed from the side. His left hand is pressed " +
+      "flat against his own lower back, fingers spread, taking the weight. His right hand holds a " +
+      "long-handled metal shoehorn and guides it into the heel of a plain dark slip-on shoe on his " +
+      "foot. He is not looking at the camera, his head is down, his expression is patient and matter " +
+      "of fact, not pained. He wears a grey zip cardigan and dark trousers. " +
+      "Beside him a low wooden shoe rack: two pairs of slip-on shoes pulled to the front within easy " +
+      "reach, and behind them, pushed to the back and visibly untouched, a pair of proper brown " +
+      "lace-up leather shoes with the laces still tied in a bow and a fine layer of dust on the toes. " +
+      "Coats on wall hooks above, a doormat, an umbrella leaning in the corner, keys in a small bowl. " +
+      "Cool overcast daylight comes through the frosted glass pane of the front door, no direct sun. " +
+      MARKE +
+      KEIN_PRODUKT +
+      KEIN_TEXT +
+      "Vertical 4:5 composition, camera at hip height about two and a half metres away, the man fills " +
+      "the right two thirds of the frame, his hand on the lower back sits just above the horizontal " +
+      "centre line, the shoe rack with the untouched lace-up shoes sits in the lower left third and " +
+      "is fully in focus.",
+  },
+  {
+    // Grundbild fuer die Zitatanzeige a2-09. Der Text kommt NICHT aus dem
+    // Bildmodell, sondern wird in scripts/bau-zitat-ads.py gesetzt: ein Zitat
+    // muss auf 100 % der Auslieferungen buchstabengleich stehen, und genau das
+    // kann kein Bildmodell zusichern. Deshalb hier nur das Foto, mit ruhigem
+    // unteren Drittel, auf das die Zitatflaeche gelegt wird.
+    name: "a2-09-zitat-schuhe-basis",
+    aspect: "4:5",
+    seed: 611009,
+    attach: [],
+    prompt:
+      REAL +
+      ECHTE_MENSCHEN +
+      "A German man of about 62 sits on the edge of his bed in an ordinary German bedroom in the " +
+      "morning, photographed from the side and slightly in front. He is already dressed in a plain " +
+      "dark blue shirt and grey trousers and wears plain dark slip-on shoes. He leans forward with " +
+      "his forearms resting on his thighs and looks down at a pair of proper brown lace-up leather " +
+      "shoes standing on the floor in front of him, laces still tied. His face is calm and thoughtful, " +
+      "not in pain, not grimacing, not looking at the camera. " +
+      "The room is real and lived in: a rumpled duvet behind him, a wardrobe door slightly open, a " +
+      "wristwatch and a glass of water on the bedside table, curtains half drawn. Soft overcast " +
+      "morning daylight from a window on the left, no direct sun. " +
+      MARKE +
+      KEIN_PRODUKT +
+      KEIN_TEXT +
+      "Vertical 4:5 composition, camera at seated eye level about three metres away, the man fills " +
+      "the upper two thirds of the frame and sits slightly right of centre, the lace-up shoes on the " +
+      "floor sit in the lower left. The lower third of the image is quiet, evenly lit floor and " +
+      "carpet with no clutter, so a caption can be placed over it later.",
+  },
+  {
+    // Grundbild fuer die zweite Zitatanzeige a2-10. Gleiche Bauart, andere
+    // Szene und anderes Licht: der abgesagte Termin statt der Schuhe.
+    name: "a2-10-zitat-zusage-basis",
+    aspect: "4:5",
+    seed: 611010,
+    attach: [],
+    prompt:
+      REAL +
+      ECHTE_MENSCHEN +
+      "A German man of about 60 sits alone at the kitchen table of an ordinary German flat in the " +
+      "late afternoon, photographed from the side. A light jacket hangs ready over the back of the " +
+      "chair beside him and a set of car keys lies on the table next to a half-full mug and a " +
+      "switched-off mobile phone lying face down. He rests one forearm on the table, the other hand " +
+      "loosely at his lower back, and looks out of the window instead of getting up. His expression " +
+      "is calm and resigned, not in pain, not grimacing, not looking at the camera. " +
+      "The kitchen is real and untidy: a fruit bowl, a folded newspaper, crumbs on the table, a " +
+      "chair pushed in on the far side. Warm low afternoon daylight from the window on the right. " +
+      MARKE +
+      KEIN_PRODUKT +
+      KEIN_TEXT +
+      "Vertical 4:5 composition, camera at seated eye level about three metres away, the man and the " +
+      "table fill the upper two thirds of the frame. The lower third is quiet, softly lit floor and " +
+      "chair legs with no clutter, so a caption can be placed over it later.",
+  },
 ];
 
 /* ------------------------------------------------------------------ */

@@ -1,9 +1,10 @@
 # Anzeigen zum zweiten Advertorial (adv/2) und zur PDP lp2
 
-Stand 2026-08-20. Motive: `scripts/gen-adv2-ads.mjs`, Ausgabe `assets/ads/adv2/`.
-Grundlagen: `kb sop nano-banana`, `kb sop meta-kampagnen`, `image-ads.md` (Native Image Ads).
+Stand 2026-08-26. Motive: `scripts/gen-adv2-ads.mjs`, Ausgabe `assets/ads/adv2/`.
+Grundlagen: `brain` → `agency/sops/nano-banana.md`, `agency/sops/meta-kampagnen.md`, `image-ads.md` (Native Image Ads).
 
-Sechs Anzeigen, ein Ad Set, zwei Ziele.
+Zehn Anzeigen, ein Ad Set, zwei Ziele. a2-07 bis a2-10 sind am 26.08.
+nachgelegt.
 
 | Ad | Awareness | Bild | Ziel | CTA |
 |---|---|---|---|---|
@@ -13,10 +14,16 @@ Sechs Anzeigen, ein Ad Set, zwei Ziele.
 | a2-04-rasen-halb | problem aware | halb gemähter Rasen, Mäher steht | `/ruecken/adv/2/` | Mehr dazu |
 | a2-05-produktbild | product aware | echtes Bundle-Foto, nicht generiert | `/ruecken/lp2/` | Jetzt einkaufen |
 | a2-06-anwendung-mann | product aware | Mann trägt den Gurt im Sitzen | `/ruecken/lp2/` | Jetzt einkaufen |
+| a2-07-enkel-wartet | problem aware | Hand am Rücken, Enkelkind mit erhobenen Armen | `/ruecken/adv/2/` | Mehr dazu |
+| a2-08-schuhe-flur | problem aware | Hand am Rücken, Schuhlöffel, Schnürschuhe hinten | `/ruecken/adv/2/` | Mehr dazu |
+| a2-09-zitat-schuhe | problem aware | Zitat im Bild, Knopf „Jetzt Lesen" | `/ruecken/adv/2/` | Mehr dazu |
+| a2-10-zitat-zusage | problem aware | Zitat im Bild, Knopf „Jetzt Lesen" | `/ruecken/adv/2/` | Mehr dazu |
 
-In den vier problem-aware Motiven ist bewusst kein Produkt und kein Text zu sehen.
+In den problem-aware Motiven a2-01 bis a2-08 ist bewusst kein Produkt und kein
+Text zu sehen. a2-09 und a2-10 brechen die Textregel absichtlich, Begründung
+steht bei a2-09; produktfrei bleiben auch sie.
 Sobald der Gurt im Bild liegt, ist die Anzeige als Werbung erkannt und der
-Curiosity Gap zu, den die erste Textzeile öffnen soll. Die vier Bildwelten sind
+Curiosity Gap zu, den die erste Textzeile öffnen soll. Die Bildwelten sind
 absichtlich weit auseinander (Screenshot, Mensch, Stillleben innen, Szene
 draußen), weil Meta visuell ähnliche Creatives in denselben Delivery-Bucket
 sortiert und man sonst für Überschneidung statt für Reichweite zahlt.
@@ -173,6 +180,123 @@ Wie stark der Reiz ist, entscheidet man selbst. An guten Tagen mehr, an schlecht
 
 ---
 
+## a2-07-enkel-wartet
+
+Nachgelegt am 2026-08-26. Grund: von den vier problem-aware Motiven trägt in den
+ersten Tagen nur `a2-02-ruecken-griff`. Die Hand am unteren Rücken ist das Bild,
+das diese Zielgruppe von sich selbst kennt — a2-07 und a2-08 nehmen dieselbe
+Geste und setzen sie in zwei andere Szenen aus dem Advertorial.
+
+Angle: Was der Rücken kostet. Der Verzicht ist die Aussage, nicht der Schmerz —
+deshalb kein Schmerzgesicht, sondern ein Mann, der sitzen bleibt.
+Bildbezug im Brief: „Dein Enkelkind hebst du nicht mehr hoch. Du setzt dich hin
+und wartest, bis es zu dir kommt."
+
+**Primary Text**
+
+```
+Man setzt sich hin und wartet, bis das Enkelkind zu einem kommt.
+
+Nicht, weil man nicht will. Sondern weil Hochheben und wieder Absetzen zwei Bewegungen sind, für die man am nächsten Tag bezahlt.
+
+So verschiebt sich das über die Jahre. Erst hört man im Verein auf, dann mit dem Laufen, dann fällt die große Hunderunde weg, dann die kleine. Jedes Mal fällt etwas weg, und kurz darauf tut etwas weh, das vorher harmlos war.
+
+Ein Leser hat aufgeschrieben, an welchem Punkt ihm klar wurde, dass das kein Nachlassen ist, sondern ein Kreislauf. Und was er getan hat, um ihn zu unterbrechen.
+```
+
+**Headline:** Was nach und nach wegfällt
+
+---
+
+## a2-08-schuhe-flur
+
+Angle: Warning Sign, die kleine tägliche Kapitulation. Das Motiv erklärt sich
+ohne ein Wort, sobald man das Schuhregal sieht: Slipper vorn in Reichweite, die
+Schnürschuhe stehen unangetastet dahinter. Flur statt Wohnzimmer, kühles Licht
+statt warmes — sonst landet es bei Meta im selben Delivery-Bucket wie a2-02 und
+a2-07.
+Bildbezug im Brief: „Du ziehst nur noch Schuhe ohne Schnürsenkel an."
+
+**Primary Text**
+
+```
+Irgendwann kauft man nur noch Schuhe ohne Schnürsenkel.
+
+Das ist keine Entscheidung, die man bewusst trifft. Die geschnürten stehen weiter hinten im Regal, und man greift jeden Morgen an ihnen vorbei.
+
+Genauso verschwindet der Stift, der runterfällt und liegen bleibt. Der Weg in die Küche, den man sich spart. Der Stuhl im Restaurant, den man vor der Karte aussucht.
+
+Das ist kein Nachlassen. Der Körper schont, weil er glaubt, er müsste — und mit jedem Mal wird die Bewegung teurer, die er sich abgewöhnt hat.
+
+Ein Leser hat aufgeschrieben, wann ihm das aufgefallen ist und was er danach anders gemacht hat.
+```
+
+**Headline:** Schuhe ohne Schnürsenkel
+
+---
+
+## a2-09-zitat-schuhe
+
+Nachgelegt am 2026-08-26, erstes Motiv **mit** Text im Bild. Bewusste Abweichung
+von der Regel oben: die textfreien Motive holen den Klick, aber nur `a2-02`
+bringt die Leute auch auf der Seite an. Ein Zitat im Bild qualifiziert vor dem
+Klick vor — wer sich in dem Satz nicht wiedererkennt, klickt gar nicht erst.
+
+Der Satz ist O-Ton der Zielgruppe, keine Marketingsprache: keine Diagnose,
+keine Schmerzskala, sondern die Angst vor dem Verlust der Selbständigkeit.
+
+Aufbau: Foto ganzflächig, Zitatfläche unten in Off-White, Knopf „Jetzt Lesen"
+in der Markenfarbe. Der Text wird **nicht** vom Bildmodell gesetzt, sondern in
+`scripts/bau-zitat-ads.py` — ein Zitat muss auf jeder Auslieferung
+buchstabengleich dastehen. Das Foto kommt aus `gen-adv2-ads.mjs`
+(`a2-09-zitat-schuhe-basis.jpg`).
+
+- **Zitat im Bild:** „Ich hab Angst, dass mir irgendwann jemand die Schuhe zubinden muss."
+- **Bildunterzeile:** Georg, 63 · Erfahrungsbericht eines Lesers (Symbolbild)
+- **Knopf im Bild:** Jetzt Lesen
+
+**Primary Text**
+
+```
+Sein Rücken bestimmt inzwischen den Tagesablauf, nicht andersherum.
+
+Schuhe ohne Schnürsenkel. Der Stift, der liegen bleibt. Das Enkelkind, das er nicht mehr hochhebt. Und ein Satz, den er sich selbst lange nicht zugeben wollte: „Ich hab Angst, dass mir irgendwann jemand die Schuhe zubinden muss."
+
+In seinem Erfahrungsbericht schreibt Georg auf, wie es so weit gekommen ist. Und an welchem Punkt er verstanden hat, warum die Übungen vom Physiotherapeuten bei ihm nie lange gehalten haben.
+
+Der Bericht ist frei zu lesen. Die ersten Absätze reichen, um zu merken, ob er von dir handelt.
+```
+
+**Headline:** Was er lange niemandem erzählt hat
+
+---
+
+## a2-10-zitat-zusage
+
+Gleiche Bauart, zweiter O-Ton aus demselben Brief, anderes Foto, anderes Licht.
+Nicht der Schmerz ist die Aussage, sondern was er kostet: die Zusage, die man
+nicht mehr gibt.
+
+- **Zitat im Bild:** „Ich sage nicht mehr einfach zu. Ich sage: Mal schauen, wie es mir geht."
+- **Bildunterzeile:** Georg, 63 · Erfahrungsbericht eines Lesers (Symbolbild)
+- **Knopf im Bild:** Jetzt Lesen
+
+**Primary Text**
+
+```
+Er sagt nicht mehr zu. Er sagt: mal schauen, wie es mir geht.
+
+Nicht, weil er keine Lust hätte. Sondern weil er drei Tage vorher nicht weiß, ob der Rücken den Abend mitmacht — und weil eine Absage am selben Tag unangenehmer ist als ein vorsichtiges Vielleicht.
+
+So verschwindet über die Jahre eine Zusage nach der anderen. Erst der Verein, dann die große Hunderunde, dann die Einladungen.
+
+In seinem Erfahrungsbericht schreibt Georg auf, wann ihm das aufgefallen ist und was er danach anders gemacht hat. Frei zu lesen, die ersten Absätze reichen zum Erkennen.
+```
+
+**Headline:** Mal schauen, wie es mir geht
+
+---
+
 ## Kampagne
 
 | Einstellung | Wert |
@@ -248,6 +372,8 @@ https://stabil-im-alltag.de/assets/ads/adv2/a2-03-ecke-geraete.jpg
 https://stabil-im-alltag.de/assets/ads/adv2/a2-04-rasen-halb.jpg
 https://stabil-im-alltag.de/assets/ads/adv2/a2-05c-produktbild.jpg
 https://stabil-im-alltag.de/assets/ads/adv2/a2-06b-anwendung-mann.jpg
+https://stabil-im-alltag.de/assets/ads/adv2/a2-07-enkel-wartet.jpg
+https://stabil-im-alltag.de/assets/ads/adv2/a2-08-schuhe-flur.jpg
 ```
 
 ### Ziel-URLs inklusive UTMs
