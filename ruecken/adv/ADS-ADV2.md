@@ -333,6 +333,23 @@ In seinem Erfahrungsbericht schreibt Georg auf, wann ihm das aufgefallen ist und
 | a2-04-rasen-halb | Ad `120254569093090029` · Creative `2226540274801320` |
 | a2-05-produktbild | Ad `120254572027530029` · Creative `1759762762026062` · **noch PAUSED, muss aktiviert werden** |
 | ~~a2-05-geraet-couch~~ | Ad `120254569094840029` · generiert, durch das echte Produktbild ersetzt, PAUSED |
+
+### Nachgelegt am 2026-08-26
+
+| Objekt | ID |
+|---|---|
+| a2-09-zitat-schuhe | Ad `120254658001550029` · Creative `2308830802986815` · **PAUSED** |
+| a2-10-zitat-zusage | Ad `120254658006420029` · Creative `1571642414502587` · **PAUSED** |
+
+Beide im bestehenden Ad Set `de_broad_purchase_0700`, `self_ai_disclosure:
+OPT_IN` wie bei a2-02 bis a2-06, `conversion_domain: stabil-im-alltag.de`.
+
+**UTMs fest verdrahtet, keine Makros.** `a2-05` im Quizfunnel hat am 07.08.
+`utm_campaign={{campaign.name}}` wörtlich an das Sheet geschickt; seitdem gilt:
+Makro nur, wo es sich nicht vermeiden lässt. Für diese beiden Anzeigen stehen
+Kampagnen-, Ad-Set- und Anzeigenname als Klartext in der Ziel-URL.
+
+a2-07 und a2-08 sind gebaut, aber noch nicht im Konto angelegt.
 | a2-06-anwendung-mann | Ad `120254569096000029` · Creative `1049092304530471` |
 
 Alle drei Ebenen ACTIVE, `start_time` des Ad Sets steht auf
