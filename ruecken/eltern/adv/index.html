@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mein Vater kam kaum noch aus dem Sessel | Stabil im Alltag</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="../../../assets/logo_transparent.png">
+  <link rel="apple-touch-icon" href="../../../assets/logo_transparent.png">
+  <style>
+    :root {
+      --primary:  #1A5C8A;
+      --teal:     #28836A;
+      --amber:    #7A5C12;
+      --green:    #27865A;
+      --red:      #C0392B;
+      --bg:       #F4F7FA;
+      --surface:  #fff;
+      --text:     #1E2D3A;
+      --text-muted: #6B7E8C;
+      --border:   #D0DCE8;
+      --max:      740px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Libre Franklin', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.78;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── HEADER ── */
+    .site-header {
+      background: var(--surface);
+      border-bottom: 3px solid var(--primary);
+      padding: 0 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100px;
+      gap: 16px;
+    }
+    .header-logo {
+      font-family: 'Lora', serif;
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--primary);
+      letter-spacing: -0.3px;
+    }
+    .header-logo span { color: var(--teal); }
+    .header-anzeige {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #6B7E8C;
+      border: 1.5px solid #B0BEC5;
+      border-radius: 3px;
+      padding: 2px 10px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      background: #F0F4F7;
+    }
+
+    /* ── ARTICLE ── */
+    .article-outer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 40px 20px 72px;
+    }
+
+    .article-cat {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .article-headline {
+      font-family: 'Lora', serif;
+      font-size: clamp(24px, 5vw, 36px);
+      font-weight: 600;
+      line-height: 1.25;
+      color: #101E28;
+      margin-bottom: 18px;
+    }
+
+    .article-deck {
+      font-size: 17px;
+      line-height: 1.65;
+      color: #3A5060;
+      font-style: italic;
+      border-left: 3px solid var(--primary);
+      padding-left: 16px;
+      margin-bottom: 24px;
+    }
+
+    /* ── AUTHOR ROW ── */
+    .author-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 28px;
+    }
+    .author-avatar {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: #D9E8F0;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .author-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .author-name  { font-weight: 700; font-size: 15px; color: #1a1a1a; }
+    .author-role  { font-size: 12.5px; color: var(--text-muted); }
+    .author-date  { font-size: 12.5px; color: var(--text-muted); margin-top: 2px; }
+
+    /* ── IMAGES ── */
+    .article-img {
+      width: 100%;
+      border-radius: 10px;
+      margin: 28px 0;
+      display: block;
+      object-fit: cover;
+      max-height: 460px;
+    }
+
+    /* 4:3 crop — zeigt unteren Bildbereich (Gurt sichtbar) */
+    .img-crop-43 {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border-radius: 10px;
+      margin: 28px 0;
+    }
+    .img-crop-43 img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: bottom;
+      display: block;
+    }
+
+    .article-sub { font-size: 18px; line-height: 1.6; color: #3A5060; margin-bottom: 8px; }
+
+    /* ── BODY TEXT ── */
+    .article-body p { margin-bottom: 20px; }
+
+    .article-body h2 {
+      font-family: 'Lora', serif;
+      font-size: clamp(20px, 4vw, 26px);
+      font-weight: 600;
+      line-height: 1.3;
+      color: #101E28;
+      margin: 44px 0 16px;
+    }
+
+    .article-body h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 28px 0 10px;
+    }
+
+    .article-body strong { font-weight: 700; }
+    .article-body em    { font-style: italic; }
+
+    /* ── PULLQUOTE ── */
+    .pullquote {
+      border-left: 4px solid var(--primary);
+      background: #E8F1F8;
+      border-radius: 0 10px 10px 0;
+      padding: 18px 22px;
+      margin: 28px 0;
+      font-style: italic;
+      font-size: 18px;
+      line-height: 1.6;
+      color: #1E2D3A;
+    }
+
+    hr { border: none; border-top: 1px solid var(--border); margin: 36px 0; }
+
+    /* ── SCIENCE / INFO BOX ── */
+    .science-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--primary);
+      border-radius: 0 0 12px 12px;
+      padding: 24px;
+      margin: 28px 0;
+    }
+    .science-box .box-title {
+      font-family: 'Lora', serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+    }
+
+    /* ── TIMELINE (WOCHEN) ── */
+    .woche-item {
+      border-left: 3px solid var(--primary);
+      padding-left: 20px;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .woche-item::before {
+      content: '';
+      width: 12px; height: 12px;
+      background: var(--primary);
+      border-radius: 50%;
+      position: absolute;
+      left: -7.5px; top: 6px;
+    }
+    .woche-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .woche-title {
+      font-family: 'Lora', serif;
+      font-size: 19px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 12px;
+    }
+    .woche-item p { margin-bottom: 12px; font-size: 16px; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonial-grid { display: flex; flex-direction: column; gap: 16px; margin: 28px 0; }
+    .testimonial-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 22px 18px;
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '"';
+      font-family: 'Lora', serif;
+      font-size: 64px;
+      color: #C8DCE8;
+      position: absolute;
+      top: 6px; left: 14px;
+      line-height: 1;
+    }
+    .stars { color: #e6a010; font-size: 13px; margin-bottom: 6px; }
+    .testimonial-text { font-size: 15px; line-height: 1.65; color: #333; font-style: italic; padding-top: 8px; }
+    .testimonial-author { margin-top: 12px; font-size: 13px; font-weight: 700; color: var(--primary); }
+
+    /* ── REASONS LIST ── */
+    .reasons-list { list-style: none; margin: 0 0 24px; }
+    .reasons-list li {
+      padding: 12px 0;
+      font-size: 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .reasons-list li:last-child { border-bottom: none; }
+    .reasons-list .num {
+      background: var(--primary);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      border-radius: 50%;
+      width: 26px; height: 26px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── FAZIT LIST ── */
+    .fazit-list { list-style: none; margin: 16px 0 24px; }
+    .fazit-list li {
+      padding: 7px 0;
+      font-size: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .fazit-list li:last-child { border-bottom: none; }
+
+    /* ── UPDATE BOX ── */
+    .update-box {
+      background: #FFFBEC;
+      border: 2px solid #D4A800;
+      border-radius: 12px;
+      padding: 24px 24px 20px;
+      margin: 40px 0;
+    }
+    .update-label {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 6px;
+    }
+    .update-box h3 {
+      font-family: 'Lora', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 12px;
+      line-height: 1.35;
+    }
+    .update-box p { font-size: 15px; margin-bottom: 10px; }
+    .update-perks { list-style: none; margin: 14px 0; }
+    .update-perks li { padding: 5px 0; font-size: 15px; font-weight: 600; }
+    .update-perks li::before { content: "✅ "; }
+    .update-note { font-size: 12px; color: #888; font-style: italic; margin-top: 8px; }
+
+    /* ── PRODUCT CARD ── */
+    .product-card {
+      background: var(--surface);
+      border: 2px solid var(--primary);
+      border-radius: 16px;
+      padding: 28px 24px;
+      margin: 40px 0;
+      box-shadow: 0 4px 24px rgba(26,92,138,0.10);
+    }
+    .product-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+    .product-name {
+      font-family: 'Lora', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 4px;
+    }
+    .product-tagline { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+    .rating-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; font-size: 14px; }
+    .rating-stars { color: #e6a010; font-size: 18px; }
+
+    .feature-list { list-style: none; margin: 0 0 20px; }
+    .feature-list li {
+      padding: 7px 0;
+      font-size: 14.5px;
+      border-bottom: 1px solid #EEF2F6;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .feature-list li:last-child { border-bottom: none; }
+    .feature-list .chk { color: var(--green); font-weight: 700; flex-shrink: 0; }
+
+    .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 22px; }
+    .pros-box { background: #F0FAF5; border-radius: 8px; padding: 14px; }
+    .cons-box { background: #FEF2F2; border-radius: 8px; padding: 14px; }
+    .pros-box h4 { color: var(--green); font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+    .cons-box h4 { color: var(--red);   font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+    .pros-box ul, .cons-box ul { list-style: none; }
+    .pros-box li, .cons-box li { font-size: 13px; line-height: 1.5; padding: 3px 0; }
+    .pros-box li::before { content: "✅ "; }
+    .cons-box li::before { content: "❌ "; }
+
+    .btn-primary {
+      display: block;
+      width: 100%;
+      background: var(--teal);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 17px 24px;
+      font-family: 'Libre Franklin', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      text-align: center;
+      cursor: pointer;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+    }
+    .guarantee-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ── AUTHOR BIO ── */
+    .author-bio {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 44px 0 28px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+    .author-bio-avatar {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: #D9E8F0;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .author-bio-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .author-bio-name { font-weight: 700; font-size: 16px; margin-bottom: 2px; }
+    .author-bio-role { font-size: 12.5px; color: var(--primary); margin-bottom: 10px; font-weight: 600; }
+    .author-bio-text { font-size: 14px; color: #555; line-height: 1.65; }
+
+    /* ── ABOUT MAG ── */
+    .about-mag {
+      background: #EDF3F8;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 28px 0;
+      font-size: 13px;
+      color: #4A6070;
+      line-height: 1.65;
+    }
+    .about-mag strong { color: #2A3E4E; }
+
+    /* ── DISCLAIMER ── */
+    .disclaimer {
+      background: #EFF2F5;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0 36px;
+      font-size: 11.5px;
+      line-height: 1.65;
+      color: #90A0AC;
+    }
+    .disclaimer strong { color: #6E8090; }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 28px 20px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .footer-logo {
+      font-family: 'Lora', serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 10px;
+      display: block;
+    }
+    .footer-logo span { color: var(--teal); }
+    .footer-links { display: flex; gap: 20px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
+    .footer-links a { color: var(--primary); text-decoration: underline; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:600px) {
+      .pros-cons { grid-template-columns: 1fr; }
+      .author-bio { flex-direction: column; align-items: center; text-align: center; }
+    }
+
+    /* ── BRIEF-REGISTER ── */
+    .article-body p.beat { margin-bottom: 10px; }
+    .article-body p.beat + p:not(.beat) { margin-top: 24px; }
+
+    .signature {
+      font-family: 'Lora', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 4px 0 0;
+    }
+
+    /* ── OPTIONEN-STAPEL ── */
+    .option-stack {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2px 24px;
+      margin: 28px 0;
+    }
+    .option-stack > div { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    .option-stack > div:last-child { border-bottom: none; }
+    .option-stack h3 { margin: 0 0 8px; }
+    .option-stack p { font-size: 16px; margin-bottom: 10px; }
+    .option-stack p:last-child { margin-bottom: 0; }
+
+    /* ── ABSCHLUSS-CTA ── */
+    .cta-final { margin: 40px 0 44px; }
+    .cta-final .btn-primary {
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 17px;
+      padding: 20px 26px;
+      line-height: 1.35;
+      margin-bottom: 12px;
+    }
+    .cta-terms {
+      text-align: center;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    @media(max-width:600px) {
+      .option-stack { padding: 2px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/"><img src="../../../assets/logo_transparent.png" alt="Stabil im Alltag" style="height:90px;width:auto;display:block;"></a>
+    <div class="header-anzeige">Anzeige</div>
+  </div>
+</header>
+
+<!-- ═══ ARTICLE ═══ -->
+<main>
+  <article class="article-outer">
+
+    <h1 class="article-headline">
+      Mein Vater hat 40 Jahre lang Häuser gebaut. Mit 72 kam er kaum noch aus seinem Sessel.
+    </h1>
+
+    <p class="article-sub">Ein Sohn erzählt, wie er zugesehen hat, wie sein Vater immer weniger wurde, warum Reden, Rezepte und Streit nichts geändert haben, und was am Ende doch geholfen hat.</p>
+
+    <img
+      src="../../../assets/eltern-symbolbild.jpg"
+      alt="Ältere Person mit Rückenschmerzen im Garten"
+      class="article-img"
+      style="margin-top:24px;margin-bottom:6px"
+    >
+    <div style="font-size:12px;color:var(--text-muted);margin:0 0 24px;">(Symbolbild)</div>
+
+    <div class="author-row">
+      <div>
+        <div class="author-name">Markus, 47</div>
+        <div class="author-role">Erfahrungsbericht eines Lesers</div>
+        <div class="author-date">12. Oktober 2026 · 9 Min. Lesezeit</div>
+      </div>
+    </div>
+
+    <div class="article-body">
+
+      <p>Es war ein Sonntag im Februar. Ich stand in der Küche meiner Eltern und hörte aus dem Wohnzimmer ein Geräusch, das ich von meinem Vater nicht kannte. Ein kurzes, unterdrücktes Stöhnen.</p>
+
+      <p>Er versuchte, aus seinem Sessel aufzustehen.</p>
+
+      <p>Beide Hände auf den Lehnen, nach vorn schieben, Anlauf nehmen. Einmal. Zweimal. Beim dritten Mal kam er hoch. Dann blieb er gebückt stehen, eine Hand im Kreuz, und wartete, bis es ging.</p>
+
+      <p>Er hat nicht gemerkt, dass ich in der Tür stand. Ich habe so getan, als hätte ich nichts gesehen, und bin zurück an die Spüle.</p>
+
+      <p>An diesem Tag habe ich verstanden, dass mein Vater alt wird.</p>
+
+      <h2>Der Mann, der mich auf den Schultern getragen hat</h2>
+
+      <p>Mein Vater war 40 Jahre Maurer. Er hat Zementsäcke getragen wie andere Leute Einkaufstüten. Als ich klein war, hat er mich auf dem Rummel stundenlang auf den Schultern getragen, und das Haus, in dem ich aufgewachsen bin, hat er zum großen Teil selbst gebaut.</p>
+
+      <p>Und jetzt brauchte er drei Anläufe für einen Sessel.</p>
+
+      <p>Wenn ich heute zurückdenke, hat es nicht an diesem Sonntag angefangen. Es kam schleichend, über Jahre.</p>
+
+      <p class="beat">Erst hat er mit dem Kegeln aufgehört. „Die Bahn ist mir zu weit weg.“</p>
+      <p class="beat">Dann hat er den Garten meiner Mutter überlassen. Sie hat die Tomaten gepflanzt, er hat vom Stuhl aus zugeschaut.</p>
+      <p class="beat">Beim Spaziergang blieb er nach ein paar hundert Metern stehen und tat so, als würde er sich die Vorgärten der Nachbarn ansehen.</p>
+      <p class="beat">Auf der Fahrt zu uns, eine Stunde Autobahn, mussten wir auf halber Strecke anhalten. Er konnte nicht mehr sitzen.</p>
+
+      <p>Und nachts, das hat mir meine Mutter irgendwann am Telefon erzählt, ist er oft gegen drei Uhr aufgestanden und hat sich ins Wohnzimmer gesetzt, weil er im Bett keine Lage mehr gefunden hat.</p>
+
+      <p>Wenn man ihn fragte, wo es wehtut, fuhr er mit der flachen Hand quer über den unteren Rücken. Breit, wie ein Gürtel. An schlechten Tagen zog es ihm bis ins Bein.</p>
+
+      <p>Am Telefon klang trotzdem immer alles gut.</p>
+
+      <div class="pullquote">
+        „Geht schon, Junge. Mach dir keine Gedanken.“
+      </div>
+
+      <p>Mein Vater hat sich in seinem ganzen Leben nicht beschwert. Damit hat er auch jetzt nicht angefangen.</p>
+
+      <h2>Ich habe mir trotzdem Gedanken gemacht. Jeden Tag.</h2>
+
+      <p>Was, wenn er stürzt?</p>
+
+      <p>Was, wenn er eines Morgens nicht mehr aus dem Bett kommt und meine Mutter ihn nicht hochkriegt? Sie ist selbst 70.</p>
+
+      <p>Was, wenn die beiden das Haus nicht mehr schaffen, das Haus, das er gebaut hat?</p>
+
+      <p>Ich wohne eine Stunde entfernt. Ich habe zwei Kinder, einen Job, und meine Frau arbeitet auch. Ich war schon jeden zweiten Samstag bei meinen Eltern, um den Rasen zu mähen und die Getränkekisten in den Keller zu tragen.</p>
+
+      <p>Irgendwann habe ich mich dabei ertappt, wie ich im Auto ausgerechnet habe, wie das wird, wenn es jedes Wochenende ist. Wenn es mehr wird als Rasen und Kisten.</p>
+
+      <p>Und dann habe ich mich dafür geschämt.</p>
+
+      <p>Wer Eltern hat, die älter werden, kennt dieses Gefühl. Man liebt sie. Und gleichzeitig hat man Angst vor dem, was kommt. Vor dem Tag, an dem aus dem Sohn ein Pfleger wird.</p>
+
+      <h2>Das Übungsblatt auf dem Kühlschrank</h2>
+
+      <p>Am meisten hat mich etwas anderes fertiggemacht: Es gab ja etwas, das er hätte tun können.</p>
+
+      <p>Der Orthopäde hatte ihm Physiotherapie verschrieben. Er ist hingegangen, pünktlich, wie er alles in seinem Leben pünktlich gemacht hat. Zum Schluss hat ihm die Physiotherapeutin ein Blatt mit Übungen mitgegeben. Brücke, Katzenbuckel, Knie zur Brust.</p>
+
+      <p>Beim nächsten Besuch hing das Blatt am Kühlschrank. Beim übernächsten lag es unter der Zeitung. Danach habe ich es nicht mehr gesehen.</p>
+
+      <p>Ich habe ihn darauf angesprochen. Erst vorsichtig, dann weniger vorsichtig.</p>
+
+      <p class="beat"><em>„Papa, du musst die Übungen machen.“</em></p>
+      <p class="beat"><em>„Mach ich doch.“</em></p>
+      <p class="beat"><em>„Mama sagt, du machst sie nicht.“</em></p>
+      <p class="beat"><em>„Soll ich mich in meinem Alter auf den Boden legen? Da komm ich ja nicht mehr hoch.“</em></p>
+
+      <p>Wir haben gestritten. Nicht nur einmal. Einmal bin ich wütend nach Hause gefahren und habe die ganze Stunde im Auto das Radio nicht angemacht. Ich war wütend auf ihn. Und noch mehr auf mich, weil ich einen 72-jährigen Mann angeschrien hatte, der Schmerzen hat.</p>
+
+      <p>Dazwischen habe ich gekauft, was mir eingefallen ist. Ein Massagekissen für den Sessel. Wärmepflaster. Einen Stützgürtel aus der Apotheke. Eine Rotlichtlampe.</p>
+
+      <p>Das Massagekissen hat er benutzt, solange ich da war. Der Stützgürtel liegt heute noch originalverpackt im Schrank.</p>
+
+      <p>An seinem Rücken hat nichts davon etwas geändert. Warum, habe ich erst später verstanden.</p>
+
+      <h2>Mein Vater war nicht faul</h2>
+
+      <p>Ich bin kein Arzt. Aber irgendwann habe ich angefangen zu lesen, nachts, wenn ich selbst nicht schlafen konnte.</p>
+
+      <p>Die Wirbelsäule wird von einer tiefen Muskelschicht gehalten, die direkt an den Wirbeln sitzt. Diese Muskeln spürt man nicht. Sie arbeiten einfach, beim Stehen, beim Gehen, beim Sitzen.</p>
+
+      <p>Wenn der Rücken wehtut, schont man sich. Wer sich schont, verliert genau diese Muskeln. Und wer sie verliert, hat beim Stehen, Gehen und Sitzen noch schneller Schmerzen. Ein Kreislauf, und mein Vater steckte seit Jahren mittendrin.</p>
+
+      <img
+        src="../../../assets/teufelskreislauf_clean_bg.png"
+        alt="Der Kreislauf aus Schmerz, Schonung und schwächer werdender Muskulatur"
+        class="article-img"
+        style="background:var(--surface);object-fit:contain;padding:12px"
+      >
+
+      <p>Die Übungen auf dem Blatt hätten diese Muskeln stärken können. Aber nur, wenn man sie über Wochen regelmäßig und sauber macht. Für einen Mann, der vom Boden kaum noch hochkommt und nicht spürt, ob er den richtigen Muskel trifft, war das nie realistisch.</p>
+
+      <p>Er hatte ein Programm für einen 40-Jährigen bekommen.</p>
+
+      <h2>Training, bei dem man nur sitzen muss</h2>
+
+      <p>Beim Lesen bin ich auf neuromuskuläre Elektrostimulation gestoßen, kurz NMES. Ich kannte bis dahin nur das Kribbelgerät vom Orthopäden. Das heißt TENS, es überdeckt Schmerzen für ein paar Stunden und trainiert keinen Muskel. Und ich kannte die Bauchgürtel aus der Werbung.</p>
+
+      <p>NMES setzen Kliniken und Rehazentren seit Jahrzehnten ein, zum Beispiel nach Operationen, wenn Patienten selbst noch nicht trainieren können. Ein Impuls bringt den Muskel dazu, sich anzuspannen. Der Mensch muss dafür nichts tun. Er kann einfach sitzen bleiben.</p>
+
+      <p>Genau das brauchte mein Vater.</p>
+
+      <p>Ein Sportwissenschaftler von der Deutschen Sporthochschule Köln, Christian Senfleben, hat dafür ein Gerät gebaut, das gezielt die tiefe Muskulatur im unteren Rücken trainiert. Getestet hat er es in einer Studie mit 60 Teilnehmenden über acht Wochen. Es heißt <strong>Wellenpuls LWS</strong>: ein Gurt, den man um den unteren Rücken legt.</p>
+
+      <div style="margin:28px 0 6px">
+        <video src="../../../assets/video/wellenpuls-kontraktion-ruecken.mp4" poster="../../../assets/video/wellenpuls-kontraktion-ruecken-poster.jpg" autoplay muted loop playsinline preload="metadata" style="width:100%;border-radius:10px;display:block" aria-label="Animierte Darstellung: Die Rückenmuskulatur über dem Gurt spannt sich im Takt der Impulse an"></video>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);margin:0 0 24px;">So spannt der Impuls die Rückenmuskulatur an und lässt sie wieder los. (Animierte Darstellung)</div>
+
+      <p>Man legt ihn an, schaltet ihn ein und sitzt 20 Minuten. Zweimal pro Woche. Er wird warm, hat vier Tasten und schaltet sich nach 20 Minuten selbst ab. Kein Handy, keine App, nichts einzurichten.</p>
+
+      <p>Ich habe das gelesen und gedacht: Das schafft sogar mein Vater.</p>
+
+      <h2>Natürlich hatte ich Zweifel</h2>
+
+      <p>Würde er so ein Ding überhaupt anziehen? Mein Vater hält schon sein Handy für eine Zumutung.</p>
+
+      <p>Und 489 Euro sind viel Geld für etwas, das vielleicht im Schrank neben dem Stützgürtel landet.</p>
+
+      <p>Dann habe ich zusammengerechnet, was mich die Samstage in den letzten zwei Jahren gekostet haben. An Benzin. An Zeit mit meinen eigenen Kindern. Und es gab eine 30-Tage-Geld-zurück-Garantie. Wenn er ihn nicht benutzt, schicke ich ihn zurück.</p>
+
+      <p>Ich habe bestellt und direkt an meine Eltern liefern lassen. Das ging einfach über eine abweichende Lieferadresse.</p>
+
+      <h2>„Das war's schon?“</h2>
+
+      <p>Am Samstag darauf saß er im Sessel und schaute mich an, als wollte ich ihm eine Halskrause verpassen.</p>
+
+      <p class="beat"><em>„Was soll das denn sein?“</em></p>
+      <p class="beat"><em>„Rückentraining, Papa. Du musst nur sitzen bleiben.“</em></p>
+
+      <p>Ich habe die Elektroden mit etwas Wasser angesprüht, ihm den Gurt um den Rücken gelegt, festgezogen und eingeschaltet. Erst die Wärme. Dann die Stärke, Stufe für Stufe, bis er sagte: „Jetzt merk ich was.“</p>
+
+      <p>Dann hat er die Sportschau geguckt. Nach 20 Minuten hat sich das Gerät ausgeschaltet, und er sagte: „Das war's schon?“</p>
+
+      <p>Am Abend rief meine Mutter an. Er habe Muskelkater im Rücken. Er klinge fast zufrieden.</p>
+
+      <h2>Was danach passiert ist</h2>
+
+      <p>Ich hatte mit allem gerechnet, nur nicht damit, dass er dranbleibt.</p>
+
+      <p>Aber man kann dabei nichts falsch machen, und man muss sich nicht überwinden. Dienstags und freitags, vor dem Fernseher. Meine Mutter sagt, inzwischen erinnert er sie daran.</p>
+
+      <p>Nach drei Wochen sagte er am Telefon zum ersten Mal seit Jahren nicht „Geht schon“. Er sagte: „Besser.“</p>
+
+      <p>Nach ungefähr sechs Wochen stand ich wieder in der Küche meiner Eltern, und aus dem Wohnzimmer kam kein Stöhnen. Er stand einfach auf und ging zum Fenster.</p>
+
+      <p>Er geht wieder selbst zum Bäcker. Er steht wieder in seiner Werkstatt. Im Frühjahr hat er die Tomaten selbst gepflanzt.</p>
+
+      <img
+        src="../../../assets/eltern-ehepaar.jpg"
+        alt="Älteres Paar beim Spaziergang"
+        class="article-img"
+      >
+
+      <p>Er hat nicht über Nacht den Rücken eines 40-Jährigen bekommen. Er hat immer noch schlechte Tage. Aber er hat weniger Schmerzen, er bewegt sich mehr, und er wirkt wacher als in all den Jahren davor.</p>
+
+      <p>Und ich? Ich fahre immer noch jeden zweiten Samstag hin. Letztes Mal hatte er den Rasen schon gemäht, bevor ich ankam, und war fast ein bisschen beleidigt, als ich den Mäher rausholen wollte.</p>
+
+      <p>Die Angst ist nicht ganz weg. Eltern werden älter, das hält niemand auf. Aber ich habe zum ersten Mal das Gefühl, etwas getan zu haben, das wirklich hilft. Ohne zu drängen und ohne zu streiten.</p>
+
+      <h2>Wenn Sie gerade in der Tür stehen</h2>
+
+      <p>Vielleicht lesen Sie das, weil Sie selbst zusehen. Weil Ihre Mutter am Telefon „Geht schon“ sagt. Weil bei Ihren Eltern auch ein Übungsblatt irgendwo unter der Zeitung liegt.</p>
+
+      <p>Ich will Ihnen nichts versprechen. Ich kenne Ihre Eltern nicht. Es ist ein Trainingsgerät, und Training wirkt über Wochen, nicht über Nacht. Bei Herzschrittmacher, Metallimplantaten im Rumpf, Epilepsie oder Herzrhythmusstörungen ist es nicht geeignet, und bei Vorerkrankungen sollten Ihre Eltern vorher mit ihrer Hausärztin oder ihrem Hausarzt sprechen.</p>
+
+      <p>Aber wenn Ihre Eltern die Übungen nicht machen, weil sie vom Boden nicht hochkommen oder nicht wissen, ob sie es richtig machen, dann ist das die eine Sache, die ich an Ihrer Stelle ausprobieren würde.</p>
+
+      <p>Drei Dinge haben bei uns geholfen:</p>
+
+      <ul class="fazit-list">
+        <li><strong>Beim ersten Mal dabei sein.</strong> Gemeinsam anlegen, die Stufe zusammen finden. Danach kam er allein zurecht.</li>
+        <li><strong>Feste Tage.</strong> Bei uns sind es Dienstag und Freitag, immer vor derselben Sendung.</li>
+        <li><strong>Direkt hinliefern lassen.</strong> Dann steht das Paket da, und niemand muss etwas abholen oder aufbauen.</li>
+      </ul>
+
+      <p>Wer nicht dabei sein kann: Zum Paket gehört ein persönliches Gespräch mit Christian, dem Gründer. Das kann auch direkt mit Ihrer Mutter oder Ihrem Vater stattfinden.</p>
+
+      <h2>Zum Preis</h2>
+
+      <p>Der Wellenpuls LWS kostet einmalig 489 Euro, ohne Abo und ohne Pads zum Nachkaufen. Dazu kommen das Gespräch mit Christian, ein kurzer Videokurs und ein E-Book mit Startplan. Versand ist kostenlos, die Lieferung dauert in der Regel zwei Werktage.</p>
+
+      <p>Und Sie haben 30 Tage Zeit. Merken Ihre Eltern keinen Unterschied, gibt es den vollen Kaufpreis zurück.</p>
+
+      <p style="margin-bottom:8px;">Alles Gute für Sie und Ihre Eltern,</p>
+
+      <p class="signature">Markus</p>
+
+      <p style="margin-top:24px;"><em>P.S. Mein Vater weiß bis heute nicht, dass ich das hier aufgeschrieben habe. Er würde sagen: „Mach nicht so ein Theater.“ Aber vielleicht hilft es jemandem, der gerade in der Küche steht und zuhört.</em></p>
+
+    </div><!-- /article-body -->
+
+    <!-- ═══ CTA ═══ -->
+    <div class="cta-final">
+      <a href="../../lp3/?fuer=eltern" class="btn-primary track-lead">Den Wellenpuls LWS für Ihre Eltern ansehen und 30 Tage testen</a>
+      <div class="cta-terms">489 € einmalig · kostenloser Versand · Lieferung direkt an Ihre Eltern möglich · 30 Tage Geld zurück</div>
+    </div>
+
+    <!-- ═══ ABOUT ═══ -->
+    <div class="about-mag">
+      <strong>Über Stabil im Alltag</strong><br><br>
+      Stabil im Alltag ist ein Angebot der Wellenpuls GmbH aus Solingen. Wir schreiben über Rückengesundheit im Alltag und stellen dabei auch unser eigenes Produkt vor, den Wellenpuls LWS.
+    </div>
+
+    <!-- ═══ DISCLAIMER ═══ -->
+    <div class="disclaimer">
+      <strong>Hinweis:</strong> Dieser Artikel ist eine Anzeige der Wellenpuls GmbH. Der Erfahrungsbericht beruht auf der Erfahrung eines Kunden, Name und einzelne Details wurden geändert. Der Wellenpuls LWS ist ein Trainingsgerät und kein Medizinprodukt. Er ersetzt keine ärztliche Beratung. Ergebnisse können von Mensch zu Mensch verschieden sein.
+    </div>
+
+  </article>
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer">
+  <a href="/"><img src="../../../assets/logo_transparent.png" alt="Stabil im Alltag" style="height:48px;width:auto;display:block;margin:0 auto 10px;"></a>
+  <div>© 2026, Stabil im Alltag</div>
+  <div class="footer-links">
+    <a href="/impressum/">Impressum</a>
+    <a href="/datenschutz/">Datenschutz</a>
+    <a href="#" onclick="SIA_openConsent();return false;">Cookie-Einstellungen</a>
+  </div>
+</footer>
+
+<script src="../../../assets/consent.js" defer></script>
+</body>
+</html>
