@@ -627,13 +627,15 @@ const MAKE_WEBHOOK_URL = 'https://hook.eu2.make.com/wk4v2q911h2j1nx89voqd25lq80y
 // Preistest Oktober 2026 (assets/preistest.js): ?angebot=neukunde zeigt 299 € mit
 // 38 % Neukunden-Rabatt. Der Checkout wuerfelt nicht selbst, er wird auch von lp und lp2
 // genutzt. Der Code laeuft als "aktion" ueber dieselbe Make-Route wie sommer100 und
-// muss in WooCommerce als Gutschein "neukunde" (190 EUR Festbetrag) angelegt sein.
+// ist in WooCommerce als Gutschein FSBA7RF3 angelegt (190 EUR Festbetrag).
 var ANGEBOT = (function(){
   var p = '';
   try { p = (new URLSearchParams(location.search).get('angebot') || '').toLowerCase(); } catch(e){}
   var quelle = '';
   try { var g = JSON.parse(localStorage.getItem('sia_preistest_2026_10') || 'null'); if (g) quelle = g.quelle || ''; } catch(e){}
-  if (p === 'neukunde') return { variante: 'b', betrag: 299, betragText: '299,00 €', code: 'neukunde', quelle: quelle };
+  // Sichtbar heisst der Code NEUKUNDE (Anzeigen, Seiten). In WooCommerce ist der Gutschein als
+  // FSBA7RF3 angelegt; diesen Code bekommt Make als "aktion" und traegt ihn in die Bestellung ein.
+  if (p === 'neukunde') return { variante: 'b', betrag: 299, betragText: '299,00 €', code: 'FSBA7RF3', quelle: quelle };
   return { variante: p === 'regulaer' ? 'a' : '', betrag: 489, betragText: '489,00 €', code: '', quelle: quelle };
 })();
 (function(){
