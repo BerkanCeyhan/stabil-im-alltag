@@ -834,15 +834,23 @@ document.getElementById('checkout-form').addEventListener('submit', async functi
   if (ANGEBOT.code) payload.aktion = ANGEBOT.code;
 
   try {
+    // Zeitlimit: haengt Make, bekommt der Kunde nach 30 s eine klare Meldung statt eines ewig drehenden Buttons.
+    var ctrl = ('AbortController' in window) ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function(){ ctrl.abort(); }, 30000) : null;
     var res = await fetch(MAKE_WEBHOOK_URL, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify(payload)
+      body:    JSON.stringify(payload),
+      signal:  ctrl ? ctrl.signal : undefined
     });
+    if(timer) clearTimeout(timer);
 
     if(!res.ok) throw new Error('HTTP ' + res.status);
 
-    var data = await res.json();
+    // Passt in Make keine Route, antwortet der Webhook nur mit "Accepted" (kein JSON).
+    var text = await res.text();
+    var data = null;
+    try { data = JSON.parse(text); } catch(e){ throw new Error('Keine Route in Make: ' + text.slice(0, 40)); }
 
     if(data && data.payment_url){
       // Pixel + Conversions-API (gemeinsame eventID, Consent-geprüft) statt reinem Browser-Pixel.
