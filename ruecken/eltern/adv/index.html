@@ -8,7 +8,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="../../../assets/logo_transparent.png">
   <link rel="apple-touch-icon" href="../../../assets/logo_transparent.png">
+  <script src="../../../assets/preistest.js"></script>
   <style>
+    /* Preistest: .p-a nur bei 489 €, .p-b nur bei 299 € mit Neukunden-Rabatt (assets/preistest.js) */
+    .v-rabatt .p-a{display:none!important}
+    html:not(.v-rabatt) .p-b{display:none!important}
+
     :root {
       --primary:  #1A5C8A;
       --teal:     #28836A;
@@ -551,7 +556,7 @@
       Mein Vater hat 40 Jahre lang Häuser gebaut. Mit 72 kam er kaum noch aus seinem Sessel.
     </h1>
 
-    <p class="article-sub">Ein Sohn erzählt, wie er zugesehen hat, wie sein Vater immer weniger wurde, warum Reden, Rezepte und Streit nichts geändert haben, und was am Ende doch geholfen hat.</p>
+    <p class="article-sub">Ein Sohn erzählt, wie sein Vater über Jahre immer weniger wurde, warum weder gutes Zureden noch Streit etwas geändert haben und was am Ende doch geholfen hat.</p>
 
     <img
       src="../../../assets/eltern-symbolbild.jpg"
@@ -620,11 +625,11 @@
 
       <p>Und dann habe ich mich dafür geschämt.</p>
 
-      <p>Wer Eltern hat, die älter werden, kennt dieses Gefühl. Man liebt sie. Und gleichzeitig hat man Angst vor dem, was kommt. Vor dem Tag, an dem aus dem Sohn ein Pfleger wird.</p>
+      <p>Man liebt seine Eltern und hat gleichzeitig Angst vor dem Tag, an dem aus dem Sohn ein Pfleger wird.</p>
 
       <h2>Das Übungsblatt auf dem Kühlschrank</h2>
 
-      <p>Am meisten hat mich etwas anderes fertiggemacht: Es gab ja etwas, das er hätte tun können.</p>
+      <p>Am meisten hat mich fertiggemacht, dass es etwas gab, das er hätte tun können.</p>
 
       <p>Der Orthopäde hatte ihm Physiotherapie verschrieben. Er ist hingegangen, pünktlich, wie er alles in seinem Leben pünktlich gemacht hat. Zum Schluss hat ihm die Physiotherapeutin ein Blatt mit Übungen mitgegeben. Brücke, Katzenbuckel, Knie zur Brust.</p>
 
@@ -668,18 +673,20 @@
 
       <p>Beim Lesen bin ich auf neuromuskuläre Elektrostimulation gestoßen, kurz NMES. Ich kannte bis dahin nur das Kribbelgerät vom Orthopäden. Das heißt TENS, es überdeckt Schmerzen für ein paar Stunden und trainiert keinen Muskel. Und ich kannte die Bauchgürtel aus der Werbung.</p>
 
-      <p>NMES setzen Kliniken und Rehazentren seit Jahrzehnten ein, zum Beispiel nach Operationen, wenn Patienten selbst noch nicht trainieren können. Ein Impuls bringt den Muskel dazu, sich anzuspannen. Der Mensch muss dafür nichts tun. Er kann einfach sitzen bleiben.</p>
-
-      <p>Genau das brauchte mein Vater.</p>
+      <p>NMES setzen Kliniken und Rehazentren seit Jahrzehnten ein, zum Beispiel nach Operationen, wenn Patienten selbst noch nicht trainieren können. Ein Impuls bringt den Muskel dazu, sich anzuspannen, während man einfach sitzen bleibt. Das war genau das, was mein Vater brauchte.</p>
 
       <p>Ein Sportwissenschaftler von der Deutschen Sporthochschule Köln, Christian Senfleben, hat dafür ein Gerät gebaut, das gezielt die tiefe Muskulatur im unteren Rücken trainiert. Getestet hat er es in einer Studie mit 60 Teilnehmenden über acht Wochen. Es heißt <strong>Wellenpuls LWS</strong>: ein Gurt, den man um den unteren Rücken legt.</p>
 
       <div style="margin:28px 0 6px">
-        <video src="../../../assets/video/wellenpuls-kontraktion-ruecken.mp4" poster="../../../assets/video/wellenpuls-kontraktion-ruecken-poster.jpg" autoplay muted loop playsinline preload="metadata" style="width:100%;border-radius:10px;display:block" aria-label="Animierte Darstellung: Die Rückenmuskulatur über dem Gurt spannt sich im Takt der Impulse an"></video>
+        <video src="../../../assets/video/wellenpuls-kontraktion-aelter.mp4" poster="../../../assets/video/wellenpuls-kontraktion-aelter-poster.jpg" autoplay muted loop playsinline preload="metadata" style="width:100%;border-radius:10px;display:block" aria-label="Animierte Darstellung: Der Gurt arbeitet, die Muskulatur spannt sich im Takt der Impulse sanft an"></video>
       </div>
-      <div style="font-size:12px;color:var(--text-muted);margin:0 0 24px;">So spannt der Impuls die Rückenmuskulatur an und lässt sie wieder los. (Animierte Darstellung)</div>
+      <div style="font-size:12px;color:var(--text-muted);margin:0 0 24px;">So spannt der Impuls die Rumpfmuskulatur sanft an und lässt sie wieder los. (Animierte Darstellung)</div>
 
-      <p>Man legt ihn an, schaltet ihn ein und sitzt 20 Minuten. Zweimal pro Woche. Er wird warm, hat vier Tasten und schaltet sich nach 20 Minuten selbst ab. Kein Handy, keine App, nichts einzurichten.</p>
+      <p>Später habe ich gesehen, dass ihn auch das Gesundheitszentrum valmedica in Mülheim an der Ruhr in seinen Programmen einsetzt. Dort heißt es:</p>
+
+      <div style="background:#fff;border:1px solid #D0DCE8;border-radius:12px;padding:20px 22px;margin:24px 0"><img src="../../../assets/lp3/valmedica-logo.png" alt="valmedica" style="height:30px;width:auto;display:block;margin-bottom:12px"><p style="font-family:'Lora',serif;font-style:italic;font-size:17px;line-height:1.6;margin:0 0 10px">„Wellenpuls ergänzt unser Angebot um eine einfache, alltagstaugliche Möglichkeit, die Tiefenmuskulatur im Rumpf gezielt zu aktivieren. Die Anwendung ist niederschwellig und lässt sich super in unsere Betreuungskonzepte einfügen.“</p><p style="font-size:13px;color:#6B7E8C;margin:0">valmedica, Gesundheitszentrum in Mülheim an der Ruhr</p></div>
+
+      <p>Man legt ihn an, schaltet ihn ein und sitzt 20 Minuten, zweimal pro Woche. Er wird warm, hat vier Tasten und schaltet sich am Ende selbst ab. Ein Handy oder eine App braucht man dafür nicht.</p>
 
       <p>Ich habe das gelesen und gedacht: Das schafft sogar mein Vater.</p>
 
@@ -689,7 +696,7 @@
 
       <p>Und 489 Euro sind viel Geld für etwas, das vielleicht im Schrank neben dem Stützgürtel landet.</p>
 
-      <p>Dann habe ich zusammengerechnet, was mich die Samstage in den letzten zwei Jahren gekostet haben. An Benzin. An Zeit mit meinen eigenen Kindern. Und es gab eine 30-Tage-Geld-zurück-Garantie. Wenn er ihn nicht benutzt, schicke ich ihn zurück.</p>
+      <p>Dann habe ich zusammengerechnet, was mich die Samstage in den letzten zwei Jahren gekostet haben, an Benzin und an Zeit mit meinen eigenen Kindern. Außerdem gab es eine 30-Tage-Geld-zurück-Garantie. Wenn er ihn nicht benutzt, schicke ich ihn eben zurück.</p>
 
       <p>Ich habe bestellt und direkt an meine Eltern liefern lassen. Das ging einfach über eine abweichende Lieferadresse.</p>
 
@@ -716,7 +723,7 @@
 
       <p>Nach ungefähr sechs Wochen stand ich wieder in der Küche meiner Eltern, und aus dem Wohnzimmer kam kein Stöhnen. Er stand einfach auf und ging zum Fenster.</p>
 
-      <p>Er geht wieder selbst zum Bäcker. Er steht wieder in seiner Werkstatt. Im Frühjahr hat er die Tomaten selbst gepflanzt.</p>
+      <p>Er geht wieder selbst zum Bäcker und steht wieder in seiner Werkstatt. Im Frühjahr hat er die Tomaten selbst gepflanzt.</p>
 
       <img
         src="../../../assets/eltern-ehepaar.jpg"
@@ -724,33 +731,27 @@
         class="article-img"
       >
 
-      <p>Er hat nicht über Nacht den Rücken eines 40-Jährigen bekommen. Er hat immer noch schlechte Tage. Aber er hat weniger Schmerzen, er bewegt sich mehr, und er wirkt wacher als in all den Jahren davor.</p>
+      <p>Über Nacht ist das nicht passiert, und schlechte Tage hat er immer noch. Aber die Schmerzen sind weniger geworden, er bewegt sich mehr und wirkt wacher als in den Jahren davor.</p>
 
       <p>Und ich? Ich fahre immer noch jeden zweiten Samstag hin. Letztes Mal hatte er den Rasen schon gemäht, bevor ich ankam, und war fast ein bisschen beleidigt, als ich den Mäher rausholen wollte.</p>
 
-      <p>Die Angst ist nicht ganz weg. Eltern werden älter, das hält niemand auf. Aber ich habe zum ersten Mal das Gefühl, etwas getan zu haben, das wirklich hilft. Ohne zu drängen und ohne zu streiten.</p>
+      <p>Die Angst ist nicht ganz weg, Eltern werden nun mal älter. Aber ich habe zum ersten Mal das Gefühl, etwas getan zu haben, das wirklich hilft, und zwar ohne Drängen und ohne Streit.</p>
 
       <h2>Wenn Sie gerade in der Tür stehen</h2>
 
-      <p>Vielleicht lesen Sie das, weil Sie selbst zusehen. Weil Ihre Mutter am Telefon „Geht schon“ sagt. Weil bei Ihren Eltern auch ein Übungsblatt irgendwo unter der Zeitung liegt.</p>
+      <p>Vielleicht lesen Sie das, weil Ihre Mutter am Telefon auch „Geht schon“ sagt und bei Ihren Eltern ein Übungsblatt irgendwo unter der Zeitung liegt.</p>
 
       <p>Ich will Ihnen nichts versprechen. Ich kenne Ihre Eltern nicht. Es ist ein Trainingsgerät, und Training wirkt über Wochen, nicht über Nacht. Bei Herzschrittmacher, Metallimplantaten im Rumpf, Epilepsie oder Herzrhythmusstörungen ist es nicht geeignet, und bei Vorerkrankungen sollten Ihre Eltern vorher mit ihrer Hausärztin oder ihrem Hausarzt sprechen.</p>
 
       <p>Aber wenn Ihre Eltern die Übungen nicht machen, weil sie vom Boden nicht hochkommen oder nicht wissen, ob sie es richtig machen, dann ist das die eine Sache, die ich an Ihrer Stelle ausprobieren würde.</p>
 
-      <p>Drei Dinge haben bei uns geholfen:</p>
+      <p>Bei uns hat vor allem geholfen, dass ich beim ersten Mal dabei war und wir die Stufe gemeinsam gefunden haben. Danach kam er allein zurecht. Wir haben feste Tage ausgemacht, Dienstag und Freitag vor derselben Sendung. Und weil das Paket direkt bei meinen Eltern ankam, musste niemand etwas abholen oder aufbauen.</p>
 
-      <ul class="fazit-list">
-        <li><strong>Beim ersten Mal dabei sein.</strong> Gemeinsam anlegen, die Stufe zusammen finden. Danach kam er allein zurecht.</li>
-        <li><strong>Feste Tage.</strong> Bei uns sind es Dienstag und Freitag, immer vor derselben Sendung.</li>
-        <li><strong>Direkt hinliefern lassen.</strong> Dann steht das Paket da, und niemand muss etwas abholen oder aufbauen.</li>
-      </ul>
-
-      <p>Wer nicht dabei sein kann: Zum Paket gehört ein persönliches Gespräch mit Christian, dem Gründer. Das kann auch direkt mit Ihrer Mutter oder Ihrem Vater stattfinden.</p>
+      <p>Wenn Sie nicht dabei sein können: Zum Paket gehört ein persönliches Gespräch mit Christian, dem Gründer, und das kann auch direkt mit Ihrer Mutter oder Ihrem Vater stattfinden.</p>
 
       <h2>Zum Preis</h2>
 
-      <p>Der Wellenpuls LWS kostet einmalig 489 Euro, ohne Abo und ohne Pads zum Nachkaufen. Dazu kommen das Gespräch mit Christian, ein kurzer Videokurs und ein E-Book mit Startplan. Versand ist kostenlos, die Lieferung dauert in der Regel zwei Werktage.</p>
+      <p><span class="p-a">Der Wellenpuls LWS kostet einmalig 489 Euro</span><span class="p-b">Der Wellenpuls LWS kostet regulär 489 Euro. Neukunden bekommen gerade 38 % Rabatt mit dem Code NEUKUNDE, dann sind es einmalig 299 Euro</span>, ohne Abo und ohne Pads zum Nachkaufen. Dazu kommen das Gespräch mit Christian, ein kurzer Videokurs und ein E-Book mit Startplan. Versand ist kostenlos, die Lieferung dauert in der Regel zwei Werktage.</p>
 
       <p>Und Sie haben 30 Tage Zeit. Merken Ihre Eltern keinen Unterschied, gibt es den vollen Kaufpreis zurück.</p>
 
@@ -765,7 +766,7 @@
     <!-- ═══ CTA ═══ -->
     <div class="cta-final">
       <a href="../../lp3/?fuer=eltern" class="btn-primary track-lead">Den Wellenpuls LWS für Ihre Eltern ansehen und 30 Tage testen</a>
-      <div class="cta-terms">489 € einmalig · kostenloser Versand · Lieferung direkt an Ihre Eltern möglich · 30 Tage Geld zurück</div>
+      <div class="cta-terms"><span class="p-a">489 € einmalig</span><span class="p-b">299 € mit 38 % Neukunden-Rabatt</span>, kostenloser Versand, Lieferung direkt an Ihre Eltern möglich, 30 Tage Geld zurück</div>
     </div>
 
     <!-- ═══ ABOUT ═══ -->

@@ -4,6 +4,9 @@
    Wer auf dem Advertorial zustimmt, sieht das Banner auf LP/Checkout/Danke nicht erneut. */
 (function () {
   var PIXEL_ID = '576311248662294';
+  // Google Ads (Konto Wellenpuls 7822852952), Conversion "Kauf (2)". Laedt wie der Pixel nur nach Marketing-Einwilligung.
+  var GADS_ID = 'AW-18457347229';
+  var GADS_KAUF = 'AW-18457347229/QRiBCJXj-vocEJ2Jk-FE';
   // Meta Conversions-API via Make (Server-Side). Empfängt Browser-Events und spielt sie serverseitig an Meta.
   var CAPI_WEBHOOK = 'https://hook.eu2.make.com/7omhyj9vgfm9az1i1el3i9ihvfh5hjym';
   var COOKIE   = 'sia_consent';
@@ -27,7 +30,7 @@
   // Meta hängt die UTM-Parameter nur an den ersten Klick. Auf dem Weg
   // Quiz -> LP -> Checkout -> Danke gehen sie sonst verloren. Deshalb einmal
   // in einem Cookie sichern und an interne Links wieder anhängen.
-  var ATTR_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id', 'fbclid'];
+  var ATTR_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id', 'fbclid', 'gclid', 'gbraid', 'wbraid'];
   var ATTR_COOKIE = 'sia_attr';
 
   function readAttr() {
@@ -108,6 +111,31 @@
     fetchClientIp();
     fbq('init', PIXEL_ID);
     fbq('track', 'PageView');
+    loadGoogle();
+  }
+
+  /* ---------- Google Ads (nur nach Einwilligung) ---------- */
+  var googleLoaded = false;
+  function loadGoogle() {
+    if (googleLoaded) return;
+    googleLoaded = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+    gtag('consent', 'default', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'denied' });
+    var t = document.createElement('script');
+    t.async = true;
+    t.src = 'https://www.googletagmanager.com/gtag/js?id=' + GADS_ID;
+    document.head.appendChild(t);
+    gtag('js', new Date());
+    gtag('config', GADS_ID);
+  }
+  // Kauf an Google melden (Danke-Seite). Ohne Einwilligung passiert nichts.
+  function googleKauf(d) {
+    if (!d || !marketingAllowed()) return;
+    try { if (sessionStorage.getItem('sia_gads_kauf') === (d.transaction_id || '1')) return; } catch (e) {}
+    loadGoogle();
+    gtag('event', 'conversion', { send_to: GADS_KAUF, value: d.value, currency: d.currency || 'EUR', transaction_id: d.transaction_id || '' });
+    try { sessionStorage.setItem('sia_gads_kauf', d.transaction_id || '1'); } catch (e) {}
   }
 
   /* ---------- Client-IP (für Meta Match Quality) ---------- */
@@ -204,7 +232,7 @@
     document.querySelectorAll('.track-atc').forEach(function (btn) {
       if (btn.__siaBound) return;
       btn.__siaBound = true;
-      btn.addEventListener('click', function (e) { e.preventDefault(); sendEvent('AddToCart', btn, { value: 489.00, currency: 'EUR' }); });
+      btn.addEventListener('click', function (e) { e.preventDefault(); sendEvent('AddToCart', btn, { value: parseFloat(btn.dataset.value || '489'), currency: 'EUR' }); });
     });
   }
 
@@ -257,10 +285,10 @@
     wrap.innerHTML =
       '<div class="sia-in">' +
         '<h2>Wir respektieren deine Privatsphäre</h2>' +
-        '<p>Wir verwenden notwendige Cookies, damit diese Seite funktioniert. Mit deiner Einwilligung setzen wir zusätzlich Marketing-Cookies ein – konkret den <strong>Meta-Pixel</strong> (Facebook/Instagram), um die Wirksamkeit unserer Werbung zu messen. Dabei werden Daten an Meta übermittelt. Mehr dazu in der <a href="' + dzPath() + '">Datenschutzerklärung</a>. Deine Auswahl gilt für alle Seiten dieses Angebots.</p>' +
+        '<p>Wir verwenden notwendige Cookies, damit diese Seite funktioniert. Mit deiner Einwilligung setzen wir zusätzlich Marketing-Cookies ein – konkret den <strong>Meta-Pixel</strong> (Facebook/Instagram) und das <strong>Google-Ads-Conversion-Tracking</strong>, um die Wirksamkeit unserer Werbung zu messen. Dabei werden Daten an Meta und Google übermittelt. Mehr dazu in der <a href="' + dzPath() + '">Datenschutzerklärung</a>. Deine Auswahl gilt für alle Seiten dieses Angebots.</p>' +
         '<div class="sia-opts" id="sia-opts">' +
           '<div class="sia-opt"><input type="checkbox" checked disabled><div><strong>Notwendig</strong> – technisch erforderlich für Anzeige und Bestellung (z. B. Speicherung deiner Cookie-Auswahl). Immer aktiv.</div></div>' +
-          '<div class="sia-opt"><input type="checkbox" id="sia-mkt" ' + preChecked + '><div><strong>Marketing</strong> – Meta-Pixel und serverseitige Conversion-Messung (Meta CAPI). Hilft uns, Werbung zu optimieren.</div></div>' +
+          '<div class="sia-opt"><input type="checkbox" id="sia-mkt" ' + preChecked + '><div><strong>Marketing</strong> – Meta-Pixel, serverseitige Conversion-Messung (Meta CAPI) und Google-Ads-Conversion-Tracking. Hilft uns, Werbung zu optimieren.</div></div>' +
         '</div>' +
         '<div class="sia-btns">' +
           '<button type="button" class="sia-accept" id="sia-accept">Alle akzeptieren</button>' +
@@ -328,6 +356,8 @@
   // Beliebiges Standard-Event feuern: Pixel + CAPI mit gemeinsamer eventID.
   // Ohne Marketing-Einwilligung wird das Event gepuffert und nach Zustimmung nachgefeuert.
   window.SIA_track = function (name, customData) { if (name) sendEvent(name, null, customData || {}); };
+  // Google-Ads-Kauf: { value, currency, transaction_id }. Wird nach spaeterer Einwilligung nicht nachgeholt.
+  window.SIA_googleKauf = googleKauf;
 
   /* ---------- Init ---------- */
   function init() {

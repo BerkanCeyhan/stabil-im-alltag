@@ -282,6 +282,7 @@ select{
 .ship-toggle-label input[type=checkbox]{width:18px;height:18px;accent-color:var(--teal);cursor:pointer;flex-shrink:0}
 #ship-card{display:none}
 #ship-card.open{display:block}
+.rabatt-row .or-name,.rabatt-row .or-price{color:#28836A;font-weight:700}
 </style>
 </head>
 <body>
@@ -623,6 +624,34 @@ select{
 const MAKE_WEBHOOK_URL = 'https://hook.eu2.make.com/wk4v2q911h2j1nx89voqd25lq80ymuln';
 // ────────────────────────────────────────────────────────────
 
+// Preistest Oktober 2026 (assets/preistest.js): ?angebot=neukunde zeigt 299 € mit
+// 38 % Neukunden-Rabatt. Der Checkout wuerfelt nicht selbst, er wird auch von lp und lp2
+// genutzt. Der Code laeuft als "aktion" ueber dieselbe Make-Route wie sommer100 und
+// muss in WooCommerce als Gutschein "neukunde" (190 EUR Festbetrag) angelegt sein.
+var ANGEBOT = (function(){
+  var p = '';
+  try { p = (new URLSearchParams(location.search).get('angebot') || '').toLowerCase(); } catch(e){}
+  var quelle = '';
+  try { var g = JSON.parse(localStorage.getItem('sia_preistest_2026_10') || 'null'); if (g) quelle = g.quelle || ''; } catch(e){}
+  if (p === 'neukunde') return { variante: 'b', betrag: 299, betragText: '299,00 €', code: 'neukunde', quelle: quelle };
+  return { variante: p === 'regulaer' ? 'a' : '', betrag: 489, betragText: '489,00 €', code: '', quelle: quelle };
+})();
+(function(){
+  if (ANGEBOT.variante !== 'b') return;
+  document.querySelectorAll('.ms-amount, .tf-amount').forEach(function(el){ el.textContent = ANGEBOT.betragText; });
+  var lbl = document.getElementById('btn-label');
+  if (lbl) lbl.textContent = 'Jetzt sicher bezahlen · ' + ANGEBOT.betragText;
+  document.querySelectorAll('.offer-list').forEach(function(list){
+    var row = document.createElement('div');
+    row.className = 'offer-row rabatt-row';
+    row.innerHTML = '<div class="or-name"><span class="ck">✓</span> Neukunden-Rabatt (Code NEUKUNDE)</div><div class="or-price">− 190,00 €</div>';
+    var first = list.querySelector('.offer-row');
+    if (first && first.nextSibling) list.insertBefore(row, first.nextSibling); else list.appendChild(row);
+  });
+  document.querySelectorAll('.tr.sav span:last-child').forEach(function(el){ el.textContent = '− 433,80 €'; });
+  document.querySelectorAll('.tf-badge').forEach(function(el){ el.textContent = el.textContent.replace('33 % gespart', '59 % gespart'); });
+})();
+
 // Countdown
 (function(){
   var total = 14*60+59;
@@ -789,13 +818,18 @@ document.getElementById('checkout-form').addEventListener('submit', async functi
     // "existiert nicht". Ein vorhandener Schluessel mit Wert null waere
     // mehrdeutig -- dann greift moeglicherweise keine der beiden Routen.
     event_id:            SIA_EVENT_ID,
+    preis_variante:      ANGEBOT.variante,
+    preis_quelle:        ANGEBOT.quelle,
     fbc:                 ATTR.fbc || '',
     fbp:                 ATTR.fbp || '',
     client_user_agent:   ATTR.client_user_agent || navigator.userAgent || '',
     client_ip_address:   ATTR.client_ip_address || '',
-    amount:              '489.00',
+    amount:              ANGEBOT.betrag.toFixed(2),
     currency:            'EUR'
   };
+  // Nur bei 299 €: den Gutscheincode als "aktion" mitschicken. Ohne Rabatt bleibt der
+  // Schluessel weg, damit der Router in Make den regulaeren Zweig nimmt.
+  if (ANGEBOT.code) payload.aktion = ANGEBOT.code;
 
   try {
     var res = await fetch(MAKE_WEBHOOK_URL, {
@@ -811,10 +845,12 @@ document.getElementById('checkout-form').addEventListener('submit', async functi
     if(data && data.payment_url){
       // Pixel + Conversions-API (gemeinsame eventID, Consent-geprüft) statt reinem Browser-Pixel.
       if(typeof window.SIA_track === 'function'){
-        window.SIA_track('InitiateCheckout', { value: 489.00, currency: 'EUR', content_name: 'Wellenpuls LWS' });
+        window.SIA_track('InitiateCheckout', { value: ANGEBOT.betrag, currency: 'EUR', content_name: 'Wellenpuls LWS', preis_variante: ANGEBOT.variante });
       } else if(typeof fbq !== 'undefined'){
-        fbq('track', 'InitiateCheckout', { value: 489.00, currency: 'EUR' });
+        fbq('track', 'InitiateCheckout', { value: ANGEBOT.betrag, currency: 'EUR' });
       }
+      // Fuer die Danke-Seite: richtiger Betrag in der Uebersicht und fuer die Google-Conversion.
+      try { sessionStorage.setItem('sia_bestellung', JSON.stringify({ betrag: ANGEBOT.betrag, code: ANGEBOT.code, event_id: SIA_EVENT_ID, variante: ANGEBOT.variante })); } catch(e){}
       window.location.href = data.payment_url;
     } else {
       throw new Error('Keine Zahlungs-URL erhalten');

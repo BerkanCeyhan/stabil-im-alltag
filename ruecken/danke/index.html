@@ -225,6 +225,29 @@ a{color:inherit;text-decoration:none}
   setTimeout(function(){wrap.remove();},5000);
 })();
 </script>
+<script>
+// Bestellung aus dem Checkout (sessionStorage): richtigen Betrag zeigen und Kauf an Google Ads melden.
+// Hinweis: Mollie leitet auch nach abgebrochener Zahlung hierher; die Google-Conversion kann dadurch leicht ueberzaehlen.
+(function(){
+  var b = null;
+  try { b = JSON.parse(sessionStorage.getItem('sia_bestellung') || 'null'); } catch(e){}
+  if (!b || !b.betrag) return;
+  var text = b.betrag.toFixed(2).replace('.', ',') + ' €';
+  if (b.betrag !== 489) {
+    var erste = document.querySelector('.order-row .order-row-price');
+    if (erste) erste.textContent = '489,00 €';
+    var zeile = document.createElement('div');
+    zeile.className = 'order-row';
+    zeile.innerHTML = '<div class="order-row-name"><span class="ck">✓</span> Neukunden-Rabatt (Code NEUKUNDE)</div><div class="order-row-price">− 190,00 €</div>';
+    var row1 = document.querySelector('.order-row');
+    if (row1 && row1.parentNode) row1.parentNode.insertBefore(zeile, row1.nextSibling);
+    var total = document.querySelector('.order-total span:last-child');
+    if (total) total.textContent = text;
+  }
+  function melden(){ if (window.SIA_googleKauf) window.SIA_googleKauf({ value: b.betrag, currency: 'EUR', transaction_id: b.event_id || '' }); }
+  if (document.readyState === 'complete') setTimeout(melden, 300); else window.addEventListener('load', function(){ setTimeout(melden, 300); });
+})();
+</script>
 <script src="../../assets/consent.js" defer></script>
 </body>
 </html>

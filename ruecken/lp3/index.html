@@ -2,502 +2,746 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wellenpuls LWS: Training für den unteren Rücken, im Sitzen</title>
-<meta name="description" content="Der Wellenpuls LWS trainiert die tiefe Rückenmuskulatur mit neuromuskulärer Elektrostimulation und Wärme. Zweimal pro Woche 20 Minuten. 30 Tage testen, Geld zurück.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Wellenpuls LWS: Rückentraining im Sitzen</title>
+<meta name="description" content="Der Wellenpuls LWS trainiert die tiefe Rückenmuskulatur mit neuromuskulärer Elektrostimulation und Wärme. Zweimal pro Woche 20 Minuten im Sitzen. 30 Tage testen, Geld zurück.">
 <link rel="icon" type="image/png" href="../../assets/logo_transparent.png">
 <link rel="apple-touch-icon" href="../../assets/logo_transparent.png">
 <script>
 /* Variante für die Eltern-Kampagne: ?fuer=eltern. Läuft vor dem ersten Rendern. */
 (function(){try{var p=new URLSearchParams(location.search);if((p.get('fuer')||'').toLowerCase()==='eltern'){document.documentElement.classList.add('v-eltern');}}catch(e){}})();
 </script>
+<script src="../../assets/preistest.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;700&family=Literata:opsz,wght@7..72,500;7..72,600;7..72,700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;700&family=Literata:opsz,wght@7..72,600;7..72,700&display=swap">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --ink:oklch(24% 0.035 245);
-  --ink-2:oklch(35% 0.03 245);
-  --muted:oklch(49% 0.02 245);
+  --ink-2:oklch(36% 0.03 245);
+  --muted:oklch(50% 0.02 245);
   --brand:oklch(38% 0.1 240);
-  --brand-deep:oklch(28% 0.08 243);
-  --brand-wash:oklch(95.6% 0.016 238);
+  --brand-deep:oklch(27% 0.075 243);
+  --brand-night:oklch(21% 0.055 245);
+  --brand-wash:oklch(95.8% 0.016 238);
   --action:oklch(47% 0.1 165);
   --action-deep:oklch(39% 0.095 165);
-  --action-wash:oklch(95.6% 0.026 165);
-  --paper:oklch(98.8% 0.004 240);
-  --line:oklch(88.5% 0.016 240);
-  --star:oklch(72% 0.15 75);
+  --mint:oklch(84% 0.1 165);
+  --mint-wash:oklch(96% 0.03 165);
+  --paper:oklch(99% 0.004 240);
+  --white:oklch(99.6% 0.002 240);
+  --line:oklch(89% 0.015 240);
+  --star:oklch(74% 0.16 75);
+  --deal:oklch(52% 0.17 28);
   --on-dark:oklch(97% 0.01 240);
-  --on-dark-2:oklch(86% 0.025 240);
-
-  --s-xs:4px;--s-sm:8px;--s-md:16px;--s-lg:24px;--s-xl:32px;--s-2xl:48px;--s-3xl:64px;--s-4xl:96px;
-  --wrap:720px;
+  --on-dark-2:oklch(84% 0.03 240);
+  --gutter:max(20px, env(safe-area-inset-left));
   --serif:'Literata',Georgia,serif;
   --sans:'Atkinson Hyperlegible Next','Segoe UI',Arial,sans-serif;
+  --r:16px;
+  --space-xs:8px;--space-sm:12px;--space-md:16px;--space-lg:24px;--space-xl:32px;--space-2xl:48px;--space-3xl:64px;
 }
-html{font-size:19px;-webkit-text-size-adjust:100%}
-body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
-img,video{display:block;max-width:100%;height:auto}
+html{font-size:18px;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video,svg{display:block;max-width:100%}
+img,video{height:auto}
 a{color:var(--brand)}
-:focus-visible{outline:3px solid var(--action);outline-offset:3px;border-radius:4px}
+:focus-visible{outline:3px solid var(--action);outline-offset:3px;border-radius:6px}
+.ico{width:22px;height:22px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* Varianten */
 .only-eltern{display:none}
 .v-eltern .only-eltern{display:block}
 .v-eltern .only-selbst{display:none}
+.only-eltern-i{display:none}
+.v-eltern .only-eltern-i{display:inline}
+/* Preistest: .p-a nur bei 489 €, .p-b nur bei 299 € mit Neukunden-Rabatt (assets/preistest.js) */
+.v-rabatt .p-a{display:none!important}
+html:not(.v-rabatt) .p-b{display:none!important}
+.code-hint{font-size:0.86rem;color:var(--ink-2);margin:-4px 0 14px;line-height:1.4}
+.code-hint b{font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:0.04em;color:var(--ink);background:var(--mint-wash);border:1px dashed oklch(70% 0.08 165);padding:1px 6px;border-radius:6px}
+.night .code-hint{color:var(--on-dark-2)}
+.night .code-hint b{color:var(--brand-night)}
 
-/* Grundraster */
-.wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px}
-.band{padding:clamp(56px,9vw,96px) 0}
-.band-wash{background:var(--brand-wash)}
-h1,h2,h3{font-family:var(--serif);font-optical-sizing:auto;color:var(--brand-deep);text-wrap:balance}
-h1{font-size:clamp(1.9rem,5.4vw,2.7rem);line-height:1.14;font-weight:700;letter-spacing:-0.01em}
-h2{font-size:clamp(1.55rem,4.2vw,2.15rem);line-height:1.2;font-weight:600;margin-bottom:var(--s-lg)}
-h3{font-size:1.2rem;line-height:1.3;font-weight:600}
-p{max-width:66ch}
-p+p{margin-top:var(--s-md)}
-.lead{font-size:1.12rem;color:var(--ink-2)}
-.small{font-size:0.86rem;color:var(--muted)}
+/* Raster und Typografie */
+.wrap{max-width:1140px;margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
+.narrow{max-width:780px}
+.band{padding:clamp(56px,9vw,104px) 0}
+.wash{background:var(--brand-wash)}
+.night{background:var(--brand-night);color:var(--on-dark)}
+h1,h2,h3{font-family:var(--serif);font-optical-sizing:auto;color:var(--brand-deep);text-wrap:balance;line-height:1.16}
+h1{font-size:clamp(1.75rem,4.8vw,2.55rem);font-weight:700;letter-spacing:-0.01em}
+h2{font-size:clamp(1.6rem,4.4vw,2.35rem);font-weight:700;letter-spacing:-0.01em}
+h3{font-size:1.12rem;font-weight:600}
+.night h2,.night h3{color:var(--on-dark)}
+.kicker{font-size:0.8rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--action-deep);margin-bottom:var(--space-sm)}
+.night .kicker{color:var(--mint)}
+.lead{font-size:1.08rem;color:var(--ink-2);max-width:56ch;margin-top:var(--space-sm)}
+.night .lead{color:var(--on-dark-2)}
+.head{margin-bottom:clamp(28px,5vw,44px)}
+.head.center{text-align:center}
+.head.center .lead{margin-left:auto;margin-right:auto}
 
-/* Kopf */
-.risk-bar{background:var(--brand-deep);color:var(--on-dark);font-size:0.86rem;text-align:center;padding:10px 16px;line-height:1.4}
-.risk-bar strong{font-weight:700}
-.top{display:flex;justify-content:center;padding:14px 20px;border-bottom:1px solid var(--line);background:var(--paper)}
-.top img{height:64px;width:auto}
+/* Leiste und Kopf */
+.bar{background:var(--brand-night);color:var(--on-dark);font-size:0.82rem;padding:9px var(--gutter);display:flex;justify-content:center;gap:6px 22px;flex-wrap:wrap}
+.bar span{display:inline-flex;align-items:center;gap:7px}
+.bar .ico{width:17px;height:17px;color:var(--mint)}
+.top{display:flex;justify-content:center;padding:10px var(--gutter);border-bottom:1px solid var(--line);background:var(--paper)}
+.top img{height:54px;width:auto}
 
 /* Buttons */
-.btn{display:flex;align-items:center;justify-content:center;min-height:60px;width:100%;padding:16px 28px;background:var(--action);color:#fff;font-family:var(--sans);font-size:1.05rem;font-weight:700;text-decoration:none;border-radius:10px;border:0;cursor:pointer;text-align:center;line-height:1.3;transition:background .2s ease-out}
+.btn{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:64px;width:100%;padding:12px 24px;background:var(--action);color:var(--white);font-family:var(--sans);font-size:1.14rem;font-weight:700;text-decoration:none;border-radius:14px;text-align:center;line-height:1.25;box-shadow:0 8px 20px oklch(47% 0.1 165 / 0.26);transition:background .2s ease-out,transform .15s ease-out}
+.btn small{font-size:0.8rem;font-weight:600;opacity:.92}
 .btn:hover{background:var(--action-deep)}
-.btn-note{margin-top:var(--s-sm);font-size:0.86rem;color:var(--ink-2);text-align:center}
-.btn-note strong{font-weight:700;color:var(--action-deep)}
+.btn:active{transform:translateY(1px)}
+.btn-inline{display:inline-flex;width:auto;min-width:min(100%,340px)}
+.textlink{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--brand);text-decoration:none;border-bottom:2px solid oklch(38% 0.1 240 / 0.25);padding-bottom:2px}
+.textlink:hover{border-color:var(--brand)}
 
-/* Kopf: Paket */
-.buy{padding:clamp(28px,5vw,56px) 0 clamp(48px,7vw,80px)}
-.buy-grid{display:grid;gap:var(--s-xl);max-width:1120px;margin:0 auto;padding:0 20px;align-items:start}
-.buy-media{background:var(--brand-wash);border-radius:16px;padding:clamp(12px,3vw,28px)}
-.buy-media img{width:100%;max-width:560px;margin:0 auto}
-.buy h1{margin-bottom:var(--s-sm)}
-.buy .lead{margin-bottom:var(--s-md)}
-.rating{display:flex;align-items:center;gap:10px;margin-bottom:var(--s-lg);font-size:0.9rem;color:var(--ink-2)}
-.stars{color:var(--star);letter-spacing:2px;font-size:1.05rem}
-.pack{list-style:none;border-top:1px solid var(--line);margin-bottom:var(--s-md)}
-.pack li{display:flex;justify-content:space-between;gap:var(--s-md);padding:12px 0;border-bottom:1px solid var(--line);color:var(--ink-2);line-height:1.4;font-size:0.95rem}
+/* Produktbereich */
+.pdp{padding:18px 0 44px}
+.pdp-grid{display:grid;gap:18px}
+.gallery{min-width:0}
+.slides{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;border-radius:var(--r);background:var(--white);border:1px solid var(--line)}
+.slides::-webkit-scrollbar{display:none}
+.slides figure{flex:0 0 100%;scroll-snap-align:center;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;background:var(--white);position:relative}
+.slides img{width:100%;height:100%;object-fit:contain}
+.slides img.cover{object-fit:cover}
+.slides figcaption{position:absolute;left:12px;bottom:12px;background:oklch(21% 0.055 245 / 0.72);color:var(--on-dark);font-size:0.78rem;padding:4px 10px;border-radius:999px}
+.thumbs{display:flex;gap:8px;margin-top:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.thumbs::-webkit-scrollbar{display:none}
+.thumbs button{flex:0 0 60px;height:60px;border-radius:10px;border:2px solid var(--line);background:var(--white);padding:0;cursor:pointer;overflow:hidden}
+.thumbs button img{width:100%;height:100%;object-fit:cover}
+.thumbs button[aria-current="true"]{border-color:var(--brand)}
+.info,.pdp-head{min-width:0}
+.pdp-head h1{margin-bottom:8px}
+.pdp-head .lead{margin:0;font-size:1.04rem}
+.rate{display:inline-flex;align-items:center;gap:8px;font-size:0.9rem;color:var(--ink-2);text-decoration:none;margin-bottom:10px}
+.stars{display:inline-flex;gap:1px;color:var(--star)}
+.stars svg{width:17px;height:17px;fill:currentColor}
+.ticks{list-style:none;display:grid;gap:8px;margin:0 0 20px}
+.ticks li{display:flex;gap:10px;align-items:flex-start;color:var(--ink-2);line-height:1.4}
+.ticks .ico{color:var(--action);margin-top:1px}
+.pack{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:16px;background:var(--white)}
+.pack-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 14px;background:var(--brand-wash);font-weight:700;font-size:0.92rem;color:var(--brand-deep)}
+.pack-head span:last-child{font-weight:600;color:var(--muted);font-size:0.8rem}
+.pack ul{list-style:none}
+.pack li{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 14px;border-top:1px solid var(--line);font-size:0.9rem;color:var(--ink-2);line-height:1.35}
 .pack li b{color:var(--ink);font-weight:700}
-.pack .val{flex-shrink:0;text-align:right;white-space:nowrap}
-.pack .val s{color:var(--muted);font-size:0.82rem;display:block}
-.pack .free{color:var(--action-deep);font-weight:700}
-.price{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:var(--s-md) 0 4px}
-.price-now{font-family:var(--serif);font-size:clamp(2.4rem,7vw,3.1rem);font-weight:700;line-height:1;color:var(--brand-deep)}
-.price-was{font-size:0.95rem;color:var(--muted)}
-.price-note{font-size:0.88rem;color:var(--ink-2);margin-bottom:var(--s-md)}
-.assure{list-style:none;display:grid;gap:8px;margin-top:var(--s-md)}
-.assure li{display:grid;grid-template-columns:20px 1fr;gap:10px;font-size:0.92rem;color:var(--ink-2);line-height:1.45}
-.assure svg{margin-top:3px;color:var(--action)}
-.assure b{color:var(--ink)}
+.tag{flex-shrink:0;font-size:0.76rem;font-weight:700;color:var(--action-deep);background:var(--mint-wash);padding:3px 8px;border-radius:999px;white-space:nowrap}
+.tag s{font-weight:500;color:var(--muted);margin-left:4px}
+.tag.plain{background:none;color:var(--ink);font-size:0.88rem;padding:0}
+.pricebox{display:flex;align-items:center;gap:8px 12px;flex-wrap:wrap;margin-bottom:14px}
+.now{font-family:var(--serif);font-size:2.5rem;font-weight:700;line-height:1;color:var(--brand-deep)}
+.was{color:var(--muted);font-size:0.95rem}
+.save{font-size:0.8rem;font-weight:700;color:var(--white);background:var(--deal);padding:4px 10px;border-radius:999px}
+.assure{display:grid;gap:10px;margin-top:14px}
+.seal-row{display:flex;gap:12px;align-items:center;padding:12px 14px;border-radius:var(--r);background:var(--mint-wash);border:1px solid oklch(85% 0.06 165)}
+.seal-row svg.seal{width:58px;height:58px;flex-shrink:0}
+.seal-row p{font-size:0.88rem;color:var(--ink-2);line-height:1.4}
+.seal-row b{color:var(--ink);display:block;font-size:0.96rem}
+.meta{display:flex;gap:10px;align-items:flex-start;font-size:0.86rem;color:var(--ink-2);line-height:1.4}
+.meta .ico{color:var(--brand);width:20px;height:20px}
+.pay{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:0.78rem;color:var(--muted)}
+.pay img{height:24px;width:auto}
 @media(min-width:900px){
-  .buy-grid{grid-template-columns:1.05fr 1fr;gap:var(--s-2xl)}
-  .buy-media{position:sticky;top:20px}
-  .buy .btn{max-width:460px}
+  .pdp{padding:36px 0 64px}
+  .pdp-grid{grid-template-columns:1.08fr 1fr;grid-template-areas:"g h" "g i";grid-template-rows:auto 1fr;gap:20px 52px;align-items:start}
+  .pdp-head{grid-area:h}.info{grid-area:i}
+  .gallery{grid-area:g;position:sticky;top:16px}
+  .thumbs button{flex-basis:74px;height:74px}
 }
 
-/* So funktioniert */
-.how{padding:clamp(48px,7vw,80px) 0;background:var(--brand-wash)}
-.how-media{max-width:960px;margin:0 auto;padding:0 20px}
-.how-frame{position:relative;border-radius:16px;overflow:hidden;background:var(--ink)}
-.how-frame video{width:100%;aspect-ratio:16/9;object-fit:cover}
-.how-tag{position:absolute;right:12px;bottom:12px;background:oklch(24% 0.035 245 / 0.62);color:var(--on-dark);font-size:0.72rem;padding:4px 10px;border-radius:999px}
-.how-text{max-width:620px;margin:var(--s-lg) auto 0;padding:0 20px;text-align:center}
-.how-text h2{margin-bottom:var(--s-sm)}
-.how-text p{margin:0 auto;color:var(--ink-2)}
+/* Nachweise */
+.proof{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--white)}
+.proof ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:16px 20px;padding-top:20px;padding-bottom:20px}
+.proof li{display:flex;gap:10px;align-items:center;font-size:0.84rem;font-weight:600;color:var(--ink-2);line-height:1.3}
+.proof .ico{width:30px;height:30px;color:var(--brand);stroke-width:1.6}
+@media(min-width:900px){.proof ul{grid-template-columns:repeat(4,1fr)}}
 
-.cta-inline{margin-top:var(--s-2xl);max-width:460px}
-.cta-inline .btn-note{text-align:left}
+/* So arbeitet der Gurt */
+.work{display:grid;gap:clamp(28px,5vw,56px);align-items:center}
+.work-media{position:relative;border-radius:var(--r);overflow:hidden;background:var(--ink)}
+.work-media video{width:100%;aspect-ratio:16/10;object-fit:cover}
+.work-tag{position:absolute;right:10px;bottom:10px;background:oklch(21% 0.055 245 / 0.66);color:var(--on-dark);font-size:0.7rem;padding:3px 9px;border-radius:999px}
+.figs{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:var(--space-xl);border-top:1px solid oklch(97% 0.01 240 / 0.16)}
+.figs div{padding:18px 10px 0 0}
+.figs div+div{padding-left:14px;border-left:1px solid oklch(97% 0.01 240 / 0.16)}
+.figs b{display:block;font-family:var(--serif);font-size:clamp(1.7rem,6vw,2.5rem);font-weight:700;line-height:1;color:var(--mint)}
+.figs span{display:block;margin-top:8px;font-size:0.86rem;line-height:1.35;color:var(--on-dark-2)}
+@media(min-width:900px){.work{grid-template-columns:1.15fr 1fr}}
 
-/* Gründer */
-.founder{display:grid;gap:var(--s-xl);align-items:start}
-.founder-photo img{border-radius:14px;width:100%;max-width:300px}
-.facts{list-style:none;margin-top:var(--s-lg);display:grid;gap:10px}
-.facts li{display:grid;grid-template-columns:22px 1fr;gap:10px;color:var(--ink-2)}
-.facts svg{margin-top:5px}
-@media(min-width:760px){.founder{grid-template-columns:240px 1fr}}
-
-/* Wiedererkennen */
-.recog{list-style:none;display:grid;gap:0;margin:var(--s-lg) 0;border-top:1px solid var(--line)}
-.recog li{padding:18px 0;border-bottom:1px solid var(--line);font-size:1.05rem}
-.recog li span{display:block;font-size:0.86rem;color:var(--muted);margin-top:2px}
-
-/* Mechanismus */
-.figure{margin:var(--s-xl) 0 var(--s-md);border-radius:14px;overflow:hidden;background:var(--paper)}
+/* Teufelskreis */
+.cycle{display:grid;gap:clamp(28px,5vw,64px);align-items:center}
+.cycle-img{background:var(--white);border-radius:var(--r);padding:clamp(12px,3vw,28px);border:1px solid var(--line)}
+.cycle-img img{margin:0 auto;width:100%;max-width:520px}
+.steps-text{list-style:none;display:grid;gap:14px;counter-reset:c}
+.steps-text li{display:grid;grid-template-columns:36px 1fr;gap:12px;align-items:start;color:var(--ink-2);line-height:1.45;counter-increment:c}
+.steps-text li::before{content:counter(c);width:36px;height:36px;border-radius:50%;background:var(--brand-deep);color:var(--on-dark);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:0.92rem}
+.steps-text b{color:var(--ink)}
+.here{margin-top:var(--space-xl);display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:center;padding:16px;border-radius:var(--r);background:var(--mint-wash);border:1px solid oklch(85% 0.06 165)}
+.here img{width:96px;height:96px;object-fit:cover;border-radius:12px;background:var(--white)}
+.here p{color:var(--ink-2);line-height:1.45;font-size:0.96rem}
+.here b{display:block;color:var(--ink);font-size:1.02rem;margin-bottom:2px}
+@media(min-width:900px){.cycle{grid-template-columns:1fr 1fr}}
 
 /* Vergleich */
-.compare{display:grid;gap:0;margin-top:var(--s-lg);border-top:1px solid var(--line)}
-.compare-row{display:grid;gap:6px;padding:20px 0;border-bottom:1px solid var(--line)}
-.compare-row dt{font-family:var(--serif);font-weight:600;font-size:1.1rem;color:var(--brand-deep)}
-.compare-row dd{color:var(--ink-2)}
-.compare-row.ours{background:var(--paper);margin:0 -20px;padding:22px 20px;border-radius:12px;border:2px solid var(--brand);border-bottom-width:2px}
-.compare-row.ours dt{color:var(--brand)}
-@media(min-width:760px){.compare-row{grid-template-columns:220px 1fr;gap:var(--s-lg)}}
+.cmp-wrap{position:relative}
+.cmp{width:100%;border-collapse:separate;border-spacing:0;font-size:0.88rem}
+.cmp th,.cmp td{padding:14px 4px;text-align:center;vertical-align:middle;border-bottom:1px solid var(--line)}
+.cmp tbody tr:last-child td{border-bottom:0}
+.cmp thead th{font-size:0.74rem;font-weight:700;color:var(--muted);line-height:1.2;vertical-align:bottom;padding-bottom:12px}
+.cmp td:first-child,.cmp th:first-child{text-align:left;padding-left:2px;color:var(--ink);font-weight:600;line-height:1.3;width:38%}
+.cmp .us{background:var(--brand-deep);color:var(--on-dark);border-bottom-color:oklch(97% 0.01 240 / 0.14)}
+.cmp thead .us{border-radius:14px 14px 0 0;padding-top:10px;color:var(--on-dark);font-size:0.78rem}
+.cmp thead .us img{width:64px;margin:0 auto 6px;border-radius:6px}
+.cmp tbody tr:last-child .us{border-radius:0 0 14px 14px}
+.yes,.no{display:inline-flex;width:26px;height:26px;border-radius:50%;align-items:center;justify-content:center}
+.yes{background:var(--action);color:var(--white)}
+.us .yes{background:var(--mint);color:var(--brand-deep)}
+.no{background:oklch(94% 0.01 240);color:oklch(60% 0.02 240)}
+.yes svg,.no svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.cmp-note{margin-top:var(--space-lg);color:var(--ink-2);font-size:0.94rem;max-width:62ch}
 
-/* Anleitung */
-.howto-video{margin:var(--s-lg) 0 var(--s-xl)}
-.howto-video video{width:100%;border-radius:14px;background:var(--ink)}
-.steps{list-style:none;counter-reset:s;display:grid;gap:var(--s-lg)}
-.steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:var(--s-md);align-items:start}
-.steps li::before{content:counter(s);width:44px;height:44px;border-radius:50%;background:var(--brand);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:1.05rem}
-.steps h3{margin:6px 0 4px}
-.rhythm{margin-top:var(--s-xl);padding:20px 22px;background:var(--brand-wash);border-radius:12px;color:var(--ink-2)}
+/* Anwendung */
+.how{list-style:none;display:grid;gap:18px;counter-reset:s}
+.how li{counter-increment:s;position:relative}
+.how figure{position:relative;border-radius:var(--r);overflow:hidden}
+.how img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.how figure::after{content:counter(s);position:absolute;left:12px;top:12px;width:42px;height:42px;border-radius:50%;background:var(--paper);color:var(--brand-deep);font-family:var(--serif);font-weight:700;font-size:1.2rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px oklch(24% 0.035 245 / 0.18)}
+.how h3{margin-top:14px}
+.how p{color:var(--ink-2);margin-top:4px;line-height:1.45;font-size:0.96rem}
+.howto{margin-top:clamp(32px,5vw,48px);display:grid;gap:16px;align-items:center;padding:clamp(14px,3vw,20px);border-radius:calc(var(--r) + 4px);background:var(--white);border:1px solid var(--line)}
+.howto video{width:100%;border-radius:var(--r);background:var(--ink)}
+.howto p{color:var(--ink-2);margin-top:6px}
+@media(min-width:760px){.how{grid-template-columns:repeat(3,1fr);gap:24px}.howto{grid-template-columns:1.35fr 1fr;gap:32px}}
 
-/* Funktionen */
-.features{margin-top:var(--s-lg);border-top:1px solid var(--line)}
-.feature{display:grid;gap:6px;padding:22px 0;border-bottom:1px solid var(--line)}
-.feature h3{font-size:1.08rem;color:var(--brand-deep)}
-.feature p{color:var(--ink-2)}
-@media(min-width:760px){.feature{grid-template-columns:260px 1fr;gap:var(--s-xl)}}
+/* Im Detail */
+.bento{display:grid;gap:14px}
+.tile{border-radius:var(--r);background:var(--white);border:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column}
+.tile img{width:100%;object-fit:contain;background:var(--white)}
+.tile .txt{padding:16px 18px 18px}
+.tile h3{font-family:var(--sans);font-size:1.02rem;font-weight:700;color:var(--ink)}
+.tile p{color:var(--ink-2);font-size:0.94rem;line-height:1.45;margin-top:4px}
+.tile-big img{aspect-ratio:16/11;padding:clamp(12px,3vw,28px)}
+.tile-sm img{aspect-ratio:16/9;padding:14px}
+.tile-ctrl img{aspect-ratio:16/9;object-fit:cover;padding:0}
+.specs{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:var(--r);background:var(--brand-deep);color:var(--on-dark)}
+.specs li{padding:16px 18px;border-bottom:1px solid oklch(97% 0.01 240 / 0.12);line-height:1.3}
+.specs li:nth-child(odd){border-right:1px solid oklch(97% 0.01 240 / 0.12)}
+.specs li:nth-last-child(-n+2){border-bottom:0}
+.specs b{display:block;font-family:var(--serif);font-size:1.3rem;color:var(--mint)}
+.specs span{font-size:0.86rem;color:var(--on-dark-2)}
+@media(min-width:900px){
+  .bento{grid-template-columns:1.25fr 1fr;grid-template-areas:"big ctrl" "big back" "specs specs"}
+  .tile-big{grid-area:big}.tile-ctrl{grid-area:ctrl}.tile-sm{grid-area:back}.specs{grid-area:specs;grid-template-columns:repeat(4,1fr)}
+  .specs li{border-bottom:0!important;border-right:1px solid oklch(97% 0.01 240 / 0.12)}
+  .specs li:last-child{border-right:0}
+  .tile-big img{aspect-ratio:auto;flex:1}
+}
 
 /* Stimmen */
-.voices{display:grid;gap:var(--s-xl);margin-top:var(--s-lg)}
-.voice blockquote{font-family:var(--serif);font-size:1.12rem;line-height:1.55;color:var(--ink)}
-.voice figcaption{margin-top:10px;font-size:0.9rem;color:var(--muted);font-weight:600}
-@media(min-width:760px){.voices{grid-template-columns:1fr 1fr;column-gap:var(--s-2xl)}}
-.summary-rating{margin-top:var(--s-2xl);display:flex;flex-wrap:wrap;align-items:center;gap:12px;font-size:0.95rem;color:var(--ink-2)}
+.feature-quote{display:grid;gap:18px;align-items:end;margin-bottom:clamp(28px,5vw,44px)}
+.feature-quote blockquote{font-family:var(--serif);font-size:clamp(1.3rem,3.6vw,1.85rem);line-height:1.4;color:var(--brand-deep);font-weight:600;max-width:34ch;text-wrap:pretty}
+.feature-quote blockquote::before{content:'„';display:block;font-size:3.4rem;line-height:.6;color:var(--action);margin-bottom:8px}
+.feature-quote footer{display:flex;align-items:center;gap:12px;color:var(--ink-2);font-size:0.92rem}
+.feature-quote footer b{color:var(--ink);display:block}
+.score{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.score .big{font-family:var(--serif);font-size:2.8rem;font-weight:700;color:var(--brand-deep);line-height:1}
+.score .stars svg{width:22px;height:22px}
+.score p{font-size:0.88rem;color:var(--ink-2);line-height:1.35}
+.reviews{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 0 10px;scrollbar-width:thin}
+.review{flex:0 0 84%;scroll-snap-align:start;background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:10px}
+.review blockquote{font-size:0.98rem;line-height:1.5;color:var(--ink)}
+.review footer{display:flex;align-items:center;gap:10px;margin-top:auto;font-size:0.86rem;color:var(--ink-2)}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--white);border:1px solid var(--line);color:var(--brand-deep);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:0.82rem;flex-shrink:0}
+.review footer b{color:var(--ink);display:block}
+.swipe{font-size:0.8rem;color:var(--muted);margin-top:4px}
+@media(min-width:900px){.feature-quote{grid-template-columns:1fr auto;gap:40px}.reviews{display:grid;grid-template-columns:repeat(6,1fr);overflow:visible}.review{flex:auto;grid-column:span 2}.review:nth-child(-n+2){grid-column:span 3}.swipe{display:none}}
+
+/* Fachpartner */
+.partner{display:grid;gap:20px;align-items:center;padding:clamp(22px,5vw,40px);border-radius:calc(var(--r) + 4px);background:var(--white);border:1px solid var(--line)}
+.partner-who{display:flex;align-items:center;gap:16px}
+.partner-pic{width:88px;height:88px;border-radius:50%;object-fit:cover;object-position:50% 18%;flex-shrink:0}
+.partner-logo{height:34px;width:auto}
+.partner blockquote{font-family:var(--serif);font-size:clamp(1.05rem,2.6vw,1.28rem);line-height:1.5;color:var(--ink)}
+.partner figcaption{font-size:0.86rem;color:var(--ink-2);line-height:1.45}
+.partner figcaption b{display:block;color:var(--ink);margin-bottom:2px}
+@media(min-width:900px){
+  .partner{grid-template-columns:220px 1fr;gap:40px}
+  .partner-who{flex-direction:column;align-items:flex-start;gap:18px}
+  .partner-pic{width:220px;height:275px;border-radius:var(--r)}
+}
+
+/* Gründer */
+.founder{display:grid;gap:clamp(24px,5vw,56px);align-items:start}
+.founder-pics{display:grid;grid-template-columns:1.1fr 1fr;gap:12px;align-items:end}
+.founder-pics figure{position:relative}
+.founder-pics img{border-radius:var(--r);width:100%;object-fit:cover}
+.founder-pics .p1 img{aspect-ratio:4/5}
+.founder-pics .p2 img{aspect-ratio:3/4;object-position:62% 50%}
+.founder-pics figcaption{font-size:0.78rem;color:var(--muted);line-height:1.35;margin-top:8px}
+.founder p{color:var(--ink-2)}
+.founder p+p{margin-top:12px}
+.facts{list-style:none;display:grid;gap:10px;margin-top:20px}
+.facts li{display:flex;gap:10px;align-items:flex-start;color:var(--ink-2);line-height:1.4;font-size:0.95rem}
+.facts .ico{color:var(--action)}
+@media(min-width:900px){.founder{grid-template-columns:1fr 1.05fr}}
 
 /* Eltern */
-.qa{display:grid;gap:var(--s-lg);margin-top:var(--s-lg)}
-.qa h3{margin-bottom:6px}
-.qa p{color:var(--ink-2)}
+.parents-grid{display:grid;gap:clamp(24px,5vw,56px);align-items:center}
+.parents-grid img{border-radius:var(--r);width:100%;aspect-ratio:16/10;object-fit:cover}
+.parents{list-style:none;display:grid;gap:16px;margin-top:var(--space-lg)}
+.parents li{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;line-height:1.4}
+.parents .ico{width:44px;height:44px;padding:10px;border-radius:12px;background:var(--white);color:var(--brand);border:1px solid var(--line)}
+.parents b{display:block;color:var(--ink);margin-bottom:2px}
+.parents span{color:var(--ink-2);font-size:0.94rem}
+@media(min-width:900px){.parents-grid{grid-template-columns:1fr 1fr}}
 
 /* Angebot */
-.offer{background:var(--brand-deep);color:var(--on-dark)}
-.offer h2{color:var(--on-dark)}
-.offer-grid{display:grid;gap:var(--s-2xl)}
-.offer .price-now{color:var(--on-dark)}
-.offer .price-was{color:var(--on-dark-2)}
-.offer .price-note{color:var(--on-dark-2)}
-.offer .btn{background:oklch(80% 0.12 165);color:var(--brand-deep)}
-.offer .btn:hover{background:oklch(86% 0.1 165)}
-.offer .btn-note{color:var(--on-dark-2)}
-.offer .btn-note strong{color:var(--on-dark)}
-.guarantee{background:oklch(100% 0 0 / 0.07);border-radius:14px;padding:clamp(22px,4vw,32px)}
-.guarantee h3{color:var(--on-dark);font-size:1.4rem;margin-bottom:var(--s-md)}
-.g-steps{list-style:none;counter-reset:g;display:grid;gap:var(--s-md);margin-top:var(--s-md)}
-.g-steps li{counter-increment:g;display:grid;grid-template-columns:34px 1fr;gap:12px;color:var(--on-dark-2)}
-.g-steps li::before{content:counter(g);width:34px;height:34px;border-radius:50%;border:2px solid oklch(80% 0.12 165);color:var(--on-dark);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:0.95rem}
-.g-steps b{color:var(--on-dark);font-weight:700}
-@media(min-width:900px){.offer .wrap{max-width:1080px}.offer-grid{grid-template-columns:1.1fr 1fr;align-items:start}}
+.offer-grid{display:grid;gap:clamp(28px,5vw,56px);align-items:center}
+.offer-media{position:relative;background:var(--white);border-radius:calc(var(--r) + 4px);padding:clamp(14px,3vw,28px)}
+.offer-media img{width:100%}
+.offer-media .big-seal{position:absolute;right:-10px;bottom:-18px;width:min(124px,30vw);filter:drop-shadow(0 8px 18px oklch(21% 0.055 245 / 0.35))}
+.g-steps{list-style:none;display:grid;gap:14px;margin:18px 0 26px}
+.g-steps li{display:flex;gap:12px;align-items:flex-start;color:var(--on-dark-2);line-height:1.45}
+.g-steps .ico{color:var(--mint);width:26px;height:26px}
+.g-steps b{color:var(--on-dark)}
+.night .now{color:var(--on-dark)}
+.night .was{color:var(--on-dark-2)}
+.night .btn{background:var(--mint);color:var(--brand-night);box-shadow:none}
+.night .btn:hover{background:oklch(90% 0.08 165)}
+.fine{font-size:0.82rem;color:var(--on-dark-2);margin-top:10px;text-align:center}
+@media(min-width:900px){.offer-grid{grid-template-columns:1fr 1fr}}
+
+/* Zwischen-CTA */
+.mid-cta{margin-top:clamp(32px,5vw,48px);display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center}
+.mid-cta p{font-size:0.88rem;color:var(--muted);display:flex;align-items:center;gap:8px}
+.mid-cta .ico{width:18px;height:18px;color:var(--action)}
+.center .mid-cta{justify-content:center}
 
 /* FAQ */
-.faq{margin-top:var(--s-lg);border-top:1px solid var(--line)}
+.faq{border-top:1px solid var(--line);margin-top:20px}
 .faq details{border-bottom:1px solid var(--line)}
-.faq summary{list-style:none;cursor:pointer;padding:20px 40px 20px 0;font-weight:700;font-size:1.05rem;position:relative;line-height:1.4}
+.faq summary{list-style:none;cursor:pointer;padding:20px 40px 20px 0;font-weight:700;position:relative;line-height:1.4}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:'';position:absolute;right:6px;top:50%;width:12px;height:12px;border-right:2.5px solid var(--brand);border-bottom:2.5px solid var(--brand);transform:translateY(-70%) rotate(45deg);transition:transform .2s ease-out}
+.faq summary::after{content:'';position:absolute;right:8px;top:50%;width:11px;height:11px;border-right:2.5px solid var(--brand);border-bottom:2.5px solid var(--brand);transform:translateY(-70%) rotate(45deg);transition:transform .2s ease-out}
 .faq details[open] summary::after{transform:translateY(-30%) rotate(225deg)}
-.faq details>div{padding:0 0 22px;color:var(--ink-2)}
+.faq details>div{padding:0 0 20px;color:var(--ink-2)}
+.contact{margin-top:var(--space-xl);display:flex;gap:14px;align-items:center;padding:16px 18px;border-radius:var(--r);background:var(--brand-wash)}
+.contact img{width:56px;height:56px;border-radius:50%;object-fit:cover;object-position:50% 20%}
+.contact p{font-size:0.94rem;color:var(--ink-2);line-height:1.4}
+.contact b{color:var(--ink)}
 
-/* Schluss */
-.closing h2{margin-bottom:var(--s-md)}
-.closing .btn{max-width:480px;margin-top:var(--s-xl)}
-.closing .btn-note{text-align:left;max-width:480px}
-
-/* Fuß */
-.foot{background:var(--ink);color:oklch(78% 0.015 245);padding:var(--s-2xl) 20px calc(var(--s-2xl) + 80px);text-align:center;font-size:0.86rem;line-height:1.7}
-.foot img{height:44px;width:auto;margin:0 auto var(--s-md);opacity:.8}
-.foot a{color:oklch(84% 0.015 245)}
-.foot p{margin:0 auto}
-.foot .disc{margin-top:var(--s-md);max-width:60ch;opacity:.75}
-
-/* Sticky */
-.sticky{position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--paper);border-top:1px solid var(--line);box-shadow:0 -6px 24px oklch(24% 0.035 245 / 0.12);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:14px;justify-content:center;transform:translateY(110%);transition:transform .3s cubic-bezier(.22,1,.36,1)}
+/* Fuß und Kaufleiste */
+.foot{background:var(--ink);color:oklch(78% 0.015 245);padding:40px var(--gutter) 120px;text-align:center;font-size:0.84rem;line-height:1.7}
+.foot img{height:42px;width:auto;margin:0 auto 14px;opacity:.85}
+.foot a{color:oklch(86% 0.015 245)}
+.foot .disc{margin:14px auto 0;max-width:60ch;opacity:.75}
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--paper);border-top:1px solid var(--line);box-shadow:0 -6px 24px oklch(24% 0.035 245 / 0.12);padding:10px var(--gutter) calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:12px;justify-content:center;transform:translateY(110%);transition:transform .3s cubic-bezier(.22,1,.36,1)}
 .sticky.show{transform:none}
-.sticky-text{font-size:0.82rem;color:var(--ink-2);line-height:1.3}
-.sticky-text b{display:block;font-size:1.05rem;color:var(--ink)}
-.sticky .btn{width:auto;min-height:52px;padding:12px 22px;font-size:0.98rem}
-
-@media (prefers-reduced-motion: reduce){
-  *{transition:none!important}
-}
+.sticky-text{font-size:0.78rem;color:var(--ink-2);line-height:1.25}
+.sticky-text b{display:block;font-size:1.1rem;color:var(--ink)}
+.sticky .btn{width:auto;min-height:52px;padding:10px 22px;font-size:1rem;box-shadow:none}
 </style>
 </head>
 <body>
 
-<div class="risk-bar"><strong>30 Tage zu Hause testen.</strong> Hilft er nicht, bekommen Sie Ihr Geld zurück. Kostenloser Versand.</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M2 6h11v10H2zM13 9h5l3 3.5V16h-8"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></symbol>
+    <symbol id="i-cap" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/><path d="M22 9v6"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol>
+    <symbol id="i-eu" viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="1"/><circle cx="12" cy="19.5" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="19.5" cy="12" r="1"/><circle cx="6.7" cy="6.7" r="1"/><circle cx="17.3" cy="17.3" r="1"/><circle cx="17.3" cy="6.7" r="1"/><circle cx="6.7" cy="17.3" r="1"/></symbol>
+    <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-keys" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="6"/><path d="M12 9v1.5M12 13.5V15M8 12h1.5M14.5 12H16"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7v9H3z"/><path d="M9 20v-6h6v6"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M3 7l9 4 9-4M12 11v10"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></symbol>
+    <symbol id="i-seal" viewBox="0 0 120 120">
+      <path id="sealpath" d="M60 60 m-44 0 a44 44 0 1 1 88 0 a44 44 0 1 1 -88 0" fill="none"/>
+      <circle cx="60" cy="60" r="58" fill="oklch(27% 0.075 243)"/>
+      <circle cx="60" cy="60" r="52" fill="none" stroke="oklch(84% 0.1 165)" stroke-width="1.5"/>
+      <circle cx="60" cy="60" r="33" fill="oklch(84% 0.1 165)"/>
+      <text font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="10" font-weight="700" fill="oklch(97% 0.01 240)"><textPath href="#sealpath" textLength="272" lengthAdjust="spacing">GELD-ZURÜCK-GARANTIE · 30 TAGE TESTEN ·</textPath></text>
+      <text x="60" y="64" text-anchor="middle" font-family="Literata, Georgia, serif" font-size="27" font-weight="700" fill="oklch(27% 0.075 243)">30</text>
+      <text x="60" y="78" text-anchor="middle" font-family="Atkinson Hyperlegible Next, Arial, sans-serif" font-size="9" font-weight="700" letter-spacing="1" fill="oklch(27% 0.075 243)">TAGE</text>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="bar">
+  <span><svg class="ico"><use href="#i-shield"/></svg>30 Tage testen, Geld zurück</span>
+  <span><svg class="ico"><use href="#i-truck"/></svg>Kostenloser Versand in 2 Werktagen</span>
+  <span class="p-b"><svg class="ico"><use href="#i-check"/></svg>38 % Neukunden-Rabatt mit Code NEUKUNDE</span>
+</div>
 
 <header class="top">
-  <a href="/"><img src="../../assets/logo_transparent.png" alt="Stabil im Alltag" width="160" height="64"></a>
+  <a href="/"><img src="../../assets/logo_transparent.png" alt="Stabil im Alltag" width="135" height="54"></a>
 </header>
 
 <main>
 
-<!-- PAKET -->
-<section class="buy" id="paket">
-  <div class="buy-grid">
-    <div class="buy-media">
-      <img src="../../assets/product-image-1.png" alt="Wellenpuls LWS mit Beratung, Videokurs und E-Book" width="577" height="433">
+<!-- PRODUKT -->
+<section class="pdp" id="paket">
+  <div class="wrap pdp-grid">
+    <div class="pdp-head">
+      <a class="rate" href="#stimmen"><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span>4,9 von 5 aus 29 Bewertungen</a>
+      <h1 class="only-selbst">Rückentraining im Sitzen für den unteren Rücken</h1>
+      <h1 class="only-eltern">Rückentraining für Ihre Eltern, ganz ohne Rückenübungen</h1>
+      <p class="lead only-selbst">Der Gurt trainiert die tiefe Rückenmuskulatur, während Sie auf dem Sofa sitzen.</p>
+      <p class="lead only-eltern">Der Gurt trainiert die tiefe Rückenmuskulatur, während Ihre Mutter oder Ihr Vater im Sessel sitzt.</p>
     </div>
-    <div class="buy-info">
-      <h1 class="only-selbst">Training für den unteren Rücken, während Sie auf dem Sofa sitzen</h1>
-      <h1 class="only-eltern">Rückentraining für Ihre Mutter oder Ihren Vater, ganz ohne Übungen</h1>
-      <p class="lead only-selbst">Der Wellenpuls LWS trainiert die tiefe Rückenmuskulatur. Zweimal pro Woche 20 Minuten, mit Wärme, ohne Übungsprogramm.</p>
-      <p class="lead only-eltern">Er trainiert die tiefe Rückenmuskulatur, während Ihre Eltern fernsehen oder lesen. Vier Tasten, kein Handy, keine App.</p>
-      <div class="rating"><span class="stars" aria-hidden="true">★★★★★</span><span>4,9 von 5 Sternen aus 29 Bewertungen</span></div>
-      <ul class="pack">
-        <li><span><b>Wellenpuls LWS</b> mit Reiseetui, Sprühflasche, Ladekabel und Verlängerungsteil</span><span class="val">489,00 €</span></li>
-        <li><span><b>Persönliches Gespräch mit Christian</b>, dem Gründer</span><span class="val"><span class="free">gratis</span><s>120,00 €</s></span></li>
-        <li><span><b>Videokurs:</b> Die 3 häufigsten Fehler bei Rückenschmerzen</span><span class="val"><span class="free">gratis</span><s>79,00 €</s></span></li>
-        <li><span><b>E-Book und Checkliste:</b> Ihr Startplan für den Rücken</span><span class="val"><span class="free">gratis</span><s>34,90 €</s></span></li>
-        <li><span><b>Versand</b>, Lieferung in 2 Werktagen</span><span class="val"><span class="free">gratis</span><s>9,90 €</s></span></li>
-      </ul>
-      <div class="price"><span class="price-now">489 €</span><span class="price-was">Gesamtwert <s>732,80 €</s></span></div>
-      <p class="price-note">Einmalige Zahlung, kein Abo. Bezahlen per PayPal oder Karte.</p>
-      <a href="../checkout/" class="btn track-atc">Jetzt bestellen und 30 Tage testen</a>
-      <ul class="assure">
-        <li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>30 Tage Geld-zurück-Garantie.</b> Hilft er Ihnen nicht, bekommen Sie den vollen Kaufpreis zurück.</span></li>
-        <li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Kostenloser Versand, Lieferung in 2 Werktagen.</span></li>
-        <li class="only-eltern"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Auf Wunsch direkt an die Adresse Ihrer Eltern.</span></li>
-      </ul>
-    </div>
-  </div>
-</section>
 
-<!-- SO FUNKTIONIERT ES -->
-<section class="how" id="so-funktionierts">
-  <div class="how-media">
-    <div class="how-frame">
-      <video id="how-video" src="../../assets/video/wellenpuls-kontraktion-ruecken.mp4" poster="../../assets/video/wellenpuls-kontraktion-ruecken-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Animierte Darstellung: Die Rückenmuskulatur über dem Gurt spannt sich im Takt der Impulse an und entspannt wieder"></video>
-      <span class="how-tag">Animierte Darstellung</span>
+    <div class="gallery">
+      <div class="slides" id="slides" tabindex="0" aria-label="Produktbilder">
+        <figure><img src="../../assets/product-image-1.png" alt="Wellenpuls LWS mit Beratung, Videokurs und E-Book" width="577" height="433"></figure>
+        <figure><img class="cover" src="../../assets/lp3/lifestyle-ruecken.jpg" alt="Frau trägt den Wellenpuls LWS unter der Bluse am unteren Rücken" width="960" height="960" loading="lazy"><figcaption>Unter der Kleidung getragen</figcaption></figure>
+        <figure><img src="../../assets/lp3/g-details.jpg" alt="Details: Elektroden, Bedienteil, Material, verstellbarer Gurt" width="1200" height="1200" loading="lazy"></figure>
+        <figure><img src="../../assets/lp3/g-innen.jpg" alt="Innenseite des Gurts mit eingearbeiteten Graphit-Elektroden" width="1200" height="1200" loading="lazy"><figcaption>Elektroden im Gurt, nur Wasser nötig</figcaption></figure>
+        <figure><img src="../../assets/lp3/g-sofa.jpg" alt="Frau trägt den Wellenpuls LWS auf dem Sofa" width="1200" height="1200" loading="lazy"></figure>
+        <figure><img src="../../assets/lp3/g-so-gehts.jpg" alt="So funktioniert es in drei Schritten" width="1200" height="1200" loading="lazy"></figure>
+        <figure><img src="../../assets/lp3/g-vergleich.jpg" alt="Wellenpuls im Vergleich zu anderen EMS- und TENS-Geräten" width="1200" height="1200" loading="lazy"></figure>
+        <figure><img src="../../assets/lp3/g-startup.jpg" alt="Deutsches Startup, forschungsbasiert, Patent angemeldet" width="1200" height="1200" loading="lazy"></figure>
+      </div>
+      <div class="thumbs" id="thumbs">
+        <button type="button" aria-label="Bild 1: Paket" aria-current="true"><img src="../../assets/product-image-1.png" alt=""></button>
+        <button type="button" aria-label="Bild 2: Getragen"><img src="../../assets/lp3/lifestyle-ruecken.jpg" alt=""></button>
+        <button type="button" aria-label="Bild 3: Details"><img src="../../assets/lp3/g-details.jpg" alt=""></button>
+        <button type="button" aria-label="Bild 4: Elektroden"><img src="../../assets/lp3/g-innen.jpg" alt=""></button>
+        <button type="button" aria-label="Bild 5: Sofa"><img src="../../assets/lp3/g-sofa.jpg" alt=""></button>
+        <button type="button" aria-label="Bild 6: Drei Schritte"><img src="../../assets/lp3/g-so-gehts.jpg" alt=""></button>
+        <button type="button" aria-label="Bild 7: Vergleich"><img src="../../assets/lp3/g-vergleich.jpg" alt=""></button>
+        <button type="button" aria-label="Bild 8: Startup"><img src="../../assets/lp3/g-startup.jpg" alt=""></button>
+      </div>
     </div>
-  </div>
-  <div class="how-text">
-    <h2>So funktioniert der Wellenpuls</h2>
-    <p>Ein sanfter Impuls spannt die tiefe Rückenmuskulatur an und lässt sie wieder los, 20 Minuten lang, während Sie sitzen.</p>
-  </div>
-</section>
 
-<!-- WER DAHINTER STEHT -->
-<section class="band band-wash" id="gruender">
-  <div class="wrap">
-    <h2>Entwickelt von einem Sportwissenschaftler, der selbst jahrelang Rückenschmerzen hatte</h2>
-    <div class="founder">
-      <div class="founder-photo"><img src="../../assets/Portrait_Gruender_Christian_Senfleben.jpg" alt="Christian Senfleben, Gründer von Wellenpuls" loading="lazy" width="300" height="375"></div>
-      <div>
-        <p>Christian Senfleben hat an der Deutschen Sporthochschule Köln seinen Master in Human Technology in Sports and Medicine gemacht. In seiner Abschlussarbeit ging es um die tiefe Rumpfmuskulatur, die bei Menschen mit Rückenschmerzen oft geschwächt ist.</p>
-        <p>Für seine Studie brauchte er ein Gerät, das genau diese Muskeln erreicht. Es gab keins, also hat er es gebaut und mit 60 Teilnehmenden über acht Wochen getestet. Danach wollten Teilnehmende die Prototypen kaufen. So ist Wellenpuls entstanden.</p>
-        <ul class="facts">
-          <li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--action)"/></svg><span>Patent angemeldet im Juni 2024</span></li>
-          <li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--action)"/></svg><span>Gefördert vom Land NRW, vom Bund und von der EU, ausgezeichnet mit Forschungs- und Innovationspreisen</span></li>
-          <li><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--action)"/></svg><span>Ein deutsches Unternehmen. Bei Fragen erreichen Sie Christian persönlich per E-Mail.</span></li>
+    <div class="info">
+      <ul class="ticks">
+        <li><svg class="ico"><use href="#i-check"/></svg>20 Minuten, zweimal pro Woche, mit Wärme</li>
+        <li><svg class="ico"><use href="#i-check"/></svg>Vier Tasten, kein Handy, keine App</li>
+        <li><svg class="ico"><use href="#i-check"/></svg>Entwickelt an der Deutschen Sporthochschule Köln</li>
+      </ul>
+
+      <div class="pack">
+        <div class="pack-head"><span>Ihr Paket</span><span>Gesamtwert 732,80 €</span></div>
+        <ul>
+          <li><span><b>Wellenpuls LWS</b> mit Reiseetui und Zubehör</span><span class="tag plain">489,00 €</span></li>
+          <li><span><b>1:1-Gespräch</b> mit Gründer Christian</span><span class="tag">gratis<s>120 €</s></span></li>
+          <li><span><b>Videokurs</b> in 3 Videos</span><span class="tag">gratis<s>79 €</s></span></li>
+          <li><span><b>E-Book</b> mit Startplan</span><span class="tag">gratis<s>34,90 €</s></span></li>
+          <li><span><b>Versand</b> in 2 Werktagen</span><span class="tag">gratis<s>9,90 €</s></span></li>
+          <li class="p-b"><span><b>Neukunden-Rabatt</b> mit Code NEUKUNDE</span><span class="tag plain">−190,00 €</span></li>
         </ul>
       </div>
+
+      <div class="pricebox p-a"><span class="now">489 €</span><span class="was">statt <s>732,80 €</s></span><span class="save">Sie sparen 243,80 €</span></div>
+      <div class="pricebox p-b"><span class="now">299 €</span><span class="was">statt <s>489 €</s></span><span class="save">38 % Neukunden-Rabatt</span></div>
+      <p class="code-hint p-b">Ihr Code <b>NEUKUNDE</b> ist im Bestellformular schon eingetragen.</p>
+      <a href="../checkout/" class="btn track-atc">Jetzt bestellen<small>und 30 Tage zu Hause testen</small></a>
+
+      <div class="assure">
+        <div class="seal-row"><svg class="seal" viewBox="0 0 120 120" aria-hidden="true"><use href="#i-seal"/></svg><p><b>30 Tage Geld-zurück-Garantie</b>Hilft er Ihnen nicht, bekommen Sie den vollen Kaufpreis zurück. Eine E-Mail genügt.</p></div>
+        <div class="meta"><svg class="ico"><use href="#i-truck"/></svg><span>Kostenloser Versand, Lieferung in 2 Werktagen<span class="only-eltern">Auf Wunsch direkt an die Adresse Ihrer Eltern</span></span></div>
+        <div class="pay"><img src="../../assets/lp3/zahlung.png" alt="PayPal, Mastercard, Visa" width="470" height="121"><span>Einmalige Zahlung, kein Abo</span></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- WIEDERERKENNEN -->
-<section class="band">
-  <div class="wrap">
-    <h2 class="only-selbst">So beschreiben es viele, die unseren Rücken-Check gemacht haben</h2>
-    <h2 class="only-eltern">So beschreiben Betroffene ihre Beschwerden. Vielleicht erkennen Sie Ihre Eltern wieder.</h2>
-    <ul class="recog">
-      <li>Der Schmerz sitzt mittig im unteren Rücken und zieht sich breit wie ein Gürtel.<span>Manchmal zieht er bis ins Bein.</span></li>
-      <li>Er kommt nach langem Stehen, nach einem längeren Spaziergang oder nach einer Stunde im Sitzen.<span>Im Auto, am Schreibtisch, im Wartezimmer.</span></li>
-      <li>Nachts ist es schwer, eine gute Lage zu finden. Morgens ist man nicht richtig ausgeruht.</li>
-      <li>Das geht schon Monate so, bei vielen seit Jahren.</li>
-    </ul>
-    <p class="only-selbst">Irgendwann kommt zum Schmerz der Ärger über die Zeit, die er gekostet hat. Die Wanderung, die Sie abgesagt haben. Die Gartenarbeit, die jetzt jemand anderes macht. Die Jahre, in denen Sie immer vorsichtiger geworden sind.</p>
-    <p class="only-eltern">Als Sohn oder Tochter ist das schwer mit anzusehen. Die Eltern werden vorsichtiger, gehen weniger raus, und die Übungen vom Physiotherapeuten liegen in der Schublade. Man sagt es ihnen, und es ändert sich nichts. Und im Hinterkopf steht die Frage, wie lange sie noch allein zurechtkommen.</p>
-  </div>
+<!-- NACHWEISE -->
+<section class="proof" aria-label="Warum Sie uns vertrauen können">
+  <ul class="wrap">
+    <li><svg class="ico"><use href="#i-cap"/></svg>Entwickelt an der Sporthochschule Köln</li>
+    <li><svg class="ico"><use href="#i-doc"/></svg>Patent angemeldet 2024</li>
+    <li><svg class="ico"><use href="#i-eu"/></svg>Gefördert von NRW, Bund und EU</li>
+    <li><svg class="ico"><use href="#i-person"/></svg>Persönlicher Support vom Gründer</li>
+  </ul>
 </section>
 
-<!-- MECHANISMUS -->
-<section class="band band-wash">
-  <div class="wrap">
-    <h2>Warum Übungen allein oft nicht reichen</h2>
-    <p>Ihre Wirbelsäule wird von einer tiefen Muskelschicht gehalten, die direkt an den Wirbeln ansetzt. Wenn der Rücken lange schmerzt, schont der Körper diese Muskeln. Sie werden schwächer, die oberflächlichen Muskeln übernehmen ihre Arbeit und verkrampfen. Dann tut der Rücken beim Stehen, Gehen und Sitzen noch schneller weh.</p>
-    <p>Rückenübungen können diese Muskeln wieder stärken. Dafür müssen sie über Wochen regelmäßig und sauber gemacht werden. Daran scheitern die meisten, und das liegt selten an fehlendem Willen. Ein voller Alltag, ein schlechter Tag, und das Programm bleibt liegen.</p>
-    <div class="figure"><img src="../../assets/teufelskreislauf_clean_bg_mob.png" alt="Der Kreislauf aus Schmerz, Schonung und schwächer werdender Muskulatur" loading="lazy"></div>
-    <p>Der Wellenpuls setzt an dieser Stelle an. Der Gurt bringt die tiefe Rückenmuskulatur dazu, sich anzuspannen, während Sie sitzen. Sie müssen keine Übung richtig ausführen und keinen Termin einhalten.</p>
-  </div>
-</section>
-
-<!-- TENS, EMS, NMES -->
-<section class="band">
-  <div class="wrap">
-    <h2>TENS, EMS, NMES: Wo ist der Unterschied?</h2>
-    <p>Bei Strom am Rücken denken viele an das Kribbelgerät vom Orthopäden oder an Bauchgürtel aus der Werbung. Technisch arbeiten viele dieser Geräte ähnlich. Der Unterschied liegt darin, wofür sie gebaut sind.</p>
-    <dl class="compare">
-      <div class="compare-row">
-        <dt>TENS-Gerät</dt>
-        <dd>Ein schwacher Strom überlagert die Schmerzsignale. Das kann für ein paar Stunden lindern. Die Muskulatur trainiert TENS nicht.</dd>
-      </div>
-      <div class="compare-row">
-        <dt>EMS-Gürtel für Bauch, Po oder Beine</dt>
-        <dd>Sie lassen die oberflächlichen Muskeln kräftig zucken. Gedacht sind sie für Fitness und Figur.</dd>
-      </div>
-      <div class="compare-row">
-        <dt>EMS im Studio</dt>
-        <dd>Ganzkörperanzug, fester Termin, Trainer vor Ort, meist mit Abo.</dd>
-      </div>
-      <div class="compare-row ours">
-        <dt>NMES im Wellenpuls LWS</dt>
-        <dd>Neuromuskuläre Elektrostimulation, wie sie Kliniken und Rehazentren seit Jahrzehnten einsetzen, etwa nach Operationen. Der Wellenpuls richtet sie gezielt auf die tiefe Muskulatur im unteren Rücken. Lage der Elektroden, Intensität und Anwendungsprotokoll stammen aus Christians Studie. Dazu kommt Wärme.</dd>
-      </div>
-    </dl>
-  </div>
-</section>
-
-<!-- ANLEITUNG -->
-<section class="band band-wash" id="anleitung">
-  <div class="wrap">
-    <h2>So einfach ist die Anwendung</h2>
-    <p>Christian zeigt Ihnen in einer Minute, wie Sie den Gurt anlegen und einschalten.</p>
-    <div class="howto-video">
-      <video src="../../assets/video/wellenpuls-anlegen.mp4" poster="../../assets/video/wellenpuls-anlegen-poster.jpg" controls playsinline preload="none" aria-label="Christian Senfleben zeigt, wie man den Wellenpuls LWS anlegt und einschaltet"></video>
+<!-- SO ARBEITET DER GURT -->
+<section class="band night" id="so-funktionierts">
+  <div class="wrap work">
+    <div class="work-media">
+      <video id="how-video" src="../../assets/video/wellenpuls-kontraktion-aelter.mp4" poster="../../assets/video/wellenpuls-kontraktion-aelter-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Animierte Darstellung: Der Gurt arbeitet, die Muskulatur spannt sich im Takt der Impulse sanft an"></video>
+      <span class="work-tag">Animierte Darstellung</span>
     </div>
-    <ol class="steps">
-      <li><div><h3>Befeuchten</h3><p>Die Elektroden innen im Gurt mit etwas Wasser besprühen. Die Sprühflasche liegt bei.</p></div></li>
-      <li><div><h3>Anlegen</h3><p>Den Gurt um den unteren Rücken legen, leicht oberhalb der Hüfte, und mit dem Klettverschluss festziehen.</p></div></li>
-      <li><div><h3>Einschalten</h3><p>Das Gerät startet auf Stufe 1. Mit Plus erhöhen Sie, bis Sie spüren, wie sich der Rumpf zusammenzieht. Nach 20 Minuten schaltet es sich selbst ab.</p></div></li>
+    <div>
+      <p class="kicker">So arbeitet der Gurt</p>
+      <h2>Sie sitzen. Die tiefe Muskulatur arbeitet.</h2>
+      <p class="lead">Sanfte Impulse spannen die Muskeln direkt an der Wirbelsäule an und lassen sie wieder los. Dazu wärmt der Gurt.</p>
+      <div class="figs">
+        <div><b>20</b><span>Minuten pro Einheit, dann schaltet er ab</span></div>
+        <div><b>2×</b><span>pro Woche, mit einem Tag Pause</span></div>
+        <div><b>4</b><span>Tasten, kein Handy, keine App</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEUFELSKREIS -->
+<section class="band wash" id="warum">
+  <div class="wrap cycle">
+    <div class="cycle-img"><img src="../../assets/lp3/teufelskreis.png" alt="Kreislauf in fünf Schritten: Schmerz, Schonhaltung, Abbau der tiefen Rumpfmuskulatur, mehr Instabilität, mehr Schmerz" width="535" height="467" loading="lazy"></div>
+    <div>
+      <p class="kicker">Warum der Schmerz wiederkommt</p>
+      <h2>Ein Kreislauf, den Rückenübungen allein selten durchbrechen</h2>
+      <ol class="steps-text" style="margin-top:22px">
+        <li><span><b>Der Rücken tut weh,</b> also schonen Sie sich.</span></li>
+        <li><span><b>Die tiefe Muskulatur an der Wirbelsäule baut ab.</b> Sie hält weniger.</span></li>
+        <li><span><b>Der Rücken wird instabiler,</b> der Schmerz kommt schneller.</span></li>
+      </ol>
+      <div class="here">
+        <img src="../../assets/lp3/tiefenmuskulatur.jpg" alt="Illustration: tiefe Rückenmuskulatur an der Wirbelsäule" width="1200" height="896" loading="lazy">
+        <p><b>Hier setzt der Wellenpuls an.</b>Er trainiert genau diese Muskeln. Ohne Übung, die Sie richtig machen müssen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VERGLEICH -->
+<section class="band">
+  <div class="wrap narrow">
+    <div class="head">
+      <p class="kicker">Strom ist nicht gleich Strom</p>
+      <h2>Was den Wellenpuls von TENS und EMS unterscheidet</h2>
+    </div>
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead><tr><th><span class="vh">Eigenschaft</span></th><th class="us"><img src="../../assets/lp3/packshot-vorn.jpg" alt="" width="1200" height="935" loading="lazy">Wellen&shy;puls</th><th>TENS</th><th>EMS-Gürtel</th><th>Rücken&shy;übungen</th></tr></thead>
+        <tbody>
+          <tr><td>Trainiert die tiefe Rückenmuskulatur</td><td class="us"><span class="yes" aria-label="ja"><svg><use href="#i-check"/></svg></span></td><td><span class="no" aria-label="nein"><svg><use href="#i-x"/></svg></span></td><td><span class="no" aria-label="nein"><svg><use href="#i-x"/></svg></span></td><td><span class="yes" aria-label="ja"><svg><use href="#i-check"/></svg></span></td></tr>
+          <tr><td>Im Sitzen nutzbar</td><td class="us"><span class="yes" aria-label="ja"><svg><use href="#i-check"/></svg></span></td><td><span class="yes" aria-label="ja"><svg><use href="#i-check"/></svg></span></td><td><span class="yes" aria-label="ja"><svg><use href="#i-check"/></svg></span></td><td><span class="no" aria-label="nein"><svg><use href="#i-x"/></svg></span></td></tr>
+          <tr><td>Man kann nichts falsch machen</td><td class="us"><span class="yes" aria-label="ja"><svg><use href="#i-check"/></svg></span></td><td><span class="yes" aria-label="ja"><svg><use href="#i-check"/></svg></span></td><td><span class="yes" aria-label="ja"><svg><use href="#i-check"/></svg></span></td><td><span class="no" aria-label="nein"><svg><use href="#i-x"/></svg></span></td></tr>
+          <tr><td>Für den unteren Rücken gebaut</td><td class="us"><span class="yes" aria-label="ja"><svg><use href="#i-check"/></svg></span></td><td><span class="no" aria-label="nein"><svg><use href="#i-x"/></svg></span></td><td><span class="no" aria-label="nein"><svg><use href="#i-x"/></svg></span></td><td><span class="yes" aria-label="ja"><svg><use href="#i-check"/></svg></span></td></tr>
+          <tr><td>Mit Wärme</td><td class="us"><span class="yes" aria-label="ja"><svg><use href="#i-check"/></svg></span></td><td><span class="no" aria-label="nein"><svg><use href="#i-x"/></svg></span></td><td><span class="no" aria-label="nein"><svg><use href="#i-x"/></svg></span></td><td><span class="no" aria-label="nein"><svg><use href="#i-x"/></svg></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cmp-note">TENS überdeckt Schmerzen, EMS-Gürtel zielen auf Bauch und Beine. Der Wellenpuls nutzt NMES, wie Kliniken und Rehazentren, gezielt für den unteren Rücken.</p>
+  </div>
+</section>
+
+<!-- ANWENDUNG -->
+<section class="band wash" id="anleitung">
+  <div class="wrap">
+    <div class="head center">
+      <p class="kicker">So einfach geht's</p>
+      <h2>In drei Schritten startklar</h2>
+      <p class="lead">Zweimal pro Woche, mit mindestens einem Tag Pause dazwischen. So war es auch in der Studie.</p>
+    </div>
+    <ol class="how">
+      <li><figure><img src="../../assets/lp3/schritt-1-befeuchten.jpg" alt="Elektroden im Gurt werden mit Wasser befeuchtet" loading="lazy" width="800" height="600"></figure><h3>Befeuchten</h3><p>Etwas Wasser aus der Sprühflasche auf die Elektroden. Kein Gel, keine Klebepads.</p></li>
+      <li><figure><img src="../../assets/lp3/schritt-2-anlegen.jpg" alt="Gurt wird um die Taille gelegt" loading="lazy" width="800" height="600"></figure><h3>Anlegen</h3><p>Um die Taille legen, oberhalb der Hüfte, und mit dem Klettverschluss festziehen.</p></li>
+      <li><figure><img src="../../assets/lp3/schritt-3-einschalten.jpg" alt="Daumen drückt die Plus-Taste am Bedienteil" loading="lazy" width="800" height="600"></figure><h3>Einschalten</h3><p>Mit Plus die Stufe erhöhen, bis Sie die Muskeln spüren. Nach 20 Minuten schaltet er ab.</p></li>
     </ol>
-    <p class="rhythm">Zweimal pro Woche, mit mindestens einem Tag Pause dazwischen. So war es auch in der Studie. Am Anfang kann es Muskelkater geben, wie nach jedem ungewohnten Training.</p>
+    <div class="howto">
+      <video src="../../assets/video/wellenpuls-anlegen.mp4" poster="../../assets/video/wellenpuls-anlegen-poster.jpg" controls playsinline preload="none" aria-label="Christian Senfleben zeigt, wie man den Wellenpuls LWS anlegt und einschaltet"></video>
+      <div><h3>Christian zeigt es Ihnen in einer Minute</h3><p>Mit Untertiteln. Das Video bekommen Sie auch nach dem Kauf, und bei Fragen hilft Christian im persönlichen Gespräch.</p></div>
+    </div>
   </div>
 </section>
 
-<!-- FUNKTIONEN -->
+<!-- IM DETAIL -->
 <section class="band">
   <div class="wrap">
-    <h2>Was der Wellenpuls kann, und was Sie davon haben</h2>
-    <div class="features">
-      <div class="feature"><h3>Schaltet nach 20 Minuten selbst ab</h3><p>Sie können dabei lesen, fernsehen oder die Augen zumachen. Auf die Uhr schauen müssen Sie nicht.</p></div>
-      <div class="feature"><h3>15 Stufen, Start auf Stufe 1</h3><p>Sie fangen sanft an und steigern sich in Ihrem Tempo, von Woche zu Woche.</p></div>
-      <div class="feature"><h3>Eingebaute Wärme</h3><p>Die Wärme macht das Anlegen angenehm und entspannt verspannte Muskeln.</p></div>
-      <div class="feature"><h3>Vier Tasten am Gurt</h3><p>Ein und Aus, Plus, Minus, Wärme. Kein Handy, keine App, nichts einzurichten.</p></div>
-      <div class="feature"><h3>Elektroden im Gurt eingearbeitet</h3><p>Keine Klebepads und kein Gel zum Nachkaufen. Etwas Wasser aus der Sprühflasche genügt.</p></div>
-      <div class="feature"><h3>Passt bei 78 bis 130 cm Bauchumfang</h3><p>Ein Verlängerungsteil liegt bei, falls der Gurt nicht reicht.</p></div>
-      <div class="feature"><h3>Akku mit USB-Ladekabel, Reiseetui</h3><p>Laden wie ein Handy. Im Etui kommt er mit in den Urlaub oder zu den Kindern.</p></div>
-      <div class="feature"><h3>Persönliches Gespräch mit Christian</h3><p>Er zeigt Ihnen, welche Stufe für Sie passt und wie Sie die zwei Einheiten fest in Ihre Woche einbauen.</p></div>
+    <div class="head">
+      <p class="kicker">Im Detail</p>
+      <h2>Durchdacht, damit das Training wirklich stattfindet</h2>
     </div>
-    <div class="cta-inline">
-      <a href="../checkout/" class="btn track-atc">Wellenpuls bestellen und 30 Tage testen</a>
-      <p class="btn-note"><strong>30 Tage Geld-zurück-Garantie.</strong> Kostenloser Versand.</p>
+    <div class="bento">
+      <figure class="tile tile-big"><img src="../../assets/lp3/packshot-innen.jpg" alt="Innenseite des Wellenpuls LWS mit Graphit-Elektroden und Bedienteil" width="1200" height="1008" loading="lazy"><figcaption class="txt"><h3>Elektroden im Gurt eingearbeitet</h3><p>Graphitbeschichtet und so platziert, dass sie die tiefe Rückenmuskulatur erreichen. Etwas Wasser genügt, Sie müssen nichts nachkaufen.</p></figcaption></figure>
+      <figure class="tile tile-ctrl"><img src="../../assets/lp3/bedienteil.jpg" alt="Bedienteil mit vier Tasten: Ein und Aus, Minus, Plus, Wärme" width="560" height="330" loading="lazy"><figcaption class="txt"><h3>Vier Tasten</h3><p>Ein und Aus, Minus, Plus, Wärme. Kein Handy, keine App, nichts einzurichten.</p></figcaption></figure>
+      <figure class="tile tile-sm"><img src="../../assets/lp3/packshot-hinten.jpg" alt="Rückseite des Wellenpuls LWS mit Klettverschluss" width="1200" height="804" loading="lazy"><figcaption class="txt"><h3>Passt fast jedem</h3><p>Von 78 bis 130 cm Bauchumfang, das Verlängerungsteil liegt bei.</p></figcaption></figure>
+      <ul class="specs">
+        <li><b>15 Stufen</b><span>sanft starten, Woche für Woche steigern</span></li>
+        <li><b>Wärme</b><span>eingebaut, angenehm beim Anlegen</span></li>
+        <li><b>Akku</b><span>lädt per USB wie ein Handy</span></li>
+        <li><b>Reiseetui</b><span>kommt mit in den Urlaub</span></li>
+      </ul>
+    </div>
+    <div class="mid-cta">
+      <a href="../checkout/" class="btn btn-inline track-atc">Jetzt bestellen<small><span class="p-a">489 € inklusive Bonus-Paket</span><span class="p-b">299 € mit Neukunden-Rabatt</span></small></a>
+      <p><svg class="ico"><use href="#i-shield"/></svg>30 Tage testen, Geld zurück</p>
     </div>
   </div>
 </section>
 
 <!-- STIMMEN -->
-<section class="band band-wash">
+<section class="band wash" id="stimmen">
   <div class="wrap">
-    <h2>Was Kundinnen und Kunden schreiben</h2>
-    <div class="voices">
-      <figure class="voice"><blockquote>„Mein Vater arbeitet seit 30 Jahren auf dem Bau. Er hat schon vieles ausprobiert. Der Rücken fühlt sich um Welten entspannter an."</blockquote><figcaption>Leon H.</figcaption></figure>
-      <figure class="voice"><blockquote>„Sehr lange beschäftige ich mich schon mit meinem Rücken. Zum ersten Mal habe ich das Gefühl, etwas gefunden zu haben, was mir wirklich hilft."</blockquote><figcaption>Sebastian D.</figcaption></figure>
-      <figure class="voice"><blockquote>„Seit ich den Gurt benutze, fühlt sich mein Rücken so viel besser an. Ich würde es jedem weiterempfehlen."</blockquote><figcaption>Karin Hoops</figcaption></figure>
-      <figure class="voice"><blockquote>„Ich und meine Frau sind beide zufrieden. Der untere Rücken fühlt sich entspannter und deutlich gekräftigt an. Klare Kaufempfehlung."</blockquote><figcaption>Ramon M.</figcaption></figure>
-      <figure class="voice"><blockquote>„Die Wärmefunktion entspannt den Rücken spürbar. Absolut empfehlenswert, gerade für den Preis."</blockquote><figcaption>Bettina B.</figcaption></figure>
-      <figure class="voice"><blockquote>„War echt überrascht. Wenn man sich erstmal dran gewöhnt hat, ist das Gefühl wirklich angenehm. Hab natürlich direkt übertrieben und am nächsten Tag tatsächlich einen spürbaren Muskelkater."</blockquote><figcaption>Alexander R.</figcaption></figure>
+    <p class="kicker">Was Kundinnen und Kunden sagen</p>
+    <div class="feature-quote">
+      <figure>
+        <blockquote>Mein Vater arbeitet seit 30 Jahren auf dem Bau. Er hat schon vieles ausprobiert. Der Rücken fühlt sich um Welten entspannter an.</blockquote>
+        <footer style="margin-top:16px"><span class="avatar">LH</span><span><b>Leon H.</b>hat den Gurt für seinen Vater gekauft</span></footer>
+      </figure>
+      <div class="score">
+        <span class="big">4,9</span>
+        <div><span class="stars" aria-label="5 von 5 Sternen"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><p>aus 29 Bewertungen,<br>über 120 Kundinnen und Kunden</p></div>
+      </div>
     </div>
-    <div class="summary-rating"><span class="stars" aria-hidden="true">★★★★★</span><span>Durchschnitt 4,9 von 5 aus 29 Bewertungen, über 120 Kundinnen und Kunden</span></div>
-    <div class="cta-inline">
-      <a href="../checkout/" class="btn track-atc">Wellenpuls bestellen und 30 Tage testen</a>
-      <p class="btn-note"><strong>30 Tage Geld-zurück-Garantie.</strong> Kostenloser Versand.</p>
+    <div class="reviews">
+      <article class="review"><span class="stars" aria-label="5 von 5 Sternen"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><blockquote>„Sehr lange beschäftige ich mich schon mit meinem Rücken. Zum ersten Mal habe ich das Gefühl, etwas gefunden zu haben, was mir wirklich hilft.“</blockquote><footer><span class="avatar">SD</span><span><b>Sebastian D.</b>Kunde</span></footer></article>
+      <article class="review"><span class="stars" aria-label="5 von 5 Sternen"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><blockquote>„Ich und meine Frau sind beide zufrieden. Der untere Rücken fühlt sich entspannter und deutlich gekräftigt an. Klare Kaufempfehlung.“</blockquote><footer><span class="avatar">RM</span><span><b>Ramon M.</b>Kunde</span></footer></article>
+      <article class="review"><span class="stars" aria-label="5 von 5 Sternen"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><blockquote>„Seit ich den Gurt benutze, fühlt sich mein Rücken so viel besser an. Ich würde es jedem weiterempfehlen.“</blockquote><footer><span class="avatar">KH</span><span><b>Karin Hoops</b>Kundin</span></footer></article>
+      <article class="review"><span class="stars" aria-label="5 von 5 Sternen"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><blockquote>„Die Wärmefunktion entspannt den Rücken spürbar. Absolut empfehlenswert, gerade für den Preis.“</blockquote><footer><span class="avatar">BB</span><span><b>Bettina B.</b>Kundin</span></footer></article>
+      <article class="review"><span class="stars" aria-label="5 von 5 Sternen"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><blockquote>„War echt überrascht. Wenn man sich erstmal dran gewöhnt hat, ist das Gefühl wirklich angenehm. Hab natürlich direkt übertrieben und am nächsten Tag tatsächlich einen spürbaren Muskelkater.“</blockquote><footer><span class="avatar">AR</span><span><b>Alexander R.</b>Kunde</span></footer></article>
+    </div>
+    <p class="swipe">Wischen für weitere Bewertungen</p>
+  </div>
+</section>
+
+<!-- FACHPARTNER -->
+<section class="band" style="padding-bottom:0">
+  <div class="wrap narrow">
+    <figure class="partner">
+      <div class="partner-who">
+        <img class="partner-pic" src="../../assets/lp3/valmedica-portrait.jpg" alt="Ansprechpartner von valmedica" width="480" height="719" loading="lazy">
+        <img class="partner-logo" src="../../assets/lp3/valmedica-logo.png" alt="valmedica" width="300" height="56" loading="lazy">
+      </div>
+      <div>
+        <blockquote>„Wellenpuls ergänzt unser Angebot um eine einfache, alltagstaugliche Möglichkeit, die Tiefenmuskulatur im Rumpf gezielt zu aktivieren. Die Anwendung ist niederschwellig und lässt sich super in unsere Betreuungskonzepte einfügen.“</blockquote>
+        <figcaption style="margin-top:14px"><b>valmedica, Gesundheitszentrum in Mülheim an der Ruhr</b>Medizin, Therapie und Prävention unter einem Dach. valmedica setzt den Wellenpuls in alltagsnahen Gesundheitsprogrammen ein.</figcaption>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- GRÜNDER -->
+<section class="band">
+  <div class="wrap founder">
+    <div class="founder-pics">
+      <figure class="p1"><img src="../../assets/lp3/christian.jpg" alt="Christian Senfleben, Gründer von Wellenpuls" loading="lazy" width="720" height="900"><figcaption><b style="color:var(--ink)">Christian Senfleben</b><br>Sportwissenschaftler, M.Sc., DSHS Köln</figcaption></figure>
+      <figure class="p2"><img src="../../assets/lp3/buehne.jpg" alt="Christian Senfleben auf der Bühne bei der Preisverleihung mit deutscher Flagge" loading="lazy" width="1000" height="667"><figcaption>1. Platz beim JCI Creative Young Entrepreneur Award in Tunis</figcaption></figure>
+    </div>
+    <div>
+      <p class="kicker">Wer dahinter steht</p>
+      <h2>Entwickelt von jemandem, der Rückenschmerzen selbst kennt</h2>
+      <p style="margin-top:18px">Christian hatte jahrelang selbst Rückenschmerzen. An der Deutschen Sporthochschule Köln hat er die tiefe Rumpfmuskulatur untersucht und ein Gerät gebaut, das genau diese Muskeln erreicht.</p>
+      <p>Getestet hat er es mit 60 Teilnehmenden über acht Wochen. Danach wollten Teilnehmende die Prototypen kaufen. So ist Wellenpuls entstanden.</p>
+      <ul class="facts">
+        <li><svg class="ico"><use href="#i-check"/></svg>Patent angemeldet im Juni 2024</li>
+        <li><svg class="ico"><use href="#i-check"/></svg>Gefördert von NRW, Bund und EU</li>
+        <li><svg class="ico"><use href="#i-check"/></svg>Bei Fragen erreichen Sie Christian persönlich</li>
+      </ul>
     </div>
   </div>
 </section>
 
-<!-- FÜR DIE ELTERN -->
-<section class="band" id="eltern">
-  <div class="wrap">
-    <h2>Für Ihre Mutter oder Ihren Vater bestellen</h2>
-    <p>Wenn Sie den Wellenpuls für Ihre Eltern kaufen, haben Sie wahrscheinlich andere Fragen als jemand, der ihn für sich selbst bestellt.</p>
-    <div class="qa">
-      <div><h3>Kommen meine Eltern mit dem Gerät zurecht?</h3><p>Der Gurt hat vier Tasten und braucht kein Handy. Eine Gebrauchsanweisung und Christians Video liegen bereit. Im persönlichen Gespräch, das zum Paket gehört, erklärt Christian die Anwendung auch Ihrer Mutter oder Ihrem Vater direkt.</p></div>
-      <div><h3>Werden sie ihn auch benutzen?</h3><p>Das Training findet im Sitzen statt, mit Wärme, 20 Minuten lang. Es fühlt sich nicht nach Sport an, und man kann dabei nichts falsch machen.</p></div>
-      <div><h3>Kann ich direkt zu ihnen liefern lassen?</h3><p>Ja. Im Bestellformular können Sie eine abweichende Lieferadresse angeben. Die Rechnung geht an Sie.</p></div>
-      <div><h3>Und wenn es nicht passt?</h3><p>Sie haben 30 Tage Zeit. Hilft der Wellenpuls nicht, bekommen Sie den vollen Kaufpreis zurück.</p></div>
+<!-- ELTERN -->
+<section class="band wash" id="eltern">
+  <div class="wrap parents-grid">
+    <img src="../../assets/eltern-ehepaar.jpg" alt="Älteres Ehepaar auf einem Spaziergang" loading="lazy" width="1400" height="778">
+    <div>
+      <p class="kicker">Als Geschenk</p>
+      <h2>Für Ihre Mutter oder Ihren Vater?</h2>
+      <p class="lead">Rückenübungen bleiben oft liegen, weil sie mit den Jahren schwerfallen. Der Wellenpuls braucht nur einen Sessel.</p>
+      <ul class="parents">
+        <li><svg class="ico"><use href="#i-home"/></svg><span><b>Direkt zu Ihren Eltern</b>Im Bestellformular einfach eine abweichende Lieferadresse angeben.</span></li>
+        <li><svg class="ico"><use href="#i-keys"/></svg><span><b>Einfach zu bedienen</b>Vier Tasten, kein Handy. Dazu Christians Video und eine Anleitung.</span></li>
+        <li><svg class="ico"><use href="#i-phone"/></svg><span><b>Persönlich erklärt</b>Das Gespräch mit Christian kann auch direkt mit Ihren Eltern stattfinden.</span></li>
+      </ul>
     </div>
   </div>
 </section>
 
 <!-- GARANTIE UND ANGEBOT -->
-<section class="band offer" id="bestellen">
-  <div class="wrap">
-    <div class="offer-grid">
-      <div class="guarantee">
-        <h3>So funktioniert die 30-Tage-Garantie</h3>
-        <p style="color:var(--on-dark-2)">Ob der Wellenpuls zu Ihrem Rücken passt, merken Sie zu Hause. Deshalb haben Sie 30 Tage Zeit.</p>
-        <ol class="g-steps">
-          <li><span><b>Bestellen.</b> Das Paket ist in 2 Werktagen bei Ihnen oder bei Ihren Eltern.</span></li>
-          <li><span><b>Ausprobieren.</b> Nutzen Sie ihn vier Wochen lang zweimal pro Woche, so wie in der Studie.</span></li>
-          <li><span><b>Entscheiden.</b> Spüren Sie keinen Unterschied, reicht eine E-Mail an Christian. Sie bekommen den vollen Kaufpreis innerhalb weniger Werktage zurück.</span></li>
-        </ol>
-      </div>
-      <div>
-        <h2>Wellenpuls LWS mit Bonus-Paket</h2>
-        <p style="color:var(--on-dark-2)">Gerät mit Reiseetui und Zubehör, dazu das persönliche Gespräch mit Christian, der Videokurs und das E-Book.</p>
-        <div class="price"><span class="price-now">489 €</span><span class="price-was">Gesamtwert <s>732,80 €</s></span></div>
-        <p class="price-note">Einmalige Zahlung, kein Abo. Kostenloser Versand.</p>
-        <a href="../checkout/" class="btn track-atc">Jetzt bestellen und 30 Tage testen</a>
-      </div>
+<section class="band night" id="bestellen">
+  <div class="wrap offer-grid">
+    <div class="offer-media">
+      <img src="../../assets/product-image-1.png" alt="Das Paket: Wellenpuls LWS, 1:1-Gespräch mit Christian, Videokurs, E-Book" width="577" height="433" loading="lazy">
+      <svg class="big-seal" viewBox="0 0 120 120" role="img" aria-label="30 Tage Geld-zurück-Garantie"><use href="#i-seal"/></svg>
+    </div>
+    <div>
+      <p class="kicker">Ohne Risiko</p>
+      <h2>Testen Sie 30 Tage lang zu Hause</h2>
+      <ul class="g-steps">
+        <li><svg class="ico"><use href="#i-box"/></svg><span><b>Bestellen:</b> In 2 Werktagen ist das Paket bei Ihnen<span class="only-eltern-i"> oder bei Ihren Eltern</span>.</span></li>
+        <li><svg class="ico"><use href="#i-cal"/></svg><span><b>Ausprobieren:</b> Vier Wochen, zweimal pro Woche, wie in der Studie.</span></li>
+        <li><svg class="ico"><use href="#i-mail"/></svg><span><b>Entscheiden:</b> Kein Unterschied? Eine E-Mail an Christian, und Sie bekommen den vollen Kaufpreis zurück.</span></li>
+      </ul>
+      <div class="pricebox p-a"><span class="now">489 €</span><span class="was">statt <s>732,80 €</s></span><span class="save">Bonus-Paket gratis</span></div>
+      <div class="pricebox p-b"><span class="now">299 €</span><span class="was">statt <s>489 €</s></span><span class="save">38 % Neukunden-Rabatt</span></div>
+      <p class="code-hint p-b">Mit Code <b>NEUKUNDE</b>, im Bestellformular schon eingetragen. Das Bonus-Paket ist dabei.</p>
+      <a href="../checkout/" class="btn track-atc">Jetzt bestellen<small>und 30 Tage zu Hause testen</small></a>
+      <p class="fine">Kostenloser Versand. Einmalige Zahlung per PayPal oder Karte.</p>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
 <section class="band">
-  <div class="wrap">
-    <h2>Häufige Fragen</h2>
+  <div class="wrap narrow">
+    <div class="head center"><h2>Häufige Fragen</h2></div>
     <div class="faq">
-      <details><summary>Wann merke ich etwas?</summary><div>Viele spüren nach zwei bis drei Anwendungen einen Muskelkater tief im unteren Rücken. Das zeigt, dass Muskeln arbeiten, die vorher wenig gefordert waren. Veränderungen im Alltag zeigen sich bei den meisten nach einigen Wochen regelmäßiger Nutzung. In der Studie waren es acht Wochen.</div></details>
-      <details><summary>Ist die Stimulation unangenehm?</summary><div>Beim ersten Mal fühlt sie sich ungewohnt an, ein Kribbeln, das zu einem Pulsieren wird. Sie regeln die Stärke selbst und beginnen auf Stufe 1. Die Wärme macht den Einstieg angenehmer.</div></details>
-      <details><summary>Ich habe schon viel ausprobiert. Warum sollte das anders sein?</summary><div>Der Wellenpuls trainiert die tiefe Rückenmuskulatur direkt, ohne dass Sie eine Übung richtig ausführen oder Termine einhalten müssen. Ob das bei Ihnen wirkt, prüfen Sie 30 Tage lang zu Hause. Passt es nicht, bekommen Sie Ihr Geld zurück.</div></details>
-      <details><summary>Kann ich ihn für meine Eltern bestellen?</summary><div>Ja. Geben Sie im Bestellformular einfach die Adresse Ihrer Eltern als Lieferadresse an. Das persönliche Gespräch mit Christian kann auch direkt mit Ihrer Mutter oder Ihrem Vater stattfinden.</div></details>
-      <details><summary>Für wen ist das Gerät nicht geeignet?</summary><div>Nicht geeignet ist der Wellenpuls bei Herzschrittmacher, Metallimplantaten im Rumpfbereich, Epilepsie, Herzrhythmusstörungen, in der Schwangerschaft und bei stark veränderten Blutdruckwerten. Bei bestehenden Erkrankungen sprechen Sie bitte vorher mit Ihrer Ärztin oder Ihrem Arzt.</div></details>
-      <details><summary>Was passiert im Gespräch mit Christian?</summary><div>Christian erklärt, wie Sie die richtige Stufe finden, welche Fehler Sie vermeiden sollten und wie Sie die Einheiten in Ihren Alltag einbauen. Er geht dabei auf Ihre Situation ein.</div></details>
-      <details><summary>Muss ich ein Abo abschließen?</summary><div>Nein. Sie zahlen einmal 489 Euro. Klebepads zum Nachkaufen brauchen Sie nicht, die Elektroden sind im Gurt eingearbeitet.</div></details>
+      <details><summary>Wann merke ich etwas?</summary><div>Viele spüren nach zwei bis drei Anwendungen einen Muskelkater tief im unteren Rücken. Veränderungen im Alltag zeigen sich bei den meisten nach einigen Wochen regelmäßiger Nutzung. In der Studie waren es acht Wochen.</div></details>
+      <details><summary>Ist die Stimulation unangenehm?</summary><div>Beim ersten Mal fühlt sie sich ungewohnt an, wie ein Kribbeln, das zu einem Pulsieren wird. Sie beginnen auf Stufe 1 und regeln selbst. Die Wärme macht den Einstieg angenehmer.</div></details>
+      <details><summary>Ich habe schon viel ausprobiert. Warum sollte das anders sein?</summary><div>Der Wellenpuls trainiert die tiefe Rückenmuskulatur direkt, ohne dass Sie eine Übung richtig ausführen müssen. Ob das bei Ihnen wirkt, prüfen Sie 30 Tage lang zu Hause. Wenn nicht, bekommen Sie Ihr Geld zurück.</div></details>
+      <details><summary>Trägt man den Gurt über der Kleidung?</summary><div>Nein, direkt auf der Haut, damit die Elektroden die Muskeln erreichen. Das Oberteil kann darüber bleiben. Er sitzt um die Taille, oberhalb der Hüfte.</div></details>
+      <details><summary>Kann ich ihn für meine Eltern bestellen?</summary><div>Ja. Geben Sie im Bestellformular die Adresse Ihrer Eltern als Lieferadresse an. Das Gespräch mit Christian kann auch direkt mit Ihrer Mutter oder Ihrem Vater stattfinden.</div></details>
+      <details><summary>Für wen ist das Gerät nicht geeignet?</summary><div>Nicht geeignet bei Herzschrittmacher, Metallimplantaten im Rumpfbereich, Epilepsie, Herzrhythmusstörungen, in der Schwangerschaft und bei stark veränderten Blutdruckwerten. Bei bestehenden Erkrankungen sprechen Sie bitte vorher mit Ihrer Ärztin oder Ihrem Arzt.</div></details>
+      <details><summary>Was passiert im Gespräch mit Christian?</summary><div>Christian erklärt, wie Sie die richtige Stufe finden, welche Fehler Sie vermeiden sollten und wie Sie die Einheiten in Ihren Alltag einbauen.</div></details>
+      <details><summary>Muss ich ein Abo abschließen?</summary><div>Nein. Sie zahlen einmal <span class="p-a">489 Euro</span><span class="p-b">299 Euro, also 489 Euro abzüglich Ihres Neukunden-Rabatts</span>. Klebepads zum Nachkaufen brauchen Sie nicht, die Elektroden sind im Gurt eingearbeitet.</div></details>
     </div>
-  </div>
-</section>
-
-<!-- SCHLUSS -->
-<section class="band band-wash closing">
-  <div class="wrap">
-    <h2 class="only-selbst">Probieren Sie es 30 Tage lang aus</h2>
-    <h2 class="only-eltern">Geben Sie Ihren Eltern 30 Tage, um es auszuprobieren</h2>
-    <p>Zweimal pro Woche 20 Minuten im Sitzen, und nach vier Wochen wissen Sie, ob der Wellenpuls etwas verändert. Wenn nicht, schicken Sie ihn zurück.</p>
-    <a href="../checkout/" class="btn track-atc">Wellenpuls bestellen</a>
-    <p class="btn-note">489 € einmalig, kostenloser Versand, <strong>30 Tage Geld-zurück-Garantie</strong></p>
+    <div class="contact">
+      <img src="../../assets/lp3/christian.jpg" alt="" width="56" height="56" loading="lazy">
+      <p><b>Noch eine Frage?</b> Schreiben Sie uns an <a href="mailto:info@wellenpuls.de">info@wellenpuls.de</a>. Wir antworten persönlich.</p>
+    </div>
   </div>
 </section>
 
 </main>
 
 <footer class="foot">
-  <img src="../../assets/logo_transparent.png" alt="Stabil im Alltag" width="110" height="44">
+  <img src="../../assets/logo_transparent.png" alt="Stabil im Alltag" width="105" height="42">
   <p><a href="/impressum/">Impressum</a> &nbsp;|&nbsp; <a href="/datenschutz/">Datenschutz</a> &nbsp;|&nbsp; <a href="#" onclick="SIA_openConsent();return false;">Cookie-Einstellungen</a></p>
   <p class="disc">Der Wellenpuls LWS ist ein Trainingsgerät und kein Medizinprodukt. Er ersetzt keine ärztliche Beratung. Ergebnisse können von Mensch zu Mensch verschieden sein. Bei Vorerkrankungen sprechen Sie bitte vor der Nutzung mit Ihrer Ärztin oder Ihrem Arzt.</p>
 </footer>
 
 <div class="sticky" id="sticky" aria-hidden="true">
-  <div class="sticky-text"><b>489 €</b>30 Tage Geld zurück</div>
-  <a href="../checkout/" class="btn track-atc" tabindex="-1">Bestellen</a>
+  <div class="sticky-text p-a"><b>489 €</b>30 Tage Geld zurück</div>
+  <div class="sticky-text p-b"><b>299 €</b>38 % Neukunden-Rabatt</div>
+  <a href="../checkout/" class="btn track-atc" tabindex="-1">Jetzt bestellen</a>
 </div>
 
 <script>
+/* Galerie: Vorschaubilder steuern die Bildleiste */
+(function(){
+  var s=document.getElementById('slides'),t=document.querySelectorAll('#thumbs button');
+  if(!s||!t.length)return;
+  t.forEach(function(b,i){b.addEventListener('click',function(){s.scrollTo({left:s.clientWidth*i,behavior:'smooth'});});});
+  var raf;
+  s.addEventListener('scroll',function(){cancelAnimationFrame(raf);raf=requestAnimationFrame(function(){
+    var i=Math.round(s.scrollLeft/s.clientWidth);
+    t.forEach(function(b,k){b.setAttribute('aria-current',k===i?'true':'false');});
+  });},{passive:true});
+})();
+
 /* Bewegung reduzieren: Clip anhalten, Steuerung zeigen */
 (function(){
   var v=document.getElementById('how-video');
   if(v&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){v.removeAttribute('autoplay');v.pause();v.setAttribute('controls','');}
 })();
 
-/* Leiste unten, sobald der Kopfbereich verlassen ist */
+/* Kaufleiste unten, sobald der Produktbereich verlassen ist */
 (function(){
-  var bar=document.getElementById('sticky'),hero=document.getElementById('paket'),offer=document.getElementById('bestellen');
-  if(!bar||!hero||!('IntersectionObserver' in window))return;
-  var heroOut=false,offerIn=false;
-  function upd(){var s=heroOut&&!offerIn;bar.classList.toggle('show',s);bar.setAttribute('aria-hidden',s?'false':'true');}
-  new IntersectionObserver(function(e){heroOut=!e[0].isIntersecting;upd();}).observe(hero);
-  new IntersectionObserver(function(e){offerIn=e[0].isIntersecting;upd();},{threshold:0.15}).observe(offer);
+  var bar=document.getElementById('sticky'),top=document.getElementById('paket'),offer=document.getElementById('bestellen');
+  if(!bar||!top||!('IntersectionObserver' in window))return;
+  var out=false,inOffer=false;
+  function upd(){var s=out&&!inOffer;bar.classList.toggle('show',s);bar.setAttribute('aria-hidden',s?'false':'true');bar.querySelector('a').setAttribute('tabindex',s?'0':'-1');}
+  new IntersectionObserver(function(e){out=!e[0].isIntersecting;upd();}).observe(top);
+  new IntersectionObserver(function(e){inOffer=e[0].isIntersecting;upd();},{threshold:0.15}).observe(offer);
 })();
 </script>
 <script src="../../assets/consent.js" defer></script>

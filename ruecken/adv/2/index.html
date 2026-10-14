@@ -8,7 +8,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="../../../assets/logo_transparent.png">
   <link rel="apple-touch-icon" href="../../../assets/logo_transparent.png">
+  <script src="../../../assets/preistest.js"></script>
   <style>
+    /* Preistest: .p-a nur bei 489 €, .p-b nur bei 299 € mit Neukunden-Rabatt (assets/preistest.js) */
+    .v-rabatt .p-a{display:none!important}
+    html:not(.v-rabatt) .p-b{display:none!important}
+
     :root {
       --primary:  #1A5C8A;
       --teal:     #28836A;
@@ -711,9 +716,13 @@
       <p>Das Gerät heißt <strong>Wellenpuls LWS</strong>. Ein Gurt, den man um den unteren Rücken legt. Die Elektroden sitzen genau dort, wo die tiefe Muskulatur liegt, und der Impuls kommt dort an, wo der Gurt sitzt.</p>
 
       <div style="margin:28px 0 6px">
-        <video src="../../../assets/video/wellenpuls-kontraktion-ruecken.mp4" poster="../../../assets/video/wellenpuls-kontraktion-ruecken-poster.jpg" autoplay muted loop playsinline preload="metadata" style="width:100%;border-radius:10px;display:block" aria-label="Animierte Darstellung: Die Rückenmuskulatur über dem Gurt spannt sich im Takt der Impulse an"></video>
+        <video src="../../../assets/video/wellenpuls-kontraktion-aelter.mp4" poster="../../../assets/video/wellenpuls-kontraktion-aelter-poster.jpg" autoplay muted loop playsinline preload="metadata" style="width:100%;border-radius:10px;display:block" aria-label="Animierte Darstellung: Der Gurt arbeitet, die Muskulatur spannt sich im Takt der Impulse sanft an"></video>
       </div>
-      <div style="font-size:12px;color:var(--text-muted);margin:0 0 24px;">So spannt der Impuls die Rückenmuskulatur an und lässt sie wieder los. (Animierte Darstellung)</div>
+      <div style="font-size:12px;color:var(--text-muted);margin:0 0 24px;">So spannt der Impuls die Rumpfmuskulatur sanft an und lässt sie wieder los. (Animierte Darstellung)</div>
+
+      <p>Auch Fachleute setzen ihn ein. Das Gesundheitszentrum valmedica in Mülheim an der Ruhr hat ihn in seine Gesundheitsprogramme aufgenommen und schreibt dazu:</p>
+
+      <div style="background:#fff;border:1px solid #D0DCE8;border-radius:12px;padding:20px 22px;margin:24px 0"><img src="../../../assets/lp3/valmedica-logo.png" alt="valmedica" style="height:30px;width:auto;display:block;margin-bottom:12px"><p style="font-family:'Lora',serif;font-style:italic;font-size:17px;line-height:1.6;margin:0 0 10px">„Wellenpuls ergänzt unser Angebot um eine einfache, alltagstaugliche Möglichkeit, die Tiefenmuskulatur im Rumpf gezielt zu aktivieren. Die Anwendung ist niederschwellig und lässt sich super in unsere Betreuungskonzepte einfügen.“</p><p style="font-size:13px;color:#6B7E8C;margin:0">valmedica, Gesundheitszentrum in Mülheim an der Ruhr</p></div>
 
       <p>Man braucht dafür keine Technik. Man muss nicht wissen, ob man es gerade richtig macht. Und wie stark der Reiz ist, entscheidet man selbst. An guten Tagen mehr, an schlechten weniger.</p>
 
@@ -788,6 +797,8 @@
 
       <p>Ich habe ihn jetzt über vier Monate regelmäßig genutzt. Bei 64 Einheiten sind das gut 7 Euro pro Einheit.</p>
 
+      <p class="p-b">Gerade bekommen Neukunden 38 % Rabatt mit dem Code NEUKUNDE. Dann kostet der Wellenpuls 299 Euro, bei 64 Einheiten keine 5 Euro pro Einheit.</p>
+
       <p>Der Hersteller gibt eine 30-Tage-Geld-zurück-Garantie. Wenn Sie in den ersten 30 Tagen merken, dass es nichts für Sie ist, schicken Sie ihn zurück und bekommen Ihr Geld.</p>
 
       <h2>Was ich Ihnen noch mitgeben will</h2>
@@ -811,7 +822,7 @@
     <!-- ═══ CTA ═══ -->
     <div class="cta-final">
       <a href="../../lp3/" class="btn-primary track-lead">Hier können Sie den Wellenpuls LWS ansehen und 30 Tage testen</a>
-      <div class="cta-terms">489 € · kostenloser Versand · 30 Tage Geld zurück · Lieferung in der Regel innerhalb von 2 Werktagen</div>
+      <div class="cta-terms"><span class="p-a">489 €</span><span class="p-b">299 € mit 38 % Neukunden-Rabatt</span> · kostenloser Versand · 30 Tage Geld zurück · Lieferung in der Regel innerhalb von 2 Werktagen</div>
     </div>
 
 
