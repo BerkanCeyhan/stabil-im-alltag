@@ -119,7 +119,7 @@ h3{font-size:1.12rem;font-weight:600}
 .info,.pdp-head{min-width:0}
 .pdp-head h1{margin-bottom:8px}
 .pdp-head .lead{margin:0;font-size:1.04rem}
-.rate{display:inline-flex;align-items:center;gap:8px;font-size:0.9rem;color:var(--ink-2);text-decoration:none;margin-bottom:10px}
+.rate{display:inline-flex;align-items:center;gap:8px;font-size:0.9rem;color:var(--ink-2);text-decoration:none;margin-bottom:6px;min-height:44px}
 .stars{display:inline-flex;gap:1px;color:var(--star)}
 .stars svg{width:17px;height:17px;fill:currentColor}
 .ticks{list-style:none;display:grid;gap:8px;margin:0 0 20px}
@@ -139,6 +139,10 @@ h3{font-size:1.12rem;font-weight:600}
 .was{color:var(--muted);font-size:0.95rem}
 .save{font-size:0.8rem;font-weight:700;color:var(--white);background:var(--deal);padding:4px 10px;border-radius:999px}
 .assure{display:grid;gap:10px;margin-top:14px}
+.liefer{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:10px;font-size:0.9rem;color:var(--ink-2)}
+.liefer .ico{width:19px;height:19px;color:var(--action)}
+.liefer b{color:var(--ink)}
+.pack-after{margin:18px 0 0}
 .seal-row{display:flex;gap:12px;align-items:center;padding:12px 14px;border-radius:var(--r);background:var(--mint-wash);border:1px solid oklch(85% 0.06 165)}
 .seal-row svg.seal{width:58px;height:58px;flex-shrink:0}
 .seal-row p{font-size:0.88rem;color:var(--ink-2);line-height:1.4}
@@ -166,7 +170,7 @@ h3{font-size:1.12rem;font-weight:600}
 .work{display:grid;gap:clamp(28px,5vw,56px);align-items:center}
 .work-media{position:relative;border-radius:var(--r);overflow:hidden;background:var(--ink)}
 .work-media video{width:100%;aspect-ratio:16/10;object-fit:cover}
-.work-tag{position:absolute;right:10px;bottom:10px;background:oklch(21% 0.055 245 / 0.66);color:var(--on-dark);font-size:0.7rem;padding:3px 9px;border-radius:999px}
+.work-tag{position:absolute;right:10px;bottom:10px;background:oklch(21% 0.055 245 / 0.66);color:var(--on-dark);font-size:0.78rem;padding:3px 9px;border-radius:999px}
 .figs{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:var(--space-xl);border-top:1px solid oklch(97% 0.01 240 / 0.16)}
 .figs div{padding:18px 10px 0 0}
 .figs div+div{padding-left:14px;border-left:1px solid oklch(97% 0.01 240 / 0.16)}
@@ -433,7 +437,19 @@ h3{font-size:1.12rem;font-weight:600}
         <li><svg class="ico"><use href="#i-check"/></svg>Entwickelt an der Deutschen Sporthochschule Köln</li>
       </ul>
 
-      <div class="pack">
+      <div class="pricebox p-a"><span class="now">489 €</span><span class="was">statt <s>732,80 €</s></span><span class="save">Sie sparen 243,80 €</span></div>
+      <div class="pricebox p-b"><span class="now">299 €</span><span class="was">statt <s>732,80 €</s></span><span class="save">Sie sparen 433,80 €</span></div>
+      <p class="code-hint p-b">Komplettpaket inklusive 38 % Neukunden-Rabatt auf den Gurt. Ihr Code <b>NEUKUNDE</b> ist im Bestellformular schon eingetragen.</p>
+      <a href="../checkout/" class="btn track-atc">Jetzt bestellen<small>und 30 Tage zu Hause testen</small></a>
+      <p class="liefer" id="liefer" hidden><svg class="ico"><use href="#i-truck"/></svg><span>Heute bestellt, voraussichtlich am <b id="liefer-tag"></b> bei Ihnen</span></p>
+
+      <div class="assure">
+        <div class="seal-row"><svg class="seal" viewBox="0 0 120 120" aria-hidden="true"><use href="#i-seal"/></svg><p><b>30 Tage Geld-zurück-Garantie</b>Hilft er Ihnen nicht, bekommen Sie den vollen Kaufpreis zurück. Eine E-Mail genügt.</p></div>
+        <div class="meta"><svg class="ico"><use href="#i-truck"/></svg><span>Kostenloser Versand, in der Regel in 2 Werktagen<span class="only-eltern">Auf Wunsch direkt an die Adresse Ihrer Eltern</span></span></div>
+        <div class="pay"><img src="../../assets/lp3/zahlung.png" alt="PayPal, Mastercard, Visa" width="470" height="121"><span>Einmalige Zahlung, kein Abo</span></div>
+      </div>
+
+      <div class="pack pack-after">
         <div class="pack-head"><span>Ihr Paket</span><span>Gesamtwert 732,80 €</span></div>
         <ul>
           <li><span><b>Wellenpuls LWS</b> mit Reiseetui und Zubehör</span><span class="tag plain">489,00 €</span></li>
@@ -443,17 +459,6 @@ h3{font-size:1.12rem;font-weight:600}
           <li><span><b>Versand</b> in 2 Werktagen</span><span class="tag">gratis<s>9,90 €</s></span></li>
           <li class="p-b"><span><b>Neukunden-Rabatt</b> mit Code NEUKUNDE</span><span class="tag plain">−190,00 €</span></li>
         </ul>
-      </div>
-
-      <div class="pricebox p-a"><span class="now">489 €</span><span class="was">statt <s>732,80 €</s></span><span class="save">Sie sparen 243,80 €</span></div>
-      <div class="pricebox p-b"><span class="now">299 €</span><span class="was">statt <s>732,80 €</s></span><span class="save">Sie sparen 433,80 €</span></div>
-      <p class="code-hint p-b">Komplettpaket inklusive 38 % Neukunden-Rabatt auf den Gurt. Ihr Code <b>NEUKUNDE</b> ist im Bestellformular schon eingetragen.</p>
-      <a href="../checkout/" class="btn track-atc">Jetzt bestellen<small>und 30 Tage zu Hause testen</small></a>
-
-      <div class="assure">
-        <div class="seal-row"><svg class="seal" viewBox="0 0 120 120" aria-hidden="true"><use href="#i-seal"/></svg><p><b>30 Tage Geld-zurück-Garantie</b>Hilft er Ihnen nicht, bekommen Sie den vollen Kaufpreis zurück. Eine E-Mail genügt.</p></div>
-        <div class="meta"><svg class="ico"><use href="#i-truck"/></svg><span>Kostenloser Versand, Lieferung in 2 Werktagen<span class="only-eltern">Auf Wunsch direkt an die Adresse Ihrer Eltern</span></span></div>
-        <div class="pay"><img src="../../assets/lp3/zahlung.png" alt="PayPal, Mastercard, Visa" width="470" height="121"><span>Einmalige Zahlung, kein Abo</span></div>
       </div>
     </div>
   </div>
@@ -478,7 +483,7 @@ h3{font-size:1.12rem;font-weight:600}
     </div>
     <div>
       <p class="kicker">So arbeitet der Gurt</p>
-      <h2>Sie sitzen. Die tiefe Muskulatur arbeitet.</h2>
+      <h2>Während Sie sitzen, arbeitet die tiefe Rückenmuskulatur</h2>
       <p class="lead">Sanfte Impulse spannen die Muskeln direkt an der Wirbelsäule an und lassen sie wieder los. Dazu wärmt der Gurt.</p>
       <div class="figs">
         <div><b>20</b><span>Minuten pro Einheit, dann schaltet er ab</span></div>
@@ -503,7 +508,7 @@ h3{font-size:1.12rem;font-weight:600}
       </ol>
       <div class="here">
         <img src="../../assets/lp3/tiefenmuskulatur.jpg" alt="Illustration: tiefe Rückenmuskulatur an der Wirbelsäule" width="1200" height="896" loading="lazy">
-        <p><b>Hier setzt der Wellenpuls an.</b>Er trainiert genau diese Muskeln. Ohne Übung, die Sie richtig machen müssen.</p>
+        <p><b>Hier setzt der Wellenpuls an.</b>Er trainiert genau diese Muskeln, während Sie im Sessel oder auf dem Sofa sitzen.</p>
       </div>
     </div>
   </div>
@@ -513,7 +518,7 @@ h3{font-size:1.12rem;font-weight:600}
 <section class="band">
   <div class="wrap narrow">
     <div class="head">
-      <p class="kicker">Strom ist nicht gleich Strom</p>
+      <p class="kicker">TENS, EMS und NMES</p>
       <h2>Was den Wellenpuls von TENS und EMS unterscheidet</h2>
     </div>
     <div class="cmp-wrap">
@@ -541,13 +546,13 @@ h3{font-size:1.12rem;font-weight:600}
       <p class="lead">Zweimal pro Woche, mit mindestens einem Tag Pause dazwischen. So war es auch in der Studie.</p>
     </div>
     <ol class="how">
-      <li><figure><img src="../../assets/lp3/schritt-1-befeuchten.jpg" alt="Elektroden im Gurt werden mit Wasser befeuchtet" loading="lazy" width="800" height="600"></figure><h3>Befeuchten</h3><p>Etwas Wasser aus der Sprühflasche auf die Elektroden. Kein Gel, keine Klebepads.</p></li>
+      <li><figure><img src="../../assets/lp3/schritt-1-befeuchten.jpg" alt="Elektroden im Gurt werden mit Wasser befeuchtet" loading="lazy" width="800" height="600"></figure><h3>Befeuchten</h3><p>Etwas Wasser aus der Sprühflasche auf die Elektroden genügt. Gel oder Klebepads brauchen Sie nicht.</p></li>
       <li><figure><img src="../../assets/lp3/schritt-2-anlegen.jpg" alt="Gurt wird um die Taille gelegt" loading="lazy" width="800" height="600"></figure><h3>Anlegen</h3><p>Um die Taille legen, oberhalb der Hüfte, und mit dem Klettverschluss festziehen.</p></li>
       <li><figure><img src="../../assets/lp3/schritt-3-einschalten.jpg" alt="Daumen drückt die Plus-Taste am Bedienteil" loading="lazy" width="800" height="600"></figure><h3>Einschalten</h3><p>Mit Plus die Stufe erhöhen, bis Sie die Muskeln spüren. Nach 20 Minuten schaltet er ab.</p></li>
     </ol>
     <div class="howto">
       <video src="../../assets/video/wellenpuls-anlegen.mp4" poster="../../assets/video/wellenpuls-anlegen-poster.jpg" controls playsinline preload="none" aria-label="Christian Senfleben zeigt, wie man den Wellenpuls LWS anlegt und einschaltet"></video>
-      <div><h3>Christian zeigt es Ihnen in einer Minute</h3><p>Mit Untertiteln. Das Video bekommen Sie auch nach dem Kauf, und bei Fragen hilft Christian im persönlichen Gespräch.</p></div>
+      <div><h3>Christian zeigt es Ihnen in einer Minute</h3><p>Das Video hat Untertitel, und Sie bekommen es nach dem Kauf zum Nachschauen. Bei Fragen hilft Christian im persönlichen Gespräch.</p></div>
     </div>
   </div>
 </section>
@@ -557,11 +562,11 @@ h3{font-size:1.12rem;font-weight:600}
   <div class="wrap">
     <div class="head">
       <p class="kicker">Im Detail</p>
-      <h2>Durchdacht, damit das Training wirklich stattfindet</h2>
+      <h2>Was im Gurt steckt</h2>
     </div>
     <div class="bento">
       <figure class="tile tile-big"><img src="../../assets/lp3/packshot-innen.jpg" alt="Innenseite des Wellenpuls LWS mit Graphit-Elektroden und Bedienteil" width="1200" height="1008" loading="lazy"><figcaption class="txt"><h3>Elektroden im Gurt eingearbeitet</h3><p>Graphitbeschichtet und so platziert, dass sie die tiefe Rückenmuskulatur erreichen. Etwas Wasser genügt, Sie müssen nichts nachkaufen.</p></figcaption></figure>
-      <figure class="tile tile-ctrl"><img src="../../assets/lp3/bedienteil.jpg" alt="Bedienteil mit vier Tasten: Ein und Aus, Minus, Plus, Wärme" width="560" height="330" loading="lazy"><figcaption class="txt"><h3>Vier Tasten</h3><p>Ein und Aus, Minus, Plus, Wärme. Kein Handy, keine App, nichts einzurichten.</p></figcaption></figure>
+      <figure class="tile tile-ctrl"><img src="../../assets/lp3/bedienteil.jpg" alt="Bedienteil mit vier Tasten: Ein und Aus, Minus, Plus, Wärme" width="560" height="330" loading="lazy"><figcaption class="txt"><h3>Vier Tasten</h3><p>Ein und Aus, Minus, Plus und Wärme. Ein Handy oder eine App brauchen Sie dafür nicht.</p></figcaption></figure>
       <figure class="tile tile-sm"><img src="../../assets/lp3/packshot-hinten.jpg" alt="Rückseite des Wellenpuls LWS mit Klettverschluss" width="1200" height="804" loading="lazy"><figcaption class="txt"><h3>Passt fast jedem</h3><p>Von 78 bis 130 cm Bauchumfang, das Verlängerungsteil liegt bei.</p></figcaption></figure>
       <ul class="specs">
         <li><b>15 Stufen</b><span>sanft starten, Woche für Woche steigern</span></li>
@@ -726,6 +731,15 @@ h3{font-size:1.12rem;font-weight:600}
     var i=Math.round(s.scrollLeft/s.clientWidth);
     t.forEach(function(b,k){b.setAttribute('aria-current',k===i?'true':'false');});
   });},{passive:true});
+})();
+
+/* Voraussichtliches Lieferdatum: heute + 2 Werktage, Wochenende uebersprungen */
+(function(){
+  var el=document.getElementById('liefer'),tag=document.getElementById('liefer-tag');
+  if(!el||!tag)return;
+  var d=new Date(),n=0;
+  while(n<2){d.setDate(d.getDate()+1);var w=d.getDay();if(w!==0&&w!==6)n++;}
+  try{tag.textContent=d.toLocaleDateString('de-DE',{weekday:'long',day:'numeric',month:'long'});el.hidden=false;}catch(e){}
 })();
 
 /* Bewegung reduzieren: Clip anhalten, Steuerung zeigen */
