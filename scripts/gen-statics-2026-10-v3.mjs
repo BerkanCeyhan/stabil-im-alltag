@@ -228,7 +228,7 @@ const JOBS = [
       "The control unit is on the side of the mother's belly nearest to the daughter, on the left of the image; the rest of the jumper hangs down over the belt. " +
       "Camera at seated eye level, straight on, about two metres away. " +
       PHONE + BODY + BELT + FRONT_LAYOUT + COVERED + MARKER(["Für Mama.", "Ganz ohne", "Rückenübungen."]) +
-      FOOT("Lieferung direkt zu Ihren Eltern", "30 Tage Geld-zurück-Garantie") + ONLY,
+      FOOT("Vier Tasten, keine App", "30 Tage Geld-zurück-Garantie") + ONLY,
   },
   /* ---------- Ohne Produkt, nach Christians Feedback (14.10.): "Geht schon" braucht einen Bezug zum Ruecken ---------- */
   {

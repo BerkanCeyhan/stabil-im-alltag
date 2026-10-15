@@ -51,7 +51,7 @@ NEGATIV = [
 SITELINKS = [
     ("So funktioniert es", "Sanfte Impulse, 20 Minuten", "Die tiefe Muskulatur arbeitet", f"{SITE}/ruecken/lp3/#so-funktionierts"),
     ("In 3 Schritten startklar", "Befeuchten, anlegen, einschalten", "Christian zeigt es im Video", f"{SITE}/ruecken/lp3/#anleitung"),
-    ("Für Ihre Eltern", "Lieferung direkt zu den Eltern", "Vier Tasten, keine App", f"{SITE}/ruecken/lp3/?fuer=eltern"),
+    ("Für Ihre Eltern", "Ein Geschenk für den Rücken", "Vier Tasten, keine App", f"{SITE}/ruecken/lp3/?fuer=eltern"),
     ("Kundenstimmen", "4,9 von 5 aus 29 Bewertungen", "Über 120 Kundinnen und Kunden", f"{SITE}/ruecken/lp3/#stimmen"),
 ]
 CALLOUTS = ["30 Tage testen", "Kostenloser Versand", "Kein Abo", "Mit Wärmefunktion",
@@ -134,14 +134,14 @@ KAMPAGNEN = [
                 ],
                 "headlines": [
                     "Rückentraining für Eltern", "Ein Geschenk für den Rücken", "Rückentraining im Sessel",
-                    "Ganz ohne Rückenübungen", "Vier Tasten, keine App", "Lieferung direkt zu den Eltern",
+                    "Ganz ohne Rückenübungen", "Vier Tasten, keine App", "Mit persönlicher Einweisung",
                     "30 Tage zu Hause testen", "Entwickelt an der DSHS Köln", "Wellenpuls LWS",
                     "Kostenloser Versand", "Für Mama oder Papa", "Einfach zu bedienen",
                 ],
                 "pin": {"Rückentraining für Eltern": "HEADLINE_1"},
                 "descriptions": [
                     "Gurt anlegen, im Sessel sitzen bleiben: 20 Minuten, zweimal pro Woche, mit Wärme.",
-                    "Auf Wunsch liefern wir direkt zu Ihren Eltern. Christian erklärt die Anwendung persönlich.",
+                    "Kostenloser Versand, kein Abo. Christian erklärt die Anwendung persönlich.",
                     "30 Tage zu Hause testen. Hilft er nicht, gibt es den vollen Kaufpreis zurück.",
                     "Vier Tasten, kein Handy, keine App. Entwickelt an der Deutschen Sporthochschule Köln.",
                 ],
