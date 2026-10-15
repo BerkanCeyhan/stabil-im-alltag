@@ -1,4 +1,4 @@
-// Rendert die Rabatt-Anzeigen (299 EUR, 38 % Neukunden-Rabatt, Code NEUKUNDE) aus
+// Rendert die Rabatt-Anzeigen (299 EUR, 190 EUR Neukunden-Rabatt, Code NEUKUNDE) aus
 // assets/ads/2026-10/v3/rabatt-vorlage.html nach assets/ads/2026-10/v3/{r-05,e-04}-rabatt.jpg.
 //   node scripts/render-rabatt-ads.cjs
 // Braucht Playwright (hier aus ~/projects/ig-ressources) und einen lokalen Server auf Port 8766:
