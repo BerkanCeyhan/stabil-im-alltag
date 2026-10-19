@@ -440,7 +440,7 @@ h3{font-size:1.12rem;font-weight:600}
       <div class="pricebox p-a"><span class="now">489 €</span><span class="was">statt <s>732,80 €</s></span><span class="save">Sie sparen 243,80 €</span></div>
       <div class="pricebox p-b"><span class="now">299 €</span><span class="was">statt <s>732,80 €</s></span><span class="save">Sie sparen 433,80 €</span></div>
       <p class="code-hint p-b">Komplettpaket inklusive 38 % Neukunden-Rabatt auf den Gurt. Ihr Code <b>NEUKUNDE</b> ist im Bestellformular schon eingetragen.</p>
-      <a href="../checkout/" class="btn track-atc">Jetzt bestellen<small>und 30 Tage zu Hause testen</small></a>
+      <a href="../checkout/" class="btn track-atc" data-mess-klick="kauf-oben">Jetzt bestellen<small>und 30 Tage zu Hause testen</small></a>
       <p class="liefer" id="liefer" hidden><svg class="ico"><use href="#i-truck"/></svg><span>Heute bestellt, voraussichtlich am <b id="liefer-tag"></b> bei Ihnen</span></p>
 
       <div class="assure">
@@ -576,7 +576,7 @@ h3{font-size:1.12rem;font-weight:600}
       </ul>
     </div>
     <div class="mid-cta">
-      <a href="../checkout/" class="btn btn-inline track-atc">Jetzt bestellen<small><span class="p-a">489 € inklusive Bonus-Paket</span><span class="p-b">299 € statt 732,80 €, mit Neukunden-Rabatt</span></small></a>
+      <a href="../checkout/" class="btn btn-inline track-atc" data-mess-klick="kauf-paket">Jetzt bestellen<small><span class="p-a">489 € inklusive Bonus-Paket</span><span class="p-b">299 € statt 732,80 €, mit Neukunden-Rabatt</span></small></a>
       <p><svg class="ico"><use href="#i-shield"/></svg>30 Tage testen, Geld zurück</p>
     </div>
   </div>
@@ -679,7 +679,7 @@ h3{font-size:1.12rem;font-weight:600}
       <div class="pricebox p-a"><span class="now">489 €</span><span class="was">statt <s>732,80 €</s></span><span class="save">Bonus-Paket gratis</span></div>
       <div class="pricebox p-b"><span class="now">299 €</span><span class="was">statt <s>732,80 €</s></span><span class="save">Sie sparen 433,80 €</span></div>
       <p class="code-hint p-b">Komplettpaket mit Bonus-Paket und 38 % Neukunden-Rabatt. Code <b>NEUKUNDE</b> ist im Bestellformular schon eingetragen.</p>
-      <a href="../checkout/" class="btn track-atc">Jetzt bestellen<small>und 30 Tage zu Hause testen</small></a>
+      <a href="../checkout/" class="btn track-atc" data-mess-klick="kauf-unten">Jetzt bestellen<small>und 30 Tage zu Hause testen</small></a>
       <p class="fine">Kostenloser Versand. Einmalige Zahlung per PayPal oder Karte.</p>
     </div>
   </div>
@@ -717,7 +717,7 @@ h3{font-size:1.12rem;font-weight:600}
 <div class="sticky" id="sticky" aria-hidden="true">
   <div class="sticky-text p-a"><b>489 €</b>30 Tage Geld zurück</div>
   <div class="sticky-text p-b"><b>299 € <s style="font-size:0.8rem;font-weight:400;color:var(--muted)">732,80 €</s></b>38 % Neukunden-Rabatt</div>
-  <a href="../checkout/" class="btn track-atc" tabindex="-1">Jetzt bestellen</a>
+  <a href="../checkout/" class="btn track-atc" tabindex="-1" data-mess-klick="kauf-leiste">Jetzt bestellen</a>
 </div>
 
 <script>
@@ -758,6 +758,7 @@ h3{font-size:1.12rem;font-weight:600}
   new IntersectionObserver(function(e){inOffer=e[0].isIntersecting;upd();},{threshold:0.15}).observe(offer);
 })();
 </script>
+<script src="../../assets/messung.js" data-seite="lp3" defer></script>
 <script src="../../assets/consent.js" defer></script>
 </body>
 </html>

@@ -713,10 +713,10 @@
 
       <p>Für seine Studie brauchte er ein Gerät, das genau diese Muskeln erreicht. Es gab keins. Also hat er es gebaut und mit 60 Teilnehmenden über acht Wochen getestet. Danach wollten Teilnehmende die Prototypen kaufen, und daraus wurde eine Firma.</p>
 
-      <p>Das Gerät heißt <strong>Wellenpuls LWS</strong>. Ein Gurt, den man um den unteren Rücken legt. Die Elektroden sitzen genau dort, wo die tiefe Muskulatur liegt, und der Impuls kommt dort an, wo der Gurt sitzt.</p>
+      <p data-mess="wellenpuls">Das Gerät heißt <strong>Wellenpuls LWS</strong>. Ein Gurt, den man um den unteren Rücken legt. Die Elektroden sitzen genau dort, wo die tiefe Muskulatur liegt, und der Impuls kommt dort an, wo der Gurt sitzt.</p>
 
       <img src="../../../assets/lp3/anwendung-sofa.jpg" alt="Frau sitzt auf dem Sofa, den Wellenpuls LWS unter dem Pullover am Rücken" width="928" height="650" style="width:100%;height:auto;border-radius:10px;display:block;margin:28px 0 6px">
-      <div style="font-size:12px;color:var(--text-muted);margin:0 0 24px;">So sieht die Anwendung aus: Gurt anlegen, einschalten, sitzen bleiben. (Symbolbild)</div>
+      <div data-leiste-start style="font-size:12px;color:var(--text-muted);margin:0 0 24px;">So sieht die Anwendung aus: Gurt anlegen, einschalten, sitzen bleiben. (Symbolbild)</div>
 
       <p>Auch Fachleute setzen ihn ein. Das Gesundheitszentrum valmedica in Mülheim an der Ruhr hat ihn in seine Gesundheitsprogramme aufgenommen und schreibt dazu:</p>
 
@@ -818,8 +818,8 @@
     </div><!-- /article-body -->
 
     <!-- ═══ CTA ═══ -->
-    <div class="cta-final">
-      <a href="../../lp3/" class="btn-primary track-lead">Hier können Sie den Wellenpuls LWS ansehen und 30 Tage testen</a>
+    <div class="cta-final" data-mess="cta-ende">
+      <a href="../../lp3/" class="btn-primary track-lead" data-mess-klick="cta-ende">Hier können Sie den Wellenpuls LWS ansehen und 30 Tage testen</a>
       <div class="cta-terms"><span class="p-a">489 €</span><span class="p-b">299 € mit 38 % Neukunden-Rabatt</span> · kostenloser Versand · 30 Tage Geld zurück · Lieferung in der Regel innerhalb von 2 Werktagen</div>
     </div>
 
@@ -849,6 +849,14 @@
   </div>
 </footer>
 
+<div class="angebot-leiste" id="angebot-leiste" aria-hidden="true">
+  <div class="al-in">
+    <div class="al-text"><strong>Wellenpuls LWS</strong><span>30 Tage zu Hause testen</span></div>
+    <a href="../../lp3/" class="al-btn track-lead" data-mess-klick="leiste">Zum Angebot</a>
+  </div>
+</div>
+<script src="../../../assets/angebot-leiste.js" defer></script>
+<script src="../../../assets/messung.js" data-seite="adv-ruecken" defer></script>
 <script src="../../../assets/consent.js" defer></script>
 </body>
 </html>

@@ -665,10 +665,10 @@
 
       <p>NMES setzen Kliniken und Rehazentren seit Jahrzehnten ein, zum Beispiel nach Operationen, wenn Patienten selbst noch nicht trainieren können. Ein Impuls bringt den Muskel dazu, sich anzuspannen, während man einfach sitzen bleibt.</p>
 
-      <p>Ein Sportwissenschaftler von der Deutschen Sporthochschule Köln, Christian Senfleben, hat dafür ein Gerät gebaut, das gezielt die tiefe Muskulatur im unteren Rücken trainiert. Getestet hat er es in einer Studie mit 60 Teilnehmenden über acht Wochen. Es heißt <strong>Wellenpuls LWS</strong>: ein Gurt, den man um den unteren Rücken legt.</p>
+      <p data-mess="wellenpuls">Ein Sportwissenschaftler von der Deutschen Sporthochschule Köln, Christian Senfleben, hat dafür ein Gerät gebaut, das gezielt die tiefe Muskulatur im unteren Rücken trainiert. Getestet hat er es in einer Studie mit 60 Teilnehmenden über acht Wochen. Es heißt <strong>Wellenpuls LWS</strong>: ein Gurt, den man um den unteren Rücken legt.</p>
 
       <img src="../../../assets/lp3/anwendung-sessel.jpg" alt="Älterer Mann im Sessel mit dem Wellenpuls LWS um die Taille" width="618" height="700" style="width:100%;max-width:480px;height:auto;border-radius:10px;display:block;margin:28px auto 6px">
-      <div style="font-size:12px;color:var(--text-muted);margin:0 auto 24px;max-width:480px;">So sieht die Anwendung aus: Gurt anlegen, einschalten, im Sessel sitzen bleiben. (Symbolbild)</div>
+      <div data-leiste-start style="font-size:12px;color:var(--text-muted);margin:0 auto 24px;max-width:480px;">So sieht die Anwendung aus: Gurt anlegen, einschalten, im Sessel sitzen bleiben. (Symbolbild)</div>
 
       <p>Später habe ich gesehen, dass ihn auch das Gesundheitszentrum valmedica in Mülheim an der Ruhr in seinen Programmen einsetzt. Dort heißt es:</p>
 
@@ -752,8 +752,8 @@
     </div><!-- /article-body -->
 
     <!-- ═══ CTA ═══ -->
-    <div class="cta-final">
-      <a href="../../lp3/?fuer=eltern" class="btn-primary track-lead">Den Wellenpuls LWS für Ihre Eltern ansehen und 30 Tage testen</a>
+    <div class="cta-final" data-mess="cta-ende">
+      <a href="../../lp3/?fuer=eltern" class="btn-primary track-lead" data-mess-klick="cta-ende">Den Wellenpuls LWS für Ihre Eltern ansehen und 30 Tage testen</a>
       <div class="cta-terms"><span class="p-a">489 € einmalig</span><span class="p-b">299 € mit 38 % Neukunden-Rabatt</span>, kostenloser Versand, 30 Tage Geld zurück</div>
     </div>
 
@@ -782,6 +782,14 @@
   </div>
 </footer>
 
+<div class="angebot-leiste" id="angebot-leiste" aria-hidden="true">
+  <div class="al-in">
+    <div class="al-text"><strong>Wellenpuls LWS</strong><span>30 Tage zu Hause testen</span></div>
+    <a href="../../lp3/?fuer=eltern" class="al-btn track-lead" data-mess-klick="leiste">Zum Angebot</a>
+  </div>
+</div>
+<script src="../../../assets/angebot-leiste.js" defer></script>
+<script src="../../../assets/messung.js" data-seite="adv-eltern" defer></script>
 <script src="../../../assets/consent.js" defer></script>
 </body>
 </html>

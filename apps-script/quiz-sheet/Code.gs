@@ -1,10 +1,12 @@
 /**
  * Quiz -> Google Tabelle + Zoho Campaigns (ohne Make, nur Google Apps Script).
  *
- * Drei Nutzlasten, unterschieden über `typ`:
+ * Vier Nutzlasten, unterschieden über `typ`:
  *   quiz        Antworten des abgeschlossenen Quiz          -> Blatt "Quiz"
  *   schritt     ein Bildschirmwechsel im Quiz               -> Blatt "Schritte"
  *   identitaet  E-Mail + Attribution, getrennt vom Rest     -> Blatt "Identitaet" + Zoho
+ *   seite       Lesen und Klicken auf Advertorial, Landingpage, Checkout
+ *               (assets/messung.js)                         -> Blatt "Seiten"
  *
  * WARUM GETRENNTE BLÄTTER
  * Quiz-Antworten sind Gesundheitsdaten (Art. 9 DSGVO). In derselben Zeile mit
@@ -45,6 +47,7 @@
 var BLATT_QUIZ = 'Quiz';
 var BLATT_SCHRITTE = 'Schritte';
 var BLATT_IDENTITAET = 'Identitaet';
+var BLATT_SEITEN = 'Seiten';
 var BLATT_FEHLER = 'Fehler';
 
 /* ─────────────────────────── Eingang ─────────────────────────── */
@@ -59,6 +62,7 @@ function doPost(e) {
     switch (data.typ || 'quiz') {
       case 'schritt':    schreibeSchritt_(data);    break;
       case 'identitaet': schreibeIdentitaet_(data); break;
+      case 'seite':      schreibeSeite_(data);      break;
       default:           schreibeQuiz_(data);       break;
     }
     return json_({ ok: true });
@@ -132,6 +136,32 @@ function schreibeSchritt_(data) {
     'Screen': data.screen || '',
     'Ereignis': data.ereignis || 'view',
     'Verweildauer_ms': data.dwell || ''
+  });
+}
+
+/**
+ * Ein Ereignis auf Advertorial, Landingpage, Checkout oder Danke-Seite.
+ * Wie bei den Quiz-Schritten: keine Kennung außer einer zufälligen ID, die nur
+ * im Arbeitsspeicher der Seite lebt, kein Inhalt aus Formularfeldern.
+ * Der Endpunkt ist öffentlich, deshalb wird jeder Wert gekürzt.
+ */
+function schreibeSeite_(data) {
+  function k(v, n) { return String(v === undefined || v === null ? '' : v).slice(0, n || 80); }
+  anhaengen_(BLATT_SEITEN, {
+    'Zeitpunkt': new Date(),
+    'sid': k(data.sid, 40),
+    'Seite': k(data.seite, 40),
+    'Ereignis': k(data.ereignis, 30),
+    // bei "ansicht": Herkunft (Host + Pfad der vorigen Seite)
+    'Detail': k(data.detail, 60),
+    'Wert': typeof data.wert === 'number' ? data.wert : '',
+    'Sekunden': typeof data.sek === 'number' ? data.sek : '',
+    'Variante': k(data.variante, 4),
+    'Quelle': k(data.quelle, 12),
+    'utm_source': k(data.utm_source),
+    'utm_campaign': k(data.utm_campaign),
+    'utm_content': k(data.utm_content),
+    'Geraet': k(data.geraet, 10)
   });
 }
 
