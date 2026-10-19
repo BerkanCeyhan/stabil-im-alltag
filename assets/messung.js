@@ -24,7 +24,10 @@
  */
 (function () {
   var ENDPUNKT = 'https://script.google.com/macros/s/AKfycbwraM9stECq1iIpcdo1V--YByP7p78MGb-gpcNxdabL1nzF25OT9pJmfjyxlhrvZlQb3A/exec';
-  if (navigator.webdriver) return; // automatisierte Browser verfälschen die Zahlen
+  // Automatisierte Browser verfälschen die Zahlen. Wer in einem Test navigator.webdriver
+  // überschreibt, muss danach die Testzeilen löschen: Die "ende"-Ereignisse beim Schließen
+  // laufen an page.route vorbei und landen echt in der Tabelle.
+  if (navigator.webdriver) return;
 
   var skript = document.currentScript;
   var SEITE = (skript && skript.getAttribute('data-seite')) || location.pathname;
