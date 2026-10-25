@@ -232,7 +232,12 @@
     document.querySelectorAll('.track-atc').forEach(function (btn) {
       if (btn.__siaBound) return;
       btn.__siaBound = true;
-      btn.addEventListener('click', function (e) { e.preventDefault(); sendEvent('AddToCart', btn, { value: parseFloat(btn.dataset.value || '489'), currency: 'EUR' }); });
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        // Shopify-Kasse (assets/kasse.js): die Meta-App meldet AddToCart selbst, hier nicht doppelt.
+        if (window.SIA_kasseShopify) { window.location.href = btn.href; return; }
+        sendEvent('AddToCart', btn, { value: parseFloat(btn.dataset.value || '489'), currency: 'EUR' });
+      });
     });
   }
 
