@@ -1,5 +1,5 @@
 /*
- * Mitlaufende Leiste "Zum Angebot" für die Advertorials.
+ * Mitlaufende Leiste "Mehr Informationen" für die Advertorials, unten auf Handy und Desktop.
  *
  * Erscheint erst, wenn der Leser beim Wellenpuls angekommen ist: Das Element mit
  * data-leiste-start (die Bildunterschrift unter dem Anwendungsbild) muss einmal
@@ -10,7 +10,7 @@
  *   <div class="angebot-leiste" id="angebot-leiste">
  *     <div class="al-in">
  *       <div class="al-text"><strong>Wellenpuls LWS</strong><span>30 Tage zu Hause testen</span></div>
- *       <a href="../../lp3/" class="al-btn track-lead" data-mess-klick="leiste">Zum Angebot</a>
+ *       <a href="../../lp3/" class="al-btn track-lead" data-mess-klick="leiste">Mehr Informationen</a>
  *     </div>
  *   </div>
  */
@@ -29,6 +29,7 @@
     '.angebot-leiste .al-btn::after{content:" \\2192"}' +
     '.angebot-leiste .al-btn:hover{background:#1f6b56}' +
     '.angebot-leiste .al-btn:focus-visible{outline:3px solid #1A5C8A;outline-offset:2px}' +
+    '@media (max-width:400px){.angebot-leiste .al-in{gap:10px;padding:10px 12px}.angebot-leiste .al-btn{padding:12px 16px;font-size:14px}}' +
     '@media (prefers-reduced-motion:reduce){.angebot-leiste,.angebot-leiste.zeigen{transition:none}}';
 
   function start() {
