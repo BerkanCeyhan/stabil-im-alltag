@@ -21,7 +21,7 @@
  *   ?kasse=alt                     Test beenden, wieder alte Kasse
  */
 (function () {
-  var FUER_ALLE = false;
+  var FUER_ALLE = true;
   var BRUECKE = 'https://kasse.stabil-im-alltag.de/pages/kasse';
   var KEY = 'sia_kasse';
 
