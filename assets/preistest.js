@@ -62,4 +62,15 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', markiereLinks);
   else markiereLinks();
+
+  // Code-Knopf (data-code-kopieren): kopiert den Code, damit er im Shopify-Checkout nur
+  // eingefuegt werden muss. Seit 29.10.2026 traegt die Kasse den Code nicht mehr selbst ein.
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest ? e.target.closest('[data-code-kopieren]') : null;
+    if (!b) return;
+    var code = b.getAttribute('data-code-kopieren');
+    var fertig = function () { b.textContent = code + ' kopiert'; setTimeout(function () { b.textContent = code; }, 2000); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(code).then(fertig, fertig);
+    else fertig();
+  });
 })();

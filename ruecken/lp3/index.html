@@ -60,6 +60,8 @@ a{color:var(--brand)}
 .only-eltern-i{display:none}
 .v-eltern .only-eltern-i{display:inline}
 /* Preistest: .p-a nur bei 489 €, .p-b nur bei 299 € mit Neukunden-Rabatt (assets/preistest.js) */
+.code-copy{display:inline-block;padding:1px 10px;border:2px dashed currentColor;border-radius:8px;background:#fff;color:inherit;font:inherit;font-weight:800;letter-spacing:.04em;cursor:pointer}
+.code-copy:hover{background:#f2f6ff}
 .v-rabatt .p-a{display:none!important}
 html:not(.v-rabatt) .p-b{display:none!important}
 .code-hint{font-size:0.86rem;color:var(--ink-2);margin:-4px 0 14px;line-height:1.4}
@@ -440,7 +442,7 @@ h3{font-size:1.12rem;font-weight:600}
 
       <div class="pricebox p-a"><span class="now">489 €</span><span class="was">statt <s>732,80 €</s></span><span class="save">Sie sparen 243,80 €</span></div>
       <div class="pricebox p-b"><span class="now">299 €</span><span class="was">statt <s>732,80 €</s></span><span class="save">Sie sparen 433,80 €</span></div>
-      <p class="code-hint p-b">Komplettpaket inklusive 38 % Neukunden-Rabatt auf den Gurt. Ihr Code <b>NEUKUNDE</b> ist im Bestellformular schon eingetragen.</p>
+      <p class="code-hint p-b">Komplettpaket inklusive 38 % Neukunden-Rabatt auf den Gurt. Geben Sie an der Kasse den Code <button type="button" class="code-copy" data-code-kopieren="NEUKUNDE" title="Code kopieren">NEUKUNDE</button> ein.</p>
       <a href="../checkout/" class="btn track-atc" data-mess-klick="kauf-oben">Jetzt bestellen<small>und 30 Tage zu Hause testen</small></a>
       <p class="liefer" id="liefer" hidden><svg class="ico"><use href="#i-truck"/></svg><span>Heute bestellt, voraussichtlich am <b id="liefer-tag"></b> bei Ihnen</span></p>
 
@@ -458,7 +460,7 @@ h3{font-size:1.12rem;font-weight:600}
           <li><span><b>Videokurs</b> in 3 Videos</span><span class="tag">gratis<s>79 €</s></span></li>
           <li><span><b>E-Book</b> mit Startplan</span><span class="tag">gratis<s>34,90 €</s></span></li>
           <li><span><b>Versand</b> in 2 Werktagen</span><span class="tag">gratis<s>9,90 €</s></span></li>
-          <li class="p-b"><span><b>Neukunden-Rabatt</b> mit Code NEUKUNDE</span><span class="tag plain">−190,00 €</span></li>
+          <li class="p-b"><span><b>Neukunden-Rabatt</b> mit Code NEUKUNDE an der Kasse</span><span class="tag plain">−190,00 €</span></li>
         </ul>
       </div>
     </div>
@@ -577,7 +579,7 @@ h3{font-size:1.12rem;font-weight:600}
       </ul>
     </div>
     <div class="mid-cta">
-      <a href="../checkout/" class="btn btn-inline track-atc" data-mess-klick="kauf-paket">Jetzt bestellen<small><span class="p-a">489 € inklusive Bonus-Paket</span><span class="p-b">299 € statt 732,80 €, mit Neukunden-Rabatt</span></small></a>
+      <a href="../checkout/" class="btn btn-inline track-atc" data-mess-klick="kauf-paket">Jetzt bestellen<small><span class="p-a">489 € inklusive Bonus-Paket</span><span class="p-b">299 € statt 732,80 €, mit Code NEUKUNDE</span></small></a>
       <p><svg class="ico"><use href="#i-shield"/></svg>30 Tage testen, Geld zurück</p>
     </div>
   </div>
@@ -679,7 +681,7 @@ h3{font-size:1.12rem;font-weight:600}
       </ul>
       <div class="pricebox p-a"><span class="now">489 €</span><span class="was">statt <s>732,80 €</s></span><span class="save">Bonus-Paket gratis</span></div>
       <div class="pricebox p-b"><span class="now">299 €</span><span class="was">statt <s>732,80 €</s></span><span class="save">Sie sparen 433,80 €</span></div>
-      <p class="code-hint p-b">Komplettpaket mit Bonus-Paket und 38 % Neukunden-Rabatt. Code <b>NEUKUNDE</b> ist im Bestellformular schon eingetragen.</p>
+      <p class="code-hint p-b">Komplettpaket mit Bonus-Paket und 38 % Neukunden-Rabatt. Geben Sie an der Kasse den Code <button type="button" class="code-copy" data-code-kopieren="NEUKUNDE" title="Code kopieren">NEUKUNDE</button> ein.</p>
       <a href="../checkout/" class="btn track-atc" data-mess-klick="kauf-unten">Jetzt bestellen<small>und 30 Tage zu Hause testen</small></a>
       <p class="fine">Kostenloser Versand. Einmalige Zahlung per PayPal oder Karte.</p>
     </div>
