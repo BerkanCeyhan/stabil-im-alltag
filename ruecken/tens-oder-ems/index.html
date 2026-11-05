@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<script src="../../assets/kasse.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>TENS oder EMS? Der Unterschied einfach erklärt</title>
+<meta name="description" content="TENS soll Schmerzsignale dämpfen, EMS spannt Muskeln an. Der Unterschied einfach erklärt und was NMES für den unteren Rücken bedeutet.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="../../assets/logo_transparent.png">
+<link rel="apple-touch-icon" href="../../assets/logo_transparent.png">
+<script>
+/* Vergleichsseiten zeigen immer den Neukundenrabatt: erzwingt Variante b aus preistest.js, auch für die Links zur Landingpage. */
+(function(){try{var u=new URL(location.href);if(u.searchParams.get('angebot')!=='neukunde'){u.searchParams.set('angebot','neukunde');history.replaceState(null,'',u.href);}}catch(e){}})();
+</script>
+<script src="../../assets/preistest.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;700&family=Literata:opsz,wght@7..72,600;7..72,700&display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:oklch(24% 0.035 245);
+  --ink-2:oklch(36% 0.03 245);
+  --muted:oklch(46% 0.02 245);
+  --brand:oklch(38% 0.1 240);
+  --brand-deep:oklch(27% 0.075 243);
+  --brand-night:oklch(21% 0.055 245);
+  --action:oklch(47% 0.1 165);
+  --action-deep:oklch(39% 0.095 165);
+  --mint-wash:oklch(96% 0.022 165);
+  --gruen:oklch(70% 0.14 160);
+  --aus:oklch(86% 0.012 200);
+  --rot:oklch(55% 0.17 25);
+  --paper:oklch(99.2% 0.003 240);
+  --white:oklch(99.8% 0.001 240);
+  --line:oklch(89% 0.015 240);
+  --haar:oklch(70% 0.03 240);
+  --on-dark:oklch(97% 0.01 240);
+  --on-dark-2:oklch(86% 0.025 240);
+  --gutter:max(18px, env(safe-area-inset-left));
+  --serif:'Literata',Georgia,serif;
+  --sans:'Atkinson Hyperlegible Next','Segoe UI',Arial,sans-serif;
+  --r:16px;
+}
+html{font-size:18px;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-wrap:break-word}
+img,svg{display:block;max-width:100%}
+img{height:auto}
+a{color:var(--brand)}
+:focus-visible{outline:3px solid var(--action);outline-offset:3px;border-radius:6px}
+.nw{white-space:nowrap}
+
+.code-copy{display:inline-block;min-height:32px;padding:1px 10px;border:2px dashed currentColor;border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-weight:700;letter-spacing:.04em;cursor:pointer}
+.code-copy:hover{background:#f2f6ff}
+.alt{color:var(--muted);font-weight:400}
+
+/* Spalte und Schrift */
+.spalte{max-width:720px;margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
+h1,h2,h3,h4{font-family:var(--serif);font-optical-sizing:auto;color:var(--brand-deep);text-wrap:balance;line-height:1.2}
+h2{font-size:clamp(1.5rem,4.4vw,1.95rem);font-weight:700;letter-spacing:-0.01em;margin:clamp(40px,7vw,60px) 0 14px}
+h3{font-size:clamp(1.28rem,3.6vw,1.5rem);font-weight:700;margin:clamp(32px,6vw,44px) 0 12px}
+.text p+p{margin-top:14px}
+.text ul{margin:12px 0 14px;padding-left:1.15em;display:grid;gap:6px}
+
+/* Kopf */
+.top{display:flex;justify-content:center;padding:10px var(--gutter)}
+.top img{height:clamp(84px,12vw,104px);width:auto}
+.start{background:var(--brand-night);color:var(--on-dark);padding:14px 0 clamp(28px,5vw,44px)}
+.anzeige{text-align:right;font-size:0.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--on-dark)}
+.start h1{color:var(--on-dark);font-size:clamp(1.8rem,5.4vw,2.6rem);font-weight:700;letter-spacing:-0.01em;margin-top:8px}
+.unterzeile{font-size:clamp(1.14rem,3.2vw,1.34rem);line-height:1.35;margin-top:8px;color:var(--on-dark)}
+.intro{margin-top:22px;padding:clamp(16px,3vw,24px);border-radius:var(--r);background:oklch(100% 0 0 / 0.09);color:var(--on-dark)}
+.intro p+p{margin-top:14px}
+
+/* Bilder im Text */
+.bild-text{position:relative;margin-top:clamp(24px,5vw,36px);border-radius:var(--r);overflow:hidden}
+.bild-text img{width:100%}
+
+/* Sieben Merkmale */
+.merkmale{display:grid;gap:10px;margin-top:18px}
+.merkmale details{border:1px solid var(--line);border-radius:14px;background:var(--white)}
+.merkmale summary{list-style:none;cursor:pointer;position:relative;padding:17px 50px 17px 18px;font-weight:700;line-height:1.3}
+.merkmale summary::-webkit-details-marker{display:none}
+.merkmale summary::before,.merkmale summary::after{content:'';position:absolute;right:19px;top:50%;width:14px;height:1.6px;background:var(--ink-2);transition:transform .2s ease-out}
+.merkmale summary::after{transform:rotate(90deg)}
+.merkmale details[open] summary::after{transform:rotate(0)}
+.merkmale details>div{padding:0 18px 16px;color:var(--ink-2);font-size:0.96rem}
+
+/* Knöpfe */
+.knopf{display:flex;justify-content:center;margin-top:20px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:56px;padding:10px 26px;border-radius:12px;background:var(--action);color:var(--white);font-weight:700;text-decoration:none;text-align:center;line-height:1.25;transition:background .2s ease-out}
+.btn:hover{background:var(--action-deep)}
+
+/* Stimmen, Tipp, Bestellung */
+.paket{margin-top:16px;border-radius:var(--r);background:var(--white);border:1px solid var(--line);padding:clamp(10px,2vw,18px)}
+.paket img{width:100%;max-width:440px;margin:0 auto}
+.preis{font-family:var(--serif);font-size:1.9rem;font-weight:700;line-height:1.1;color:var(--brand-deep);margin-top:16px}
+.preis small{display:block;font-family:var(--sans);font-size:0.84rem;font-weight:400;line-height:1.35;color:var(--ink-2);margin-top:4px}
+.warn{margin-top:18px;font-size:0.86rem;line-height:1.5;color:var(--ink-2)}
+
+/* Fuß */
+.foot{margin-top:clamp(44px,8vw,68px);background:var(--ink);color:oklch(84% 0.015 245);padding:30px var(--gutter) 38px;font-size:0.84rem;line-height:1.6}
+.foot-in{max-width:720px;margin:0 auto}
+.foot a{color:oklch(92% 0.015 245)}
+.foot p+p{margin-top:10px}
+.foot .links{margin-top:18px;padding-top:14px;border-top:1px solid oklch(100% 0 0 / 0.16)}
+
+
+/* Fotos, Risiko */
+.foto{margin-top:16px;border-radius:var(--r);overflow:hidden}
+.foto img{width:100%}
+.unterschrift{margin-top:8px;font-size:0.9rem;color:var(--ink-2)}
+.tipp{margin-top:14px;padding:14px 16px;border-radius:14px;background:var(--mint-wash)}
+.zahlung{display:block;width:100%;max-width:300px;margin:14px auto 0}
+.risiko{margin-top:6px;padding:clamp(16px,3vw,24px);border-radius:var(--r);background:var(--mint-wash)}
+.risiko h3{margin:0 0 10px}
+.risiko ol{padding-left:1.25em;display:grid;gap:7px}
+.risiko small{display:block;margin-top:12px;font-size:0.84rem;line-height:1.45;color:var(--ink-2)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a href="/"><img src="../../assets/logo_transparent.png" alt="Stabil im Alltag" width="604" height="413"></a>
+</header>
+
+<section class="start">
+  <div class="spalte">
+    <p class="anzeige">Anzeige</p>
+    <h1>TENS oder EMS? Der Unterschied einfach erklärt</h1>
+    <p class="unterzeile">Was hinter den Begriffen steckt und was NMES für den unteren Rücken bedeutet</p>
+    <div class="intro">
+      <p>Wer ein Gerät für den Rücken sucht, stößt schnell auf TENS und EMS. Die Geräte sehen ähnlich aus: Elektroden auf der Haut, elektrische Impulse. Ihr Ziel ist aber ein anderes.</p>
+      <p>TENS soll Schmerzsignale dämpfen. EMS spannt Muskeln an und heißt in der Forschung NMES. Gemeint ist dasselbe Prinzip, deshalb bleiben wir auf dieser Seite beim Begriff NMES.</p>
+    </div>
+  </div>
+</section>
+
+<main class="spalte">
+
+<figure class="bild-text"><img src="../../assets/lp3/problem.jpg" alt="Frau sitzt am Morgen auf der Bettkante und hält sich den unteren Rücken" width="1200" height="900"></figure>
+
+<div class="text">
+  <h2>Warum so viele Menschen vor dieser Frage stehen</h2>
+  <p>Rückenschmerzen gehören zu den häufigsten Beschwerden in Deutschland. In einer Befragung des Robert Koch-Instituts gaben 61,3 Prozent der Erwachsenen an, in den vergangenen zwölf Monaten Rückenschmerzen gehabt zu haben. Bei 15,5 Prozent waren sie chronisch.</p>
+  <p>Viele suchen irgendwann nach etwas, das sie selbst zu Hause tun können, und stoßen dabei auf Geräte mit elektrischen Impulsen. Fast immer fallen dann dieselben zwei Begriffe. Wer sie verwechselt, kauft leicht ein Gerät, das für etwas anderes gedacht ist.</p>
+
+  <h2>TENS in Kürze</h2>
+  <p>TENS arbeitet mit schwachen Impulsen an den Nerven und soll die Weiterleitung von Schmerzsignalen dämpfen. Man spürt ein Kribbeln, der Muskel bleibt dabei in Ruhe. Laut dem Institut für Qualität und Wirtschaftlichkeit im Gesundheitswesen (IQWiG) ist nicht belegt, dass Elektrotherapien chronische Rückenschmerzen lindern können. Wenn Sie eine Schmerzbehandlung suchen, sprechen Sie am besten mit Ihrer Ärztin oder Ihrem Arzt, auch über ein TENS-Gerät auf Rezept.</p>
+
+  <h2>Was NMES anders macht</h2>
+  <p>NMES steht für neuromuskuläre Elektrostimulation. Die Impulse sind stärker als bei TENS und bringen den Muskel dazu, sich anzuspannen und wieder zu lösen. Das ist Muskeltraining und keine Schmerzbehandlung.</p>
+  <ul>
+    <li>Die Muskeln spannen sich spürbar an und lösen sich wieder</li>
+    <li>Es fühlt sich wie ein deutliches Ziehen an, danach kann es Muskelkater geben</li>
+    <li>Als Gürtel läuft es auch im Sitzen, ohne dass Sie dafür Übungen machen</li>
+    <li>Am Rücken liegen die Elektroden direkt über der Muskulatur, die Sie trainieren möchten</li>
+  </ul>
+  <p>Kleine Studien deuten darauf hin, dass NMES Kraft und Ausdauer der Rumpfmuskulatur steigern kann. Die Arbeiten sind klein und betreffen andere Geräte.</p>
+
+  <h3>Für wen NMES infrage kommt</h3>
+  <p>NMES passt eher zu Ihnen, wenn Sie</p>
+  <ul data-mess="ziel">
+    <li>die Muskulatur am unteren Rücken trainieren möchten</li>
+    <li>Übungen bisher nicht durchgehalten haben</li>
+    <li>etwas suchen, das Sie im Sitzen zu Hause machen können</li>
+  </ul>
+  <p>Gürtel für den Rücken kosten rund 55 bis 489 Euro. Die Unterschiede liegen vor allem bei den Elektroden, bei der Bedienung und bei der Betreuung nach dem Kauf.</p>
+
+  <h3>Warum Rückentraining oft am Alltag scheitert</h3>
+  <p>Bei Rückenschmerzen ohne klare Ursache ist aktives Training am besten belegt, und Krankengymnastik oder Rückenübungen bleiben dafür die erste Wahl. Schwierig wird es beim Dranbleiben: Laut einer Übersichtsarbeit im Fachblatt The Spine Journal machen bis zu 70 Prozent der Menschen mit chronischen Rückenschmerzen ihre verordneten Heimübungen nicht.</p>
+  <p>Ein NMES-Gurt senkt die Hürde: zweimal pro Woche 20 Minuten im Sitzen, zum Beispiel abends vor dem Fernseher. Er ersetzt keine Übungen, macht Training aber auch an den Tagen möglich, an denen sonst nichts passieren würde.</p>
+
+  <h2 id="wellenpuls">Der Wellenpuls LWS: NMES-Training für den unteren Rücken</h2>
+  <p>Ein Gerät für dieses Ziel ist der Wellenpuls LWS, ein Trainingsgurt für den unteren Rücken. Sie legen ihn um die Taille, das Oberteil bleibt darüber, und schalten ihn ein.</p>
+  <figure class="foto"><img src="../../assets/lp3/anwendung-sofa.jpg" alt="Frau sitzt auf dem Sofa und sieht fern, der Gurt sitzt um ihre Taille, das Oberteil liegt darüber" width="928" height="650" loading="lazy"></figure>
+  <ul>
+    <li>Zweimal pro Woche 20 Minuten, dann schaltet er von selbst ab</li>
+    <li>Vier Tasten, keine App, kein Handy</li>
+    <li>Etwas Wasser genügt, keine Klebepads</li>
+    <li>15 Stufen, Wärme per eigener Taste</li>
+    <li>Akku, lädt per USB</li>
+    <li>Passt von 78 bis 130 cm Bauchumfang</li>
+  </ul>
+
+  <h3>So legen Sie ihn an</h3>
+  <figure class="foto"><img src="../../assets/lp3/schritt-2-anlegen.jpg" alt="Der Gurt wird um die Taille gelegt und mit Klett festgezogen" width="800" height="600" loading="lazy"></figure>
+  <p class="unterschrift">Um die Taille legen und mit Klett festziehen.</p>
+
+  <h3 id="bestellen">Das ist im Preis enthalten</h3>
+  <figure class="paket"><img src="../../assets/product-image-1.png" alt="Das Paket: Wellenpuls LWS, 1:1-Beratung mit Christian, Videokurs in 3 Videos, E-Book" width="577" height="433" loading="lazy"></figure>
+  <ul>
+    <li>Wellenpuls LWS mit Reiseetui und Zubehör</li>
+    <li>1:1-Gespräch mit Gründer Christian Senfleben</li>
+    <li>Videokurs in 3 Videos und E-Book mit Startplan</li>
+    <li>Kostenloser Versand, kein Abo</li>
+  </ul>
+  <p class="preis">299&nbsp;€ <s class="alt">489&nbsp;€</s><small>mit Neukundenrabatt, Einmalzahlung, inkl. MwSt.</small></p>
+  <p class="tipp"><b>Tipp:</b> Den Wellenpuls LWS gibt es aktuell mit einem Neukundenrabatt von 190 Euro. Sie zahlen 299&nbsp;€ statt 489&nbsp;€, wenn Sie an der Kasse den Code <button type="button" class="code-copy" data-code-kopieren="NEUKUNDE" title="Code kopieren">NEUKUNDE</button> eingeben.</p>
+  <div class="knopf"><a href="../lp3/" class="btn track-lead" data-mess-klick="lp-angebot">Zum Angebot</a></div>
+  <img class="zahlung" src="../../assets/lp3/zahlung.png" alt="Zahlung per PayPal, Mastercard oder Visa" width="470" height="121" loading="lazy">
+
+  <div class="risiko" data-mess="risiko">
+    <h3>So gehen Sie beim Kauf kein Risiko ein</h3>
+    <ol>
+    <li>Sie haben ab Erhalt 30 Tage Zeit, den Gurt zu Hause ganz normal zu nutzen.</li>
+    <li>Passt er nicht zu Ihnen, genügt eine E-Mail.</li>
+    <li>Die Rücksendung ist mit dem Rücksendelabel von Wellenpuls kostenlos.</li>
+    <li>Nach Eingang und Prüfung erstattet Wellenpuls den Kaufpreis auf demselben Zahlungsweg.</li>
+    </ol>
+    <small>Das Rückgaberecht gilt für Verbraucher und Lieferungen innerhalb Deutschlands. Der Gurt muss vollständig und unbeschädigt zurückkommen. Ihr gesetzliches Widerrufsrecht bleibt unberührt. <a href="https://kasse.stabil-im-alltag.de/policies/terms-of-service" rel="noopener">Bedingungen in den AGB, § 6a</a></small>
+  </div>
+
+  <h2>Häufige Fragen</h2>
+</div>
+
+<div class="merkmale" data-mess="fragen">
+  <details><summary>Ich habe schon viel ausprobiert. Warum sollte das hier anders sein?</summary><div>Salben, Wärme und Massage wirken von außen auf den Rücken. Der Gurt spannt die Muskeln am unteren Rücken an, jede Einheit ist also Training. Ob er zu Ihnen passt, prüfen Sie 30 Tage lang zu Hause.</div></details>
+  <details><summary>Bringt das überhaupt etwas?</summary><div>Dass die Muskeln arbeiten, spüren Sie schon bei der ersten Anwendung und oft am nächsten Tag als Muskelkater. Kleine Studien deuten darauf hin, dass NMES Kraft und Ausdauer der Rumpfmuskulatur steigern kann. Zum Wellenpuls LWS selbst gibt es keine veröffentlichte Studie, und weniger Schmerzen lassen sich nicht versprechen.</div></details>
+  <details><summary>Komme ich mit der Technik zurecht?</summary><div>Der Gurt hat vier Tasten: Ein und Aus, Minus, Plus, Wärme. Sie brauchen weder Handy noch App. Zum Paket gehören ein Videokurs und ein 1:1-Gespräch, in dem Gründer Christian Senfleben den Ablauf mit Ihnen durchgeht.</div></details>
+  <details><summary>Tut das weh?</summary><div>Das Ziehen ist am Anfang ungewohnt. Die Stärke bestimmen Sie selbst: Beginnen Sie auf Stufe 1 und steigern Sie langsam, bis Sie die Muskeln spüren. Bekommen Sie Muskelkater, senken Sie die Stufe.</div></details>
+  <details><summary>Habe ich dafür überhaupt Zeit?</summary><div>Wellenpuls empfiehlt zweimal pro Woche 20 Minuten im Sitzen, zum Beispiel abends vor dem Fernseher. Nach 20 Minuten schaltet der Gurt von selbst ab.</div></details>
+  <details><summary>Warum kostet er mehr als andere Gürtel?</summary><div>Im Preis stecken der Gurt mit Wärme und festen Elektroden, das Gespräch mit dem Gründer, der Videokurs und das E-Book. Zweimal pro Woche sind 104 Einheiten im Jahr, bei 299&nbsp;€ im ersten Jahr also rund 2,90&nbsp;€ pro Einheit. Klebepads müssen Sie nicht nachkaufen, und es gibt kein Abo.</div></details>
+  <details><summary>Was passiert, wenn er nicht zu mir passt?</summary><div>Dann schreiben Sie Wellenpuls innerhalb von 30 Tagen ab Erhalt eine E-Mail und schicken den Gurt mit dem kostenlosen Rücksendelabel zurück. Nach Eingang und Prüfung erstattet Wellenpuls den Kaufpreis.</div></details>
+  <details><summary>Ersetzt der Gurt Physiotherapie oder Bewegung?</summary><div>Nein. Bewegung ist am besten belegt, der Gurt kann dazukommen. Besprechen Sie mit Ihrer Ärztin oder Ihrem Arzt, ob ein Training mit Strom für Sie infrage kommt.</div></details>
+  <details><summary>Ist NMES sicher? Für wen ist der Gurt nicht geeignet?</summary><div>Nicht geeignet ist er bei Herzschrittmacher, Metallimplantaten im Rumpfbereich, Epilepsie, Herzrhythmusstörungen, in der Schwangerschaft und bei stark veränderten Blutdruckwerten. Neue oder unklare Rückenschmerzen lassen Sie bitte zuerst ärztlich abklären. Schwere Muskelschäden wurden in Einzelfällen nach Ganzkörpertraining mit Strom beschrieben, zu lokalen Gürteln gibt es kaum Daten. Steigern Sie die Stufe deshalb langsam.</div></details>
+  <details><summary>Kann ich ihn für meine Eltern bestellen?</summary><div>Ja. Das Gespräch mit Christian kann auch direkt mit Ihrer Mutter oder Ihrem Vater stattfinden. Prüfen Sie die Gegenanzeigen bitte gemeinsam.</div></details>
+</div>
+
+<div class="knopf"><a href="../lp3/" class="btn track-lead" data-mess-klick="lp-unten">Zum Wellenpuls LWS</a></div>
+
+</main>
+
+<footer class="foot">
+  <div class="foot-in">
+    <p>Die Informationen auf dieser Seite stellen keine medizinische Beratung dar und sollten nicht als solche betrachtet werden. Konsultieren Sie Ihren Arzt, bevor Sie Ihre regelmäßige medizinische Versorgung ändern. Der Wellenpuls LWS ist ein Trainingsgerät und kein Medizinprodukt. Er ist nicht dazu bestimmt, Krankheiten zu diagnostizieren, zu behandeln, zu heilen oder zu verhindern. Die Wirkung ist von individuellen Faktoren abhängig. Die Abbildungen von Betroffenen und Anwendern sind teils nachempfunden.</p>
+    <p class="links">© 2026 Stabil im Alltag, ein Angebot der Wellenpuls GmbH &nbsp;|&nbsp; <a href="/impressum/">Impressum</a> &nbsp;|&nbsp; <a href="/datenschutz/">Datenschutz</a> &nbsp;|&nbsp; <a href="#" onclick="SIA_openConsent();return false;">Cookie-Einstellungen</a></p>
+  </div>
+</footer>
+
+<script src="../../assets/messung.js" data-seite="tens-ems" defer></script>
+<script src="../../assets/consent.js" defer></script>
+</body>
+</html>
