@@ -15,9 +15,13 @@
  * (per Link erzwungen, nicht Teil des 50/50-Vergleichs).
  *
  * Schalter: TEST_AKTIV = false zeigt allen ohne Parameter 489 €.
+ *
+ * Seit 15.11.2026 ist der Test beendet: NUR_REGULAER = true zeigt jedem 489 €, auch wenn der
+ * Browser noch Variante b gespeichert hat oder ein alter Anzeigenlink ?angebot=neukunde trägt.
  */
 (function () {
-  var TEST_AKTIV = true;
+  var NUR_REGULAER = true;
+  var TEST_AKTIV = false;
   var KEY = 'sia_preistest_2026_10';
   var V = {
     a: { variante: 'a', preis: 489, code: '', param: 'regulaer' },
@@ -30,7 +34,9 @@
   try { gespeichert = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
 
   var v, quelle;
-  if (p === 'neukunde' || p === 'regulaer') {
+  if (NUR_REGULAER) {
+    v = 'a'; quelle = 'ohne-test';
+  } else if (p === 'neukunde' || p === 'regulaer') {
     v = p === 'neukunde' ? 'b' : 'a';
     // Einmal per Anzeige erzwungen bleibt erzwungen, auch beim Wiederkommen ohne Parameter.
     quelle = gespeichert && gespeichert.v === v ? gespeichert.quelle : 'anzeige';
