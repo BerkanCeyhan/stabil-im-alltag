@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vier Jahre Physiotherapie und Übungen: Was meinem Rücken gefehlt hat | Stabil im Alltag</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="../../../assets/logo_transparent.png">
+  <link rel="apple-touch-icon" href="../../../assets/logo_transparent.png">
+  <script src="../../../assets/preistest.js"></script>
+  <style>
+    /* Preistest: .p-a nur bei 489 €, .p-b nur bei 299 € mit Neukunden-Rabatt (assets/preistest.js) */
+    .v-rabatt .p-a{display:none!important}
+    html:not(.v-rabatt) .p-b{display:none!important}
+
+    :root {
+      --primary:  #1A5C8A;
+      --teal:     #28836A;
+      --amber:    #7A5C12;
+      --green:    #27865A;
+      --red:      #C0392B;
+      --bg:       #F4F7FA;
+      --surface:  #fff;
+      --text:     #1E2D3A;
+      --text-muted: #6B7E8C;
+      --border:   #D0DCE8;
+      --max:      740px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Libre Franklin', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.78;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── HEADER ── */
+    .site-header {
+      background: var(--surface);
+      border-bottom: 3px solid var(--primary);
+      padding: 0 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100px;
+      gap: 16px;
+    }
+    .header-logo {
+      font-family: 'Lora', serif;
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--primary);
+      letter-spacing: -0.3px;
+    }
+    .header-logo span { color: var(--teal); }
+    .header-anzeige {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #6B7E8C;
+      border: 1.5px solid #B0BEC5;
+      border-radius: 3px;
+      padding: 2px 10px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      background: #F0F4F7;
+    }
+
+    /* ── ARTICLE ── */
+    .article-outer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 40px 20px 72px;
+    }
+
+    .article-cat {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .article-headline {
+      font-family: 'Lora', serif;
+      font-size: clamp(24px, 5vw, 36px);
+      font-weight: 600;
+      line-height: 1.25;
+      color: #101E28;
+      margin-bottom: 18px;
+    }
+
+    .article-deck {
+      font-size: 17px;
+      line-height: 1.65;
+      color: #3A5060;
+      font-style: italic;
+      border-left: 3px solid var(--primary);
+      padding-left: 16px;
+      margin-bottom: 24px;
+    }
+
+    /* ── AUTHOR ROW ── */
+    .author-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 28px;
+    }
+    .author-avatar {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: #D9E8F0;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .author-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .author-name  { font-weight: 700; font-size: 15px; color: #1a1a1a; }
+    .author-role  { font-size: 12.5px; color: var(--text-muted); }
+    .author-date  { font-size: 12.5px; color: var(--text-muted); margin-top: 2px; }
+
+    /* ── IMAGES ── */
+    .article-img {
+      width: 100%;
+      border-radius: 10px;
+      margin: 28px 0;
+      display: block;
+      object-fit: cover;
+      max-height: 460px;
+    }
+
+    /* 4:3 crop — zeigt unteren Bildbereich (Gurt sichtbar) */
+    .img-crop-43 {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border-radius: 10px;
+      margin: 28px 0;
+    }
+    .img-crop-43 img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: bottom;
+      display: block;
+    }
+
+    /* ── BODY TEXT ── */
+    .article-body p { margin-bottom: 20px; }
+
+    .article-body h2 {
+      font-family: 'Lora', serif;
+      font-size: clamp(20px, 4vw, 26px);
+      font-weight: 600;
+      line-height: 1.3;
+      color: #101E28;
+      margin: 44px 0 16px;
+    }
+
+    .article-body h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 28px 0 10px;
+    }
+
+    .article-body strong { font-weight: 700; }
+    .article-body em    { font-style: italic; }
+
+    /* ── PULLQUOTE ── */
+    .pullquote {
+      border-left: 4px solid var(--primary);
+      background: #E8F1F8;
+      border-radius: 0 10px 10px 0;
+      padding: 18px 22px;
+      margin: 28px 0;
+      font-style: italic;
+      font-size: 18px;
+      line-height: 1.6;
+      color: #1E2D3A;
+    }
+
+    hr { border: none; border-top: 1px solid var(--border); margin: 36px 0; }
+
+    /* ── SCIENCE / INFO BOX ── */
+    .science-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--primary);
+      border-radius: 0 0 12px 12px;
+      padding: 24px;
+      margin: 28px 0;
+    }
+    .science-box .box-title {
+      font-family: 'Lora', serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+    }
+
+    /* ── TIMELINE (WOCHEN) ── */
+    .woche-item {
+      border-left: 3px solid var(--primary);
+      padding-left: 20px;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .woche-item::before {
+      content: '';
+      width: 12px; height: 12px;
+      background: var(--primary);
+      border-radius: 50%;
+      position: absolute;
+      left: -7.5px; top: 6px;
+    }
+    .woche-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .woche-title {
+      font-family: 'Lora', serif;
+      font-size: 19px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 12px;
+    }
+    .woche-item p { margin-bottom: 12px; font-size: 16px; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonial-grid { display: flex; flex-direction: column; gap: 16px; margin: 28px 0; }
+    .testimonial-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 22px 18px;
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '"';
+      font-family: 'Lora', serif;
+      font-size: 64px;
+      color: #C8DCE8;
+      position: absolute;
+      top: 6px; left: 14px;
+      line-height: 1;
+    }
+    .stars { color: #e6a010; font-size: 13px; margin-bottom: 6px; }
+    .testimonial-text { font-size: 15px; line-height: 1.65; color: #333; font-style: italic; padding-top: 8px; }
+    .testimonial-author { margin-top: 12px; font-size: 13px; font-weight: 700; color: var(--primary); }
+
+    /* ── REASONS LIST ── */
+    .reasons-list { list-style: none; margin: 0 0 24px; }
+    .reasons-list li {
+      padding: 12px 0;
+      font-size: 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .reasons-list li:last-child { border-bottom: none; }
+    .reasons-list .num {
+      background: var(--primary);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      border-radius: 50%;
+      width: 26px; height: 26px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── FAZIT LIST ── */
+    .fazit-list { list-style: none; margin: 16px 0 24px; }
+    .fazit-list li {
+      padding: 7px 0;
+      font-size: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .fazit-list li:last-child { border-bottom: none; }
+
+    /* ── UPDATE BOX ── */
+    .update-box {
+      background: #FFFBEC;
+      border: 2px solid #D4A800;
+      border-radius: 12px;
+      padding: 24px 24px 20px;
+      margin: 40px 0;
+    }
+    .update-label {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 6px;
+    }
+    .update-box h3 {
+      font-family: 'Lora', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 12px;
+      line-height: 1.35;
+    }
+    .update-box p { font-size: 15px; margin-bottom: 10px; }
+    .update-perks { list-style: none; margin: 14px 0; }
+    .update-perks li { padding: 5px 0; font-size: 15px; font-weight: 600; }
+    .update-perks li::before { content: "✅ "; }
+    .update-note { font-size: 12px; color: #888; font-style: italic; margin-top: 8px; }
+
+    /* ── PRODUCT CARD ── */
+    .product-card {
+      background: var(--surface);
+      border: 2px solid var(--primary);
+      border-radius: 16px;
+      padding: 28px 24px;
+      margin: 40px 0;
+      box-shadow: 0 4px 24px rgba(26,92,138,0.10);
+    }
+    .product-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+    .product-name {
+      font-family: 'Lora', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 4px;
+    }
+    .product-tagline { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+    .rating-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; font-size: 14px; }
+    .rating-stars { color: #e6a010; font-size: 18px; }
+
+    .feature-list { list-style: none; margin: 0 0 20px; }
+    .feature-list li {
+      padding: 7px 0;
+      font-size: 14.5px;
+      border-bottom: 1px solid #EEF2F6;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .feature-list li:last-child { border-bottom: none; }
+    .feature-list .chk { color: var(--green); font-weight: 700; flex-shrink: 0; }
+
+    .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 22px; }
+    .pros-box { background: #F0FAF5; border-radius: 8px; padding: 14px; }
+    .cons-box { background: #FEF2F2; border-radius: 8px; padding: 14px; }
+    .pros-box h4 { color: var(--green); font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+    .cons-box h4 { color: var(--red);   font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; }
+    .pros-box ul, .cons-box ul { list-style: none; }
+    .pros-box li, .cons-box li { font-size: 13px; line-height: 1.5; padding: 3px 0; }
+    .pros-box li::before { content: "✅ "; }
+    .cons-box li::before { content: "❌ "; }
+
+    .btn-primary {
+      display: block;
+      width: 100%;
+      background: var(--teal);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 17px 24px;
+      font-family: 'Libre Franklin', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      text-align: center;
+      cursor: pointer;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+    }
+    .guarantee-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ── AUTHOR BIO ── */
+    .author-bio {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 44px 0 28px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+    .author-bio-avatar {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: #D9E8F0;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .author-bio-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .author-bio-name { font-weight: 700; font-size: 16px; margin-bottom: 2px; }
+    .author-bio-role { font-size: 12.5px; color: var(--primary); margin-bottom: 10px; font-weight: 600; }
+    .author-bio-text { font-size: 14px; color: #555; line-height: 1.65; }
+
+    /* ── ABOUT MAG ── */
+    .about-mag {
+      background: #EDF3F8;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 28px 0;
+      font-size: 13px;
+      color: #4A6070;
+      line-height: 1.65;
+    }
+    .about-mag strong { color: #2A3E4E; }
+
+    /* ── DISCLAIMER ── */
+    .disclaimer {
+      background: #EFF2F5;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0 36px;
+      font-size: 11.5px;
+      line-height: 1.65;
+      color: #90A0AC;
+    }
+    .disclaimer strong { color: #6E8090; }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 28px 20px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .footer-logo {
+      font-family: 'Lora', serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 10px;
+      display: block;
+    }
+    .footer-logo span { color: var(--teal); }
+    .footer-links { display: flex; gap: 20px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
+    .footer-links a { color: var(--primary); text-decoration: underline; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:600px) {
+      .pros-cons { grid-template-columns: 1fr; }
+      .author-bio { flex-direction: column; align-items: center; text-align: center; }
+    }
+
+    /* ── BRIEF-REGISTER ── */
+    .article-body p.beat { margin-bottom: 10px; }
+    .article-body p.beat + p:not(.beat) { margin-top: 24px; }
+
+    .signature {
+      font-family: 'Lora', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 4px 0 0;
+    }
+
+    /* ── OPTIONEN-STAPEL ── */
+    .option-stack {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2px 24px;
+      margin: 28px 0;
+    }
+    .option-stack > div { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    .option-stack > div:last-child { border-bottom: none; }
+    .option-stack h3 { margin: 0 0 8px; }
+    .option-stack p { font-size: 16px; margin-bottom: 10px; }
+    .option-stack p:last-child { margin-bottom: 0; }
+
+    /* ── ABSCHLUSS-CTA ── */
+    .cta-final { margin: 40px 0 44px; }
+    .cta-final .btn-primary {
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 17px;
+      padding: 20px 26px;
+      line-height: 1.35;
+      margin-bottom: 12px;
+    }
+    .cta-terms {
+      text-align: center;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    @media(max-width:600px) {
+      .option-stack { padding: 2px 18px; }
+    }
+
+    /* adv/3: Bewertungen, Listen, Kurzüberblick */
+    .stimme{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:0 0 14px}
+    .stimme .sterne{color:#C8901A;font-size:17px;letter-spacing:2px;margin-bottom:8px}
+    .article-body .stimme p{font-size:17px;line-height:1.6;margin:0 0 8px}
+    .stimme .wer{font-size:14px;font-weight:700;color:var(--text-muted)}
+    .stimme + p{margin-top:24px}
+    .article-body ol.gruende{margin:0 0 24px;padding-left:24px}
+    .article-body ol.gruende li{margin-bottom:12px;padding-left:4px}
+    .article-body ul.haken{list-style:none;margin:0 0 24px;padding:0}
+    .article-body ul.haken li{position:relative;padding-left:32px;margin-bottom:12px}
+    .article-body ul.haken li::before{content:"✓";position:absolute;left:0;top:0;color:var(--green);font-weight:800}
+    .blick{text-align:left;background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin:0 0 22px}
+    .blick-titel{font-weight:800;font-size:18px;margin-bottom:10px;color:var(--text)}
+    .blick ul{margin:0;padding-left:20px;color:var(--text);font-size:16px;line-height:1.55}
+    .blick li{margin-bottom:6px}
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/"><img src="../../../assets/logo_transparent.png" alt="Stabil im Alltag" style="height:90px;width:auto;display:block;"></a>
+    <div class="header-anzeige">Anzeige</div>
+  </div>
+</header>
+
+<!-- ═══ ARTICLE ═══ -->
+<main>
+  <article class="article-outer">
+
+    <h1 class="article-headline">
+      Ich habe vier Jahre lang alles für meinen Rücken getan. Erst mit 61 hat mir jemand erklärt, warum es nicht gereicht hat.
+    </h1>
+
+    <p style="font-family:'Lora',serif;font-size:19px;line-height:1.55;color:var(--text);margin:18px 0 0">Physiotherapie, Übungen jeden Morgen, Wärme, eine neue Matratze. Eine Leserin erzählt, was ihr dabei die ganze Zeit gefehlt hat.</p>
+
+    <!-- Hero -->
+    <img
+      src="../../../assets/pexels-beytlik-7522172.jpg"
+      alt="Rückenschmerzen im Alltag"
+      class="article-img"
+      style="margin-top:24px;margin-bottom:6px"
+    >
+    <div style="font-size:12px;color:var(--text-muted);margin:0 0 24px;">(Symbolbild)</div>
+
+    <div class="author-row">
+      <div>
+        <div class="author-name">Renate, 61</div>
+        <div class="author-role">Erfahrungsbericht einer Leserin</div>
+        <div class="author-date">15. November 2026 · 15 Min. Lesezeit</div>
+      </div>
+    </div>
+
+    <!-- ─── BODY ─── -->
+    <div class="article-body">
+
+      <p>Liebe Leserin, lieber Leser,</p>
+
+      <p>vielleicht kennen Sie das.</p>
+
+      <p>Sie wachen auf und bleiben erst einmal liegen. Sie horchen in sich hinein, wie es heute wird. Dann drehen Sie sich auf die Seite, schieben die Beine aus dem Bett und drücken sich mit dem Arm hoch, weil es anders nicht geht.</p>
+
+      <p>Die ersten Schritte ins Bad gehen Sie leicht gebückt. Nach zehn Minuten wird es besser. Das wissen Sie inzwischen.</p>
+
+      <p>Nach einer Stunde Stehen in der Küche zieht es im unteren Rücken. Beim Einkaufen auch, spätestens in der Schlange an der Kasse. An schlechten Tagen zieht es bis ins Gesäß und das Bein hinunter.</p>
+
+      <p>Im Restaurant suchen Sie zuerst den Stuhl aus und dann das Essen.</p>
+
+      <p>Nachts werden Sie wach, weil Sie sich umdrehen müssen. Gegen vier liegen Sie da und suchen eine Lage, in der es geht.</p>
+
+      <p>Und wenn jemand fragt, sagen Sie: „Ach, mein Rücken ist halt nicht mehr der beste.“ Als käme das mit den Jahren eben so.</p>
+
+      <p>Ich habe das vier Jahre lang gesagt.</p>
+
+      <p>Ich bin Lehrerin und 61 Jahre alt. Sechs Stunden stehe ich vor der Klasse, danach sitze ich über den Korrekturen. Abends lag ich flach auf dem Sofa, weil nichts anderes mehr ging.</p>
+
+      <p>An den Wochenenden habe ich gerechnet. Gehe ich mit meiner Enkelin in den Park, oder schone ich mich, damit ich die Woche durchstehe? Ich habe mich öfter für die Woche entschieden, als ich zugeben möchte.</p>
+
+      <p>An den Schmerz hatte ich mich fast gewöhnt. Schlimmer war etwas anderes. Meine Enkelin Lena fragte, ob wir auf den Spielplatz gehen, und ich wusste die Antwort schon, bevor sie ausgeredet hatte. Dann habe ich ihr Gesicht gesehen, als ich Nein sagte.</p>
+
+      <p>Dabei habe ich alles gemacht, was man mir gesagt hat.</p>
+
+      <p>Ich war bei der Physiotherapie. Erst sechs Termine, dann noch einmal sechs, irgendwann habe ich aufgehört zu zählen. Die Übungen habe ich morgens vor der Schule gemacht, auf der Matte im Wohnzimmer, während mein Mann noch schlief.</p>
+
+      <p>Ich hatte Wärmepflaster in der Handtasche und Schmerztabletten im Nachttisch. Ich habe einen Rückenkurs an der Volkshochschule belegt und eine neue Matratze gekauft. Vom Orthopäden hatte ich sogar so ein Kribbelgerät mit Klebepads. Das half für zwei Stunden.</p>
+
+      <p>Jedes Mal wurde es kurz besser. Dann kam es wieder.</p>
+
+      <p>Lange dachte ich, ich müsste einfach noch mehr tun. Noch regelmäßiger üben, noch öfter zur Physiotherapie gehen, mich mehr zusammenreißen.</p>
+
+      <p>Heute weiß ich, dass mir die ganze Zeit ein Stück vom Bild gefehlt hat. Niemand hatte mit mir darüber gesprochen. Dieses Stück ist der Grund, warum ich heute zweimal in der Woche einen Gurt trage, den ich am Anfang für Unsinn gehalten habe.</p>
+
+      <p>Ich schreibe Ihnen das, weil ich vier Jahre lang an der falschen Stelle gesucht habe. Wenn Sie üben, zur Physiotherapie gehen und Tabletten nehmen, und es kommt trotzdem immer wieder, dann liegt das sehr wahrscheinlich nicht an Ihrer Disziplin.</p>
+
+      <h2>Warum Sie alles richtig machen und es trotzdem wiederkommt</h2>
+
+      <p>Rückenübungen trainieren die Muskeln, die Sie bewusst anspannen können. Das sind die Muskeln, die Sie bei der Brücke spüren oder im Vierfüßlerstand. Sie liegen nah an der Oberfläche und reagieren, wenn Sie es wollen.</p>
+
+      <p>Die Muskeln, die Ihre Wirbelsäule halten, liegen tiefer. Sie sitzen direkt an den Wirbeln und in der seitlichen Bauchwand. Diese Muskeln können Sie kaum bewusst anspannen. Sie arbeiten von allein, wenn Sie stehen, gehen und sitzen, und Sie merken nichts davon.</p>
+
+      <p>Bei vielen Menschen mit Rückenproblemen arbeiten sie kaum noch.</p>
+
+      <p>Das hat Christian Senfleben untersucht, ein Sportwissenschaftler von der Deutschen Sporthochschule Köln. Bei Menschen mit anhaltenden Beschwerden im unteren Rücken ist ausgerechnet diese tiefe Muskulatur häufig stark geschwächt.</p>
+
+      <p>Sie hat sich dann so weit zurückgebildet, dass der Körper sie kaum noch ansteuert. Ihre Arbeit übernehmen andere. Die Muskeln an der Oberfläche springen ein und verkrampfen dabei. Die Bandscheiben bekommen mehr Druck ab. Die Wirbelsäule muss ohne ihre eigene Stütze auskommen.</p>
+
+      <p>Sie können also jeden Morgen üben und zweimal die Woche zur Physiotherapie gehen. Solange die tiefen Muskeln dabei kaum mitarbeiten, bleibt das Problem dort, wo es sitzt.</p>
+
+      <p>Mir hat ein Bild geholfen. Wenn in einer Wand ein Wasserschaden steckt, können Sie die Stelle jedes Jahr neu streichen. Eine Weile sieht die Wand gut aus. Dann kommt der Fleck wieder durch.</p>
+
+      <p>So ging es mir mit meinem Rücken. Ich habe vier Jahre lang gestrichen.</p>
+
+      <h2>Warum es mit den Jahren schlimmer wird</h2>
+
+      <p>Das zweite Stück hat mich richtig getroffen, als ich es zum ersten Mal gelesen habe.</p>
+
+      <p>Wenn der Rücken wehtut, schützt sich der Körper. Die Muskeln rund um die Stelle spannen sich an und halten alles fest. Sie selbst fangen an, sich zu schonen. Sie bücken sich seltener, Sie tragen weniger, Sie lassen den langen Spaziergang weg.</p>
+
+      <p>Für ein paar Tage ist das richtig. Schwierig wird es, wenn dieser Schutz nicht mehr aufhört.</p>
+
+      <p>Die Muskeln an der Oberfläche halten jetzt dauernd fest. Die tiefen Muskeln werden noch weniger gebraucht, und was der Körper nicht braucht, baut er ab. Der Rücken verliert Halt. Er meldet sich schneller, also schonen Sie sich noch mehr.</p>
+
+      <img src="../../../assets/teufelskreislauf_clean_bg.png" alt="Der Kreislauf aus Schmerz, Schonung und schwächer werdender Muskulatur" class="article-img" style="background:var(--surface);object-fit:contain;padding:12px">
+
+      <p>So dreht sich das im Kreis, oft über viele Jahre. Physiotherapie, Wärme und Tabletten lindern für eine Weile. Den Kreis halten sie nicht an, solange die tiefen Muskeln schwach bleiben.</p>
+
+      <p>Deshalb sagen so viele nach Jahren denselben Satz: „Es wird kurz besser, und dann kommt es wieder.“ Bei mir waren es die Wochen nach jeder Physiotherapie. Drei, vier Wochen ging es gut, dann stand ich wieder am Anfang.</p>
+
+      <p>Lange habe ich die Schuld bei mir gesucht. Zu wenig Bewegung, zu viel Sitzen, zu viel Stress in der Schule, zu wenig Durchhalten.</p>
+
+      <p>Als ich das mit den tiefen Muskeln verstanden hatte, war ich zuerst gar nicht erleichtert. Ich war wütend. Vier Jahre Physiotherapie, viel Geld, unzählige Morgen auf der Matte. Und niemand hatte mir gesagt, dass meine Übungen an diesen Muskeln fast vorbeigehen.</p>
+
+      <h2>Was ich über Strom gelernt habe</h2>
+
+      <p>Beim Lesen bin ich auf etwas gestoßen, das ich zuerst nicht ernst genommen habe: Elektrostimulation.</p>
+
+      <p>Ich dachte an mein Kribbelgerät vom Orthopäden und an die Bauchgürtel aus der Fernsehwerbung. Dann habe ich gelesen, dass das drei verschiedene Dinge sind.</p>
+
+      <div class="science-box">
+        <div class="box-title">Drei Arten von Elektrostimulation</div>
+        <p><strong>TENS</strong> legt einen schwachen Strom über die Schmerzsignale. Das kann für ein paar Stunden lindern. Die Muskeln trainiert es nicht. So ein Gerät hatte ich vom Orthopäden.</p>
+        <p><strong>EMS-Gürtel aus der Werbung</strong> lassen Bauch, Po oder Beine kräftig zucken. Gemacht sind sie für Fitness und Figur.</p>
+        <p style="margin-bottom:0"><strong>NMES</strong>, die neuromuskuläre Elektrostimulation, setzen Kliniken und Rehazentren seit Jahrzehnten ein, zum Beispiel nach Operationen oder nach langer Bettruhe. Ein Impuls bringt den Muskel dazu, sich anzuspannen, auch wenn man selbst still sitzt. Entscheidend ist, wo die Elektroden sitzen und welcher Muskel angesprochen wird.</p>
+      </div>
+
+      <p>NMES hilft also dort, wo der Körper einen Muskel selbst nicht mehr richtig anspannt. Das war bei mir die tiefe Muskulatur im unteren Rücken.</p>
+
+      <p>Nur gab es für den unteren Rücken lange kein Gerät, das dafür gebaut war. Was man kaufen konnte, war für Bauch und Beine gemacht oder für alles gleichzeitig.</p>
+
+      <p>Christian Senfleben brauchte für seine Studie in Köln ein Gerät, das die tiefe Muskulatur im unteren Rücken erreicht. Weil es keins gab, hat er es gebaut. Getestet hat er es mit 60 Teilnehmenden über acht Wochen. Danach wollten Teilnehmende die Prototypen kaufen, und daraus ist eine kleine Firma in Solingen geworden.</p>
+
+      <p data-mess="wellenpuls">Das Gerät heißt <strong>Wellenpuls LWS</strong>. Es ist ein Gurt, den man um den unteren Rücken legt. Die Elektroden sind fest eingearbeitet und sitzen dort, wo die tiefe Muskulatur liegt.</p>
+
+      <img src="../../../assets/lp3/anwendung-sofa.jpg" alt="Frau sitzt auf dem Sofa, den Wellenpuls LWS unter dem Pullover am Rücken" width="928" height="650" style="width:100%;height:auto;border-radius:10px;display:block;margin:28px 0 6px">
+      <div data-leiste-start style="font-size:12px;color:var(--text-muted);margin:0 0 24px;">So sieht die Anwendung aus: Gurt anlegen, einschalten, sitzen bleiben. (Symbolbild)</div>
+
+      <p>Auch Fachleute setzen ihn ein. Das Gesundheitszentrum valmedica in Mülheim an der Ruhr hat ihn in seine Gesundheitsprogramme aufgenommen und schreibt dazu:</p>
+
+      <div style="background:#fff;border:1px solid #D0DCE8;border-radius:12px;padding:20px 22px;margin:24px 0"><img src="../../../assets/lp3/valmedica-logo.png" alt="valmedica" style="height:30px;width:auto;display:block;margin-bottom:12px"><p style="font-family:'Lora',serif;font-style:italic;font-size:17px;line-height:1.6;margin:0 0 10px">„Wellenpuls ergänzt unser Angebot um eine einfache, alltagstaugliche Möglichkeit, die Tiefenmuskulatur im Rumpf gezielt zu aktivieren. Die Anwendung ist niederschwellig und lässt sich super in unsere Betreuungskonzepte einfügen.“</p><div style="font-size:14px;color:var(--text-muted)">valmedica, Gesundheitszentrum in Mülheim an der Ruhr</div></div>
+
+      <h2>Mein erster Gedanke: schon wieder so ein Gerät</h2>
+
+      <p>Ich hatte schon eine Massagepistole, die nach drei Wochen im Schrank lag. Eine Akupressurmatte, die sich gut anfühlte und nichts änderte. Eine Rotlichtlampe, die für ein paar Stunden half.</p>
+
+      <p>Ich hatte keine Lust mehr, Hoffnung in Dinge zu stecken, die nach einem Monat in der Ecke stehen.</p>
+
+      <p>Dann habe ich mir angesehen, was der Gurt eigentlich macht. Zum ersten Mal seit Jahren passte etwas zu dem, was ich gerade über meinen Rücken gelernt hatte.</p>
+
+      <p>Der Wellenpuls ist ein Trainingsgerät. Er massiert nicht, und er betäubt nichts. Die Impulse gehen über die Haut an die Muskeln. Die Muskeln spannen sich an und lassen wieder los, so wie beim Training.</p>
+
+      <p>Ich selbst muss dafür nichts tun. Ich muss keine Haltung einnehmen und nicht spüren, ob ich gerade den richtigen Muskel treffe. Genau daran war ich bei meinen Übungen so oft gescheitert, ohne es zu merken.</p>
+
+      <p>Mit meinem alten Kribbelgerät hat das wenig zu tun. TENS überlagert den Schmerz, an den Muskeln ändert es nichts. Der Wellenpuls lässt sie arbeiten.</p>
+
+      <p>Wie stark der Impuls ist, stelle ich selbst ein. Es gibt 15 Stufen. An guten Tagen nehme ich mehr, an schlechten weniger.</p>
+
+      <h2>Zweimal die Woche zwanzig Minuten. Das soll reichen?</h2>
+
+      <p>Das war mein nächster Zweifel. Ich habe früher jeden Morgen geübt. Und jetzt sollten 40 Minuten in der Woche mehr bringen?</p>
+
+      <p>In der Studie wurde genau so trainiert: zweimal pro Woche, jeweils zwanzig Minuten, mit mindestens einem Tag Pause dazwischen. Der Muskel bekommt einen kräftigen Reiz und danach Zeit, sich zu erholen.</p>
+
+      <p>Es kommt darauf an, ob der Reiz bei den richtigen Muskeln ankommt. Zwanzig Minuten, die dort ankommen, bringen mir mehr als eine Stunde Übungen, die daran vorbeigehen.</p>
+
+      <p>Dazu kommt etwas ganz Praktisches. Ich muss mich nicht überwinden. Ich lege den Gurt an, setze mich aufs Sofa und schalte den Fernseher ein. Eine Wärmefunktion ist eingebaut. Nach zwanzig Minuten schaltet sich der Gurt von selbst ab.</p>
+
+      <p>An meinen Übungen bin ich oft gescheitert, weil nach einem langen Schultag keine Kraft mehr da war. Sitzen kann ich auch an einem schlechten Dienstag.</p>
+
+      <img src="../../../assets/PackShot_01.png" alt="Wellenpuls LWS, Gurt für den unteren Rücken" class="article-img" style="background:var(--surface);object-fit:contain;padding:12px">
+
+      <h2>Die ersten Wochen</h2>
+
+      <p>Ich hatte mir vorgenommen, nichts zu erwarten. Ich wollte nicht noch einmal enttäuscht werden.</p>
+
+      <p>Das Paket kam nach zwei Tagen. Dabei war eine Videoanleitung vom Gründer. Man feuchtet die Elektroden mit etwas Wasser an, legt den Gurt um, zieht den Klettverschluss fest und schaltet ein.</p>
+
+      <h3>Die erste Woche</h3>
+
+      <p>Beim ersten Mal fühlt es sich fremd an. Erst kribbelt es, dann wird ein Pulsieren daraus, und dann merkt man, wie sich die Muskeln zusammenziehen. Unangenehm fand ich es nicht.</p>
+
+      <p>Ich habe auf einer niedrigen Stufe angefangen, so wie es empfohlen wird. Mit der Wärme war es fast gemütlich. Mir war aber klar, dass ich höher gehen muss, damit ein Training daraus wird. Das habe ich in den nächsten Einheiten gemacht.</p>
+
+      <p>Nach der dritten Anwendung hatte ich am nächsten Tag Muskelkater. Tief im unteren Rücken und seitlich am Bauch, an Stellen, die ich nach meinen Übungen nie gespürt hatte. Da dachte ich zum ersten Mal: Diese Muskeln haben seit Jahren nichts mehr zu tun bekommen.</p>
+
+      <h3>Die zweite und dritte Woche</h3>
+
+      <p>Ich hatte gehofft, dass sich der Rücken weniger meldet. Zuerst habe ich etwas anderes gemerkt. Ich stand gerader, ohne daran zu denken.</p>
+
+      <p>Nach langem Sitzen kam ich leichter hoch. Das mühsame Aufrichten war nicht weg, aber es war anders. Der Rücken fühlte sich an, als hätte er wieder Halt von innen.</p>
+
+      <p>Mein Mann sah mich eines Abends an und fragte, ob ich neue Schuhe hätte. Ich hatte keine. Ich stand nur gerader.</p>
+
+      <h3>Die vierte bis sechste Woche</h3>
+
+      <p>An einem Dienstagabend rief Lena an. Ob wir am Samstag in den Tierpark gehen.</p>
+
+      <p>Ich habe Ja gesagt, bevor ich nachgedacht hatte. Erst nach dem Auflegen ist mir aufgefallen, dass ich diesmal nicht gerechnet hatte. Ich hatte mir nicht überlegt, wie ich danach den Sonntag überstehe.</p>
+
+      <p>Wir waren vier Stunden im Tierpark. Ein kurzes Stück habe ich Lena auf dem Arm getragen. Nach dem Picknick bin ich von der Bank aufgestanden, ohne mich abzustützen.</p>
+
+      <p>Abends auf dem Sofa war ich müde, so wie man nach einem schönen Tag müde ist. Ich konnte mich nicht erinnern, wann das zuletzt so gewesen war.</p>
+
+      <img src="../../../assets/Glückliches_älteres_Ehepaar.png" alt="Älteres Paar unterwegs" class="article-img">
+      <div style="font-size:12px;color:var(--text-muted);margin:-14px 0 24px;">(Symbolbild)</div>
+
+      <h2>Woche sieben bis zwölf</h2>
+
+      <p>Ich will hier nichts schönreden. Von großen Versprechen halte ich selbst nichts mehr.</p>
+
+      <p>Der Gurt hat nicht über Nacht alles geändert. Es gab keine Woche, nach der plötzlich alles gut war. Es ging langsam, so wie ein Geräusch leiser wird und man es erst später merkt.</p>
+
+      <p>Irgendwann um die siebte Woche bin ich morgens aufgestanden, und mein erster Gedanke galt nicht dem Rücken. Ich bin einfach aufgestanden und habe Kaffee gemacht.</p>
+
+      <p>In der Schule stehe ich wieder meine sechs Stunden, und abends ist noch etwas von mir übrig. Nach dem Abendessen stehe ich vom Tisch auf, ohne vorher Luft zu holen.</p>
+
+      <p>Mit Lena war ich wieder öfter auf dem Spielplatz. Einmal habe ich mich sogar mit auf die Schaukel gesetzt, weil sie so lange gebettelt hat.</p>
+
+      <p>Meine Übungen mache ich weiter. Sie fühlen sich weniger nach Pflicht an, seit ich merke, dass der Rücken mitmacht.</p>
+
+      <p>Die Tabletten liegen noch im Nachttisch. Ich denke nur viel seltener an sie.</p>
+
+      <h2>Was andere schreiben</h2>
+
+      <p>Hinter dem Wellenpuls steht kein Konzern. Es ist eine kleine Firma aus Solingen, und der Gründer antwortet selbst auf E-Mails. Bevor ich bestellt habe, habe ich die Bewertungen bei Google gelesen. Vier davon:</p>
+
+      <div class="stimme"><div class="sterne" aria-label="5 von 5 Sternen">★★★★★</div><p>„Ich habe den Wellenpuls Gürtel mit als Erste Anfang Mai erhalten. Herr Senfleben hat ihn mir sogar persönlich vorbeigebracht, da er nicht weit weg wohnt. Er hat mir alles super erklärt, zum Beispiel, dass ich ihn schon stärker einstellen muss und nicht nur leicht kribbeln lassen. Ich bin momentan bei Stärke 10 von 15. Mir hat der Gurt geholfen und ich kann ihn nur empfehlen.“</p><div class="wer">Isabell B.</div></div>
+
+      <div class="stimme"><div class="sterne" aria-label="5 von 5 Sternen">★★★★★</div><p>„Ich und meine Frau sind sehr zufrieden und haben beide das Gefühl, dass sich der untere Rücken entspannter und deutlich gekräftigt anfühlt. Am Anfang etwas ungewohnt, doch schon nach wenigen Anwendungen traut man sich, richtig Gas zu geben, und man spürt die Muskeln arbeiten. Klare Kaufempfehlung!“</p><div class="wer">Ramon M.</div></div>
+
+      <div class="stimme"><div class="sterne" aria-label="5 von 5 Sternen">★★★★★</div><p>„Ich benutze den Gürtel seit über einem Jahr regelmäßig und ich bin richtig begeistert. Mein Rücken fühlt sich deutlich besser an. Das Tragen des Gürtels ist sehr angenehm. Top!“</p><div class="wer">Andrea O.</div></div>
+
+      <div class="stimme"><div class="sterne" aria-label="5 von 5 Sternen">★★★★★</div><p>„Der Wellenpuls Gurt ist wirklich eine tolle Unterstützung für meinen Rücken. Die Handhabung ist einfach, das Anlegen geht schnell, und durch die Wärme- und Intensitätsstufen kann ich es genau auf meine Bedürfnisse einstellen. Nach ein paar Anwendungen fühlt sich mein Rücken entspannter und kräftiger an.“</p><div class="wer">Shabnam B.</div></div>
+
+      <p>Mir ist beim Lesen aufgefallen, wie oft der Gründer selbst vorkommt. Das hat mir mehr Vertrauen gegeben als jedes Siegel.</p>
+
+      <h2>Für wen das nichts ist</h2>
+
+      <p>Ich kenne Ihre Vorgeschichte nicht. Und ich bin die Letzte, die Ihnen erzählt, dass ein Gerät alles löst.</p>
+
+      <p>Wenn Sie erwarten, dass Sie den Gurt umlegen und am nächsten Tag ist alles gut, lassen Sie es. Es ist ein Trainingsgerät, und Training braucht Wochen.</p>
+
+      <p>Wenn Sie ihn kaufen und in den Schrank legen, hilft er Ihnen so wenig wie mir meine Massagepistole.</p>
+
+      <p>Manche dürfen ihn gar nicht benutzen: Menschen mit Herzschrittmacher, mit Metallimplantaten im Rumpf, mit Epilepsie oder Herzrhythmusstörungen, Schwangere und Menschen mit stark veränderten Blutdruckwerten. Wenn Sie eine Erkrankung haben oder unsicher sind, fragen Sie vorher Ihre Ärztin oder Ihren Arzt.</p>
+
+      <p>Wenn Sie aber dort stehen, wo ich stand, wenn Sie vieles versucht haben und es immer wiederkommt, dann würde ich es an Ihrer Stelle ausprobieren.</p>
+
+      <h2>Was beim Gurt anders ist als bei meinen alten Sachen</h2>
+
+      <p>Zwei Kolleginnen haben mich im Lehrerzimmer danach gefragt. Ich habe es ihnen so aufgeschrieben:</p>
+
+      <ol class="gruende">
+        <li><strong>Er setzt an der tiefen Muskulatur an.</strong> Meine Übungen haben vor allem die Muskeln an der Oberfläche erreicht.</li>
+        <li><strong>Er trainiert.</strong> Wärme, Massage und mein Kribbelgerät haben gelindert. An den Muskeln haben sie nichts geändert.</li>
+        <li><strong>Ich halte es durch.</strong> Zweimal die Woche zwanzig Minuten auf dem Sofa schaffe ich auch in einer vollen Woche.</li>
+        <li><strong>Er kommt aus der Forschung.</strong> Gebaut wurde er für eine Studie an der Deutschen Sporthochschule Köln, mit 60 Teilnehmenden über acht Wochen.</li>
+        <li><strong>Er wärmt.</strong> Die Wärme entspannt die verkrampften Muskeln außen, während die tiefen arbeiten.</li>
+      </ol>
+
+      <h2>So sieht ein Abend mit dem Gurt aus</h2>
+
+      <p>Das Anlegen dauert eine halbe Minute. Ich sprühe etwas Wasser auf die Elektroden, die Sprühflasche liegt bei. Dann lege ich den Gurt um die Taille, oberhalb der Hüfte, direkt auf die Haut, und ziehe den Klettverschluss fest. Der Pullover kommt wieder darüber.</p>
+
+      <p>Am Gurt sind vier Tasten: Ein und Aus, Plus, Minus und Wärme. Ein Handy oder eine App braucht man nicht. Ich drücke auf Plus, bis ich die Muskeln deutlich spüre.</p>
+
+      <p>Dann mache ich, was ich abends ohnehin mache. Ich sehe fern, lese oder telefoniere mit meiner Schwester. Nach zwanzig Minuten ist Schluss.</p>
+
+      <p>Der Gurt passt von 78 bis 130 Zentimetern Bauchumfang, ein Verlängerungsteil liegt bei. Geladen wird er am Kabel wie ein Handy. Für den Urlaub gibt es ein festes Etui.</p>
+
+      <p>Mein Mann benutzt ihn inzwischen auch. Er hatte nie ernsthaft Rückenprobleme, aber nach langen Tagen im Büro tut ihm die Wärme gut. Manchmal verhandeln wir, wer zuerst dran ist.</p>
+
+      <h2>Zum Preis</h2>
+
+      <p>Der Wellenpuls LWS kostet 489 Euro. Das ist viel Geld, und ich habe eine gute Woche überlegt.</p>
+
+      <p>Dann habe ich zusammengezählt, was ich in den vier Jahren davor ausgegeben hatte. Die Zuzahlungen für die Physiotherapie, den Rückenkurs, die Matratze, die Massagepistole, die Lampe, die Pflaster und die Tabletten. Es war ein Mehrfaches, und besser geworden war davon nichts auf Dauer.</p>
+
+      <p>Den Gurt benutze ich zweimal in der Woche. Das sind im ersten Jahr rund 100 Einheiten, also knapp 5 Euro pro Einheit. Im zweiten Jahr kostet er nichts mehr. Es gibt kein Abo, und Klebepads muss man nicht nachkaufen, weil die Elektroden im Gurt sitzen.</p>
+
+      <p>Im Preis steckt mehr als der Gurt. Dazu gehören das Reiseetui, ein persönliches Gespräch mit Christian Senfleben, ein kurzer Videokurs und ein E-Book mit einem Plan für die ersten Wochen. Der Versand ist kostenlos.</p>
+
+      <p>Das Gespräch habe ich genutzt. Er hat mir erklärt, wie hoch ich die Stufe stellen soll und an welchen Tagen ich am besten trainiere. Ich hatte nicht erwartet, dass sich bei einem Gerät aus dem Internet der Entwickler selbst meldet.</p>
+
+      <p>Den Ausschlag hat am Ende die Rückgabe gegeben. Man hat 30 Tage Zeit. Wer in dieser Zeit merkt, dass es nichts für ihn ist, schickt den Gurt zurück und bekommt sein Geld wieder. Eine E-Mail genügt.</p>
+
+      <!-- BLACK FRIDAY: Ab 20.11. hier den Aktionsabsatz einsetzen (Rabatt, Code, Enddatum). -->
+
+      <h2>Was sich in zwölf Wochen geändert hat</h2>
+
+      <p>Vier Jahre Physiotherapie, Übungen, Wärme und Tabletten. Danach zwölf Wochen mit dem Gurt, zweimal in der Woche zwanzig Minuten.</p>
+
+      <p>Ein Gerät löst nicht alles, das habe ich oben schon geschrieben. Bei mir hat sich das hier geändert:</p>
+
+      <ul class="haken">
+        <li>Ich wache auf und stehe auf, ohne vorher in mich hineinzuhorchen.</li>
+        <li>Ich stehe sechs Stunden in der Schule und bin abends müde wie andere Leute auch.</li>
+        <li>Ich stehe vom Esstisch auf, ohne mich abzustützen.</li>
+        <li>Ich habe Lena in den letzten drei Monaten kein einziges Mal absagen müssen.</li>
+      </ul>
+
+      <p>Das klingt vielleicht nach wenig. Wer jahrelang solche kleinen Absagen gesammelt hat, weiß, wie viel es ist.</p>
+
+      <p>Die Wärmepflaster habe ich letzte Woche aus der Handtasche genommen. Die Massagepistole liegt noch im Schrank.</p>
+
+      <p>Ich wünsche Ihnen, dass Sie nicht so lange suchen müssen wie ich.</p>
+
+      <p>Herzliche Grüße</p>
+
+      <p class="signature">Renate</p>
+
+      <p>P.S. Falls Sie nur eines aus diesem Brief mitnehmen: Fragen Sie sich, ob Ihre Übungen die tiefen Muskeln überhaupt erreichen. Bei mir war das vier Jahre lang nicht so, und ich habe es nicht gewusst.</p>
+
+    </div><!-- /article-body -->
+
+    <!-- ═══ CTA ═══ -->
+    <div class="cta-final" data-mess="cta-ende">
+      <div class="blick">
+        <div class="blick-titel">Der Wellenpuls LWS auf einen Blick</div>
+        <ul>
+          <li>Trainingsgerät für die tiefe Muskulatur im unteren Rücken</li>
+          <li>Entwickelt von Sportwissenschaftler Christian Senfleben an der Deutschen Sporthochschule Köln</li>
+          <li>Zweimal pro Woche 20 Minuten, im Sitzen, mit Wärme</li>
+          <li>Vier Tasten, 15 Stufen, kein Handy, keine App</li>
+          <li>Passt von 78 bis 130 cm Bauchumfang</li>
+          <li>Dabei: Reiseetui, Gespräch mit dem Gründer, Videokurs und E-Book</li>
+          <li>30 Tage zu Hause testen, sonst Geld zurück</li>
+        </ul>
+      </div>
+      <a href="../../lp3/" class="btn-primary track-lead" data-mess-klick="cta-ende">Den Wellenpuls LWS ansehen und 30 Tage zu Hause testen</a>
+      <div class="cta-terms">489 € einmalig · kostenloser Versand · 30 Tage Geld zurück · Lieferung in der Regel innerhalb von 2 Werktagen</div>
+    </div>
+
+
+    <!-- ═══ ABOUT ═══ -->
+    <div class="about-mag">
+      <strong>Über Stabil im Alltag</strong><br><br>
+      Stabil im Alltag ist ein Angebot der Wellenpuls GmbH aus Solingen. Wir schreiben über Rückengesundheit im Alltag und stellen dabei auch unser eigenes Produkt vor, den Wellenpuls LWS.
+    </div>
+
+    <!-- ═══ DISCLAIMER ═══ -->
+    <div class="disclaimer">
+      <strong>Hinweis:</strong> Dieser Artikel ist eine Anzeige der Wellenpuls GmbH. Der Erfahrungsbericht beruht auf Erfahrungen von Kundinnen und Kunden, Name und einzelne Details wurden geändert. Die Bewertungen stammen von Google. Der Wellenpuls LWS ist ein Trainingsgerät und kein Medizinprodukt. Er ersetzt keine ärztliche Beratung. Ergebnisse können von Mensch zu Mensch verschieden sein.
+    </div>
+
+  </article>
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer">
+  <a href="/"><img src="../../../assets/logo_transparent.png" alt="Stabil im Alltag" style="height:48px;width:auto;display:block;margin:0 auto 10px;"></a>
+  <div>© 2026, Stabil im Alltag</div>
+  <div class="footer-links">
+    <a href="/impressum/">Impressum</a>
+    <a href="/datenschutz/">Datenschutz</a>
+    <a href="#" onclick="SIA_openConsent();return false;">Cookie-Einstellungen</a>
+  </div>
+</footer>
+
+<div class="angebot-leiste" id="angebot-leiste" aria-hidden="true">
+  <div class="al-in">
+    <div class="al-text"><strong>Wellenpuls LWS</strong><span>30 Tage zu Hause testen</span></div>
+    <a href="../../lp3/" class="al-btn track-lead" data-mess-klick="leiste">Mehr Informationen</a>
+  </div>
+</div>
+<script src="../../../assets/angebot-leiste.js" defer></script>
+<script src="../../../assets/messung.js" data-seite="adv-3" defer></script>
+<script src="../../../assets/consent.js" defer></script>
+</body>
+</html>
