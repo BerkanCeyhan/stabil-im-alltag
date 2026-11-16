@@ -18,6 +18,8 @@
   if((p.get('fuer')||'').toLowerCase()==='eltern')d.classList.add('v-eltern');
   var n=Date.now(),von=Date.parse('2026-11-20T00:00:00+01:00'),bis=Date.parse('2026-12-01T00:00:00+01:00'),b=p.get('bf');
   if(b==='1'||(b!=='0'&&n>=von&&n<bis))d.classList.add('bf');
+  /* Weihnachtshinweis: 20.11. bis 24.12.2026, außerdem in der Geschenk-Variante und in der Vorschau */
+  if(b==='1'||d.classList.contains('v-eltern')||(n>=von&&n<Date.parse('2026-12-25T00:00:00+01:00')))d.classList.add('xmas');
 }catch(e){}})();
 </script>
 <script src="../../assets/preistest.js"></script>
@@ -57,6 +59,8 @@ button{font:inherit;color:inherit}
 .v-eltern .only-eltern,.v-eltern .nur-geschenk,.bf .nur-geschenk{display:block}
 .v-eltern .only-eltern-i,.v-eltern .nur-geschenk-i,.bf .nur-geschenk-i{display:inline}
 .v-eltern .only-selbst{display:none}
+.nur-xmas{display:none}
+.xmas .nur-xmas{display:flex}
 .bf .bf-aus{display:none!important}
 html:not(.bf) .bf-an{display:none!important}
 
@@ -104,6 +108,14 @@ sup{font-size:.7em;line-height:0}
 .haken li{position:relative;padding-left:32px;margin-bottom:var(--a1)}
 .haken li::before{content:"";position:absolute;left:0;top:4px;width:20px;height:20px;border-radius:50%;background:var(--action) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 10.5l3 3 6-7' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/20px no-repeat}
 
+/* Nutzen in der Kaufbox und Weihnachtshinweis */
+.nutzen li{margin-bottom:var(--a2)}
+.nutzen li b{display:block;font-size:19px;line-height:1.3}
+.nutzen li span{display:block;font-size:16px;color:var(--ink-2);line-height:1.4}
+.geschenk{gap:12px;align-items:center;background:var(--rot-wash);border:1px solid #f1c3bf;border-radius:var(--r);padding:12px 14px;margin:0 0 var(--a3);font-size:15.5px;line-height:1.35;color:var(--ink-2)}
+.geschenk svg{flex:0 0 34px;width:34px;height:34px;color:var(--rot)}
+.geschenk b{display:block;font-size:18px;color:var(--rot)}
+
 /* Paket: Bild, Text, Preis je Zeile, darunter Preis mit Streichpreis und Ersparnis */
 .stack{border:2px solid var(--ink);border-radius:var(--r);background:#fff;overflow:hidden;margin:0 0 var(--a2)}
 .st-zeile{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 14px;border-top:1px solid var(--line)}
@@ -136,8 +148,19 @@ sup{font-size:.7em;line-height:0}
 .btn small{display:block;font-size:15px;font-weight:600;margin-top:2px}
 .btn:hover{background:var(--action-deep)}
 .btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
-.zahlung{display:flex;justify-content:center;margin:var(--a2) 0 0}
-.zahlung img{height:26px;width:auto}
+.zahl{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:var(--a2) 0 0}
+.z{height:42px;min-width:66px;padding:0 10px;border:1px solid var(--line);border-radius:7px;background:#fff;display:inline-flex;align-items:center;justify-content:center;gap:4px;font-weight:800;font-size:17px;line-height:1;color:#111}
+.z svg{height:22px;width:auto}
+.z-paypal{font-style:italic;color:#003087}.z-paypal i{color:#009cde}
+.z-klarna{background:#ffb3c7;border-color:#ffb3c7}
+.z-visa{font-style:italic;color:#1a1f71;font-size:20px;letter-spacing:.5px}
+.z-mc svg{height:26px}
+.z-amex{background:#2e77bc;border-color:#2e77bc;color:#fff;letter-spacing:.5px}
+.z-apple svg{height:20px;margin-top:-2px}
+.z-google{color:#5f6368}.z-google svg{width:20px;height:20px}
+.mehr-btn{display:block;margin:var(--a3) auto 0;padding:13px 26px;min-height:52px;background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:50px;font-weight:700;font-size:17px;cursor:pointer}
+.mehr-btn:hover{background:var(--wash)}
+.stimme[hidden]{display:none!important}
 .liefer{display:flex;gap:10px;align-items:flex-start;justify-content:center;margin:var(--a2) 0 0;font-size:16px;color:var(--ink-2)}
 .liefer svg{flex:0 0 22px;width:22px;height:22px;margin-top:2px;color:var(--action)}
 .garantie{display:flex;gap:var(--a2);align-items:flex-start;background:var(--ok-wash);border:1px solid #b9dccb;border-radius:var(--r);padding:var(--a2) 16px;margin-top:var(--a3);font-size:16px}
@@ -176,11 +199,11 @@ sup{font-size:.7em;line-height:0}
 /* Vergleich: Wellenpuls-Spalte hervorgehoben, Bild im Kopf */
 .vgl{overflow:hidden}
 .vgl table{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed}
-.vgl col.c0{width:43%}
-.vgl thead th{font-size:12.5px;line-height:1.2;font-weight:700;color:var(--ink-2);padding:8px 2px;vertical-align:bottom;text-align:center;hyphens:manual}
+.vgl col.c0{width:40%}
+.vgl thead th{font-size:11.5px;line-height:1.2;font-weight:700;color:var(--ink-2);padding:8px 1px;vertical-align:bottom;text-align:center;hyphens:manual}
 .vgl thead th.wp{background:var(--ink);color:#fff;border-radius:var(--r) var(--r) 0 0;padding:8px 4px}
 .vgl thead th.wp img{width:100%;max-width:92px;aspect-ratio:1.25;object-fit:contain;border-radius:8px;background:#fff;margin:0 auto 6px;padding:3px}
-.vgl tbody th{font-size:15.5px;line-height:1.3;font-weight:700;text-align:left;padding:13px 8px 13px 0;border-top:1px solid var(--line);hyphens:auto}
+.vgl tbody th{font-size:15.5px;line-height:1.3;font-weight:700;text-align:left;padding:13px 8px 13px 0;border-top:1px solid var(--line);hyphens:manual}
 .vgl tbody td{text-align:center;padding:10px 2px;border-top:1px solid var(--line)}
 .vgl td.wp{background:var(--ink);border-top-color:#2b3d58}
 .vgl tbody tr:last-child td.wp{border-radius:0 0 var(--r) var(--r)}
@@ -293,7 +316,7 @@ details p{color:var(--ink-2);padding-right:10px}
 
 <div class="streifen">
   <span class="bf-aus">30 Tage testen, Geld zurück · Kostenloser Versand</span>
-  <span class="bf-an">Black Friday: 190 € Rabatt mit dem Code BLACKFRIDAY <span class="cd" data-cd></span></span>
+  <span class="bf-an">Black Friday: zusätzlich 190 € Rabatt mit dem Code BLACKFRIDAY <span class="cd" data-cd></span></span>
 </div>
 
 <header class="kopf"><img src="../../assets/logo_transparent.png" alt="Stabil im Alltag" width="115" height="46"></header>
@@ -307,7 +330,7 @@ details p{color:var(--ink-2);padding-right:10px}
     <div class="titel">
       <div class="gzeile"><svg aria-hidden="true"><use href="#g-logo"/></svg><span class="sterne" aria-hidden="true">★★★★★</span><span><b>5,0</b> · 30 Bewertungen bei Google</span></div>
       <h1 class="only-selbst">Wellenpuls LWS: Rückentraining im Sitzen</h1>
-      <h1 class="only-eltern">Rückentraining für Ihre Eltern: Wellenpuls LWS</h1>
+      <h1 class="only-eltern">Rückentraining für Ihre Liebsten: Wellenpuls LWS</h1>
     </div>
 
     <div class="gal">
@@ -331,10 +354,15 @@ details p{color:var(--ink-2);padding-right:10px}
     </div>
 
     <div class="kauf">
-      <ul class="haken">
-        <li>Trainiert die Muskeln mit Elektrostimulation</li>
-        <li>20 Minuten, zweimal pro Woche, mit Wärmefunktion</li>
-        <li>Vier Tasten für einfache Steuerung, mit Stärkeregler</li>
+      <div class="geschenk nur-xmas">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="9" width="18" height="12" rx="1.5"/><path d="M2 9h20V6H2zM12 6v15M12 6c-1-3-5-4-5-1.5S10 6 12 6zm0 0c1-3 5-4 5-1.5S14 6 12 6z"/></svg>
+        <div><b>Perfekt als Weihnachtsgeschenk</b><span class="bf-an">Jetzt schon zum Bestpreis für Weihnachten sichern. Ein sinnvolles Geschenk für die Gesundheit.</span><span class="bf-aus">Ein sinnvolles Geschenk für die Gesundheit.</span></div>
+      </div>
+
+      <ul class="haken nutzen">
+        <li><b>Stärkt die tiefen Rückenmuskeln</b><span>mit neuromuskulärer Elektrostimulation, ganz ohne Übungen</span></li>
+        <li><b>Passt in jeden Alltag</b><span>2-mal pro Woche à 20 Minuten, im Sitzen, mit Wärmefunktion</span></li>
+        <li><b>Einfach zu bedienen</b><span>vier Tasten mit Stärkeregler, keine App</span></li>
       </ul>
 
       <div class="stack">
@@ -344,6 +372,7 @@ details p{color:var(--ink-2);padding-right:10px}
         <div class="st-zeile"><img class="st-bild" src="../../assets/lp4/st-ebook.jpg" alt="" width="240" height="240"><div class="st-text"><b>E-Book</b><span>mit Plan für die ersten Wochen</span></div><div class="st-preis"><span class="gratis">gratis</span><s>34,90 €</s></div></div>
         <div class="st-zeile"><div class="st-icon"><svg aria-hidden="true"><use href="#i-wagen"/></svg></div><div class="st-text"><b>Versand</b><span>in 2 Werktagen</span></div><div class="st-preis"><span class="gratis">gratis</span><s>9,90 €</s></div></div>
         <div class="st-zeile st-bonus bf-an"><div class="st-icon"><svg aria-hidden="true"><use href="#i-rabatt"/></svg></div><div class="st-text"><span class="etikett">Bonus</span><b>Black-Friday-Rabatt</b><button type="button" class="code-chip" data-code-kopieren="BLACKFRIDAY" title="Code kopieren">BLACKFRIDAY</button></div><div class="st-preis">−190 €</div></div>
+        <div class="st-zeile st-bonus bf-an"><div class="st-icon"><svg aria-hidden="true"><use href="#i-schild"/></svg></div><div class="st-text"><span class="etikett">Bonus</span><b>Verlängerte Garantie</b><span>Rückgabe bis 15. Januar</span></div><div class="st-preis"><span class="gratis">gratis</span></div></div>
         <div class="summe">
           <div class="summe-preis bf-aus"><b>489 €</b><s>732,80 €</s></div>
           <div class="summe-preis bf-an"><b>299 €</b><s>732,80 €</s></div>
@@ -354,12 +383,20 @@ details p{color:var(--ink-2);padding-right:10px}
       </div>
 
       <a href="../checkout/" class="btn track-atc" id="kauf-oben" data-mess-klick="kauf-oben">Jetzt bestellen<small>30 Tage risikofrei testen</small></a>
-      <div class="zahlung"><img src="../../assets/lp3/zahlung.png" alt="Zahlung per PayPal, Mastercard oder Visa" width="470" height="121"></div>
+      <div class="zahl" role="img" aria-label="Zahlungsarten: PayPal, Klarna, Visa, Mastercard, American Express, Apple Pay, Google Pay">
+        <span class="z z-paypal">Pay<i>Pal</i></span>
+        <span class="z z-klarna">Klarna.</span>
+        <span class="z z-visa">VISA</span>
+        <span class="z z-mc"><svg viewBox="0 0 40 24" aria-hidden="true"><circle cx="14" cy="12" r="10" fill="#eb001b"/><circle cx="26" cy="12" r="10" fill="#f79e1b"/><path d="M20 4a10 10 0 0 1 0 16 10 10 0 0 1 0-16z" fill="#ff5f00"/></svg></span>
+        <span class="z z-amex">AMEX</span>
+        <span class="z z-apple"><svg viewBox="0 0 24 24" fill="#000" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>Pay</span>
+        <span class="z z-google"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#g-logo"/></svg>Pay</span>
+      </div>
       <div class="liefer" id="liefer" hidden><svg aria-hidden="true"><use href="#i-wagen"/></svg><span>Heute bestellt, voraussichtlich am <b id="liefer-tag"></b> bei Ihnen.</span></div>
 
       <div class="garantie">
         <svg aria-hidden="true"><use href="#i-schild"/></svg>
-        <div><b>30 Tage Geld zurück</b>Hilft er nicht, bekommen Sie den vollen Kaufpreis erstattet.<span class="nur-geschenk-i"> Als Geschenk bestellt? Dann gilt die Rückgabe bis 31. Januar.</span></div>
+        <div><b>30 Tage Geld zurück</b>Hilft er nicht, bekommen Sie den vollen Kaufpreis erstattet.<span class="bf-an"> Zu Black Friday verlängert: Rückgabe bis 15. Januar.</span><span class="only-eltern-i bf-aus"> Als Geschenk bestellt? Dann gilt die Rückgabe bis 15. Januar.</span></div>
       </div>
     </div>
 
@@ -373,7 +410,7 @@ details p{color:var(--ink-2);padding-right:10px}
     <div class="schritte">
       <div class="schritt"><img src="../../assets/lp3/schritt-1-befeuchten.jpg" alt="Die Elektroden im Gurt werden mit Wasser besprüht" width="800" height="600" loading="lazy"><div><h3>Anfeuchten</h3><p>Etwas Wasser auf die Elektroden sprühen.</p></div></div>
       <div class="schritt"><img src="../../assets/lp3/schritt-2-anlegen.jpg" alt="Der Gurt wird um die Taille gelegt" width="800" height="600" loading="lazy"><div><h3>Anlegen</h3><p>Direkt auf die Haut anlegen und mit dem Klettverschluss festziehen.</p></div></div>
-      <div class="schritt"><img src="../../assets/lp3/schritt-3-einschalten.jpg" alt="Ein Daumen drückt die Plus-Taste am Bedienteil" width="800" height="600" loading="lazy"><div><h3>Stärke wählen</h3><p>Die gewünschte Stärke auswählen. Nach 20 Minuten schaltet sich der Gurt selbst ab.</p></div></div>
+      <div class="schritt"><img src="../../assets/lp3/schritt-3-einschalten.jpg" alt="Ein Daumen drückt die Plus-Taste am Bedienteil" width="800" height="600" loading="lazy"><div><h3>Stärke wählen</h3><p>Die gewünschte Stärke auswählen. Nach 20 Minuten schaltet sich das Gurtsystem selbst ab.</p></div></div>
     </div>
 
     <div class="zeiger">
@@ -396,12 +433,13 @@ details p{color:var(--ink-2);padding-right:10px}
 <!-- ═══ Wirkprinzip ═══ -->
 <section class="abschnitt">
   <div class="wrap zwei">
-    <img src="../../assets/lp3/tiefenmuskulatur.jpg" alt="Zeichnung: Der Gurt liegt um den unteren Rücken, die Muskeln direkt an der Wirbelsäule sind hervorgehoben" width="1200" height="896" loading="lazy">
+    <img src="../../assets/lp3/tiefenmuskulatur.jpg" alt="Zeichnung: Das Gurtsystem liegt um den unteren Rücken, die Muskeln direkt an der Wirbelsäule sind hervorgehoben" width="1200" height="896" loading="lazy">
     <div>
-      <h2>Der Gurt spannt die Rückenmuskulatur mit elektrischen Impulsen an</h2>
-      <p>Im Gurt sitzen Elektroden. Sie geben elektrische Impulse<sup>*</sup> durch die Haut an die Muskeln ab. Bei jedem Impuls zieht sich der Muskel zusammen und entspannt sich wieder, wie bei einer Übung.</p>
+      <h2>Das Gurtsystem spannt die Rückenmuskulatur mit elektrischen Impulsen an</h2>
+      <p>Im Gurtsystem sitzen Elektroden. Sie geben elektrische Impulse<sup>*</sup> durch die Haut an die Muskeln ab. Bei jedem Impuls zieht sich der Muskel zusammen und entspannt sich wieder, wie bei einer Übung.</p>
       <p>Die Elektroden liegen so, dass sie die Muskeln des unteren Rückens direkt an der Wirbelsäule und die seitlichen Bauchmuskeln erreichen. Diese Muskeln stützen den Rücken beim Stehen, Gehen und Sitzen. Mit Übungen sind sie schwer zu treffen, weil man sie kaum bewusst anspannen kann.</p>
-      <p>Ein Muskel, der regelmäßig angespannt wird, wird kräftiger, und kräftigere Muskeln geben dem Rücken mehr Halt. Deshalb folgt die Anwendung einem festen Plan: zweimal pro Woche 20 Minuten, so wie in der Studie mit 60 Teilnehmenden über acht Wochen. Viele spüren schon nach zwei bis drei Anwendungen einen Muskelkater im unteren Rücken.</p>
+      <p>Ein Muskel, der regelmäßig angespannt wird, wird kräftiger, und kräftigere Muskeln geben dem Rücken mehr Halt. Deshalb folgt die Anwendung einem festen Plan: 2-mal pro Woche à 20 Minuten, so wie in der Studie mit 60 Teilnehmenden über acht Wochen. Viele spüren schon nach zwei bis drei Anwendungen einen Muskelkater im unteren Rücken.</p>
+      <p>Das passt in den Alltag. Sie brauchen keinen Termin, keine Matte und keine Sportkleidung. Sie legen das Gurtsystem an und bleiben sitzen, auf dem Sofa, im Sessel oder am Schreibtisch.</p>
       <p class="hinweis"><sup>*</sup> Hinweis: Die NMES-Technologie wird in Kliniken und Rehazentren seit Jahrzehnten genutzt, beispielsweise nach Operationen.</p>
     </div>
   </div>
@@ -422,11 +460,12 @@ details p{color:var(--ink-2);padding-right:10px}
           <th scope="col">Rücken&shy;übungen</th>
         </tr></thead>
         <tbody>
-          <tr><th scope="row">Trainiert die unteren Rückenmuskeln und die seitlichen Bauchmuskeln</th><td class="wp"><span class="ja" role="img" aria-label="ja"></span></td><td><span class="nein" role="img" aria-label="nein"></span></td><td><span class="nein" role="img" aria-label="nein"></span></td><td><span class="ja" role="img" aria-label="ja"></span></td></tr>
+          <tr><th scope="row">Trainiert die tiefen Rückenmuskeln</th><td class="wp"><span class="ja" role="img" aria-label="ja"></span></td><td><span class="nein" role="img" aria-label="nein"></span></td><td><span class="nein" role="img" aria-label="nein"></span></td><td><span class="ja" role="img" aria-label="ja"></span></td></tr>
           <tr><th scope="row">Funktioniert auch im Sitzen</th><td class="wp"><span class="ja" role="img" aria-label="ja"></span></td><td><span class="ja" role="img" aria-label="ja"></span></td><td><span class="ja" role="img" aria-label="ja"></span></td><td><span class="nein" role="img" aria-label="nein"></span></td></tr>
-          <tr><th scope="row">Man kann dabei nichts falsch machen</th><td class="wp"><span class="ja" role="img" aria-label="ja"></span></td><td><span class="ja" role="img" aria-label="ja"></span></td><td><span class="ja" role="img" aria-label="ja"></span></td><td><span class="nein" role="img" aria-label="nein"></span></td></tr>
+          <tr><th scope="row">Ohne Vorkenntnisse richtig anwendbar</th><td class="wp"><span class="ja" role="img" aria-label="ja"></span></td><td><span class="ja" role="img" aria-label="ja"></span></td><td><span class="ja" role="img" aria-label="ja"></span></td><td><span class="nein" role="img" aria-label="nein"></span></td></tr>
           <tr><th scope="row">Für den unteren Rücken gezielt entwickelt</th><td class="wp"><span class="ja" role="img" aria-label="ja"></span></td><td><span class="nein" role="img" aria-label="nein"></span></td><td><span class="nein" role="img" aria-label="nein"></span></td><td><span class="ja" role="img" aria-label="ja"></span></td></tr>
           <tr><th scope="row">Mit Wärmefunktion</th><td class="wp"><span class="ja" role="img" aria-label="ja"></span></td><td><span class="nein" role="img" aria-label="nein"></span></td><td><span class="nein" role="img" aria-label="nein"></span></td><td><span class="nein" role="img" aria-label="nein"></span></td></tr>
+          <tr><th scope="row">Auch für körperlich eingeschränkte Personen</th><td class="wp"><span class="ja" role="img" aria-label="ja"></span></td><td><span class="ja" role="img" aria-label="ja"></span></td><td><span class="ja" role="img" aria-label="ja"></span></td><td><span class="nein" role="img" aria-label="nein"></span></td></tr>
         </tbody>
       </table>
     </div>
@@ -441,11 +480,32 @@ details p{color:var(--ink-2);padding-right:10px}
     <div class="g-kopf"><svg aria-hidden="true"><use href="#g-logo"/></svg><div><div><b>5,0</b><span class="sterne" aria-hidden="true">★★★★★</span></div><div class="klein">30 Bewertungen bei Google, Stand Oktober 2026</div></div></div>
     <div class="stimmen">
       <div class="stimme"><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#7b5ea7" aria-hidden="true">G</span><div><b>Gottfried E.</b><span>März 2026</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>Ich habe den Wellenpuls Rückengurt jetzt seit einiger Zeit im Einsatz und möchte ihn nicht mehr missen. Die Verarbeitung ist hochwertig und der Tragekomfort überzeugt. Was den Gurt aber wirklich von anderen abhebt, ist die integrierte Wärme-Funktion. Sie wird schnell warm und entspannt die Muskulatur spürbar, egal ob bei der Arbeit oder abends auf der Couch.</p></div>
-      <div class="stimme"><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#d2573b" aria-hidden="true">I</span><div><b>Isabella B.</b><span>Juli 2025</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>Ich habe den Wellenpuls Gürtel mit als Erste Anfang Mai erhalten. Herr Senfleben hat ihn mir sogar persönlich vorbei gebracht, da er nicht weit weg wohnt. Er hat mir alles super erklärt (z. Bsp. dass ich ihn schon stärker einstellen muss und nicht nur leicht kribbeln lassen - ich bin momentan bei Stärke 10 von 15). Mir hat der Gurt geholfen und ich kann ihn nur empfehlen.</p></div>
-      <div class="stimme"><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#2f7fb8" aria-hidden="true">S</span><div><b>Sebastian D.</b><span>September 2024</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>Ich bin letzte Woche bei Christian gewesen und durfte das Produkt direkt testen und es hat mich direkt überzeugt. Sehr lange gehe ich schon den weg mit Rückenschmerzen und zum ersten mal habe ich das Gefühl etwas gefunden zu haben, was mir helfen wird.</p></div>
+      <div class="stimme"><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#d2573b" aria-hidden="true">I</span><div><b>Isabella B.</b><span>Juli 2025</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>Ich habe den Wellenpuls Gürtel mit als Erste Anfang Mai erhalten. Herr Senfleben hat ihn mir sogar persönlich vorbei gebracht, da er nicht weit weg wohnt. Er hat mir alles super erklärt […] und ich kann ihn nur empfehlen.</p></div>
+      <div class="stimme"><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#2f7fb8" aria-hidden="true">S</span><div><b>Sebastian D.</b><span>September 2024</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>Ich bin letzte Woche bei Christian gewesen und durfte das Produkt direkt testen und es hat mich direkt überzeugt. […]</p></div>
       <div class="stimme only-selbst"><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#3d8f5f" aria-hidden="true">A</span><div><b>Alexander R.</b><span>September 2024</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>War echt überrascht. Wenn man sich erstmal dran gewöhnt hat, ist das Gefühl echt angenehm. Super zum Netflixen! Hab natürlich direkt übertrieben und am nächsten Tag tatsächlich nen spürbaren Muskelkater 😂</p></div>
       <div class="stimme only-eltern"><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#3d8f5f" aria-hidden="true">M</span><div><b>Marcus B.</b><span>April 2026</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>Der Wellenpuls war ein Geschenk für meinen Vater und ist bei ihm im regelmäßigem Einsatz. …</p></div>
+      <div class="stimme mehr" hidden><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#7b5ea7" aria-hidden="true">M</span><div><b>Michael H.</b><span>Juni 2026</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>Ich hatte viel Kontakt mit Christian und hab sehr viel mit ihm über meine Problematik geredet. Bevor ich das Gerät gekauft habe, wurde ich super von ihm beraten. Noch dazu die 30-tägige Geld zurück Garantie. Also Habe ich mich dazu entschieden das Gerät zu bestellen. Als es zu Hause ankam, war ich positiv überrascht von der Qualität der Verpackung und natürlich auch Des Gerätes an sich. […] Ich war auch immer wieder in Kontakt mit Christian und wurde super von ihm supportet. […] Super Support, Super Beratung und ein tolles Gerät. Daumen hoch und weiter so. Noch mal danke für alles</p></div>
+      <div class="stimme mehr only-selbst" hidden><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#d2573b" aria-hidden="true">M</span><div><b>Marcus B.</b><span>April 2026</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>Der Wellenpuls war ein Geschenk für meinen Vater und ist bei ihm im regelmäßigem Einsatz. […] Danke an das Wellenpuls Team und macht weiter so!</p></div>
+      <div class="stimme mehr only-eltern" hidden><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#3d8f5f" aria-hidden="true">A</span><div><b>Alexander R.</b><span>September 2024</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>War echt überrascht. Wenn man sich erstmal dran gewöhnt hat, ist das Gefühl echt angenehm. Super zum Netflixen! Hab natürlich direkt übertrieben und am nächsten Tag tatsächlich nen spürbaren Muskelkater 😂</p></div>
+      <div class="stimme mehr" hidden><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#2f7fb8" aria-hidden="true">O</span><div><b>Ole S.</b><span>April 2026</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>Wir lieben den Gürtel von Wellenpuls :) für mich als Sportler inzwischen unverzichtbar. […] Einfach in der Handhabung und schon nach kurzer Zeit mit merklichen Verbesserungen für den Rücken!</p></div>
+      <div class="stimme mehr" hidden><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#3d8f5f" aria-hidden="true">A</span><div><b>Andrea O.</b><span>Dezember 2025</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>Ich benutze den Gürtel seit über einem Jahr regelmäßig und ich bin richtig begeistert. […] Das tragen des Gürtels ist sehr angenehm. Top!</p></div>
+      <div class="stimme mehr" hidden><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#b0703a" aria-hidden="true">N</span><div><b>Neal D.</b><span>August 2025</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>Der Wellenpulse Gurt hilft mir zusätzlich zu meinen wöchentlichen Workouts einen entspannteren und stärkeren Rücken zu haben. Sehr zu empfehlen!</p></div>
+      <div class="stimme mehr" hidden><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#6a7fc1" aria-hidden="true">P</span><div><b>Pia S.</b><span>August 2025</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>Sehr angenehmes Tragegefühl und viele verschiedene Stufen zur progressiven Steigerung. […]</p></div>
+      <div class="stimme mehr" hidden><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#c14f7e" aria-hidden="true">L</span><div><b>Lina W.</b><span>August 2025</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>Sehr gute Qualität und wirklich benutzerfreundlich! Tut sehr gut […]. Ich bin total zufrieden und würde es jedem ans Herz legen und weiter empfehlen! Viel Spaß damit!</p></div>
+      <div class="stimme mehr" hidden><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#4a9a9a" aria-hidden="true">T</span><div><b>Talea H.</b><span>August 2025</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>Ich bin sehr überzeugt von dem Produkt! Die verschiedenen Intensitätsstufen sind super zum individuell anpassen. So lässt es sich bequem von Zuhause den Rücken trainieren, einfach auf der Couch 😊</p></div>
+      <div class="stimme mehr" hidden><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#7b5ea7" aria-hidden="true">A</span><div><b>Andreas W.</b><span>Juli 2025</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>[…] Mein Core ist spürbar stärker geworden, obwohl ich im Alltag kaum Zeit für Training habe. Klare Empfehlung für alle mit Rückenthemen!</p></div>
+      <div class="stimme mehr" hidden><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#d2573b" aria-hidden="true">M</span><div><b>Michael B.</b><span>Juli 2025</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>Seit etwa 5 Wochen haben wir den Wellenpuls im Gebrauch. […] Das war eine sehr gute Anschaffung. Können wir nur empfehlen.</p></div>
+      <div class="stimme mehr" hidden><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#2f7fb8" aria-hidden="true">J</span><div><b>Julia M.</b><span>Juli 2025</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>Nutze den Wellenpuls-Gurt seit drei Wochen und bin super begeistert! […] Ganz große Weiterempfehlung!! ☺️☺️</p></div>
+      <div class="stimme mehr" hidden><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#3d8f5f" aria-hidden="true">T</span><div><b>Tim W.</b><span>Juli 2025</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>ich kenne EMS-Training schon seit 2014 - Das Produkt von Christian nutze ich nun schon seit einigen Wochen […]. Als Personal Trainer nutze ich das Gerät sogar mit meinen Kunden - auch diese sind von dem Produkt begeistert! Danke, Christian!</p></div>
+      <div class="stimme mehr" hidden><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#b0703a" aria-hidden="true">R</span><div><b>Ramon</b><span>Juni 2025</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>Ich und meine Frau sind sehr zufrieden […]. Am Anfang etwas unangenehm, doch schon nach wenigen Anwendungen traut man sich „richtig Gas“ zu geben und man spürt die Muskeln arbeiten. Klare Kaufempfehlung!</p></div>
+      <div class="stimme mehr" hidden><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#6a7fc1" aria-hidden="true">M</span><div><b>Monika H.</b><span>Februar 2025</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>Das Wellenpuls-LWS-Gerät hat meine Erwartungen weit übertroffen. […] Ein Top-Gerät, das ich ohne Einschränkung weiterempfehlen kann.</p></div>
+      <div class="stimme mehr" hidden><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#c14f7e" aria-hidden="true">B</span><div><b>Bettina B.</b><span>Dezember 2024</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>Ich bin begeistert vom Wellenpuls LWS! Die Stimulation fühlt sich wirklich super angenehm an und ist eine echte Wohltat. Besonders toll finde ich die Wärmefunktion - sie entspannt den Rücken spürbar und macht die Anwendung nochmal angenehmer. Absolut empfehlenswert, v.a. für den Preis!</p></div>
+      <div class="stimme mehr" hidden><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#4a9a9a" aria-hidden="true">Y</span><div><b>yung_t</b><span>Dezember 2024</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>Mir persönlich hat das Gerät total viel gebracht. […] Kann ich nur empfehlen. Top Produkt👍🏻</p></div>
+      <div class="stimme mehr" hidden><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#7b5ea7" aria-hidden="true">L</span><div><b>Leon H.</b><span>Dezember 2024</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>Ich habe das Produkt meinem Vater gezeigt (er arbeitet seit 30 Jahren auf dem Bau). […] Das Trage-Gefühl beschreibt er als sehr angenehm […].</p></div>
+      <div class="stimme mehr" hidden><svg class="g" aria-hidden="true"><use href="#g-logo"/></svg><div class="st-wer"><span class="avatar" style="background:#d2573b" aria-hidden="true">A</span><div><b>Anna K.</b><span>September 2024</span></div></div><div class="sterne" role="img" aria-label="5 von 5 Sternen">★★★★★</div><p>Ich bin begeistert vom ersten Produkt der Wellenpuls GmbH. Das Tragegefühl war sehr angenehm und ich konnte spüren, dass es an den richtigen Stellen ansetzt. Ich habe mich sehr gut beraten gefühlt und auf meine Bedürfnisse wurde eingegangen. Bis jetzt hat mich das Produkt voll und ganz überzeugt.</p></div>
     </div>
+    <button type="button" class="mehr-btn" id="mehr-btn">Mehr Bewertungen laden</button>
+    <p class="klein" id="mehr-hinweis" hidden style="text-align:center;margin:var(--a2) 0 0">Alle Bewertungen stammen von Google. Bei […] haben wir Aussagen zu Beschwerden ausgelassen.</p>
     <div class="partner schmal">
       <img class="foto" src="../../assets/lp3/valmedica-portrait.jpg" alt="Ansprechpartner von valmedica" width="480" height="719" loading="lazy">
       <div>
@@ -469,7 +529,7 @@ details p{color:var(--ink-2);padding-right:10px}
       </div>
     </div>
     <div class="gr-text">
-      <blockquote>„Ich hatte selbst jahrelang Rückenschmerzen. Im Studium fand ich das Prinzip der Elektrostimulation sehr spannend und habe mich gefragt, ob man es auch für den Rücken nutzen kann. So bin ich auf die Idee gekommen, ein Gerät gezielt für den unteren Rücken zu entwickeln. Daraus ist der Wellenpuls entstanden.“</blockquote>
+      <blockquote>„Ich hatte selbst jahrelang Rückenprobleme. Ich weiß, wie belastend das im Alltag sein kann. Im Studium fand ich das Prinzip der neuromuskulären Stimulation sehr spannend und habe mich gefragt, ob man es auch für den Rücken nutzen kann. So bin ich auf die Idee gekommen, ein Gerät gezielt für den unteren Rücken zu entwickeln. Daraus ist der Wellenpuls LWS entstanden.“</blockquote>
     </div>
   </div>
 </section>
@@ -481,7 +541,7 @@ details p{color:var(--ink-2);padding-right:10px}
     <ul class="haken" style="margin-bottom:0">
       <li>Das Paket geht auf Wunsch direkt an die beschenkte Person.</li>
       <li>Die Boni kommen per E-Mail.</li>
-      <li>Das persönliche Gespräch mit Christian ist eine ausführliche Beratung zum Wellenpuls und zu Rückenschmerzen allgemein. Auf Wunsch findet es direkt mit der beschenkten Person statt.</li>
+      <li>Das persönliche Gespräch mit Christian ist eine ausführliche Beratung zum Wellenpuls LWS und zur Rückenfitness allgemein. Auf Wunsch findet es direkt mit der beschenkten Person statt.</li>
     </ul>
   </div>
 </section>
@@ -499,6 +559,7 @@ details p{color:var(--ink-2);padding-right:10px}
       <div class="st-zeile"><img class="st-bild" src="../../assets/lp4/st-ebook.jpg" alt="" width="240" height="240" loading="lazy"><div class="st-text"><b>E-Book</b><span>mit Plan für die ersten Wochen</span></div><div class="st-preis"><span class="gratis">gratis</span><s>34,90 €</s></div></div>
       <div class="st-zeile"><div class="st-icon"><svg aria-hidden="true"><use href="#i-wagen"/></svg></div><div class="st-text"><b>Versand</b><span>in 2 Werktagen</span></div><div class="st-preis"><span class="gratis">gratis</span><s>9,90 €</s></div></div>
       <div class="st-zeile st-bonus bf-an"><div class="st-icon"><svg aria-hidden="true"><use href="#i-rabatt"/></svg></div><div class="st-text"><span class="etikett">Bonus</span><b>Black-Friday-Rabatt</b><button type="button" class="code-chip" data-code-kopieren="BLACKFRIDAY" title="Code kopieren">BLACKFRIDAY</button></div><div class="st-preis">−190 €</div></div>
+        <div class="st-zeile st-bonus bf-an"><div class="st-icon"><svg aria-hidden="true"><use href="#i-schild"/></svg></div><div class="st-text"><span class="etikett">Bonus</span><b>Verlängerte Garantie</b><span>Rückgabe bis 15. Januar</span></div><div class="st-preis"><span class="gratis">gratis</span></div></div>
       <div class="summe">
         <div class="summe-preis bf-aus"><b>489 €</b><s>732,80 €</s></div>
         <div class="summe-preis bf-an"><b>299 €</b><s>732,80 €</s></div>
@@ -509,11 +570,19 @@ details p{color:var(--ink-2);padding-right:10px}
     </div>
 
     <a href="../checkout/" class="btn track-atc" data-mess-klick="kauf-unten">Jetzt bestellen<small>30 Tage risikofrei testen</small></a>
-    <div class="zahlung"><img src="../../assets/lp3/zahlung.png" alt="Zahlung per PayPal, Mastercard oder Visa" width="470" height="121" loading="lazy"></div>
+    <div class="zahl" role="img" aria-label="Zahlungsarten: PayPal, Klarna, Visa, Mastercard, American Express, Apple Pay, Google Pay">
+        <span class="z z-paypal">Pay<i>Pal</i></span>
+        <span class="z z-klarna">Klarna.</span>
+        <span class="z z-visa">VISA</span>
+        <span class="z z-mc"><svg viewBox="0 0 40 24" aria-hidden="true"><circle cx="14" cy="12" r="10" fill="#eb001b"/><circle cx="26" cy="12" r="10" fill="#f79e1b"/><path d="M20 4a10 10 0 0 1 0 16 10 10 0 0 1 0-16z" fill="#ff5f00"/></svg></span>
+        <span class="z z-amex">AMEX</span>
+        <span class="z z-apple"><svg viewBox="0 0 24 24" fill="#000" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>Pay</span>
+        <span class="z z-google"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#g-logo"/></svg>Pay</span>
+      </div>
 
     <div class="garantie">
       <svg aria-hidden="true"><use href="#i-schild"/></svg>
-      <div><b>30 Tage Geld zurück</b>Hilft er nicht, bekommen Sie den vollen Kaufpreis erstattet. Eine E-Mail genügt.<span class="nur-geschenk-i"> Als Geschenk bestellt? Dann gilt die Rückgabe bis 31. Januar.</span></div>
+      <div><b>30 Tage Geld zurück</b>Hilft er nicht, bekommen Sie den vollen Kaufpreis erstattet. Eine E-Mail genügt.<span class="bf-an"> Zu Black Friday verlängert: Rückgabe bis 15. Januar.</span><span class="only-eltern-i bf-aus"> Als Geschenk bestellt? Dann gilt die Rückgabe bis 15. Januar.</span></div>
     </div>
   </div>
 </section>
@@ -525,12 +594,12 @@ details p{color:var(--ink-2);padding-right:10px}
     <details><summary>Wann merke ich etwas?</summary><p>Viele spüren nach zwei bis drei Anwendungen einen Muskelkater tief im unteren Rücken. Veränderungen im Alltag zeigen sich bei den meisten nach einigen Wochen regelmäßiger Nutzung. In der Studie waren es acht Wochen.</p></details>
     <details><summary>Ist das unangenehm?</summary><p>Beim ersten Mal fühlt es sich ungewohnt an, wie ein Kribbeln, das zu einem Pulsieren wird. Sie beginnen auf Stufe 1 und regeln selbst, es gibt 15 Stufen. Die Wärme macht den Einstieg angenehmer.</p></details>
     <details><summary>Ich habe schon viel ausprobiert. Warum sollte das anders sein?</summary><p>Der Wellenpuls trainiert die Muskeln an der Wirbelsäule direkt, ohne dass Sie eine Übung richtig ausführen müssen. Ob das bei Ihnen wirkt, prüfen Sie 30 Tage lang zu Hause. Wenn nicht, bekommen Sie Ihr Geld zurück.</p></details>
-    <details><summary>Passt mir der Gurt?</summary><p>Er passt von 78 bis 130 cm Bauchumfang. Das Verlängerungsteil liegt bei.</p></details>
-    <details><summary>Trägt man ihn über der Kleidung?</summary><p>Nein, direkt auf der Haut, damit die Elektroden die Muskeln erreichen. Das Oberteil kann darüber bleiben. Der Gurt sitzt um die Taille, oberhalb der Hüfte.</p></details>
+    <details><summary>Passt mir das Gurtsystem?</summary><p>Es passt von 78 bis 130 cm Bauchumfang. Das Verlängerungsteil liegt bei.</p></details>
+    <details><summary>Trägt man ihn über der Kleidung?</summary><p>Nein, direkt auf der Haut, damit die Elektroden die Muskeln erreichen. Das Oberteil kann darüber bleiben. Das Gurtsystem sitzt um die Taille, oberhalb der Hüfte.</p></details>
     <details><summary>Für wen ist er nicht geeignet?</summary><p>Nicht geeignet bei Herzschrittmacher, Metallimplantaten im Rumpfbereich, Epilepsie, Herzrhythmusstörungen, in der Schwangerschaft und bei stark veränderten Blutdruckwerten. Bei bestehenden Erkrankungen sprechen Sie bitte vorher mit Ihrer Ärztin oder Ihrem Arzt.</p></details>
     <details><summary>Kann ich ihn für meine Eltern bestellen?</summary><p>Ja. Viele bestellen den Wellenpuls für ihre Mutter oder ihren Vater. Das Gespräch mit Christian kann auch direkt mit Ihren Eltern stattfinden.</p></details>
     <details><summary>Was passiert im Gespräch mit Christian?</summary><p>Christian erklärt, wie Sie die richtige Stufe finden, welche Fehler Sie vermeiden sollten und wie Sie die zwei Einheiten pro Woche in Ihren Alltag einbauen.</p></details>
-    <details><summary>Muss ich ein Abo abschließen oder etwas nachkaufen?</summary><p>Nein. Sie zahlen einmal. Klebepads brauchen Sie nicht, die Elektroden sind im Gurt eingearbeitet. Geladen wird er per USB wie ein Handy.</p></details>
+    <details><summary>Muss ich ein Abo abschließen oder etwas nachkaufen?</summary><p>Nein. Sie zahlen einmal. Klebepads brauchen Sie nicht, die Elektroden sind im Gurtsystem eingearbeitet. Geladen wird es per USB wie ein Handy.</p></details>
     <div class="kontakt"><img src="../../assets/lp4/st-gespraech.jpg" alt="" width="56" height="56" loading="lazy"><span>Noch eine Frage? Schreiben Sie an <a href="mailto:info@wellenpuls.de">info@wellenpuls.de</a>. Wir antworten persönlich.</span></div>
   </div>
 </section>
@@ -568,6 +637,16 @@ details p{color:var(--ink-2);padding-right:10px}
     var i=Math.round(s.scrollLeft/s.clientWidth);
     t.forEach(function(b,k){b.setAttribute('aria-current',k===i?'true':'false');});
   });},{passive:true});
+})();
+
+/* Weitere Google-Bewertungen einblenden */
+(function(){
+  var b=document.getElementById('mehr-btn');if(!b)return;
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.stimme.mehr').forEach(function(e){e.hidden=false;});
+    var h=document.getElementById('mehr-hinweis');if(h)h.hidden=false;
+    b.remove();
+  });
 })();
 
 /* Voraussichtliches Lieferdatum: heute + 2 Werktage, Wochenende übersprungen */
