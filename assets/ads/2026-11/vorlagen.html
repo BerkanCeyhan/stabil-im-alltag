@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<title>Statics November 2026: Vorlagen</title>
+<!--
+  Vorlagen für die 15 Meta-Statics, je 1080 × 1350 (4:5).
+  scripts/bau-statics-2026-11.mjs öffnet diese Seite und speichert jedes <section class="ad"> als JPG.
+  Fotos und Illustrationen ohne Text kommen aus roh/ (scripts/gen-statics-2026-11.mjs),
+  Schrift, Screenshots und der echte Gurt werden hier gesetzt.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;700;800&family=Literata:opsz,wght@7..72,600;7..72,700&family=Roboto:wght@400;500;700&display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#777;display:flex;flex-wrap:wrap;gap:40px;padding:40px;font-family:"Inter",system-ui,sans-serif}
+.ad{width:1080px;height:1350px;position:relative;overflow:hidden;background:#fff;color:#14233a;flex:0 0 auto}
+.ad img{display:block}
+.voll{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.emoji{font-family:"Noto Color Emoji",sans-serif}
+
+/* 01 Notiz im Handy */
+#s01{background:#fff;font-family:"Inter",sans-serif;color:#1c1c1e}
+#s01 .status{display:flex;justify-content:space-between;align-items:center;padding:34px 60px 0;font-weight:600;font-size:38px}
+#s01 .status .r{display:flex;gap:14px;align-items:center}
+#s01 .akku{width:62px;height:30px;border:3px solid #1c1c1e;border-radius:9px;position:relative}
+#s01 .akku::before{content:"";position:absolute;inset:3px;right:16px;background:#1c1c1e;border-radius:4px}
+#s01 .akku::after{content:"";position:absolute;right:-9px;top:8px;width:5px;height:10px;background:#1c1c1e;border-radius:0 3px 3px 0}
+#s01 .balken{display:flex;gap:5px;align-items:flex-end}
+#s01 .balken i{display:block;width:8px;background:#1c1c1e;border-radius:2px}
+#s01 .nav{display:flex;justify-content:space-between;align-items:center;padding:44px 52px 0;color:#d9a300;font-size:40px}
+#s01 .nav b{font-weight:400}
+#s01 .nav .punkte{width:58px;height:58px;border:3.5px solid #d9a300;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;letter-spacing:2px;padding-bottom:20px;font-size:38px}
+#s01 .datum{text-align:center;color:#9a9aa0;font-size:30px;margin-top:38px}
+#s01 h1{font-size:66px;line-height:1.14;font-weight:800;padding:34px 60px 30px;letter-spacing:-.5px}
+#s01 ul{list-style:none;padding:0 60px}
+#s01 li{display:flex;align-items:center;gap:30px;font-size:52px;padding:19px 0;color:#8b8b90}
+#s01 li .k{width:58px;height:58px;flex:0 0 58px;border-radius:50%;background:#d9a300;display:flex;align-items:center;justify-content:center}
+#s01 li .k svg{width:34px;height:34px}
+#s01 li.offen{color:#1c1c1e;font-weight:600}
+#s01 li.offen .k{background:none;border:4px solid #c4c4c8}
+
+/* 02 Suchleiste */
+#s02{background:#fff;font-family:"Roboto","Inter",sans-serif;color:#202124}
+#s02 .feld{margin:70px 46px 0;border:2px solid #dfe1e5;border-radius:60px;box-shadow:0 4px 18px rgba(32,33,36,.16);padding:38px 44px;display:flex;align-items:center;gap:26px;font-size:54px}
+#s02 .feld svg{width:50px;height:50px;flex:0 0 50px;color:#9aa0a6}
+#s02 .feld .x{margin-left:auto;font-size:54px;color:#70757a;line-height:1}
+#s02 .cursor{display:inline-block;width:4px;height:56px;background:#1a73e8;vertical-align:-10px;margin-left:4px}
+#s02 ul{list-style:none;margin:36px 46px 0}
+#s02 li{display:flex;align-items:center;gap:30px;font-size:50px;padding:44px 44px;border-bottom:2px solid #eceef1}
+#s02 li svg{width:46px;height:46px;flex:0 0 46px;color:#9aa0a6}
+#s02 li span{color:#5f6368}
+#s02 li b{font-weight:700;color:#202124}
+#s02 li .pfeil{margin-left:auto;transform:rotate(-45deg)}
+
+/* 03 Gelbe Blockschrift auf Schwarz, Pfeil */
+#s03{background:#fff}
+#s03 .block{position:absolute;left:0;right:0;top:0;height:590px;background:#000;color:#ffd60a;padding:54px 56px 0;font-family:"Inter Display","Inter",sans-serif;font-weight:900;font-size:110px;line-height:1.06;letter-spacing:-2.5px;text-transform:uppercase;white-space:nowrap}
+#s03 .bild{position:absolute;left:0;right:0;top:590px;height:760px;object-fit:contain;width:100%}
+#s03 .block span{color:#fff}
+#s03 svg{position:absolute;inset:0;width:1080px;height:1350px}
+
+/* 04 Eine Zahl */
+#s04{background:#f4efe6;font-family:"Atkinson Hyperlegible Next","Inter",sans-serif;padding:70px 70px 0}
+#s04 .zahl{font-family:"Literata",serif;font-weight:700;font-size:250px;line-height:1;letter-spacing:-6px;color:#14233a}
+#s04 .zahl small{font-size:104px;letter-spacing:-1px;font-weight:600}
+#s04 .vor{font-size:64px;font-weight:700;color:#14233a;margin-bottom:-6px}
+#s04 .leute{display:flex;gap:14px;margin:36px 0 44px}
+#s04 .leute svg{flex:1;height:auto;fill:#d7d0c4}
+#s04 .leute svg.an{fill:#c0271d}
+#s04 p{font-size:62px;line-height:1.2;font-weight:700;color:#14233a}
+#s04 p + p{color:#c0271d;margin-top:14px}
+#s04 .quelle{position:absolute;left:70px;right:70px;bottom:54px;font-size:27px;font-weight:400;color:#6d6659}
+
+/* 05 Astronaut */
+#s05 .leiste{position:absolute;left:0;right:0;bottom:0;background:#fff;padding:36px 56px 46px;border-top:10px solid #c0271d;font-family:"Atkinson Hyperlegible Next","Inter",sans-serif;font-weight:800;font-size:62px;line-height:1.16;color:#101820}
+
+/* 06 Bisher und jetzt */
+#s06{background:#fff}
+#s06 .h{position:absolute;left:0;right:0;height:672px;overflow:hidden}
+#s06 .h.o{top:0}
+#s06 .h.u{bottom:0}
+#s06 .h img{width:100%;height:100%;object-fit:cover}
+#s06 .schild{position:absolute;left:36px;top:34px;border-radius:14px;padding:14px 28px;font-family:"Atkinson Hyperlegible Next","Inter",sans-serif;font-weight:800;font-size:50px;line-height:1.1;box-shadow:0 4px 16px rgba(0,0,0,.25)}
+#s06 .o .schild{background:#fff;color:#14233a}
+#s06 .u .schild{background:#0b6e4f;color:#fff}
+
+/* 07 Lindert und trainiert */
+#s07{background:#f6f4ef;font-family:"Inter Display","Inter",sans-serif}
+#s07 .h{position:absolute;left:0;right:0;height:675px;overflow:hidden}
+#s07 .o{top:0;background:#ecebe6}
+#s07 .u{bottom:0;background:#fff;border-top:8px solid #14233a}
+#s07 .wort{position:absolute;z-index:1;left:54px;top:40px;font-weight:900;font-size:128px;letter-spacing:-3px;line-height:1}
+#s07 .o .wort{color:#8d8b84}
+#s07 .u .wort{color:#0b6e4f}
+#s07 .o img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 100%}
+#s07 .u img{position:absolute;left:50%;bottom:28px;width:590px;transform:translateX(-50%);filter:drop-shadow(0 18px 22px rgba(0,0,0,.22))}
+
+/* 08 Zwei Kreise */
+#s08{background:#fbfaf7;font-family:"Atkinson Hyperlegible Next","Inter",sans-serif}
+#s08 > svg{position:absolute;inset:0;width:1080px;height:1350px}
+#s08 .t{position:absolute;left:0;right:0;text-align:center}
+#s08 .t b{display:block;font-family:"Inter Display","Inter",sans-serif;font-weight:900;font-size:112px;line-height:1;letter-spacing:-2px}
+#s08 .t span{display:block;font-size:44px;color:#3a4a5f;margin-top:14px}
+#s08 .t1{top:190px}
+#s08 .t1 b{color:#14233a}
+#s08 .t2{top:990px}
+#s08 .t2 b{color:#0b6e4f}
+#s08 .beides{position:absolute;left:0;right:0;top:566px;text-align:center;font-family:"Inter Display","Inter",sans-serif;font-weight:900;font-size:40px;letter-spacing:5px;color:#14233a}
+#s08 img{position:absolute;left:50%;top:612px;width:262px;transform:translateX(-50%);filter:drop-shadow(0 12px 14px rgba(0,0,0,.3))}
+
+/* 09 Vier Bilder */
+#s09{background:#fff;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:8px}
+#s09 div{position:relative;overflow:hidden}
+#s09 img{width:100%;height:100%;object-fit:cover}
+#s09 span{position:absolute;left:0;right:0;bottom:0;padding:90px 30px 28px;background:linear-gradient(transparent,rgba(8,16,28,.86));color:#fff;font-family:"Atkinson Hyperlegible Next","Inter",sans-serif;font-weight:800;font-size:58px;line-height:1.05}
+#s09 span i{font-style:normal;display:inline-flex;align-items:center;justify-content:center;width:66px;height:66px;border-radius:50%;background:#fff;color:#14233a;font-size:42px;margin-right:16px;vertical-align:4px}
+
+/* 10 Google-Bewertung */
+#s10{background:#e9edf2;font-family:"Roboto","Inter",sans-serif}
+#s10 .karte{position:absolute;left:70px;top:150px;width:940px;background:#fff;border-radius:34px;padding:60px 60px 66px;box-shadow:0 30px 70px rgba(20,35,58,.22);transform:rotate(-2.2deg)}
+#s10 .wer{display:flex;align-items:center;gap:30px}
+#s10 .av{width:112px;height:112px;border-radius:50%;background:#3d8f5f;color:#fff;font-size:58px;font-weight:500;display:flex;align-items:center;justify-content:center}
+#s10 .wer b{display:block;font-size:50px;font-weight:500;color:#202124}
+#s10 .wer span{display:block;font-size:36px;color:#70757a}
+#s10 .wer .av{display:flex;flex:0 0 112px;color:#fff;font-size:58px}
+#s10 .g{position:absolute;right:60px;top:66px;width:80px;height:80px}
+#s10 .st{color:#fbbc04;font-size:66px;letter-spacing:6px;margin:34px 0 22px}
+#s10 p{font-size:54px;line-height:1.42;color:#202124}
+#s10 mark{background:#ffe866;color:inherit;padding:2px 6px;border-radius:6px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+/* 11 Story vom Sofa */
+#s11 .txt{position:absolute;left:54px;top:300px;font-family:"Inter",sans-serif;font-weight:800;font-size:60px;line-height:1.25}
+#s11 .txt span{display:table;background:#fff;color:#111;padding:8px 24px 12px;border-radius:16px;margin-bottom:10px}
+
+/* 12 Gründer */
+#s12{background:#f7f4ee}
+#s12 .foto{position:absolute;left:0;top:0;width:100%;height:740px;object-fit:cover;object-position:50% 16%}
+#s12 .zitat{position:absolute;left:64px;right:64px;top:790px;font-family:"Literata",serif;font-weight:600;font-size:63px;line-height:1.24;color:#14233a}
+#s12 .name{position:absolute;left:64px;bottom:60px;font-family:"Atkinson Hyperlegible Next","Inter",sans-serif;font-size:38px;color:#3a4a5f;border-left:8px solid #0b6e4f;padding-left:22px;line-height:1.3}
+#s12 .name b{display:block;color:#14233a}
+
+/* 13 Black Friday: Paket mit Preis */
+#s13{background:#fff;font-family:"Atkinson Hyperlegible Next","Inter",sans-serif}
+#s13 .bf{position:absolute;left:54px;top:50px;background:#000;color:#fff;font-weight:800;font-size:44px;border-radius:12px;padding:12px 28px}
+#s13 .gurt{position:absolute;left:50%;top:150px;width:720px;transform:translateX(-50%);filter:drop-shadow(0 22px 26px rgba(0,0,0,.2))}
+#s13 .boni{position:absolute;left:54px;right:54px;top:730px;display:flex;justify-content:center;align-items:flex-start;gap:26px}
+#s13 .boni div{width:210px;text-align:center;font-size:30px;font-weight:700;line-height:1.2;color:#3a4a5f}
+#s13 .boni img{width:150px;height:150px;border-radius:20px;border:2px solid #d9e1ea;object-fit:cover;margin:0 auto 12px}
+#s13 .boni .plus{width:auto;font-size:64px;font-weight:400;color:#9aa6b4;padding-top:40px}
+#s13 .preis{position:absolute;left:54px;right:54px;bottom:124px;display:flex;align-items:center;justify-content:center;gap:30px}
+#s13 .preis b{font-family:"Literata",serif;font-size:190px;line-height:1;color:#14233a;letter-spacing:-4px}
+#s13 .preis s{font-size:74px;color:#7c8794}
+#s13 .preis em{font-style:normal;background:#c0271d;color:#fff;font-weight:800;font-size:44px;border-radius:12px;padding:12px 22px;line-height:1.15;text-align:center}
+#s13 .code{position:absolute;left:0;right:0;bottom:50px;text-align:center;font-size:42px;color:#14233a}
+#s13 .code b{background:#000;color:#fff;border-radius:10px;padding:5px 18px;letter-spacing:2px;margin:0 6px}
+
+/* 14 Chat mit Papa */
+#s14{background:#efe7dc;font-family:"Inter",sans-serif}
+#s14 .kopf{position:absolute;left:0;right:0;top:0;height:170px;background:#f6f6f6;border-bottom:2px solid #dcdcdc;display:flex;align-items:center;gap:28px;padding:0 40px;color:#111}
+#s14 .kopf .z{font-size:70px;color:#2a7fd4;font-weight:300;margin-top:-8px}
+#s14 .kopf .av{width:104px;height:104px;border-radius:50%;background:#9aa7b4;color:#fff;font-size:54px;font-weight:600;display:flex;align-items:center;justify-content:center}
+#s14 .kopf b{display:block;font-size:50px;font-weight:600}
+#s14 .kopf span{display:block;font-size:32px;color:#7b7b7b}
+#s14 .tag{position:absolute;left:0;right:0;top:206px;text-align:center}
+#s14 .tag span{background:#fff;border-radius:16px;padding:8px 24px;font-size:30px;color:#6b6b6b;box-shadow:0 1px 2px rgba(0,0,0,.12)}
+#s14 .verlauf{position:absolute;left:36px;right:36px;top:300px;display:flex;flex-direction:column;gap:30px}
+#s14 .b{max-width:800px;border-radius:30px;padding:26px 34px 22px;font-size:58px;line-height:1.24;color:#111;box-shadow:0 2px 3px rgba(0,0,0,.14);position:relative}
+#s14 .b small{display:block;text-align:right;font-size:28px;color:#7a8a80;margin-top:6px}
+#s14 .ich{align-self:flex-end;background:#d9fdd3;border-top-right-radius:6px}
+#s14 .er{align-self:flex-start;background:#fff;border-top-left-radius:6px}
+#s14 .eingabe{position:absolute;left:0;right:0;bottom:0;height:150px;background:#f6f6f6;border-top:2px solid #dcdcdc;display:flex;align-items:center;gap:26px;padding:0 36px}
+#s14 .eingabe span{flex:1;background:#fff;border:2px solid #dcdcdc;border-radius:50px;padding:20px 36px;font-size:40px;color:#a0a0a0}
+#s14 .eingabe i{width:90px;height:90px;border-radius:50%;background:#2a7fd4;display:flex;align-items:center;justify-content:center}
+#s14 .eingabe svg{width:44px;height:44px;color:#fff}
+
+/* 15 Papa im Sessel */
+#s15 .dunkel{position:absolute;left:0;right:0;top:0;height:470px;background:linear-gradient(rgba(8,14,24,.84),rgba(8,14,24,.58) 60%,transparent)}
+#s15 .txt{position:absolute;left:56px;right:56px;top:46px;font-family:"Atkinson Hyperlegible Next","Inter",sans-serif;font-weight:800;font-size:84px;line-height:1.12;color:#fff;text-shadow:0 3px 16px rgba(0,0,0,.5)}
+#s15 .txt span{display:block;color:#ffd60a;margin-top:10px}
+
+/* 16 Black Friday: Anwendung mit rundem Badge */
+#s16{background:#fff;font-family:"Atkinson Hyperlegible Next","Inter",sans-serif}
+#s16 .foto{position:absolute;left:0;top:0;width:100%;height:800px;object-fit:cover;object-position:42% 40%}
+#s16 .rund{position:absolute;right:44px;top:612px;width:300px;height:300px;border-radius:50%;background:#000;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transform:rotate(-8deg);box-shadow:0 10px 30px rgba(0,0,0,.35);border:8px solid #fff}
+#s16 .rund small{font-size:27px;font-weight:700;letter-spacing:1px}
+#s16 .rund b{font-family:"Inter Display","Inter",sans-serif;font-weight:900;font-size:76px;line-height:1;color:#ffd60a;margin:6px 0;white-space:nowrap}
+#s16 .rund span{font-size:29px;font-weight:700}
+#s16 h3{position:absolute;left:54px;top:850px;width:620px;font-family:"Literata",serif;font-size:66px;line-height:1.12;color:#14233a}
+#s16 .preis{position:absolute;left:54px;bottom:132px;display:flex;align-items:baseline;gap:24px}
+#s16 .preis b{font-family:"Literata",serif;font-size:150px;line-height:1;color:#14233a;letter-spacing:-3px}
+#s16 .preis s{font-size:66px;color:#7c8794}
+#s16 .code{position:absolute;left:54px;bottom:56px;font-size:40px;color:#14233a}
+#s16 .code b{background:#000;color:#fff;border-radius:10px;padding:5px 18px;letter-spacing:2px;margin:0 6px}
+
+/* 17 Black Friday: schwarz mit gelber Schrift */
+#s17{background:#000;color:#fff;font-family:"Inter Display","Inter",sans-serif}
+#s17 .k{position:absolute;left:60px;top:64px;font-weight:800;font-size:50px;letter-spacing:6px;text-transform:uppercase}
+#s17 .gross{position:absolute;left:54px;top:134px;font-weight:900;font-size:250px;line-height:.94;letter-spacing:-8px;color:#ffd60a}
+#s17 .gross small{display:block;font-size:150px;letter-spacing:-4px}
+#s17 img{position:absolute;left:50%;top:640px;width:640px;transform:translateX(-50%);filter:drop-shadow(0 0 60px rgba(255,214,10,.28))}
+#s17 .unten{position:absolute;left:60px;right:60px;bottom:58px;display:flex;justify-content:space-between;align-items:flex-end;font-family:"Atkinson Hyperlegible Next","Inter",sans-serif}
+#s17 .unten .p b{font-family:"Inter Display","Inter",sans-serif;font-weight:900;font-size:110px;line-height:1}
+#s17 .unten .p s{font-size:54px;color:#9a9a9a;margin-left:18px}
+#s17 .unten .c{text-align:right;font-size:36px;line-height:1.35}
+#s17 .unten .c b{display:inline-block;background:#ffd60a;color:#000;border-radius:10px;padding:4px 16px;letter-spacing:2px;font-size:40px}
+
+/* 18 Black Friday: jetzt schon für Weihnachten */
+#s18{background:#f7f1e6;font-family:"Atkinson Hyperlegible Next","Inter",sans-serif;color:#14233a}
+#s18 .band{position:absolute;right:-96px;top:66px;width:520px;transform:rotate(38deg);background:#c0271d;color:#fff;text-align:center;font-weight:800;font-size:38px;padding:16px 0;box-shadow:0 6px 16px rgba(0,0,0,.2)}
+#s18 h3{position:absolute;left:60px;top:90px;width:760px;font-family:"Literata",serif;font-size:88px;line-height:1.08}
+#s18 .sub{position:absolute;left:60px;top:420px;width:800px;font-size:46px;line-height:1.3;color:#3a4a5f}
+#s18 img{position:absolute;left:50%;top:560px;width:620px;transform:translateX(-50%);filter:drop-shadow(0 22px 26px rgba(0,0,0,.22))}
+#s18 .preis{position:absolute;left:60px;bottom:120px;display:flex;align-items:center;gap:26px}
+#s18 .preis b{font-family:"Literata",serif;font-size:150px;line-height:1;letter-spacing:-3px}
+#s18 .preis s{font-size:64px;color:#8a7f6b}
+#s18 .preis em{font-style:normal;background:#c0271d;color:#fff;font-weight:800;font-size:40px;border-radius:12px;padding:10px 20px}
+#s18 .code{position:absolute;left:60px;bottom:52px;font-size:40px}
+#s18 .code b{background:#14233a;color:#fff;border-radius:10px;padding:5px 18px;letter-spacing:2px;margin:0 6px}
+
+/* 19 Black Friday: Geschenk, Papa im Sessel */
+#s19 .dunkel{position:absolute;left:0;right:0;top:0;height:420px;background:linear-gradient(rgba(8,14,24,.84),rgba(8,14,24,.55) 62%,transparent)}
+#s19 .txt{position:absolute;left:56px;right:56px;top:46px;font-family:"Atkinson Hyperlegible Next","Inter",sans-serif;font-weight:800;font-size:80px;line-height:1.1;color:#fff;text-shadow:0 3px 16px rgba(0,0,0,.5)}
+#s19 .stern{position:absolute;right:40px;top:330px;width:270px;height:270px;background:#c0271d;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:"Atkinson Hyperlegible Next","Inter",sans-serif;clip-path:polygon(50% 0,61% 9%,75% 7%,81% 20%,94% 25%,92% 39%,100% 50%,92% 61%,94% 75%,81% 80%,75% 93%,61% 91%,50% 100%,39% 91%,25% 93%,19% 80%,6% 75%,8% 61%,0 50%,8% 39%,6% 25%,19% 20%,25% 7%,39% 9%);transform:rotate(8deg)}
+#s19 .stern small{font-size:27px;font-weight:700}
+#s19 .stern b{font-family:"Inter Display","Inter",sans-serif;font-weight:900;font-size:74px;line-height:1}
+#s19 .leiste{position:absolute;left:0;right:0;bottom:0;background:#fff;padding:26px 54px 34px;display:flex;align-items:center;justify-content:space-between;font-family:"Atkinson Hyperlegible Next","Inter",sans-serif;color:#14233a}
+#s19 .leiste .p b{font-family:"Literata",serif;font-size:104px;line-height:1}
+#s19 .leiste .p s{font-size:50px;color:#7c8794;margin-left:16px}
+#s19 .leiste .c{text-align:right;font-size:34px;line-height:1.35}
+#s19 .leiste .c b{display:inline-block;background:#000;color:#fff;border-radius:10px;padding:3px 14px;letter-spacing:2px}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="g-logo" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></symbol>
+  <symbol id="lupe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></symbol>
+  <symbol id="hoch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V5M5 12l7-7 7 7"/></symbol>
+  <symbol id="ok" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></symbol>
+</svg>
+
+<!-- 01 Notiz im Handy -->
+<section class="ad" id="s01" data-name="01-notiz">
+  <div class="status"><span>21:47</span><span class="r"><span class="balken"><i style="height:12px"></i><i style="height:18px"></i><i style="height:24px"></i><i style="height:30px"></i></span><span class="akku"></span></span></div>
+  <div class="nav"><span>‹ <b>Notizen</b></span><span class="punkte">···</span></div>
+  <div class="datum">15. November 2026 um 21:47</div>
+  <h1>Rückenprobleme: alles, was ich probiert habe</h1>
+  <ul>
+    <li><span class="k"><svg><use href="#ok"/></svg></span>Physiotherapie</li>
+    <li><span class="k"><svg><use href="#ok"/></svg></span>Übungszettel</li>
+    <li><span class="k"><svg><use href="#ok"/></svg></span>Wärmepflaster</li>
+    <li><span class="k"><svg><use href="#ok"/></svg></span>neue Matratze</li>
+    <li><span class="k"><svg><use href="#ok"/></svg></span>Kribbelgerät</li>
+    <li><span class="k"><svg><use href="#ok"/></svg></span>Tabletten</li>
+    <li class="offen"><span class="k"></span>Rückenmuskeln im Sitzen trainieren</li>
+  </ul>
+</section>
+
+<!-- 02 Suchleiste -->
+<section class="ad" id="s02" data-name="02-suche">
+  <div class="feld"><svg><use href="#lupe"/></svg><span>rücken stärken<i class="cursor"></i></span><span class="x">×</span></div>
+  <ul>
+    <li><svg><use href="#lupe"/></svg><span>rücken stärken <b>ohne übungen</b></span><svg class="pfeil"><use href="#hoch"/></svg></li>
+    <li><svg><use href="#lupe"/></svg><span>rücken stärken <b>im sitzen</b></span><svg class="pfeil"><use href="#hoch"/></svg></li>
+    <li><svg><use href="#lupe"/></svg><span>rücken stärken <b>zu hause</b></span><svg class="pfeil"><use href="#hoch"/></svg></li>
+    <li><svg><use href="#lupe"/></svg><span>rücken stärken <b>ab 60</b></span><svg class="pfeil"><use href="#hoch"/></svg></li>
+    <li><svg><use href="#lupe"/></svg><span>rücken stärken <b>ohne fitnessstudio</b></span><svg class="pfeil"><use href="#hoch"/></svg></li>
+    <li><svg><use href="#lupe"/></svg><span>rücken stärken <b>mit strom</b></span><svg class="pfeil"><use href="#hoch"/></svg></li>
+    <li><svg><use href="#lupe"/></svg><span>rücken stärken <b>beim fernsehen</b></span><svg class="pfeil"><use href="#hoch"/></svg></li>
+  </ul>
+</section>
+
+<!-- 03 Gelbe Blockschrift auf Schwarz, Pfeil -->
+<section class="ad" id="s03" data-name="03-gelb">
+  <img class="bild" src="roh/anatomie.jpg" alt="">
+  <div class="block">Schwierig zu<br>trainieren:<br><span>die tiefen<br>Rückenmuskeln</span></div>
+  <svg viewBox="0 0 1080 1350" fill="none">
+    <defs><marker id="spitze" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5.2" markerHeight="5.2" orient="auto"><path d="M0 0l10 5-10 5 3-5z" fill="#ffd60a" stroke="#000" stroke-width="1" stroke-linejoin="round"/></marker></defs>
+    <path d="M990 600c50 150-50 370-320 440" stroke="#000" stroke-width="30" stroke-linecap="round"/>
+    <path d="M990 600c50 150-50 370-320 440" stroke="#ffd60a" stroke-width="20" stroke-linecap="round" marker-end="url(#spitze)"/>
+  </svg>
+</section>
+
+<!-- 04 Eine Zahl -->
+<section class="ad" id="s04" data-name="04-zahl">
+  <div class="vor">Bis zu</div>
+  <div class="zahl">7 <small>von 10</small></div>
+  <div class="leute" id="leute"></div>
+  <p>machen ihre Rückenübungen zu Hause nicht wie verordnet.</p>
+  <p>Am Willen liegt es selten.</p>
+  <div class="quelle">Beinart et al., The Spine Journal 2013: Übersichtsarbeit zu Übungen bei chronischen Rückenschmerzen</div>
+</section>
+
+<!-- 05 Astronaut -->
+<section class="ad" id="s05" data-name="05-astronaut">
+  <img class="voll" src="roh/astronaut.jpg" alt="" style="object-position:50% 20%">
+  <div class="leiste">5 von 6 Astronauten kommen mit weniger Rückenmuskeln zurück.</div>
+</section>
+
+<!-- 06 Bisher und jetzt -->
+<section class="ad" id="s06" data-name="06-bisher-jetzt">
+  <div class="h o"><img src="roh/matte.jpg" alt="" style="object-position:38% 50%"><span class="schild">Rückentraining bisher</span></div>
+  <div class="h u"><img src="../../lp3/anwendung-sofa.jpg" alt="" style="object-position:40% 55%"><span class="schild">Rückentraining jetzt</span></div>
+</section>
+
+<!-- 07 Lindert und trainiert -->
+<section class="ad" id="s07" data-name="07-lindert-trainiert">
+  <div class="h o"><img src="roh/lindert.jpg" alt=""><span class="wort">LINDERT</span></div>
+  <div class="h u"><span class="wort">TRAINIERT</span><img src="roh/gurt-frei.png" alt=""></div>
+</section>
+
+<!-- 08 Zwei Kreise -->
+<section class="ad" id="s08" data-name="08-kreise">
+  <svg viewBox="0 0 1080 1350" aria-hidden="true">
+    <defs><clipPath id="oben"><circle cx="540" cy="405" r="395"/></clipPath></defs>
+    <circle cx="540" cy="405" r="395" fill="#dfe5ee"/>
+    <circle cx="540" cy="945" r="395" fill="#dcebe3"/>
+    <circle cx="540" cy="945" r="395" fill="#ffd60a" clip-path="url(#oben)"/>
+    <circle cx="540" cy="405" r="395" fill="none" stroke="#14233a" stroke-width="6"/>
+    <circle cx="540" cy="945" r="395" fill="none" stroke="#0b6e4f" stroke-width="6"/>
+  </svg>
+  <div class="t t1"><b>TRAINIERT</b><span>Physiotherapie, Übungen</span></div>
+  <div class="beides">BEIDES</div>
+  <img src="roh/gurt-frei.png" alt="">
+  <div class="t t2"><b>BEQUEM</b><span>Wärmepflaster, Tabletten</span></div>
+</section>
+
+<!-- 09 Vier Bilder -->
+<section class="ad" id="s09" data-name="09-vier-bilder">
+  <div><img src="../../lp3/schritt-2-anlegen.jpg" alt=""><span><i>1</i>Gurt um</span></div>
+  <div><img src="../../lp3/schritt-3-einschalten.jpg" alt="" style="object-position:60% 50%"><span><i>2</i>Plus drücken</span></div>
+  <div><img src="../../lp3/anwendung-sofa.jpg" alt="" style="object-position:38% 50%"><span><i>3</i>sitzen bleiben</span></div>
+  <div><img src="roh/waerme.jpg" alt=""><span><i>4</i>mit Wärme</span></div>
+</section>
+
+<!-- 10 Google-Bewertung -->
+<section class="ad" id="s10" data-name="10-bewertung">
+  <div class="karte">
+    <svg class="g"><use href="#g-logo"/></svg>
+    <div class="wer"><span class="av">A</span><div><b>Alexander R.</b><span>September 2024</span></div></div>
+    <div class="st">★★★★★</div>
+    <p>War echt überrascht. Wenn man sich erstmal dran gewöhnt hat, ist das Gefühl echt angenehm. <mark>Super zum Netflixen! Hab natürlich direkt übertrieben und am nächsten Tag tatsächlich nen spürbaren Muskelkater <span class="emoji">😂</span></mark></p>
+  </div>
+</section>
+
+<!-- 11 Story vom Sofa -->
+<section class="ad" id="s11" data-name="11-story">
+  <img class="voll" src="roh/sofa.jpg" alt="">
+  <div class="txt"><span>Dienstag, 20:15 Uhr.</span><span>Rückentraining <i class="emoji" style="font-style:normal">😌</i></span></div>
+</section>
+
+<!-- 12 Gründer -->
+<section class="ad" id="s12" data-name="12-gruender">
+  <img class="foto" src="roh/christian.jpg" alt="">
+  <div class="zitat">„Ich habe den Gurt für meine Studie gebaut. Danach wollten ihn die Teilnehmer kaufen.“</div>
+  <div class="name"><b>Christian Senfleben</b>Sportwissenschaftler</div>
+</section>
+
+<!-- 13 Black Friday: Paket mit Preis -->
+<section class="ad" id="s13" data-name="13-black-friday">
+  <span class="bf">Black Friday</span>
+  <img class="gurt" src="roh/gurt-frei.png" alt="">
+  <div class="boni">
+    <div><img src="../../lp4/st-gespraech.jpg" alt="">Gespräch mit dem Gründer</div>
+    <div class="plus">+</div>
+    <div><img src="../../lp4/st-video.jpg" alt="">Videokurs</div>
+    <div class="plus">+</div>
+    <div><img src="../../lp4/st-ebook.jpg" alt="">E-Book</div>
+  </div>
+  <div class="preis"><b>299 €</b><s>489 €</s><em>190 €<br>Rabatt</em></div>
+  <div class="code">Code <b>BLACKFRIDAY</b> bis 30.11.</div>
+</section>
+
+<!-- 14 Chat mit Papa -->
+<section class="ad" id="s14" data-name="14-chat-papa">
+  <div class="kopf"><span class="z">‹</span><span class="av">P</span><div><b>Papa</b><span>zuletzt online heute um 18:02</span></div></div>
+  <div class="tag"><span>Heute</span></div>
+  <div class="verlauf">
+    <div class="b ich">Was wünschst du dir zu Weihnachten?<small>18:04</small></div>
+    <div class="b er">Nichts. Ich hab alles.<small>18:11</small></div>
+    <div class="b ich">Und dein Rücken?<small>18:11</small></div>
+    <div class="b er">Der ist halt alt.<small>18:13</small></div>
+  </div>
+  <div class="eingabe"><span>Nachricht</span><i><svg><use href="#hoch"/></svg></i></div>
+</section>
+
+<!-- 15 Papa im Sessel -->
+<section class="ad" id="s15" data-name="15-papa-sessel">
+  <img class="voll" src="roh/sessel-31.jpg" alt="" style="object-position:50% 100%">
+  <div class="dunkel"></div>
+  <div class="txt">Seine Übungen macht Papa nicht.<span>Das hier schon.</span></div>
+</section>
+
+<!-- 16 Black Friday: Anwendung mit rundem Badge -->
+<section class="ad" id="s16" data-name="16-bf-sofa">
+  <img class="foto" src="../../lp3/anwendung-sofa.jpg" alt="">
+  <div class="rund"><small>BLACK FRIDAY</small><b>−190 €</b><span>bis 30.11.</span></div>
+  <h3>Rückentraining im Sitzen</h3>
+  <div class="preis"><b>299 €</b><s>489 €</s></div>
+  <div class="code">Code <b>BLACKFRIDAY</b> an der Kasse</div>
+</section>
+
+<!-- 17 Black Friday: schwarz mit gelber Schrift -->
+<section class="ad" id="s17" data-name="17-bf-schwarz">
+  <div class="k">Black Friday</div>
+  <div class="gross">190 €<small>Rabatt</small></div>
+  <img src="roh/gurt-frei.png" alt="">
+  <div class="unten"><div class="p"><b>299 €</b><s>489 €</s></div><div class="c">Code <b>BLACKFRIDAY</b><br>bis 30. November</div></div>
+</section>
+
+<!-- 18 Black Friday: jetzt schon für Weihnachten -->
+<section class="ad" id="s18" data-name="18-bf-weihnachten">
+  <div class="band">Black Friday</div>
+  <h3>Jetzt schon für Weihnachten sichern.</h3>
+  <div class="sub">Ein sinnvolles Geschenk für die Gesundheit. Zum Bestpreis.</div>
+  <img src="roh/gurt-frei.png" alt="">
+  <div class="preis"><b>299 €</b><s>489 €</s><em>−190 €</em></div>
+  <div class="code">Code <b>BLACKFRIDAY</b> bis 30.11.</div>
+</section>
+
+<!-- 19 Black Friday: Geschenk, Papa im Sessel -->
+<section class="ad" id="s19" data-name="19-bf-geschenk">
+  <img class="voll" src="roh/sessel-31.jpg" alt="" style="object-position:50% 78%">
+  <div class="dunkel"></div>
+  <div class="txt">Perfekt als Weihnachts&shy;geschenk</div>
+  <div class="stern"><small>Black Friday</small><b>−190 €</b><small>bis 30.11.</small></div>
+  <div class="leiste"><div class="p"><b>299 €</b><s>489 €</s></div><div class="c">Code <b>BLACKFRIDAY</b><br>an der Kasse eingeben</div></div>
+</section>
+
+<script>
+// 04: zehn Figuren, sieben gefüllt
+(function(){var r=document.getElementById('leute'),s='';for(var i=0;i<10;i++){s+='<svg viewBox="0 0 40 96"'+(i<7?' class="an"':'')+'><circle cx="20" cy="13" r="12"/><path d="M20 29c-11 0-17 7-17 17v22h7v28h20V68h7V46c0-10-6-17-17-17z"/></svg>';}r.innerHTML=s;})();
+</script>
+</body>
+</html>
