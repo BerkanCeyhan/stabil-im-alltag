@@ -13,6 +13,7 @@
 /* Vergleichsseiten zeigen immer den Neukundenrabatt: erzwingt Variante b aus preistest.js, auch für die Links zur Landingpage. */
 (function(){try{var u=new URL(location.href);if(u.searchParams.get('angebot')!=='neukunde'){u.searchParams.set('angebot','neukunde');history.replaceState(null,'',u.href);}}catch(e){}})();
 </script>
+<script src="../../assets/aktion.js"></script>
 <script src="../../assets/preistest.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -118,6 +119,10 @@ h3{font-size:clamp(1.28rem,3.6vw,1.5rem);font-weight:700;margin:clamp(32px,6vw,4
 .risiko h3{margin:0 0 10px}
 .risiko ol{padding-left:1.25em;display:grid;gap:7px}
 .risiko small{display:block;margin-top:12px;font-size:0.84rem;line-height:1.45;color:var(--ink-2)}
+/* Black Friday 2026 (assets/aktion.js setzt .bf am <html>) */
+.bf-an{display:none!important}
+.bf .bf-an{display:block!important}
+.bf-preis{margin:12px 0 0;padding:12px 14px;border-radius:var(--r);background:#fff8e1;border:1px solid #e6c65c;font-size:0.95rem;line-height:1.5;text-align:left}
 </style>
 </head>
 <body>
@@ -198,6 +203,7 @@ h3{font-size:clamp(1.28rem,3.6vw,1.5rem);font-weight:700;margin:clamp(32px,6vw,4
     <li>Kostenloser Versand, kein Abo</li>
   </ul>
   <p class="preis">489&nbsp;€<small>Einmalzahlung, inkl. MwSt.</small></p>
+  <p class="bf-preis bf-an"><strong>Black Friday bis 30. November:</strong> 299&nbsp;€ statt 489&nbsp;€ mit dem Code <strong>BLACKFRIDAY</strong> an der Kasse. Rückgabe bis 15. Januar.</p>
   <div class="knopf"><a href="../lp4/" class="btn track-lead" data-mess-klick="lp-angebot">Zum Angebot</a></div>
   <img class="zahlung" src="../../assets/lp3/zahlung.png" alt="Zahlung per PayPal, Mastercard oder Visa" width="470" height="121" loading="lazy">
 
