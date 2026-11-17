@@ -8,8 +8,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="../../../assets/logo_transparent.png">
   <link rel="apple-touch-icon" href="../../../assets/logo_transparent.png">
+  <script src="../../../assets/aktion.js"></script>
   <script src="../../../assets/preistest.js"></script>
   <style>
+    /* Black Friday 2026 (assets/aktion.js setzt .bf am <html>) */
+    .bf-an{display:none!important}
+    .bf .bf-an{display:block!important}
+    .bf span.bf-an{display:inline!important}
+    .bf .bf-aus{display:none!important}
+    .bf-hinweis{background:#fff8e1;border:1px solid #e6c65c;border-left:5px solid #c79a00;border-radius:8px;padding:16px 18px;margin:26px 0;font-family:"Libre Franklin",system-ui,sans-serif;font-size:16px;line-height:1.55;color:#1E2D3A}
+    .bf-hinweis strong{display:block;font-size:15px;margin-bottom:6px}
+    .bf-hinweis p{margin:0!important;font-size:16px!important;font-family:inherit!important}
+    .bf-hinweis .code{font-weight:800;letter-spacing:.04em;white-space:nowrap}
     /* Preistest: .p-a nur bei 489 €, .p-b nur bei 299 € mit Neukunden-Rabatt (assets/preistest.js) */
     .v-rabatt .p-a{display:none!important}
     html:not(.v-rabatt) .p-b{display:none!important}
@@ -799,6 +809,11 @@
 
       <p>Der Hersteller gibt eine 30-Tage-Geld-zurück-Garantie. Wenn Sie in den ersten 30 Tagen merken, dass es nichts für Sie ist, schicken Sie ihn zurück und bekommen Ihr Geld.</p>
 
+      <div class="bf-hinweis bf-an">
+        <strong>Hinweis von Stabil im Alltag: Black Friday bis 30. November</strong>
+        <p>Bis Montag, 30. November, gibt es 190 Euro Rabatt. Geben Sie an der Kasse den Code <span class="code">BLACKFRIDAY</span> ein, dann kostet der Wellenpuls LWS 299 statt 489 Euro. Bestellungen aus der Aktion können Sie bis 15. Januar zurückgeben.</p>
+      </div>
+
       <h2>Was ich Ihnen noch mitgeben will</h2>
 
       <p>Mein Rücken war nicht das ganze Problem. Mir fehlte etwas, das ich auch an einem schlechten Dienstag noch durchziehe.</p>
@@ -819,8 +834,8 @@
 
     <!-- ═══ CTA ═══ -->
     <div class="cta-final" data-mess="cta-ende">
-      <a href="../../lp3/" class="btn-primary track-lead" data-mess-klick="cta-ende">Hier können Sie den Wellenpuls LWS ansehen und 30 Tage testen</a>
-      <div class="cta-terms"><span class="p-a">489 €</span><span class="p-b">299 € mit 38 % Neukunden-Rabatt (Code NEUKUNDE an der Kasse)</span> · kostenloser Versand · 30 Tage Geld zurück · Lieferung in der Regel innerhalb von 2 Werktagen</div>
+      <a href="../../lp4/" class="btn-primary track-lead" data-mess-klick="cta-ende">Hier können Sie den Wellenpuls LWS ansehen und 30 Tage testen</a>
+      <div class="cta-terms"><span class="bf-aus">489 € · kostenloser Versand · 30 Tage Geld zurück · Lieferung in der Regel innerhalb von 2 Werktagen</span><span class="bf-an">Black Friday bis 30.11.: 299 € statt 489 € mit dem Code BLACKFRIDAY · kostenloser Versand · Rückgabe bis 15. Januar · Lieferung in der Regel innerhalb von 2 Werktagen</span></div>
     </div>
 
 
@@ -851,8 +866,8 @@
 
 <div class="angebot-leiste" id="angebot-leiste" aria-hidden="true">
   <div class="al-in">
-    <div class="al-text"><strong>Wellenpuls LWS</strong><span>30 Tage zu Hause testen</span></div>
-    <a href="../../lp3/" class="al-btn track-lead" data-mess-klick="leiste">Mehr Informationen</a>
+    <div class="al-text"><strong>Wellenpuls LWS</strong><span class="bf-aus">30 Tage zu Hause testen</span><span class="bf-an">Black Friday: 190 € Rabatt bis 30.11.</span></div>
+    <a href="../../lp4/" class="al-btn track-lead" data-mess-klick="leiste">Mehr Informationen</a>
   </div>
 </div>
 <script src="../../../assets/angebot-leiste.js" defer></script>
